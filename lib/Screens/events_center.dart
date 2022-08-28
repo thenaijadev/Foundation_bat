@@ -10,7 +10,6 @@ import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -40,7 +39,6 @@ class _EventCenterState extends State<EventCenter> {
           children: [
             // Container for search box etc
             Container(
-              // height: 171.0,
               color: kBackground,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -154,16 +152,16 @@ class _EventCenterState extends State<EventCenter> {
                                 child: Row(
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(18)
-                                      ),
                                       height: 110,
                                       width: 110,
                                       margin: EdgeInsets.only(
                                           bottom: 7.0, top: 7.0, left: 9.0),
-                                      child: CachedNetworkImage(
-                                          imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
-                                          fit: BoxFit.cover),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(18),
+                                        child: CachedNetworkImage(
+                                            imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                                            fit: BoxFit.cover),
+                                      ),
                                     ),
                                     Expanded(
                                       child: Container(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:batnf/Screens/landing_page.dart';
 import 'package:batnf/providers/event_provider.dart';
+import 'package:batnf/providers/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => EventProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NewsProvider(),
         ),
       ],
       child: MaterialApp(
