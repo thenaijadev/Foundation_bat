@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Models/events_model.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EventDetails extends StatefulWidget {
-  EventDetails({Key? key}) : super(key: key);
+  final EventModel singleEvent;
+
+  EventDetails(this.singleEvent, {Key? key}) : super(key: key);
 
   @override
   _EventDetailsState createState() => _EventDetailsState();
@@ -25,14 +29,19 @@ class _EventDetailsState extends State<EventDetails> {
           elevation: 0,
           leading: BackButton(color: kBackground),
         ),
-
         body: ListView(
           children: [
-            Image.asset('assets/women.png', fit: BoxFit.fitHeight,),
+            SizedBox(
+              height: 150,
+              child: CachedNetworkImage(
+                imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
               child: Text(
-                "Women's Ladership\n Contest 2021",
+                widget.singleEvent.eventName,
                 style: kPageHeader,
               ),
             ),
@@ -60,12 +69,12 @@ class _EventDetailsState extends State<EventDetails> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Text(
-                        '14, December, 2021',
+                        widget.singleEvent.eventDate,
                         style: kBodyTextStyle,
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Tuesday, 4:00pm - 9:00pm',
+                        widget.singleEvent.eventTime,
                         style: kBodyTextStyle,
                       )
                     ],
@@ -97,14 +106,9 @@ class _EventDetailsState extends State<EventDetails> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Text(
-                        'Gala Convention Centre',
+                        widget.singleEvent.venue,
                         style: kBodyTextStyle,
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        '36 Guld Street London, UK',
-                        style: kBodyTextStyle,
-                      )
                     ],
                   )
                 ],
@@ -118,11 +122,10 @@ class _EventDetailsState extends State<EventDetails> {
               ),
             ),
             Container(
-              alignment: AlignmentDirectional.center,
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
               child: Text(
                 textAlign: TextAlign.justify,
-                " Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget. Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget. Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.",
+                widget.singleEvent.eventDesc,
                 style: kBodyTextStyle,
               ),
             ),

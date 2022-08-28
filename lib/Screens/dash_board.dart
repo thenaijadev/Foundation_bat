@@ -11,6 +11,9 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:provider/provider.dart';
+// import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -22,436 +25,444 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBackground,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          // Container for search box etc
-          Container(
-            height: 173.0,
-            color: kBackground,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                      color: kBackground,
-                      height: 40.0,
-                      child: Image.asset(
-                        'assets/logo.png',
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        right: 30,
-                        top: 47,
-                        bottom: 22,
-                      ),
-                      decoration: BoxDecoration(
-                          color: kSignupbuttonColor.withOpacity(0.15),
-                          shape: BoxShape.circle),
-                      height: 36,
-                      child: IconButton(
-                        icon: Icon(
-                            size: 15,
-                            FontAwesomeIcons.solidBell,
-                            color: kButtonColor),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                  color: kBackground,
-                  height: 45.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: kTextboxhintstyle,
-                      prefixIcon: Icon(
-                        FontAwesomeIcons.search,
-                        size: 13.0,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45.0),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBackground,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            // Container for search box etc
+            Container(
+              height: 173.0,
+              color: kBackground,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        color: kBackground,
+                        height: 40.0,
+                        child: Image.asset(
+                          'assets/logo.png',
                         ),
-                        borderSide: BorderSide(
-                          style: BorderStyle.solid,
-                          color: kTextfieldborderColor,
-                          width: 2.0,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          right: 30,
+                          top: 47,
+                          bottom: 22,
+                        ),
+                        decoration: BoxDecoration(
+                            color: kSignupbuttonColor.withOpacity(0.15),
+                            shape: BoxShape.circle),
+                        height: 36,
+                        child: IconButton(
+                          icon: Icon(
+                              size: 15,
+                              FontAwesomeIcons.solidBell,
+                              color: kButtonColor),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                    color: kBackground,
+                    height: 45.0,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: kTextboxhintstyle,
+                        prefixIcon: Icon(
+                          FontAwesomeIcons.search,
+                          size: 13.0,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(45.0),
+                          ),
+                          borderSide: BorderSide(
+                            style: BorderStyle.solid,
+                            color: kTextfieldborderColor,
+                            width: 2.0,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                //Ads
-                Container(
-                  margin: EdgeInsets.only(left: 30, right: 30),
-                  color: kBackground,
-                  child: Image.asset('assets/Ads.png'),
-                ),
+            Expanded(
+              child: ListView(
+                children: [
+                  //Ads
+                  Container(
+                    margin: EdgeInsets.only(left: 30, right: 30),
+                    color: kBackground,
+                    child: Image.asset('assets/Ads.png'),
+                  ),
 
-                // News list header
+                  // News list header
 
-                Container(
-                  color: kBackground,
-                  height: 419,
-                  width: 375,
-                  child: Column(
-                    children: [
-                      // News label
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'News',
-                              style: kPageHeader,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => News()));
-                              },
-                              child: Text(
-                                'See All',
-                                style: kForgetpasswordstyle,
+                  Container(
+                    color: kBackground,
+                    height: 419,
+                    width: 375,
+                    child: Column(
+                      children: [
+                        // News label
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 30.0, right: 30.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'News',
+                                style: kPageHeader,
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: 3,
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 23.0, right: 23.0),
-                              child: GestureDetector(
-                                onTap: () {
+                              TextButton(
+                                onPressed: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => NewsDetails()));
+                                          builder: (context) => News()));
                                 },
-                                child: Container(
-                                  color: kBackground,
-                                  height: 120,
-                                  width: 375,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            bottom: 15.0, right: 15.0),
-                                        height: 120,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image:
-                                                AssetImage('assets/news.png'),
-                                          ),
-                                          color: kBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 120,
-                                          margin: EdgeInsets.only(bottom: 15.0),
-                                          color: kBackground,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                'Lorem Ipsum',
-                                                style: kNewsSubHeader,
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                    color: kBackground,
-                                                    height: 7.0,
-                                                    child: Text(
-                                                      textAlign: TextAlign.left,
-                                                      'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
-                                                      style: kBodyTextStyle,
-                                                    )),
-                                              ),
-                                              Text(
-                                                textAlign: TextAlign.left,
-                                                'Dec 21 2021',
-                                                style: kNewsDateSTyle,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
                                 ),
-                              ),
-                            );
-                          }),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-
-                // Project List Header
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Projects',
-                        style: kPageHeader,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProjectPage()));
-                        },
-                        child: Text(
-                          'See All',
-                          style: kForgetpasswordstyle,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 205,
-                  width: 237,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    itemBuilder: ((context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProgressDetails()));
-                        },
-                        child: Container(
-                          height: 202,
-                          width: 237,
-                          margin: EdgeInsets.only(
-                              left: 36.27, right: 15.0, bottom: 9.0),
-                          decoration: BoxDecoration(
-                            boxShadow: [kBoxshadow],
-                            color: kBackground,
-                            borderRadius: BorderRadius.circular(18),
+                              )
+                            ],
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin:
-                                    EdgeInsets.only(left: 9.0, right: 10.15),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      'assets/project2.png',
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 3,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 23.0, right: 23.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetails()));
+                                  },
+                                  child: Container(
+                                    color: kBackground,
+                                    height: 120,
+                                    width: 375,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              bottom: 15.0, right: 15.0),
+                                          height: 120,
+                                          width: 120,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image:
+                                                  AssetImage('assets/news.png'),
+                                            ),
+                                            color: kBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            height: 120,
+                                            margin:
+                                                EdgeInsets.only(bottom: 15.0),
+                                            color: kBackground,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                Text(
+                                                  'Lorem Ipsum',
+                                                  style: kNewsSubHeader,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                      color: kBackground,
+                                                      height: 7.0,
+                                                      child: Text(
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
+                                                        style: kBodyTextStyle,
+                                                      )),
+                                                ),
+                                                Text(
+                                                  textAlign: TextAlign.left,
+                                                  'Dec 21 2021',
+                                                  style: kNewsDateSTyle,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                                height: 145,
-                                width: 218,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 16.0, left: 39.0, bottom: 10.0),
-                                child: Text(
-                                  'Lorem Ispum Project',
-                                  style: kPageHeader,
-                                ),
-                              ),
-                            ],
+                              );
+                            }),
                           ),
-                        ),
-                      );
-                    }),
+                        )
+                      ],
+                    ),
                   ),
-                ),
 
-                //Upcoming events header
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Upcoming Events',
-                        style: kPageHeader,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EventCenter()));
-                        },
-                        child: Text(
-                          'See All',
-                          style: kForgetpasswordstyle,
+                  // Project List Header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30.0, left: 30.0, right: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Projects',
+                          style: kPageHeader,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 320,
-                  width: 237,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    itemBuilder: ((context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EventDetails()));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              left: 36.27, right: 15.0, bottom: 9.0),
-                          decoration: BoxDecoration(
-                            boxShadow: [kBoxshadow],
-                            color: kBackground,
-                            borderRadius: BorderRadius.circular(18),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProjectPage()));
+                          },
+                          child: Text(
+                            'See All',
+                            style: kForgetpasswordstyle,
                           ),
-                          height: 255.0,
-                          width: 237.0,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(bottom: 6.0),
-                                margin:
-                                    EdgeInsets.only(left: 9.0, right: 10.15),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/oscars.png'),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 205,
+                    width: 237,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: ((context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProgressDetails()));
+                          },
+                          child: Container(
+                            height: 202,
+                            width: 237,
+                            margin: EdgeInsets.only(
+                                left: 36.27, right: 15.0, bottom: 9.0),
+                            decoration: BoxDecoration(
+                              boxShadow: [kBoxshadow],
+                              color: kBackground,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin:
+                                      EdgeInsets.only(left: 9.0, right: 10.15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        'assets/project2.png',
+                                      ),
+                                    ),
+                                  ),
+                                  height: 145,
+                                  width: 218,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 16.0, left: 39.0, bottom: 10.0),
+                                  child: Text(
+                                    'Lorem Ispum Project',
+                                    style: kPageHeader,
                                   ),
                                 ),
-                                height: 145,
-                                width: 218,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 6.0, left: 9.0, bottom: 10.0),
-                                child: Text(
-                                  '94th Academy Awards',
-                                  style: kPageHeader,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 9.0, bottom: 10.0),
-                                child: Text(
-                                  'Sunday, March 27, 2022',
-                                  style: kWelcomesubstyle,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 15.0, bottom: 27.0),
-                                child: ListTile(
-                                  leading: Icon(
-                                    FontAwesomeIcons.mapMarker,
-                                    color: kTextboxhintColor,
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+
+                  //Upcoming events header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Upcoming Events',
+                          style: kPageHeader,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => EventCenter()));
+                          },
+                          child: Text(
+                            'See All',
+                            style: kForgetpasswordstyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 320,
+                    width: 237,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: ((context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => EventDetails()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: 36.27, right: 15.0, bottom: 9.0),
+                            decoration: BoxDecoration(
+                              boxShadow: [kBoxshadow],
+                              color: kBackground,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            height: 255.0,
+                            width: 237.0,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 6.0),
+                                  margin:
+                                      EdgeInsets.only(left: 9.0, right: 10.15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    image: DecorationImage(
+                                      image: AssetImage('assets/oscars.png'),
+                                    ),
                                   ),
-                                  title: Text(
-                                    textAlign: TextAlign.left,
-                                    '36 Guild Street London, UK',
+                                  height: 145,
+                                  width: 218,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6.0, left: 9.0, bottom: 10.0),
+                                  child: Text(
+                                    '94th Academy Awards',
+                                    style: kPageHeader,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 9.0, bottom: 10.0),
+                                  child: Text(
+                                    'Sunday, March 27, 2022',
                                     style: kWelcomesubstyle,
                                   ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15.0, bottom: 27.0),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      FontAwesomeIcons.mapMarkerAlt,
+                                      color: kTextboxhintColor,
+                                    ),
+                                    title: Text(
+                                      textAlign: TextAlign.left,
+                                      '36 Guild Street London, UK',
+                                      style: kWelcomesubstyle,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-
-                // Visit Market Link
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 30.0, right: 30.0, bottom: 150.0),
-                  child: Center(
-                    child: Container(
-                      height: 107,
-                      width: 368,
-                      // ignore: sort_child_properties_last
-                      child: Center(
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(45.0),
-                          ),
-                          height: 45,
-                          minWidth: 230,
-                          color: kButtonColor,
-                          onPressed: () {},
-                          child: Text(
-                            "Visit Our Famer's Market",
-                            style: TextStyle(
-                                color: kBackground,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Inter',
-                                fontSize: 16.0,
-                                fontStyle: FontStyle.normal),
-                          ),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/market.png'))),
+                        );
+                      }),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 50.0,
+                  ),
+
+                  // Visit Market Link
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 30.0, right: 30.0, bottom: 150.0),
+                    child: Center(
+                      child: Container(
+                        height: 107,
+                        width: 368,
+                        // ignore: sort_child_properties_last
+                        child: Center(
+                          child: MaterialButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(45.0),
+                            ),
+                            height: 45,
+                            minWidth: 230,
+                            color: kButtonColor,
+                            onPressed: () {},
+                            child: Text(
+                              "Visit Our Famer's Market",
+                              style: TextStyle(
+                                  color: kBackground,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Inter',
+                                  fontSize: 16.0,
+                                  fontStyle: FontStyle.normal),
+                            ),
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/market.png'))),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        bottomNavigationBar: ReuseableBottomBar(),
       ),
-      bottomNavigationBar: ReuseableBottomBar(),
     );
   }
 }

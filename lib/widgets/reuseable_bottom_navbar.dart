@@ -4,7 +4,7 @@ import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/promoion.dart';
+import 'package:batnf/Screens/promotion.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

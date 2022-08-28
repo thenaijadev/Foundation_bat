@@ -4,7 +4,7 @@ class EventModel {
   String eventId = '';
   String eventName = '';
   String eventDesc = '';
-  String Venue = '';
+  String venue = '';
   String eventDate = '';
   String eventTime = '';
   String eventFlier = '';
@@ -16,7 +16,7 @@ class EventModel {
     required this.eventId,
     required this.eventName,
     required this.eventDesc,
-    required this.Venue,
+    required this.venue,
     required this.eventDate,
     required this.eventTime,
     required this.eventFlier,
@@ -28,8 +28,13 @@ class EventModel {
   EventModel.fromJson(Map<String, dynamic> data) {
     eventName = data['eventName'] == null ? "unknown" : data['eventName'];
     eventDesc = data['eventDesc'] == null ? "unknown" : data['eventDesc'];
-    Venue = data['Venue'] == null ? "unknown" : data['Venue'];
+    venue = data['Venue'] == null ? "unknown" : data['Venue'];
     eventFlier = data['eventFlier'] == null ? "unknown" : data['eventFlier'];
-    eventDate = data['eventDate'] == null ? "unknown" : data['eventDate'].toString();
+    eventDate = data['eventDate'] == null ? "unknown" : data['eventDate'];
+    eventId = data['eventId'] == null ? "unknown" : data['eventId'];
+    eventTime = data['eventTime'] == null ? "unknown" : data['eventTime'];
+    createdDate = data['createdDate'] == null ? "unknown" : data['createdDate'];
+    status = data['status'] == null ? "unknown" : data['status'];
+    adminId = data['adminId'] == null ? "unknown" : data['adminId'];
   }
 }

@@ -6,6 +6,7 @@ import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUp extends StatefulWidget {
@@ -17,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   bool Newagreement = false;
+  bool status = false;
   String password = '';
   bool hidepassword = true;
 
@@ -194,23 +196,34 @@ class _SignUpState extends State<SignUp> {
                     ),
 
                     // Remember me
-                    InkWell(
-                      onTap: () {},
-                      child: ListTile(
-                        textColor: Colors.blue,
-                        title: Text(
-                          'Remember me',
-                          style: TextStyle(
-                              color: kGeneralbodytextColor,
-                              fontStyle: FontStyle.normal,
-                              fontFamily: 'Inter',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        leading: Icon(
-                          FontAwesomeIcons.toggleOn,
-                          color: kButtonColor,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: Row(
+                        children: [
+                          FlutterSwitch(
+                              height: 20,
+                              width: 40,
+                              toggleSize: 12,
+                              activeColor: kButtonColor,
+                              value: status,
+                              onToggle: (val) {
+                                setState(() {
+                                  status = val;
+                                });
+                              }),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Remember me',
+                            style: TextStyle(
+                                color: kButtonColor,
+                                fontStyle: FontStyle.normal,
+                                fontFamily: 'Inter',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
                       ),
                     ),
 
