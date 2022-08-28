@@ -19,7 +19,6 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
-
   @override
   void initState() {
     super.initState();
@@ -46,7 +45,8 @@ class _NewsState extends State<News> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        margin:
+                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
@@ -82,33 +82,32 @@ class _NewsState extends State<News> {
                       ),
                     ],
                   ),
-                  if (provider.allNews != null &&
-                      provider.allNews!.isNotEmpty)
-                  Container(
-                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                    color: kBackground,
-                    height: 45.0,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: kTextboxhintstyle,
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.search,
-                          size: 13.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(45.0),
+                  if (provider.allNews != null && provider.allNews!.isNotEmpty)
+                    Container(
+                      margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                      color: kBackground,
+                      height: 45.0,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search',
+                          hintStyle: kTextboxhintstyle,
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.search,
+                            size: 13.0,
                           ),
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: kTextfieldborderColor,
-                            width: 2.0,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
+                            ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -122,86 +121,93 @@ class _NewsState extends State<News> {
                           child: Text('No Latest News'),
                         )
                       : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: provider.allNews!.length,
-                  itemBuilder: ((context, index) {
-                  NewsModel news = provider.allNews![index];
-                    return GestureDetector(
-                      onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => NewsDetails(news)));
-                      },
-                      child: Container(
-                        height: 124,
-                        width: 368,
-                        margin: EdgeInsets.only(
-                          left: 30,
-                          right: 30,
-                          bottom: 30.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: kBackground,
-                          borderRadius: BorderRadius.circular(18.0),
-                          boxShadow: [kBoxshadow],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 110,
-                              width: 110,
-                              margin:
-                                  EdgeInsets.only(bottom: 7.0, top: 7.0, left: 9.0),
-                              child: ClipRRect(
+                          scrollDirection: Axis.vertical,
+                          itemCount: provider.allNews!.length,
+                          itemBuilder: ((context, index) {
+                            NewsModel news = provider.allNews![index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            NewsDetails(news)));
+                              },
+                              child: Container(
+                                height: 124,
+                                width: 368,
+                                margin: EdgeInsets.only(
+                                  left: 30,
+                                  right: 30,
+                                  bottom: 30.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: kBackground,
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  boxShadow: [kBoxshadow],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 110,
+                                      width: 110,
+                                      margin: EdgeInsets.only(
+                                          bottom: 7.0, top: 7.0, left: 9.0),
+                                      child: ClipRRect(
                                         borderRadius: BorderRadius.circular(18),
                                         child: CachedNetworkImage(
                                             imageUrl:
                                                 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
                                             fit: BoxFit.cover),
                                       ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 93,
-                                margin: EdgeInsets.only(
-                                    top: 5, bottom: 10, left: 10.0, right: 6.0),
-                                color: kBackground,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    Container(
-                                      color: kBackground,
-                                      height: 19,
-                                      child: Text(
-                                        news.title,
-                                        style: kNewsSubHeader,
-                                      ),
                                     ),
                                     Expanded(
                                       child: Container(
-                                          // margin: EdgeInsets.only(bottom: 4.0),
-                                          color: kBackground,
-                                          height: 7.0,
-                                          child: Text(
-                                            textAlign: TextAlign.left,
-                                            news.information,
-                                            style: kBodyTextStyle,
-                                          )),
+                                        height: 93,
+                                        margin: EdgeInsets.only(
+                                            top: 5,
+                                            bottom: 10,
+                                            left: 10.0,
+                                            right: 6.0),
+                                        color: kBackground,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Container(
+                                              color: kBackground,
+                                              height: 19,
+                                              child: Text(
+                                                news.title,
+                                                style: kNewsSubHeader,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  // margin: EdgeInsets.only(bottom: 4.0),
+                                                  color: kBackground,
+                                                  height: 7.0,
+                                                  child: Text(
+                                                    textAlign: TextAlign.left,
+                                                    news.information,
+                                                    style: kBodyTextStyle,
+                                                  )),
+                                            ),
+                                            Text(
+                                              textAlign: TextAlign.left,
+                                              news.entryDate,
+                                              style: kNewsDateSTyle,
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    Text(
-                                      textAlign: TextAlign.left,
-                                      news.entryDate,
-                                      style: kNewsDateSTyle,
-                                    )
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  })),
+                            );
+                          })),
             ),
           ],
         ),
