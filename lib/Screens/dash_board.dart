@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
-
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/single_event_page.dart';
+import 'package:batnf/Screens/single_news_page.dart';
+import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
@@ -27,8 +29,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-
-           // Container for search box etc
+          // Container for search box etc
           Container(
             height: 173.0,
             color: kBackground,
@@ -96,12 +97,12 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: ListView(
               children: [
-
                 //Ads
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 30),
                   color: kBackground,
-                  child: Image.asset('assets/Ads.png'),),
+                  child: Image.asset('assets/Ads.png'),
+                ),
 
                 // News list header
 
@@ -123,11 +124,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             TextButton(
                               onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => News()));
-                            },
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => News()));
+                              },
                               child: Text(
                                 'See All',
                                 style: kForgetpasswordstyle,
@@ -140,52 +141,80 @@ class _HomePageState extends State<HomePage> {
                         child: ListView.builder(
                           itemCount: 3,
                           itemBuilder: ((context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 23.0, right: 23.0),
-                            child: Container(
-                              color: kBackground,
-                              height: 120,
-                              width: 375,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 15.0, right: 15.0),
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(fit: BoxFit.cover,
-                                        image: AssetImage('assets/news.png'),),
-                                    color: kBackground,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 120,
-                                      margin: EdgeInsets.only(bottom: 15.0),
-                                      color: kBackground,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        // ignore: prefer_const_literals_to_create_immutables
-                                        children: [
-                                          Text('Lorem Ipsum', style: kNewsSubHeader,),
-                                          Expanded(
-                                            child: Container(
-                                              color: kBackground,
-                                              height: 7.0,
-                                              child: Text(textAlign: TextAlign.left, 'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....', style: kBodyTextStyle,)),
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 23.0, right: 23.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => NewsDetails()));
+                                },
+                                child: Container(
+                                  color: kBackground,
+                                  height: 120,
+                                  width: 375,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 15.0, right: 15.0),
+                                        height: 120,
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image:
+                                                AssetImage('assets/news.png'),
                                           ),
-                                          Text(textAlign: TextAlign.left, 'Dec 21 2021', style: kNewsDateSTyle,)
-                                        ],
+                                          color: kBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                      Expanded(
+                                        child: Container(
+                                          height: 120,
+                                          margin: EdgeInsets.only(bottom: 15.0),
+                                          color: kBackground,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Text(
+                                                'Lorem Ipsum',
+                                                style: kNewsSubHeader,
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                    color: kBackground,
+                                                    height: 7.0,
+                                                    child: Text(
+                                                      textAlign: TextAlign.left,
+                                                      'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
+                                                      style: kBodyTextStyle,
+                                                    )),
+                                              ),
+                                              Text(
+                                                textAlign: TextAlign.left,
+                                                'Dec 21 2021',
+                                                style: kNewsDateSTyle,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        }),),
+                            );
+                          }),
+                        ),
                       )
                     ],
                   ),
@@ -204,11 +233,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextButton(
                         onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProjectPage()));
-                            },
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProjectPage()));
+                        },
                         child: Text(
                           'See All',
                           style: kForgetpasswordstyle,
@@ -224,43 +253,50 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: ((context, index) {
-                      return Container(
-                        height: 202,
-                        width: 237,
-                        margin: EdgeInsets.only(
-                            left: 36.27, right: 15.0, bottom: 9.0),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            kBoxshadow
-                          ],
-                          color: kBackground,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 9.0, right: 10.15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18.0),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    'assets/project2.png',
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProgressDetails()));
+                        },
+                        child: Container(
+                          height: 202,
+                          width: 237,
+                          margin: EdgeInsets.only(
+                              left: 36.27, right: 15.0, bottom: 9.0),
+                          decoration: BoxDecoration(
+                            boxShadow: [kBoxshadow],
+                            color: kBackground,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin:
+                                    EdgeInsets.only(left: 9.0, right: 10.15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      'assets/project2.png',
+                                    ),
                                   ),
                                 ),
+                                height: 145,
+                                width: 218,
                               ),
-                              height: 145,
-                              width: 218,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 16.0, left: 39.0, bottom: 10.0),
-                              child: Text(
-                                'Lorem Ispum Project',
-                                style: kPageHeader,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 16.0, left: 39.0, bottom: 10.0),
+                                child: Text(
+                                  'Lorem Ispum Project',
+                                  style: kPageHeader,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     }),
@@ -280,11 +316,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextButton(
                         onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EventCenter()));
-                            },
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EventCenter()));
+                        },
                         child: Text(
                           'See All',
                           style: kForgetpasswordstyle,
@@ -300,65 +336,72 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: ((context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(
-                            left: 36.27, right: 15.0, bottom: 9.0),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            kBoxshadow
-                          ],
-                          color: kBackground,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        height: 255.0,
-                        width: 237.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(bottom: 6.0),
-                              margin: EdgeInsets.only(left: 9.0, right: 10.15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18.0),
-                                image: DecorationImage(
-                                  image: AssetImage('assets/oscars.png'),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EventDetails()));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              left: 36.27, right: 15.0, bottom: 9.0),
+                          decoration: BoxDecoration(
+                            boxShadow: [kBoxshadow],
+                            color: kBackground,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          height: 255.0,
+                          width: 237.0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 6.0),
+                                margin:
+                                    EdgeInsets.only(left: 9.0, right: 10.15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/oscars.png'),
+                                  ),
+                                ),
+                                height: 145,
+                                width: 218,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 6.0, left: 9.0, bottom: 10.0),
+                                child: Text(
+                                  '94th Academy Awards',
+                                  style: kPageHeader,
                                 ),
                               ),
-                              height: 145,
-                              width: 218,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 6.0, left: 9.0, bottom: 10.0),
-                              child: Text(
-                                '94th Academy Awards',
-                                style: kPageHeader,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 9.0, bottom: 10.0),
-                              child: Text(
-                                'Sunday, March 27, 2022',
-                                style: kWelcomesubstyle,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 15.0, bottom: 27.0),
-                              child: ListTile(
-                                leading: Icon(
-                                  FontAwesomeIcons.mapMarker,
-                                  color: kTextboxhintColor,
-                                ),
-                                title: Text(
-                                  textAlign: TextAlign.left,
-                                  '36 Guild Street London, UK',
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 9.0, bottom: 10.0),
+                                child: Text(
+                                  'Sunday, March 27, 2022',
                                   style: kWelcomesubstyle,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 15.0, bottom: 27.0),
+                                child: ListTile(
+                                  leading: Icon(
+                                    FontAwesomeIcons.mapMarker,
+                                    color: kTextboxhintColor,
+                                  ),
+                                  title: Text(
+                                    textAlign: TextAlign.left,
+                                    '36 Guild Street London, UK',
+                                    style: kWelcomesubstyle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),
@@ -367,6 +410,8 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 50.0,
                 ),
+
+                // Visit Market Link
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 30.0, right: 30.0, bottom: 150.0),

@@ -3,6 +3,8 @@
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/pending_project.dart';
+import 'package:batnf/Screens/single_completed_project_page.dart';
+import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
@@ -189,132 +191,140 @@ class _ProjectPageState extends State<ProjectPage> {
                         ],
                       ),
                       Expanded(
-                        child: ListView(
-                          // padding: EdgeInsets.only(bottom: 15),
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: 15.0),
-                              decoration: BoxDecoration(
-                                color: kBackground,
-                                borderRadius: BorderRadius.circular(18.0),
-                                boxShadow: [kBoxshadow],
-                              ),
-                              height: 120,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        bottom: 15.0, right: 15.0),
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            AssetImage('assets/projects.png'),
-                                      ),
-                                      color: kBackground,
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 93,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProgressDetails()));
+                          },
+                          child: ListView(
+                            // padding: EdgeInsets.only(bottom: 15),
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 15.0),
+                                decoration: BoxDecoration(
+                                  color: kBackground,
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  boxShadow: [kBoxshadow],
+                                ),
+                                height: 120,
+                                child: Row(
+                                  children: [
+                                    Container(
                                       margin: EdgeInsets.only(
-                                          top: 5,
-                                          bottom: 10,
-                                          left: 10.0,
-                                          right: 6.0),
-                                      color: kBackground,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        // ignore: prefer_const_literals_to_create_immutables
-                                        children: [
-                                          Container(
-                                            color: kBackground,
-                                            height: 19,
-                                            child: Text(
-                                              'Lorem Ipsum Project',
-                                              style: kNewsSubHeader,
+                                          bottom: 15.0, right: 15.0),
+                                      height: 120,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image:
+                                              AssetImage('assets/projects.png'),
+                                        ),
+                                        color: kBackground,
+                                        borderRadius: BorderRadius.circular(18.0),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        height: 93,
+                                        margin: EdgeInsets.only(
+                                            top: 5,
+                                            bottom: 10,
+                                            left: 10.0,
+                                            right: 6.0),
+                                        color: kBackground,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Container(
+                                              color: kBackground,
+                                              height: 19,
+                                              child: Text(
+                                                'Lorem Ipsum Project',
+                                                style: kNewsSubHeader,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            textAlign: TextAlign.left,
-                                            ' Started: Dec 21 2021',
-                                            style: kNewsDateSTyle,
-                                          )
-                                        ],
+                                            Text(
+                                              textAlign: TextAlign.left,
+                                              ' Started: Dec 21 2021',
+                                              style: kNewsDateSTyle,
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: kBackground,
-                                borderRadius: BorderRadius.circular(18.0),
-                                boxShadow: [kBoxshadow],
-                              ),
-                              height: 120,
-                              width: 375,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        bottom: 15.0, right: 15.0),
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            AssetImage('assets/projects.png'),
-                                      ),
-                                      color: kBackground,
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 93,
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: kBackground,
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  boxShadow: [kBoxshadow],
+                                ),
+                                height: 120,
+                                width: 375,
+                                child: Row(
+                                  children: [
+                                    Container(
                                       margin: EdgeInsets.only(
-                                          top: 5,
-                                          bottom: 10,
-                                          left: 10.0,
-                                          right: 6.0),
-                                      color: kBackground,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        // ignore: prefer_const_literals_to_create_immutables
-                                        children: [
-                                          Container(
-                                            color: kBackground,
-                                            height: 19,
-                                            child: Text(
-                                              'Lorem Ipsum Project',
-                                              style: kNewsSubHeader,
-                                            ),
-                                          ),
-                                          Text(
-                                            textAlign: TextAlign.left,
-                                            ' Started: Dec 21 2021',
-                                            style: kNewsDateSTyle,
-                                          )
-                                        ],
+                                          bottom: 15.0, right: 15.0),
+                                      height: 120,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image:
+                                              AssetImage('assets/projects.png'),
+                                        ),
+                                        color: kBackground,
+                                        borderRadius: BorderRadius.circular(18.0),
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Expanded(
+                                      child: Container(
+                                        height: 93,
+                                        margin: EdgeInsets.only(
+                                            top: 5,
+                                            bottom: 10,
+                                            left: 10.0,
+                                            right: 6.0),
+                                        color: kBackground,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Container(
+                                              color: kBackground,
+                                              height: 19,
+                                              child: Text(
+                                                'Lorem Ipsum Project',
+                                                style: kNewsSubHeader,
+                                              ),
+                                            ),
+                                            Text(
+                                              textAlign: TextAlign.left,
+                                              ' Started: Dec 21 2021',
+                                              style: kNewsDateSTyle,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -360,65 +370,73 @@ class _ProjectPageState extends State<ProjectPage> {
                           scrollDirection: Axis.vertical,
                           itemCount: 2,
                           itemBuilder: ((context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(bottom: 15.0),
-                              decoration: BoxDecoration(
-                                color: kBackground,
-                                borderRadius: BorderRadius.circular(18.0),
-                                boxShadow: [kBoxshadow],
-                              ),
-                              height: 120,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        bottom: 15.0, right: 15.0),
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            AssetImage('assets/projects.png'),
-                                      ),
-                                      color: kBackground,
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 93,
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CompletedProjectDetails()));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(bottom: 15.0),
+                                decoration: BoxDecoration(
+                                  color: kBackground,
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  boxShadow: [kBoxshadow],
+                                ),
+                                height: 120,
+                                child: Row(
+                                  children: [
+                                    Container(
                                       margin: EdgeInsets.only(
-                                          top: 5,
-                                          bottom: 10,
-                                          left: 10.0,
-                                          right: 6.0),
-                                      color: kBackground,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        // ignore: prefer_const_literals_to_create_immutables
-                                        children: [
-                                          Container(
-                                            color: kBackground,
-                                            height: 19,
-                                            child: Text(
-                                              'Lorem Ipsum Project',
-                                              style: kNewsSubHeader,
-                                            ),
-                                          ),
-                                          Text(
-                                            textAlign: TextAlign.left,
-                                            ' Started: Dec 21 2021',
-                                            style: kNewsDateSTyle,
-                                          )
-                                        ],
+                                          bottom: 15.0, right: 15.0),
+                                      height: 120,
+                                      width: 120,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image:
+                                              AssetImage('assets/projects.png'),
+                                        ),
+                                        color: kBackground,
+                                        borderRadius: BorderRadius.circular(18.0),
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Expanded(
+                                      child: Container(
+                                        height: 93,
+                                        margin: EdgeInsets.only(
+                                            top: 5,
+                                            bottom: 10,
+                                            left: 10.0,
+                                            right: 6.0),
+                                        color: kBackground,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Container(
+                                              color: kBackground,
+                                              height: 19,
+                                              child: Text(
+                                                'Lorem Ipsum Project',
+                                                style: kNewsSubHeader,
+                                              ),
+                                            ),
+                                            Text(
+                                              textAlign: TextAlign.left,
+                                              ' Started: Dec 21 2021',
+                                              style: kNewsDateSTyle,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           }),

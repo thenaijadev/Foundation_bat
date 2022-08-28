@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -141,108 +142,116 @@ class _EventCenterState extends State<EventCenter> {
                 scrollDirection: Axis.vertical,
                 itemCount: 6,
                 itemBuilder: ((context, index) {
-                  return Container(
-                    height: 124,
-                    margin: EdgeInsets.only(
-                      left: 30,
-                      right: 30,
-                      bottom: 30.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: kBackground,
-                      borderRadius: BorderRadius.circular(18.0),
-                      boxShadow: [kBoxshadow],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 110,
-                          width: 110,
-                          margin:
-                              EdgeInsets.only(bottom: 7.0, top: 7.0, left: 9.0),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage('assets/event.png')),
-                            color: kBackground,
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 93,
-                            margin: EdgeInsets.only(
-                                top: 5, bottom: 10, left: 10.0, right: 6.0),
-                            color: kBackground,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                Container(
-                                  color: kBackground,
-                                  height: 19,
-                                  child: Text(
-                                    'Dec 21 2021',
-                                    style: kEventDatestyle,
-                                  ),
-                                ),
-                                Container(
-                                  color: kBackground,
-                                  height: 38,
-                                  child: Text(
-                                    "Women's Leadership Contest\n2021",
-                                    style: kPageHeader,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: kBackground,
-                                    height: 86,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 6.67, bottom: 23.67),
-                                          color: kBackground,
-                                          child: Icon(
-                                            FontAwesomeIcons.mapMarkerAlt,
-                                            size: 14.67,
-                                            color: kTextboxhintColor,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                              top: 5,
-                                              right: 11,
-                                            ),
-                                            height: 32,
-                                            width: 207,
-                                            color: kBackground,
-                                            child: Text(
-                                              textAlign: TextAlign.left,
-                                              '36 Guild Street London, UK',
-                                              style: TextStyle(
-                                                  color: kTextboxhintColor,
-                                                  fontStyle: FontStyle.normal,
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventDetails()));
+                    },
+                    child: Container(
+                      height: 124,
+                      margin: EdgeInsets.only(
+                        left: 30,
+                        right: 30,
+                        bottom: 30.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: kBackground,
+                        borderRadius: BorderRadius.circular(18.0),
+                        boxShadow: [kBoxshadow],
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 110,
+                            width: 110,
+                            margin:
+                                EdgeInsets.only(bottom: 7.0, top: 7.0, left: 9.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage('assets/event.png')),
+                              color: kBackground,
+                              borderRadius: BorderRadius.circular(18.0),
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Container(
+                              height: 93,
+                              margin: EdgeInsets.only(
+                                  top: 5, bottom: 10, left: 10.0, right: 6.0),
+                              color: kBackground,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  Container(
+                                    color: kBackground,
+                                    height: 19,
+                                    child: Text(
+                                      'Dec 21 2021',
+                                      style: kEventDatestyle,
+                                    ),
+                                  ),
+                                  Container(
+                                    color: kBackground,
+                                    height: 38,
+                                    child: Text(
+                                      "Women's Leadership Contest\n2021",
+                                      style: kPageHeader,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      color: kBackground,
+                                      height: 86,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 6.67, bottom: 23.67),
+                                            color: kBackground,
+                                            child: Icon(
+                                              FontAwesomeIcons.mapMarkerAlt,
+                                              size: 14.67,
+                                              color: kTextboxhintColor,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                top: 5,
+                                                right: 11,
+                                              ),
+                                              height: 32,
+                                              width: 207,
+                                              color: kBackground,
+                                              child: Text(
+                                                textAlign: TextAlign.left,
+                                                '36 Guild Street London, UK',
+                                                style: TextStyle(
+                                                    color: kTextboxhintColor,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 })),
