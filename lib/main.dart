@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:batnf/Screens/landing_page.dart';
+import 'package:batnf/Screens/signin.dart';
+import 'package:batnf/Screens/signup.dart';
+import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         initialRoute: LandindPage.id,
         routes: {
           LandindPage.id: (context) => const LandindPage(),
+          WelcomePage.id: (context) => WelcomePage(),
+          SignIn.id: (context) => SignIn(),
+          SignUp.id:(context) => SignUp(),
         },
       ),
     );

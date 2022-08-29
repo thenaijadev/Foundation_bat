@@ -10,6 +10,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUp extends StatefulWidget {
+  static String id = 'signup';
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -238,10 +239,8 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignIn()));
+                          Navigator.pushNamed(context, SignIn.id);
+                          ;
                         },
                         child: Text(
                           'Sign Up',
@@ -263,7 +262,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    // Sign Up Redurection
+                    // Sign In Redurection
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
@@ -287,10 +286,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignIn()));
+                              Navigator.pushNamed(context, SignIn.id);
+                              ;
                             },
                             child: Text(
                               textAlign: TextAlign.right,

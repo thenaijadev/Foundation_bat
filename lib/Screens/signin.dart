@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class SignIn extends StatefulWidget {
+  static String id = 'signin';
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -224,10 +225,8 @@ class _SignInState extends State<SignIn> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUp()));
+                              Navigator.pushNamed(context, SignUp.id);
+                              ;
                             },
                             child: Text(
                               textAlign: TextAlign.right,

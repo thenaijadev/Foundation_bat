@@ -10,6 +10,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 
 class WelcomePage extends StatefulWidget {
+  static String id = 'welcome_page';
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
@@ -62,8 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 height: 45.0,
                 color: kButtonColor,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignIn()));
+                  Navigator.pushNamed(context, SignIn.id);
                 },
                 minWidth: MediaQuery.of(context).size.width,
                 child: Text(
@@ -89,8 +89,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   borderRadius: BorderRadius.circular(45.0),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.pushNamed(context, SignUp.id);
                 },
                 minWidth: MediaQuery.of(context).size.width,
                 child: Text.rich(

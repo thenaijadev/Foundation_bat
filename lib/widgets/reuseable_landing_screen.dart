@@ -21,8 +21,6 @@ class ReuseableLandingScreen extends StatefulWidget {
 }
 
 class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -72,12 +70,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WelcomePage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, WelcomePage.id);
                 },
                 child: Text(
                   'Skip',
@@ -93,8 +86,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   ),
                   height: 45.0,
                   color: kButtonColor,
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Next',
                     textAlign: TextAlign.center,

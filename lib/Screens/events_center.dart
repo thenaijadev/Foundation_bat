@@ -122,140 +122,149 @@ class _EventCenterState extends State<EventCenter> {
                     )
                   : provider.allEvents!.isEmpty
                       ? Center(
-                          child: Text('No Events, Please check Your Internet Connection'),
+                          child: Text('No Events, Please check Your Internet Connection \n Refresh'),
                         )
-                      : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: provider.allEvents!.length,
-                          itemBuilder: ((context, index) {
-                            EventModel event = provider.allEvents![index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            EventDetails(event)));
-                              },
-                              child: Container(
-                                height: 124,
-                                margin: EdgeInsets.only(
-                                  left: 30,
-                                  right: 30,
-                                  bottom: 30.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: kBackground,
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  boxShadow: [kBoxshadow],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 110,
-                                      width: 110,
-                                      margin: EdgeInsets.only(
-                                          bottom: 7.0, top: 7.0, left: 9.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(18),
-                                        child: CachedNetworkImage(
-                                            imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 93,
+                      : RefreshIndicator(
+                          color: kBackground,
+                          backgroundColor: kButtonColor,
+                        onRefresh:() async{
+                          await Provider.of<EventProvider>(context,
+                                    listen: false)
+                                .getAllEvents();
+                        } ,
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: provider.allEvents!.length,
+                            itemBuilder: ((context, index) {
+                              EventModel event = provider.allEvents![index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EventDetails(event)));
+                                },
+                                child: Container(
+                                  height: 124,
+                                  margin: EdgeInsets.only(
+                                    left: 30,
+                                    right: 30,
+                                    bottom: 30.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: kBackground,
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    boxShadow: [kBoxshadow],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 110,
+                                        width: 110,
                                         margin: EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 10,
-                                            left: 10.0,
-                                            right: 6.0),
-                                        color: kBackground,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // ignore: prefer_const_literals_to_create_immutables
-                                          children: [
-                                            Container(
-                                              color: kBackground,
-                                              height: 19,
-                                              child: Text(
-                                                event.eventDate,
-                                                style: kEventDatestyle,
-                                              ),
-                                            ),
-                                            Container(
-                                              color: kBackground,
-                                              height: 38,
-                                              child: Text(
-                                                event.eventName,
-                                                style: kPageHeader,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                color: kBackground,
-                                                height: 86,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 6.67,
-                                                          bottom: 23.67),
-                                                      color: kBackground,
-                                                      child: Icon(
-                                                        FontAwesomeIcons
-                                                            .mapMarkerAlt,
-                                                        size: 14.67,
-                                                        color:
-                                                            kTextboxhintColor,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                          top: 5,
-                                                          right: 11,
-                                                        ),
-                                                        height: 32,
-                                                        width: 207,
-                                                        color: kBackground,
-                                                        child: Text(
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          event.venue,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  kTextboxhintColor,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontFamily:
-                                                                  'Inter',
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(18),
+                                          child: CachedNetworkImage(
+                                              imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        child: Container(
+                                          height: 93,
+                                          margin: EdgeInsets.only(
+                                              top: 5,
+                                              bottom: 10,
+                                              left: 10.0,
+                                              right: 6.0),
+                                          color: kBackground,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Container(
+                                                color: kBackground,
+                                                height: 19,
+                                                child: Text(
+                                                  event.eventDate,
+                                                  style: kEventDatestyle,
+                                                ),
+                                              ),
+                                              Container(
+                                                color: kBackground,
+                                                height: 38,
+                                                child: Text(
+                                                  event.eventName,
+                                                  style: kPageHeader,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  color: kBackground,
+                                                  height: 86,
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 6.67,
+                                                            bottom: 23.67),
+                                                        color: kBackground,
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .mapMarkerAlt,
+                                                          size: 14.67,
+                                                          color:
+                                                              kTextboxhintColor,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Container(
+                                                          margin: EdgeInsets.only(
+                                                            top: 5,
+                                                            right: 11,
+                                                          ),
+                                                          height: 32,
+                                                          width: 207,
+                                                          color: kBackground,
+                                                          child: Text(
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            event.venue,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kTextboxhintColor,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          })),
+                              );
+                            })),
+                      ),
             ),
           ],
         ),

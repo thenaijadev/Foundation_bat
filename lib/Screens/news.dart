@@ -23,8 +23,7 @@ class _NewsState extends State<News> {
   @override
   void initState() {
     super.initState();
-    var of = Provider.of<NewsProvider>(context, listen: false);
-    of.getAllNews();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
 
   @override
@@ -119,96 +118,104 @@ class _NewsState extends State<News> {
                     )
                   : provider.allNews!.isEmpty
                       ? Center(
-                          child: Text('No Latest News, Please check Your Internet Connection'),
+                          child: Text('No Latest News, Please check Your Internet Connection \n Refresh'),
                         )
-                      : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: provider.allNews!.length,
-                          itemBuilder: ((context, index) {
-                            NewsModel news = provider.allNews![index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            NewsDetails(news)));
-                              },
-                              child: Container(
-                                height: 124,
-                                width: 368,
-                                margin: EdgeInsets.only(
-                                  left: 30,
-                                  right: 30,
-                                  bottom: 30.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: kBackground,
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  boxShadow: [kBoxshadow],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 110,
-                                      width: 110,
-                                      margin: EdgeInsets.only(
-                                          bottom: 7.0, top: 7.0, left: 9.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(18),
-                                        child: CachedNetworkImage(
-                                            imageUrl:
-                                                'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 93,
+                      : RefreshIndicator(
+                        color: kBackground,
+                        backgroundColor: kButtonColor,
+                        onRefresh: ()async{
+                           await Provider.of<NewsProvider>(context, listen: false)
+                                .getAllNews();
+                          },
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: provider.allNews!.length,
+                            itemBuilder: ((context, index) {
+                              NewsModel news = provider.allNews![index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              NewsDetails(news)));
+                                },
+                                child: Container(
+                                  height: 124,
+                                  width: 368,
+                                  margin: EdgeInsets.only(
+                                    left: 30,
+                                    right: 30,
+                                    bottom: 30.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: kBackground,
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    boxShadow: [kBoxshadow],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 110,
+                                        width: 110,
                                         margin: EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 10,
-                                            left: 10.0,
-                                            right: 6.0),
-                                        color: kBackground,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // ignore: prefer_const_literals_to_create_immutables
-                                          children: [
-                                            Container(
-                                              color: kBackground,
-                                              height: 19,
-                                              child: Text(
-                                                news.title,
-                                                style: kNewsSubHeader,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  // margin: EdgeInsets.only(bottom: 4.0),
-                                                  color: kBackground,
-                                                  height: 7.0,
-                                                  child: Text(
-                                                    textAlign: TextAlign.left,
-                                                    news.information,
-                                                    style: kBodyTextStyle,
-                                                  )),
-                                            ),
-                                            Text(
-                                              textAlign: TextAlign.left,
-                                              news.entryDate,
-                                              style: kNewsDateSTyle,
-                                            )
-                                          ],
+                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(18),
+                                          child: CachedNetworkImage(
+                                              imageUrl:
+                                                  'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        child: Container(
+                                          height: 93,
+                                          margin: EdgeInsets.only(
+                                              top: 5,
+                                              bottom: 10,
+                                              left: 10.0,
+                                              right: 6.0),
+                                          color: kBackground,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Container(
+                                                color: kBackground,
+                                                height: 19,
+                                                child: Text(
+                                                  news.title,
+                                                  style: kNewsSubHeader,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                    // margin: EdgeInsets.only(bottom: 4.0),
+                                                    color: kBackground,
+                                                    height: 7.0,
+                                                    child: Text(
+                                                      textAlign: TextAlign.left,
+                                                      news.information,
+                                                      style: kBodyTextStyle,
+                                                    )),
+                                              ),
+                                              Text(
+                                                textAlign: TextAlign.left,
+                                                news.entryDate,
+                                                style: kNewsDateSTyle,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          })),
+                              );
+                            })),
+                      ),
             ),
           ],
         ),
