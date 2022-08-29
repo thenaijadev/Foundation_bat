@@ -1,15 +1,16 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
-import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:batnf/Models/news_model.dart';
+import 'package:provider/provider.dart';
+import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+
 
 class News extends StatefulWidget {
   News({Key? key}) : super(key: key);
@@ -118,7 +119,7 @@ class _NewsState extends State<News> {
                     )
                   : provider.allNews!.isEmpty
                       ? Center(
-                          child: Text('No Latest News'),
+                          child: Text('No Latest News, Please check Your Internet Connection'),
                         )
                       : ListView.builder(
                           scrollDirection: Axis.vertical,

@@ -3,11 +3,12 @@
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/single_event_page.dart';
-import 'package:batnf/Screens/single_news_page.dart';
+// import 'package:batnf/Screens/single_event_page.dart';
+// import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
+// import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -326,10 +327,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => EventCenter()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EventCenter()));
                           },
                           child: Text(
                             'See All',

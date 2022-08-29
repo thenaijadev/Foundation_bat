@@ -42,7 +42,7 @@ class _PromotionState extends State<Promotion> {
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: 50, left: 10, bottom: 36, right: 142),
+                          top: 50, left: 10, bottom: 36, right: 192),
                       color: kBackground,
                       height: 29,
                       child: Text(

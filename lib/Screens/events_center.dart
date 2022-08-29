@@ -41,7 +41,7 @@ class _EventCenterState extends State<EventCenter> {
             Container(
               color: kBackground,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -57,7 +57,7 @@ class _EventCenterState extends State<EventCenter> {
                       ),
                       Container(
                         margin:
-                            EdgeInsets.only(top: 50, right: 160, bottom: 26),
+                            EdgeInsets.only(top: 50, right: 190, bottom: 26),
                         color: kBackground,
                         height: 29,
                         child: Text(
@@ -87,7 +87,7 @@ class _EventCenterState extends State<EventCenter> {
                   if (provider.allEvents != null &&
                       provider.allEvents!.isNotEmpty)
                     Container(
-                      margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                      margin: EdgeInsets.only(left: 30, right: 30, bottom: 21),
                       color: kBackground,
                       height: 45.0,
                       child: TextField(
@@ -122,7 +122,7 @@ class _EventCenterState extends State<EventCenter> {
                     )
                   : provider.allEvents!.isEmpty
                       ? Center(
-                          child: Text('No Events'),
+                          child: Text('No Events, Please check Your Internet Connection'),
                         )
                       : ListView.builder(
                           scrollDirection: Axis.vertical,
