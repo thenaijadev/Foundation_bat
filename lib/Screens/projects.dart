@@ -132,7 +132,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18.0),
                             boxShadow: [kBoxshadow],
-                            color: Colors.blue,
+                            color: Color(0xff0E2B63),
                           ),
                           margin: EdgeInsets.only(left: 30, right: 41.5),
                           height: 250,
@@ -142,7 +142,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18.0),
                             boxShadow: [kBoxshadow],
-                            color: Colors.greenAccent,
+                            color: Color(0xff50AF47),
                           ),
                           margin: EdgeInsets.only(right: 41.5),
                           height: 250,
@@ -152,7 +152,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18.0),
                             boxShadow: [kBoxshadow],
-                            color: Colors.orange,
+                            color: Color(0xffEF7D00),
                           ),
                           margin: EdgeInsets.only(right: 30),
                           height: 250,

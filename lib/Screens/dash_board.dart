@@ -1,19 +1,21 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/single_news_page.dart';
 // import 'package:batnf/Screens/single_event_page.dart';
 // import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
-// import 'package:batnf/providers/event_provider.dart';
+import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:provider/provider.dart';
+import '../providers/news_provider.dart';
+import 'package:provider/provider.dart';
 // import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +27,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+    Provider.of<EventProvider>(context, listen: false).getAllEvents();
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Provider.of<EventProvider>(context, listen: false).getAllEvents();
+  // }
+  @override
   Widget build(BuildContext context) {
+    NewsProvider provider = Provider.of<NewsProvider>(context);
+    // EventProvider provider2 = Provider.of<EventProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -145,19 +161,29 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Expanded(
-                          child: ListView.builder(
+                          child: provider.allNews == null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : provider.allNews!.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                          'No Latest News, Please check Your Internet Connection \n Refresh'),
+                                    )
+                                  : ListView.builder(
                             itemCount: 3,
                             itemBuilder: ((context, index) {
+                              NewsModel news = provider.allNews![index];
                               return Padding(
                                 padding: const EdgeInsets.only(
                                     left: 23.0, right: 23.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             NewsDetails()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetails(news)));
                                   },
                                   child: Container(
                                     color: kBackground,
@@ -196,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                                               // ignore: prefer_const_literals_to_create_immutables
                                               children: [
                                                 Text(
-                                                  'Lorem Ipsum',
+                                                  news.title,
                                                   style: kNewsSubHeader,
                                                 ),
                                                 Expanded(
@@ -206,13 +232,13 @@ class _HomePageState extends State<HomePage> {
                                                       child: Text(
                                                         textAlign:
                                                             TextAlign.left,
-                                                        'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
+                                                        news.information,
                                                         style: kBodyTextStyle,
                                                       )),
                                                 ),
                                                 Text(
                                                   textAlign: TextAlign.left,
-                                                  'Dec 21 2021',
+                                                  news.entryDate,
                                                   style: kNewsDateSTyle,
                                                 )
                                               ],
@@ -418,6 +444,7 @@ class _HomePageState extends State<HomePage> {
                       }),
                     ),
                   ),
+                 
                   SizedBox(
                     height: 50.0,
                   ),
