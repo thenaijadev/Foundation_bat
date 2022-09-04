@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:batnf/Screens/dash_board.dart';
+import 'package:batnf/Screens/forget_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
@@ -133,26 +134,25 @@ class _SignInState extends State<SignIn> {
                     ),
 
                     // Remember me
-
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: Row(
                         children: [
                           FlutterSwitch(
-                            height: 20,
-                            width: 40,
-                            toggleSize: 12,
-                            activeColor: kButtonColor,
+                              height: 20,
+                              width: 40,
+                              toggleSize: 12,
+                              activeColor: kButtonColor,
                               value: status,
                               onToggle: (val) {
                                 setState(() {
                                   status = val;
                                 });
                               }),
-
-                              SizedBox(width: 10,),
-
-                              Text(
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
                             'Remember me',
                             style: TextStyle(
                                 color: kButtonColor,
@@ -192,7 +192,9 @@ class _SignInState extends State<SignIn> {
                     //Forget Pasword Request
                     Center(
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, ForgetPassword.id);
+                        },
                         child: Text(
                           textAlign: TextAlign.right,
                           'forgot password?',

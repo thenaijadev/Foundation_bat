@@ -1,6 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
+import 'package:batnf/Screens/forget_password_page.dart';
 import 'package:batnf/Screens/landing_page.dart';
+import 'package:batnf/Screens/reset_Completed_page.dart';
+import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/Screens/welcone_page.dart';
@@ -50,6 +55,9 @@ class MyApp extends StatelessWidget {
           LandindPage.id: (context) => const LandindPage(),
           WelcomePage.id: (context) => WelcomePage(),
           SignIn.id: (context) => SignIn(),
+          ForgetPassword.id: (context) => ForgetPassword(),
+          ResetPassword.id: (context) => ResetPassword(),
+          ResetCompleted.id: (context) => ResetCompleted(),
           SignUp.id:(context) => SignUp(),
         },
       ),

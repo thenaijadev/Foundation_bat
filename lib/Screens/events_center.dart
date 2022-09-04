@@ -3,6 +3,7 @@
 // import 'package:batnf/Models/events_model.dart';
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
@@ -56,8 +57,8 @@ class _EventCenterState extends State<EventCenter> {
                         ),
                       ),
                       Container(
-                        margin:
-                            EdgeInsets.only(top: 50, right: 190, bottom: 26),
+                        margin: EdgeInsets.only(
+                            top: 50, left: 10, bottom: 26, right: 130),
                         color: kBackground,
                         height: 29,
                         child: Text(
@@ -82,6 +83,25 @@ class _EventCenterState extends State<EventCenter> {
                           onPressed: () {},
                         ),
                       ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 47,
+                          bottom: 22,
+                        ),
+                        decoration: BoxDecoration(
+                            color: kSignupbuttonColor.withOpacity(0.15),
+                            shape: BoxShape.circle),
+                        height: 36,
+                        child: IconButton(
+                          icon: Icon(
+                              size: 15,
+                              FontAwesomeIcons.signOutAlt,
+                              color: kButtonColor),
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignIn.id);
+                          },
+                        ),
+                      )
                     ],
                   ),
                   if (provider.allEvents != null &&

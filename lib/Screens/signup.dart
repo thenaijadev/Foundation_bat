@@ -231,7 +231,7 @@ class _SignUpState extends State<SignUp> {
                     //Sign Up Button
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 36.0, left: 30, right: 30, bottom: 35.0),
+                          top: 36.0, left: 30, right: 30, bottom: 312.0),
                       child: MaterialButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),
@@ -240,7 +240,6 @@ class _SignUpState extends State<SignUp> {
                         color: kButtonColor,
                         onPressed: () {
                           Navigator.pushNamed(context, SignIn.id);
-                          ;
                         },
                         child: Text(
                           'Sign Up',
@@ -250,23 +249,10 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    //Forget Pasword Request
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          textAlign: TextAlign.right,
-                          'forgot password?',
-                          style: kForgetpasswordstyle,
-                        ),
-                      ),
-                    ),
-
                     // Sign In Redurection
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
-                        top: 260,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,

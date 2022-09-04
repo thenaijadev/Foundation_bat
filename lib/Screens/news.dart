@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
@@ -42,7 +43,6 @@ class _NewsState extends State<News> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         margin:
@@ -55,7 +55,7 @@ class _NewsState extends State<News> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 142),
+                            top: 50, left: 10, bottom: 26, right: 140),
                         color: kBackground,
                         height: 29,
                         child: Text(
@@ -80,6 +80,26 @@ class _NewsState extends State<News> {
                           onPressed: () {},
                         ),
                       ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 47,
+                          bottom: 22,
+                        ),
+                        decoration: BoxDecoration(
+                            color: kSignupbuttonColor.withOpacity(0.15),
+                            shape: BoxShape.circle),
+                        height: 36,
+                        child: IconButton(
+                          icon: Icon(
+                              size: 15,
+                              FontAwesomeIcons.signOutAlt,
+                              color: kButtonColor),
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignIn.id);
+                          },
+                        ),
+                      )
+                    
                     ],
                   ),
                   if (provider.allNews != null && provider.allNews!.isNotEmpty)

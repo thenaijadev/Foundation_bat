@@ -3,6 +3,7 @@
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/pending_project.dart';
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
@@ -36,7 +37,6 @@ class _ProjectPageState extends State<ProjectPage> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
@@ -46,9 +46,10 @@ class _ProjectPageState extends State<ProjectPage> {
                           'assets/logo.png',
                         ),
                       ),
+                      
                       Container(
                         margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 142),
+                            top: 50, left: 10, bottom: 26, right: 130),
                         color: kBackground,
                         height: 29,
                         child: Text(
@@ -73,6 +74,26 @@ class _ProjectPageState extends State<ProjectPage> {
                           onPressed: () {},
                         ),
                       ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 47,
+                          bottom: 22,
+                        ),
+                        decoration: BoxDecoration(
+                            color: kSignupbuttonColor.withOpacity(0.15),
+                            shape: BoxShape.circle),
+                        height: 36,
+                        child: IconButton(
+                          icon: Icon(
+                              size: 15,
+                              FontAwesomeIcons.signOutAlt,
+                              color: kButtonColor),
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignIn.id);
+                          },
+                        ),
+                      )
+                    
                     ],
                   ),
                   Container(

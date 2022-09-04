@@ -4,6 +4,7 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 // import 'package:batnf/Screens/single_event_page.dart';
 // import 'package:batnf/Screens/single_news_page.dart';
@@ -57,11 +58,10 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        margin: EdgeInsets.only(
+                            left: 24.0, top: 45, bottom: 20, right: 190),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                          right: 30,
+                          right: 15,
                           top: 47,
                           bottom: 22,
                         ),
@@ -86,6 +86,25 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {},
                         ),
                       ),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 47,
+                          bottom: 22,
+                        ),
+                        decoration: BoxDecoration(
+                            color: kSignupbuttonColor.withOpacity(0.15),
+                            shape: BoxShape.circle),
+                        height: 36,
+                        child: IconButton(
+                          icon: Icon(
+                              size: 15,
+                              FontAwesomeIcons.signOutAlt,
+                              color: kButtonColor),
+                          onPressed: () {
+                            Navigator.pushNamed(context, SignIn.id);
+                          },
+                        ),
+                      )
                     ],
                   ),
                   Container(
@@ -171,87 +190,97 @@ class _HomePageState extends State<HomePage> {
                                           'No Latest News, Please check Your Internet Connection \n Refresh'),
                                     )
                                   : ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: ((context, index) {
-                              NewsModel news = provider.allNews![index];
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 23.0, right: 23.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                NewsDetails(news)));
-                                  },
-                                  child: Container(
-                                    color: kBackground,
-                                    height: 120,
-                                    width: 375,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              bottom: 15.0, right: 15.0),
-                                          height: 120,
-                                          width: 120,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image:
-                                                  AssetImage('assets/news.png'),
-                                            ),
-                                            color: kBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            height: 120,
-                                            margin:
-                                                EdgeInsets.only(bottom: 15.0),
-                                            color: kBackground,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              // ignore: prefer_const_literals_to_create_immutables
-                                              children: [
-                                                Text(
-                                                  news.title,
-                                                  style: kNewsSubHeader,
-                                                ),
-                                                Expanded(
-                                                  child: Container(
+                                      itemCount: 3,
+                                      itemBuilder: ((context, index) {
+                                        NewsModel news =
+                                            provider.allNews![index];
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 23.0, right: 23.0),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NewsDetails(news)));
+                                            },
+                                            child: Container(
+                                              color: kBackground,
+                                              height: 120,
+                                              width: 375,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 15.0,
+                                                        right: 15.0),
+                                                    height: 120,
+                                                    width: 120,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: AssetImage(
+                                                            'assets/news.png'),
+                                                      ),
                                                       color: kBackground,
-                                                      height: 7.0,
-                                                      child: Text(
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        news.information,
-                                                        style: kBodyTextStyle,
-                                                      )),
-                                                ),
-                                                Text(
-                                                  textAlign: TextAlign.left,
-                                                  news.entryDate,
-                                                  style: kNewsDateSTyle,
-                                                )
-                                              ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18.0),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      height: 120,
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 15.0),
+                                                      color: kBackground,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        // ignore: prefer_const_literals_to_create_immutables
+                                                        children: [
+                                                          Text(
+                                                            news.title,
+                                                            style:
+                                                                kNewsSubHeader,
+                                                          ),
+                                                          Expanded(
+                                                            child: Container(
+                                                                color:
+                                                                    kBackground,
+                                                                height: 7.0,
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .left,
+                                                                  news.information,
+                                                                  style:
+                                                                      kBodyTextStyle,
+                                                                )),
+                                                          ),
+                                                          Text(
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            news.entryDate,
+                                                            style:
+                                                                kNewsDateSTyle,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        )
-                                      ],
+                                        );
+                                      }),
                                     ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
                         )
                       ],
                     ),
@@ -444,7 +473,7 @@ class _HomePageState extends State<HomePage> {
                       }),
                     ),
                   ),
-                 
+
                   SizedBox(
                     height: 50.0,
                   ),
