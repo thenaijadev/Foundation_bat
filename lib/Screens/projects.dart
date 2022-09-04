@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/inprogress_project.dart';
@@ -11,6 +11,8 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../widgets/reuseable_project_summary_containers.dart';
 
 class ProjectPage extends StatefulWidget {
   ProjectPage({Key? key}) : super(key: key);
@@ -39,13 +41,14 @@ class _ProjectPageState extends State<ProjectPage> {
                   Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        margin:
+                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
                           'assets/logo.png',
                         ),
-                      )
+                      ),
                       Container(
                         margin: EdgeInsets.only(
                             top: 50, left: 10, bottom: 26, right: 130),
@@ -122,18 +125,18 @@ class _ProjectPageState extends State<ProjectPage> {
                 ],
               ),
             ),
-    
+
             // Project Body
             Expanded(
               child: ListView(
-                // scrollDirection: Axis.vertical,
                 children: [
                   // Project Summary List Header
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 29.0, left: 30.0, bottom: 20),
+                    padding: const EdgeInsets.only(
+                        top: 29.0, left: 30.0, bottom: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
                           'Projects Summary',
@@ -147,40 +150,50 @@ class _ProjectPageState extends State<ProjectPage> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            boxShadow: [kBoxshadow],
-                            color: Color(0xff0E2B63),
-                          ),
+                        //Projects In Progress
+                        ProjectSummaryContainer(
                           margin: EdgeInsets.only(left: 30, right: 41.5),
-                          height: 250,
-                          width: 198,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            boxShadow: [kBoxshadow],
-                            color: Color(0xff50AF47),
+                          innercontainer: kBackground.withOpacity(0.1),
+                          Number: '5',
+                          colour: Color(0xff0E2B63),
+                          label: 'Projects in \nProgress',
+                          childCard: Icon(
+                            Icons.pie_chart_rounded,
+                            size: 17.5,
+                            color: kBackground,
                           ),
+                        ),
+
+                        //Completed Project
+                        ProjectSummaryContainer(
                           margin: EdgeInsets.only(right: 41.5),
-                          height: 250,
-                          width: 198,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            boxShadow: [kBoxshadow],
-                            color: Color(0xffEF7D00),
+                          innercontainer: kBackground.withOpacity(0.1),
+                          Number: '20',
+                          colour: Color(0xff50AF47),
+                          label: 'Projects \nCompleted',
+                          childCard: Icon(
+                            FontAwesomeIcons.checkSquare,
+                            size: 17.5,
+                            color: kBackground,
                           ),
+                        ),
+
+                        //Pending project
+                        ProjectSummaryContainer(
                           margin: EdgeInsets.only(right: 30),
-                          height: 250,
-                          width: 198,
+                          innercontainer: kBackground.withOpacity(0.1),
+                          Number: '10',
+                          colour: Color(0xffEF7D00),
+                          label: 'Pending \nProjects',
+                          childCard: Icon(
+                            FontAwesomeIcons.commentDots,
+                            color: kBackground,
+                          ),
                         ),
                       ],
                     ),
                   ),
-    
+
                   // In Progress label
                   Container(
                     margin: EdgeInsets.only(top: 15.0, left: 30.0, right: 30),
@@ -212,7 +225,7 @@ class _ProjectPageState extends State<ProjectPage> {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -239,11 +252,12 @@ class _ProjectPageState extends State<ProjectPage> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image:
-                                                AssetImage('assets/projects.png'),
+                                            image: AssetImage(
+                                                'assets/projects.png'),
                                           ),
                                           color: kBackground,
-                                          borderRadius: BorderRadius.circular(18.0),
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
                                         ),
                                       ),
                                       Expanded(
@@ -300,11 +314,12 @@ class _ProjectPageState extends State<ProjectPage> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image:
-                                                AssetImage('assets/projects.png'),
+                                            image: AssetImage(
+                                                'assets/projects.png'),
                                           ),
                                           color: kBackground,
-                                          borderRadius: BorderRadius.circular(18.0),
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
                                         ),
                                       ),
                                       Expanded(
@@ -350,7 +365,7 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-    
+
                   // In completeed label
                   Container(
                     margin: EdgeInsets.only(
@@ -391,11 +406,12 @@ class _ProjectPageState extends State<ProjectPage> {
                             itemCount: 2,
                             itemBuilder: ((context, index) {
                               return GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => CompletedProjectDetails()));
+                                          builder: (context) =>
+                                              CompletedProjectDetails()));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 15.0),
@@ -415,11 +431,12 @@ class _ProjectPageState extends State<ProjectPage> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image:
-                                                AssetImage('assets/projects.png'),
+                                            image: AssetImage(
+                                                'assets/projects.png'),
                                           ),
                                           color: kBackground,
-                                          borderRadius: BorderRadius.circular(18.0),
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
                                         ),
                                       ),
                                       Expanded(
@@ -465,7 +482,7 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-    
+
                   // In Pending Progress label
                   Container(
                     margin: EdgeInsets.only(
@@ -523,7 +540,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                               AssetImage('assets/projects.png'),
                                         ),
                                         color: kBackground,
-                                        borderRadius: BorderRadius.circular(18.0),
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
                                       ),
                                     ),
                                     Expanded(
@@ -584,7 +602,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                               AssetImage('assets/projects.png'),
                                         ),
                                         color: kBackground,
-                                        borderRadius: BorderRadius.circular(18.0),
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
                                       ),
                                     ),
                                     Expanded(
