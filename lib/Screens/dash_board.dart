@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                               : provider.allNews!.isEmpty
                                   ? Center(
                                       child: Text(
-                                          'No Latest News, Please check Your Internet Connection \n Refresh'),
+                                          'No Latest News, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
                                     )
                                   : ListView.builder(
                                       itemCount: 3,

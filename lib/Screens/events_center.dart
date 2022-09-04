@@ -142,7 +142,7 @@ class _EventCenterState extends State<EventCenter> {
                     )
                   : provider.allEvents!.isEmpty
                       ? Center(
-                          child: Text('No Events, Please check Your Internet Connection \n Refresh'),
+                          child: Text('No Events, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
                         )
                       : RefreshIndicator(
                           color: kBackground,

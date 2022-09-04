@@ -138,7 +138,7 @@ class _NewsState extends State<News> {
                     )
                   : provider.allNews!.isEmpty
                       ? Center(
-                          child: Text('No Latest News, Please check Your Internet Connection \n Refresh'),
+                          child: Text('No Latest News, \nPlease check Your Internet Connection', style: kBodyTextStyle,),
                         )
                       : RefreshIndicator(
                         color: kBackground,

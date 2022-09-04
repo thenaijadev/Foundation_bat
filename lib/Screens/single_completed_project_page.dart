@@ -45,15 +45,15 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(right: 15),
-                    padding: EdgeInsets.all(8),
-                    height: 50,
+                    height: 48,
+                    width: 48,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: kButtonColor.withOpacity(0.3),
+                      color: kButtonColor.withOpacity(0.1),
                     ),
                     child: Icon(
                       FontAwesomeIcons.calendarAlt,
-                      size: 22,
+                      size: 25,
                       color: kButtonColor,
                     ),
                   ),
@@ -77,11 +77,11 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(left: 30, right: 15),
-                    padding: EdgeInsets.all(8),
-                    height: 50,
+                    height: 48,
+                    width: 48,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: kButtonColor.withOpacity(0.3),
+                      color: kButtonColor.withOpacity(0.1),
                     ),
                     child: Icon(
                       FontAwesomeIcons.mapMarkerAlt,
