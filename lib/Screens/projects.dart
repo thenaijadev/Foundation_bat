@@ -45,8 +45,7 @@ class _ProjectPageState extends State<ProjectPage> {
                         child: Image.asset(
                           'assets/logo.png',
                         ),
-                      ),
-                      
+                      )
                       Container(
                         margin: EdgeInsets.only(
                             top: 50, left: 10, bottom: 26, right: 130),
@@ -93,7 +92,6 @@ class _ProjectPageState extends State<ProjectPage> {
                           },
                         ),
                       )
-                    
                     ],
                   ),
                   Container(
