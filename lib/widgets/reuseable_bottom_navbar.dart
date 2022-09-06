@@ -26,10 +26,9 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: kButtonColor.withOpacity(0.6),
-            offset: Offset(0,7),
-            blurRadius: 15.0
-          ),
+              color: kButtonColor.withOpacity(0.6),
+              offset: Offset(0, 7),
+              blurRadius: 15.0),
         ],
         color: kBackground,
         borderRadius: BorderRadius.only(
@@ -47,14 +46,17 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.home),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  },
+                  icon: Icon(FontAwesomeIcons.home),
+                ),
                 Text('Home')
               ],
             ),
@@ -67,14 +69,12 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EventCenter(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.calendarAlt),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, EventCenter.id);
+                  },
+                  icon: Icon(FontAwesomeIcons.calendarAlt),
+                ),
                 Text('Events')
               ],
             ),
@@ -87,14 +87,17 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Promotion(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.gamepad),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Promotion(),
+                      ),
+                    );
+                  },
+                  icon: Icon(FontAwesomeIcons.gamepad),
+                ),
                 Text('Games')
               ],
             ),
@@ -107,14 +110,12 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProjectPage(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.tasks),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, ProjectPage.id);
+                  },
+                  icon: Icon(FontAwesomeIcons.tasks),
+                ),
                 Text('Projects')
               ],
             ),
@@ -127,14 +128,17 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => News(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.newspaper),),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => News(),
+                      ),
+                    );
+                  },
+                  icon: Icon(FontAwesomeIcons.newspaper),
+                ),
                 Text('News')
               ],
             ),

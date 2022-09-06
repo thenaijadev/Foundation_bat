@@ -2,8 +2,12 @@
 
 import 'dart:io';
 
+import 'package:batnf/Screens/completed_project.dart';
+import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
+import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/landing_page.dart';
+import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/reset_Completed_page.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
@@ -63,6 +67,10 @@ class MyApp extends StatelessWidget {
           ResetPassword.id: (context) => ResetPassword(),
           ResetCompleted.id: (context) => ResetCompleted(),
           SignUp.id:(context) => SignUp(),
+          EventCenter.id: (context) => EventCenter(),
+          ProjectPage.id: (context) => ProjectPage(),
+          InprogressPage.id: (context) => InprogressPage(),
+          CompletedPage.id: (context) => CompletedPage(),
         },
       ),
     );

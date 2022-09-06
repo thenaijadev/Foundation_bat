@@ -89,14 +89,20 @@ class _PendingPageState extends State<PendingPage> {
                                   height: 19,
                                   child: Text(
                                     'Lorem Ipsum Project',
-                                    style: kNewsSubHeader,
+                                    style: kPageHeader,
                                   ),
                                 ),
-                                Text(
-                                  textAlign: TextAlign.left,
-                                  ' To Begin: Mar 17 2025',
-                                  style: kNewsDateSTyle,
-                                ),
+                                RichText(
+                                    text: TextSpan(
+                                        text: 'To Begin: ',
+                                        style: kLandpageskiptextstyle,
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                      TextSpan(
+                                        text: 'Mar 17 2025',
+                                        style: kTextboxhintstyle,
+                                      )
+                                    ])),
                               ],
                             ),
                           ),

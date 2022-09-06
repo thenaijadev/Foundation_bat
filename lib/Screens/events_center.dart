@@ -15,6 +15,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EventCenter extends StatefulWidget {
+  static String id = 'event';
   EventCenter({Key? key}) : super(key: key);
 
   @override
@@ -34,108 +35,107 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Container for search box etc
-            Container(
-              color: kBackground,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                        color: kBackground,
-                        height: 40.0,
-                        child: Image.asset(
-                          'assets/logo.png',
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 130),
-                        color: kBackground,
-                        height: 29,
-                        child: Text(
-                          'Events',
-                          style: kPageHeader,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(
-                              size: 15,
-                              FontAwesomeIcons.signOutAlt,
-                              color: kButtonColor),
-                          onPressed: () {
-                            Navigator.pushNamed(context, SignIn.id);
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                  if (provider.allEvents != null &&
-                      provider.allEvents!.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(left: 30, right: 30, bottom: 21),
-                      color: kBackground,
-                      height: 45.0,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          hintStyle: kTextboxhintstyle,
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.search,
-                            size: 13.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(45.0),
-                            ),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: kTextfieldborderColor,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-
-            Expanded(
-              child: provider.allEvents == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : provider.allEvents!.isEmpty
-                      ? Center(
-                          child: Text('No Events, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
-                        )
-                      : RefreshIndicator(
+        body: RefreshIndicator(
+          color: kBackground,
+          backgroundColor: kButtonColor,
+          onRefresh: () async {
+            await Provider.of<EventProvider>(context, listen: false)
+                .getAllEvents();
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Container for search box etc
+              Container(
+                color: kBackground,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
                           color: kBackground,
-                          backgroundColor: kButtonColor,
-                        onRefresh:() async{
-                          await Provider.of<EventProvider>(context,
-                                    listen: false)
-                                .getAllEvents();
-                        } ,
-                        child: ListView.builder(
+                          height: 40.0,
+                          child: Image.asset(
+                            'assets/logo.png',
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: 50, left: 10, bottom: 26, right: 130),
+                          color: kBackground,
+                          height: 29,
+                          child: Text(
+                            'Events',
+                            style: kPageHeader,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 47,
+                            bottom: 22,
+                          ),
+                          decoration: BoxDecoration(
+                              color: kSignupbuttonColor.withOpacity(0.15),
+                              shape: BoxShape.circle),
+                          height: 36,
+                          child: IconButton(
+                            icon: Icon(
+                                size: 15,
+                                FontAwesomeIcons.signOutAlt,
+                                color: kButtonColor),
+                            onPressed: () {
+                              Navigator.pushNamed(context, SignIn.id);
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                    if (provider.allEvents != null &&
+                        provider.allEvents!.isNotEmpty)
+                      Container(
+                        margin: EdgeInsets.only(left: 30, right: 30, bottom: 21),
+                        color: kBackground,
+                        height: 45.0,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search',
+                            hintStyle: kTextboxhintstyle,
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.search,
+                              size: 13.0,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              
+              Expanded(
+                child: provider.allEvents == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : provider.allEvents!.isEmpty
+                        ? Center(
+                            child: Text('No Events, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
+                          )
+                        : ListView.builder(
                             scrollDirection: Axis.vertical,
                             itemCount: provider.allEvents!.length,
                             itemBuilder: ((context, index) {
@@ -267,9 +267,9 @@ class _EventCenterState extends State<EventCenter> {
                                 ),
                               );
                             })),
-                      ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: ReuseableBottomBar(),
       ),

@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  carousel_images:
-    dependency: "direct main"
-    description:
-      name: carousel_images
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   characters:
     dependency: transitive
     description:
@@ -146,13 +139,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  flutter_carousel_widget:
-    dependency: "direct main"
-    description:
-      name: flutter_carousel_widget
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -401,6 +387,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
+  pin_code_fields:
+    dependency: "direct main"
+    description:
+      name: pin_code_fields
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.4.0"
   platform:
     dependency: transitive
     description:
@@ -504,13 +497,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
-  transparent_image:
-    dependency: transitive
-    description:
-      name: transparent_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:

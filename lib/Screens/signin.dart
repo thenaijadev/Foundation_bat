@@ -143,8 +143,8 @@ class _SignInState extends State<SignIn> {
                       child: Row(
                         children: [
                           FlutterSwitch(
-                              height: 15.2,
-                              width: 15.2,
+                              height: 20,
+                              width: 40,
                               toggleSize: 12,
                               activeColor: kButtonColor,
                               value: status,

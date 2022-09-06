@@ -170,7 +170,9 @@ class _HomePageState extends State<HomePage> {
                               : provider.allNews!.isEmpty
                                   ? Center(
                                       child: Text(
-                                          'No Latest News, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
+                                        'No Latest News, \nPlease check Your Internet Connection \nand drag to Refresh',
+                                        style: kBodyTextStyle,
+                                      ),
                                     )
                                   : RefreshIndicator(
                                       color: kBackground,
@@ -180,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                                                 listen: false)
                                             .getAllNews();
                                       },
-                                    child: ListView.builder(
+                                      child: ListView.builder(
                                         itemCount: 3,
                                         itemBuilder: ((context, index) {
                                           NewsModel news =
@@ -209,12 +211,16 @@ class _HomePageState extends State<HomePage> {
                                                       height: 120,
                                                       width: 120,
                                                       child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(18),
-                                            child: CachedNetworkImage(
-                                                imageUrl:
-                                                    news.newsImage,
-                                                fit: BoxFit.cover),
-                                          ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                                imageUrl: news
+                                                                    .newsImage,
+                                                                fit: BoxFit
+                                                                    .cover),
+                                                      ),
                                                     ),
                                                     Expanded(
                                                       child: Container(
@@ -252,7 +258,8 @@ class _HomePageState extends State<HomePage> {
                                                             ),
                                                             Text(
                                                               textAlign:
-                                                                  TextAlign.left,
+                                                                  TextAlign
+                                                                      .left,
                                                               news.entryDate,
                                                               style:
                                                                   kNewsDateSTyle,
@@ -268,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                                           );
                                         }),
                                       ),
-                                  ),
+                                    ),
                         )
                       ],
                     ),
@@ -287,10 +294,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProjectPage()));
+                            Navigator.pushNamed(context, ProjectPage.id);
                           },
                           child: Text(
                             'See All',
@@ -370,10 +374,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EventCenter()));
+                            Navigator.pushNamed(context, EventCenter.id);
                           },
                           child: Text(
                             'See All',

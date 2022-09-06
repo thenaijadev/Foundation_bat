@@ -42,13 +42,12 @@ dependencies:
   flutter_launcher_icons: ^0.9.3
   http: ^0.13.4
   http_status_code: ^0.0.2
-  carousel_images: ^1.1.2
-  flutter_carousel_widget: ^1.1.0
   dots_indicator: ^2.1.0
   page_indicator: ^0.4.1
   provider: ^6.0.3
   cached_network_image: ^3.2.1
   flutter_switch: ^0.3.2
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:

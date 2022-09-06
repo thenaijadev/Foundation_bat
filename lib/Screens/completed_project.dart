@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CompletedPage extends StatefulWidget {
+  static String id = 'completed';
   CompletedPage({Key? key}) : super(key: key);
 
   @override
@@ -97,16 +98,28 @@ class _CompletedPageState extends State<CompletedPage> {
                                     style: kNewsSubHeader,
                                   ),
                                 ),
-                                Text(
-                                  textAlign: TextAlign.left,
-                                  ' Started: Dec 21 2021',
-                                  style: kNewsDateSTyle,
-                                ),
-                                Text(
-                                  textAlign: TextAlign.left,
-                                  ' Completed: Aug 13 2023',
-                                  style: kNewsDateSTyle,
-                                )
+                                RichText(
+                                    text: TextSpan(
+                                        text: 'Started: ',
+                                        style: kLandpageskiptextstyle,
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                      TextSpan(
+                                        text: 'Dec 21 2021',
+                                        style: kTextboxhintstyle,
+                                      )
+                                    ])),
+                                    RichText(
+                                    text: TextSpan(
+                                        text: 'Completed: ',
+                                        style: kLandpageskiptextstyle,
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                      TextSpan(
+                                        text: 'Aug 13 2023',
+                                        style: kTextboxhintstyle,
+                                      )
+                                    ])),
                               ],
                             ),
                           ),

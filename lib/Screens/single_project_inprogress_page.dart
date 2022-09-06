@@ -75,14 +75,16 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text(
-                          'from',
-                          style: kBodyTextStyle,
-                        ),
-                        Text(
-                          widget.singleProgress.projectStartDate,
-                          style: kBodyTextStyle,
-                        ),
+                        RichText(
+                            text: TextSpan(
+                                text: 'Starts: ',
+                                style: kLandpageskiptextstyle,
+                                children: [
+                              TextSpan(
+                                  text: widget.singleProgress.projectStartDate,
+                                style: kPageHeader,
+                              )
+                            ])),
                       ],
                     )
                   ],
@@ -113,12 +115,11 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       children: [
                         Text(
                           widget.singleProgress.projectTitle,
-                          style: kBodyTextStyle,
+                          style: kPageHeader,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          // change to venue
-                          widget.singleProgress.projectEndDate,
+                          widget.singleProgress.projectVenue,
                           style: kBodyTextStyle,
                         )
                       ],

@@ -15,6 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/reuseable_project_summary_containers.dart';
 
 class ProjectPage extends StatefulWidget {
+  static String id = 'projects';
   ProjectPage({Key? key}) : super(key: key);
 
   @override
@@ -136,30 +137,40 @@ class _ProjectPageState extends State<ProjectPage> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         //Projects In Progress
-                        ProjectSummaryContainer(
-                          margin: EdgeInsets.only(left: 30, right: 41.5),
-                          innercontainer: kBackground.withOpacity(0.1),
-                          Number: '5',
-                          colour: Color(0xff0E2B63),
-                          label: 'Projects in \nProgress',
-                          childCard: Icon(
-                            Icons.pie_chart_rounded,
-                            size: 17.5,
-                            color: kBackground,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, InprogressPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(left: 30, right: 41.5),
+                            innercontainer: kBackground.withOpacity(0.1),
+                            Number: '3',
+                            colour: Color(0xff0E2B63),
+                            label: 'Projects in \nProgress',
+                            childCard: Icon(
+                              Icons.pie_chart_rounded,
+                              size: 17.5,
+                              color: kBackground,
+                            ),
                           ),
                         ),
 
                         //Completed Project
-                        ProjectSummaryContainer(
-                          margin: EdgeInsets.only(right: 41.5),
-                          innercontainer: kBackground.withOpacity(0.1),
-                          Number: '20',
-                          colour: Color(0xff50AF47),
-                          label: 'Projects \nCompleted',
-                          childCard: Icon(
-                            FontAwesomeIcons.checkSquare,
-                            size: 17.5,
-                            color: kBackground,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, CompletedPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(right: 41.5),
+                            innercontainer: kBackground.withOpacity(0.1),
+                            Number: '20',
+                            colour: Color(0xff50AF47),
+                            label: 'Projects \nCompleted',
+                            childCard: Icon(
+                              FontAwesomeIcons.checkSquare,
+                              size: 17.5,
+                              color: kBackground,
+                            ),
                           ),
                         ),
 
@@ -196,12 +207,8 @@ class _ProjectPageState extends State<ProjectPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => InprogressPage(),
-                                    ),
-                                  );
+                                  Navigator.pushNamed(
+                                      context, InprogressPage.id);
                                 },
                                 child: Text(
                                   'See All',
@@ -276,11 +283,26 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     style: kNewsSubHeader,
                                                   ),
                                                 ),
-                                                Text(
-                                                  textAlign: TextAlign.left,
-                                                  ' Started: Dec 21 2021',
-                                                  style: kNewsDateSTyle,
-                                                )
+                                                RichText(
+                                                    text: TextSpan(
+                                                        text: 'Start: ',
+                                                        style:
+                                                            kLandpageskiptextstyle,
+                                                        children: [
+                                                      TextSpan(
+                                                          text: '2022-09-01',
+                                                          style: kNewsDateSTyle)
+                                                    ])),
+                                                RichText(
+                                                    text: TextSpan(
+                                                        text: 'To End: ',
+                                                        style:
+                                                            kLandpageskiptextstyle,
+                                                        children: [
+                                                      TextSpan(
+                                                          text: '2022-09-40',
+                                                          style: kNewsDateSTyle)
+                                                    ])),
                                               ],
                                             ),
                                           ),
@@ -312,12 +334,8 @@ class _ProjectPageState extends State<ProjectPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CompletedPage(),
-                                    ),
-                                  );
+                                  Navigator.pushNamed(
+                                      context, CompletedPage.id);
                                 },
                                 child: Text(
                                   'See All',
@@ -391,19 +409,33 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 height: 19,
                                                 child: Text(
                                                   'Lorem Ipsum Project',
-                                                  style: kNewsSubHeader,
+                                                  style: kPageHeader,
                                                 ),
                                               ),
-                                              Text(
-                                                textAlign: TextAlign.left,
-                                                ' Started: Dec 21 2021',
-                                                style: kNewsDateSTyle,
-                                              ),
-                                              Text(
-                                                textAlign: TextAlign.left,
-                                                ' Completed: Aug 13 2023',
-                                                style: kNewsDateSTyle,
-                                              )
+                                              RichText(
+                                                  text: TextSpan(
+                                                      text: 'Started: ',
+                                                      style:
+                                                          kLandpageskiptextstyle,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                    TextSpan(
+                                                      text: 'Dec 21 2021',
+                                                      style: kTextboxhintstyle,
+                                                    )
+                                                  ])),
+                                              RichText(
+                                                  text: TextSpan(
+                                                      text: 'Completed: ',
+                                                      style:
+                                                          kLandpageskiptextstyle,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                    TextSpan(
+                                                      text: 'Aug 13 2023',
+                                                      style: kTextboxhintstyle,
+                                                    )
+                                                  ])),
                                             ],
                                           ),
                                         ),
@@ -452,11 +484,10 @@ class _ProjectPageState extends State<ProjectPage> {
                           ),
                         ),
                         Expanded(
-                          child:
-                              ListView.builder(
-                                itemCount: 3,
-                                itemBuilder: ((context, index) {
-                            return Container(
+                          child: ListView.builder(
+                              itemCount: 3,
+                              itemBuilder: ((context, index) {
+                                return Container(
                                   margin: EdgeInsets.only(
                                       bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
@@ -510,11 +541,18 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
-                                              Text(
-                                                textAlign: TextAlign.left,
-                                                ' To Begin: Mar 17 2025',
-                                                style: kNewsDateSTyle,
-                                              )
+                                              RichText(
+                                                  text: TextSpan(
+                                                      text: 'To Begin: ',
+                                                      style:
+                                                          kLandpageskiptextstyle,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                    TextSpan(
+                                                      text: 'Mar 17 2025',
+                                                      style: kTextboxhintstyle,
+                                                    )
+                                                  ])),
                                             ],
                                           ),
                                         ),
@@ -522,7 +560,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                     ],
                                   ),
                                 );
-                          })),
+                              })),
                         ),
                       ],
                     ),

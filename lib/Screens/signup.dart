@@ -87,8 +87,7 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.user,
-                          size: 15,
-                              color: kTextboxhintColor),
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
                           label: "Full Name",
                         ),
@@ -104,8 +103,7 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.envelope,
-                          size: 15,
-                              color: kTextboxhintColor),
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
                           label: "Email",
                         ),
@@ -121,10 +119,9 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
-                          size: 15,
-                              color: kTextboxhintColor),
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _locationTextController,
-                          label: "Location", 
+                          label: "Location",
                         ),
                       ),
                     ),
@@ -138,8 +135,7 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.calendarAlt,
-                          size: 15,
-                              color: kTextboxhintColor),
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _dobTextController,
                           label: "DD-MM-YY",
                         ),
@@ -169,10 +165,8 @@ class _SignUpState extends State<SignUp> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon:
-                                Icon(Icons.lock,
-                                size: 15,
-                                 color: kTextboxhintColor),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -196,8 +190,8 @@ class _SignUpState extends State<SignUp> {
                       child: Row(
                         children: [
                           FlutterSwitch(
-                              height: 15.2,
-                              width: 15.2,
+                              height: 20,
+                              width: 40,
                               toggleSize: 12,
                               activeColor: kButtonColor,
                               value: status,

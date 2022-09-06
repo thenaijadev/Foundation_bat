@@ -4,6 +4,7 @@ import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:batnf/constants/color_constant.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ForgetPassword extends StatefulWidget {
   static String id = 'forget_password';
@@ -47,26 +48,49 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           )),
           Container(
             height: 47,
-            margin: EdgeInsets.only(top: 109, left: 30, bottom: 75),
-            child: TextField(),
+            margin: EdgeInsets.only(top: 109, left: 30, bottom: 75, right: 30),
+            child: PinCodeTextField(
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(13),
+                fieldHeight: 45,
+                fieldWidth: 50,
+                activeFillColor: kBackground,
+                activeColor: kBackground,
+                inactiveFillColor: kBackground,
+              ),
+              boxShadows: [
+                kBoxshadow
+              ],
+              cursorColor: kGeneralbodytextColor,
+              keyboardType: TextInputType.number,
+              animationDuration: const Duration(milliseconds: 300),
+              backgroundColor: kBackground,
+              blinkWhenObscuring: true,
+              animationType: AnimationType.fade,
+                appContext: context,
+                length: 6,
+                onChanged: ((value) {
+                  setState(() {
+                    // currentText = value;
+                  });
+                })),
+                
           ),
           Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                Text(
-                  'Resend code in',
-                  style: kTextboxhintstyle,
-                ),
-                Text(
-                  '56 s',
-                  style: kLandpageskiptextstyle,
+            child: RichText(
+              text: TextSpan(
+              text: 'Resend Code in ',
+               style: kTextboxhintstyle,
+               children: [
+                TextSpan(
+                  text: '56s',
+                  style: kForgetpasswordstyle
                 )
-              ],
+               ]
+            ),
             ),
           ),
-          
           Padding(
             padding: const EdgeInsets.only(
                 top: 226.0, left: 30, right: 30, bottom: 75.0),
@@ -86,7 +110,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ),
             ),
           ),
-        
         ],
       ),
     );

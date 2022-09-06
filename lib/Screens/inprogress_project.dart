@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class InprogressPage extends StatefulWidget {
+  static String id = 'inprogress';
   InprogressPage({Key? key}) : super(key: key);
 
   @override
@@ -141,16 +142,26 @@ class _InprogressPageState extends State<InprogressPage> {
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
-                                              Text(
-                                                inprogress.projectStartDate,
-                                                textAlign: TextAlign.left,
-                                                style: kNewsDateSTyle,
-                                              ),
-                                              Text(
-                                                inprogress.projectEndDate,
-                                                textAlign: TextAlign.left,
-                                                style: kNewsDateSTyle,
-                                              )
+                                              RichText(
+                                                  text: TextSpan(
+                                                    text: 'Start: ', style: kLandpageskiptextstyle,
+                                                    children: [
+                                                      TextSpan(
+                                                        text: inprogress.projectStartDate,style: kNewsDateSTyle
+                                                      )
+                                                    ]
+                                                  )),
+                                                  RichText(
+                                                  text: TextSpan(
+                                                      text: 'To End: ',
+                                                      style:
+                                                          kLandpageskiptextstyle,
+                                                      children: [
+                                                    TextSpan(
+                                                        text: inprogress
+                                                            .projectEndDate,
+                                                        style: kNewsDateSTyle)
+                                                  ])),
                                             ],
                                           ),
                                         ),
