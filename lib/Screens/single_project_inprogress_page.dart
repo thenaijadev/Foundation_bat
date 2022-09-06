@@ -25,6 +25,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
       child: Scaffold(
         backgroundColor: kBackground,
         extendBodyBehindAppBar: true,
+        extendBody: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -39,7 +40,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
           },
           child: ListView(
             children: [
-              Container(
+              SizedBox(
+                height: 265,
                 child: CachedNetworkImage(
                   imageUrl: widget.singleProgress.projectImage,
                   fit: BoxFit.cover,

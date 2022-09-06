@@ -13,6 +13,7 @@ import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/Screens/welcone_page.dart';
+import 'package:batnf/providers/completed_provider.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => InprogressProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CompletedProvider(),
         ),
       ],
       child: MaterialApp(

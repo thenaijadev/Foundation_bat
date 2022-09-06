@@ -163,7 +163,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: '20',
+                            Number: '2',
                             colour: Color(0xff50AF47),
                             label: 'Projects \nCompleted',
                             childCard: Icon(
@@ -352,11 +352,11 @@ class _ProjectPageState extends State<ProjectPage> {
                             itemBuilder: ((context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CompletedProjectDetails()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             CompletedProjectDetails()));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(

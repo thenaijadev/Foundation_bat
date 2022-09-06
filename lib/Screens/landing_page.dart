@@ -106,12 +106,8 @@ class _LandindPageState extends State<LandindPage> {
                               height: 45.0,
                               color: kButtonColor,
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => WelcomePage(),
-                                  ),
-                                );
+                                Navigator.pushNamed(context, WelcomePage.id);
+                                
                               },
                               child: Text(
                                 'Get Started',
