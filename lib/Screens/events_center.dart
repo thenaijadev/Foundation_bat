@@ -78,23 +78,6 @@ class _EventCenterState extends State<EventCenter> {
                         child: IconButton(
                           icon: Icon(
                               size: 15,
-                              FontAwesomeIcons.solidBell,
-                              color: kButtonColor),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.signOutAlt,
                               color: kButtonColor),
                           onPressed: () {
