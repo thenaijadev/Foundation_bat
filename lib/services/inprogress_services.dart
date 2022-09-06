@@ -1,13 +1,13 @@
 import 'dart:convert';
-
-import 'package:batnf/Models/events_model.dart';
 import 'package:http/http.dart' as http;
 
-class AppEvents {
+import '../Models/inprogress_model.dart';
+
+class AppInprogressProjects {
   final String baseUrl = 'https://geeteefarms.com/events/api/';
 
-  Future<List<EventModel>> getAllEvents() async {
-    String url = 'getallevents';
+  Future<List<InprogressModel>> getInprogressProjects() async {
+    String url = 'getinprogressprojects';
 
     try {
       final response = await http.get(Uri.parse(baseUrl + url));
@@ -15,12 +15,12 @@ class AppEvents {
       if (response.statusCode == 200) {
         List data = jsonDecode(response.body);
 
-        List<EventModel> allEvents = [];
+        List<InprogressModel> inprogressProjects = [];
 
         for (Map<String, dynamic> item in data) {
-          allEvents.add(EventModel.fromJson(item));
+          inprogressProjects.add(InprogressModel.fromJson(item));
         }
-        return allEvents;
+        return inprogressProjects;
       } else {
         return [];
       }

@@ -214,10 +214,10 @@ class _ProjectPageState extends State<ProjectPage> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProgressDetails()));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => ProgressDetails()));
                             },
                             child: ListView.builder(
                                 itemCount: 3,

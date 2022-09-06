@@ -5,7 +5,7 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:http/http.dart' as http;
 
 class AppNews {
-  final String baseUrl = 'https://nubiaville.com/events/api/';
+  final String baseUrl = 'https://geeteefarms.com/events/api/';
 
   Future<List<NewsModel>> getAllNews() async {
     String url = 'getallnews';

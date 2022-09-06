@@ -13,6 +13,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../providers/news_provider.dart';
@@ -171,98 +172,103 @@ class _HomePageState extends State<HomePage> {
                                       child: Text(
                                           'No Latest News, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
                                     )
-                                  : ListView.builder(
-                                      itemCount: 3,
-                                      itemBuilder: ((context, index) {
-                                        NewsModel news =
-                                            provider.allNews![index];
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 23.0, right: 23.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NewsDetails(news)));
-                                            },
-                                            child: Container(
-                                              color: kBackground,
-                                              height: 120,
-                                              width: 375,
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 15.0,
-                                                        right: 15.0),
-                                                    height: 120,
-                                                    width: 120,
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            'assets/news.png'),
-                                                      ),
-                                                      color: kBackground,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              18.0),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      height: 120,
+                                  : RefreshIndicator(
+                                      color: kBackground,
+                                      backgroundColor: kButtonColor,
+                                      onRefresh: () async {
+                                        await Provider.of<NewsProvider>(context,
+                                                listen: false)
+                                            .getAllNews();
+                                      },
+                                    child: ListView.builder(
+                                        itemCount: 3,
+                                        itemBuilder: ((context, index) {
+                                          NewsModel news =
+                                              provider.allNews![index];
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 23.0, right: 23.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            NewsDetails(news)));
+                                              },
+                                              child: Container(
+                                                color: kBackground,
+                                                height: 120,
+                                                width: 375,
+                                                child: Row(
+                                                  children: [
+                                                    Container(
                                                       margin: EdgeInsets.only(
-                                                          bottom: 15.0),
-                                                      color: kBackground,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          Text(
-                                                            news.title,
-                                                            style:
-                                                                kNewsSubHeader,
-                                                          ),
-                                                          Expanded(
-                                                            child: Container(
-                                                                color:
-                                                                    kBackground,
-                                                                height: 7.0,
-                                                                child: Text(
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  news.information,
-                                                                  style:
-                                                                      kBodyTextStyle,
-                                                                )),
-                                                          ),
-                                                          Text(
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            news.entryDate,
-                                                            style:
-                                                                kNewsDateSTyle,
-                                                          )
-                                                        ],
-                                                      ),
+                                                          bottom: 15.0,
+                                                          right: 15.0),
+                                                      height: 120,
+                                                      width: 120,
+                                                      child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                imageUrl:
+                                                    news.newsImage,
+                                                fit: BoxFit.cover),
+                                          ),
                                                     ),
-                                                  )
-                                                ],
+                                                    Expanded(
+                                                      child: Container(
+                                                        height: 120,
+                                                        margin: EdgeInsets.only(
+                                                            bottom: 15.0),
+                                                        color: kBackground,
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          // ignore: prefer_const_literals_to_create_immutables
+                                                          children: [
+                                                            Text(
+                                                              news.title,
+                                                              style:
+                                                                  kNewsSubHeader,
+                                                            ),
+                                                            Expanded(
+                                                              child: Container(
+                                                                  color:
+                                                                      kBackground,
+                                                                  height: 7.0,
+                                                                  child: Text(
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left,
+                                                                    news.information,
+                                                                    style:
+                                                                        kBodyTextStyle,
+                                                                  )),
+                                                            ),
+                                                            Text(
+                                                              textAlign:
+                                                                  TextAlign.left,
+                                                              news.entryDate,
+                                                              style:
+                                                                  kNewsDateSTyle,
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                          );
+                                        }),
+                                      ),
+                                  ),
                         )
                       ],
                     ),
@@ -303,10 +309,10 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: ((context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProgressDetails()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => ProgressDetails()));
                           },
                           child: Container(
                             height: 202,

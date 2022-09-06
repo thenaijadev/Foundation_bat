@@ -132,6 +132,7 @@ class _LandindPageState extends State<LandindPage> {
             indicatorSelectorColor: kButtonColor,
             indicatorSpace: 10.0,
             shape: IndicatorShape.circle(size: 8),
-            length: 4));
+            length: 4),
+            );
   }
 }

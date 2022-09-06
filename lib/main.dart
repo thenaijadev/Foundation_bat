@@ -10,6 +10,7 @@ import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/event_provider.dart';
+import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => NewsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => InprogressProvider(),
         ),
       ],
       child: MaterialApp(

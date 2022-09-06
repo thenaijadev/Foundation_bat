@@ -167,7 +167,7 @@ class _NewsState extends State<News> {
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
                                               imageUrl:
-                                                  'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                                                  news.newsImage,
                                               fit: BoxFit.cover),
                                         ),
                                       ),

@@ -8,7 +8,10 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReuseableTextField extends StatelessWidget {
-  ReuseableTextField({ required this.cardChild, required this.textcontroller, required this.label});
+  ReuseableTextField(
+      {required this.cardChild,
+      required this.textcontroller,
+      required this.label,});
 
   String label;
   final TextEditingController textcontroller;
@@ -19,6 +22,7 @@ class ReuseableTextField extends StatelessWidget {
     return TextField(
       controller: textcontroller,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(top: 2),
         hintText: label,
         hintStyle: kTextboxhintstyle,
         border: OutlineInputBorder(

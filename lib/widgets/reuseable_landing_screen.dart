@@ -68,23 +68,31 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   style: kLandpagebodytextstyle,
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, WelcomePage.id);
-                },
-                child: Text(
-                  'Skip',
-                  style: kLandpageskiptextstyle,
+              Container(
+                margin: EdgeInsets.only(left: 30, right: 30,),
+                height: 45,
+                child: MaterialButton(
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0),
+                  ),
+                  color: kBackground,
+                  onPressed: () {
+                  Navigator.pushNamed(context, WelcomePage.id);},
+                  child: Text(
+                    'skip',
+                    textAlign: TextAlign.center,
+                    style: kLandpageskiptextstyle,
+                  ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 30, right: 30, bottom: 45),
+                margin: EdgeInsets.only(top: 5, left: 30, right: 30, bottom: 45),
                 height: 45,
                 child: MaterialButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(45.0),
                   ),
-                  height: 45.0,
                   color: kButtonColor,
                   onPressed: () {},
                   child: Text(

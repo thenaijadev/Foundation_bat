@@ -170,7 +170,7 @@ class _EventCenterState extends State<EventCenter> {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
+                                              imageUrl: event.eventFlier,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -192,7 +192,7 @@ class _EventCenterState extends State<EventCenter> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  event.eventDate,
+                                                  event.eventStartDate,
                                                   style: kEventDatestyle,
                                                 ),
                                               ),

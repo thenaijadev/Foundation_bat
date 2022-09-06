@@ -81,6 +81,7 @@ class _SignInState extends State<SignIn> {
                         height: 45,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.user,
+                          size: 15,
                               color: kTextboxhintColor),
                           textcontroller: _emailTextController,
                           label: "User Name",
@@ -98,6 +99,7 @@ class _SignInState extends State<SignIn> {
                         child: TextField(
                           controller: _passwordTextController,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
                             hintText: 'Password',
                             hintStyle: kTextboxhintstyle,
                             border: OutlineInputBorder(
@@ -111,7 +113,9 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             prefixIcon:
-                                Icon(Icons.lock, color: kTextboxhintColor),
+                                Icon(Icons.lock,
+                                size: 15,
+                                 color: kTextboxhintColor),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -139,8 +143,8 @@ class _SignInState extends State<SignIn> {
                       child: Row(
                         children: [
                           FlutterSwitch(
-                              height: 20,
-                              width: 40,
+                              height: 15.2,
+                              width: 15.2,
                               toggleSize: 12,
                               activeColor: kButtonColor,
                               value: status,

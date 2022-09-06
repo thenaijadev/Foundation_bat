@@ -71,6 +71,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               child: TextField(
                 controller: _newpasswordController,
                 decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 2, left: 25),
                   hintText: ' New Password',
                   hintStyle: kTextboxhintstyle,
                   border: OutlineInputBorder(
@@ -93,7 +94,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       padding: const EdgeInsets.only(right: 14.15),
                       child: Icon(
                           color: Color(0xff979797),
-                          size: 15.0,
+                          size: 19.0,
                           !hidepassword
                               ? FontAwesomeIcons.eye
                               : FontAwesomeIcons.eyeSlash),
@@ -120,6 +121,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               child: TextField(
                 controller: _confirmpasswordController,
                 decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 2, left: 25),
                   hintText: '  Confirm New Password',
                   hintStyle: kTextboxhintstyle,
                   border: OutlineInputBorder(
@@ -142,7 +144,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       padding: const EdgeInsets.only(right: 14.15),
                       child: Icon(
                           color: Color(0xff979797),
-                          size: 15.0,
+                          size: 19.0,
                           !hidepassword
                               ? FontAwesomeIcons.eye
                               : FontAwesomeIcons.eyeSlash),
@@ -159,8 +161,8 @@ class _ResetPasswordState extends State<ResetPassword> {
             child: Row(
               children: [
                 FlutterSwitch(
-                    height: 20,
-                    width: 40,
+                    height: 19,
+                    width: 32,
                     toggleSize: 12,
                     activeColor: kButtonColor,
                     value: status,

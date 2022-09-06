@@ -33,9 +33,10 @@ class _EventDetailsState extends State<EventDetails> {
           children: [
             SizedBox(
               height: 150,
+              width: 428,
               child: CachedNetworkImage(
-                imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
-                fit: BoxFit.cover,
+                imageUrl: widget.singleEvent.eventFlier,
+                fit: BoxFit.fitWidth,
               ),
             ),
             Container(
@@ -70,12 +71,12 @@ class _EventDetailsState extends State<EventDetails> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Text(
-                        widget.singleEvent.eventDate,
+                        widget.singleEvent.eventStartDate,
                         style: kBodyTextStyle,
                       ),
                       SizedBox(height: 8),
                       Text(
-                        widget.singleEvent.eventTime,
+                        widget.singleEvent.eventStartTime,
                         style: kBodyTextStyle,
                       )
                     ],
