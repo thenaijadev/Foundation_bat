@@ -175,15 +175,20 @@ class _ProjectPageState extends State<ProjectPage> {
                         ),
 
                         //Pending project
-                        ProjectSummaryContainer(
-                          margin: EdgeInsets.only(right: 30),
-                          innercontainer: kBackground.withOpacity(0.1),
-                          Number: '10',
-                          colour: Color(0xffEF7D00),
-                          label: 'Pending \nProjects',
-                          childCard: Icon(
-                            FontAwesomeIcons.commentDots,
-                            color: kBackground,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, PendingPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(right: 30),
+                            innercontainer: kBackground.withOpacity(0.1),
+                            Number: '10',
+                            colour: Color(0xffEF7D00),
+                            label: 'Pending \nProjects',
+                            childCard: Icon(
+                              FontAwesomeIcons.commentDots,
+                              color: kBackground,
+                            ),
                           ),
                         ),
                       ],

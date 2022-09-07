@@ -40,25 +40,24 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           //Home
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  },
-                  icon: Icon(FontAwesomeIcons.home),
-                ),
-                Text('Home')
-              ],
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
+            ),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/home.png'),
+                  SizedBox(height: 10.1,),
+                  Text('Home')
+                ],
+              ),
             ),
           ),
 
@@ -73,74 +72,85 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
                   onPressed: () {
                     Navigator.pushNamed(context, EventCenter.id);
                   },
-                  icon: Icon(FontAwesomeIcons.calendarAlt),
+                  icon: Icon(FontAwesomeIcons.calendarAlt, size: 23,),
                 ),
+                // SizedBox(
+                //   height: 10.1,
+                // ),
                 Text('Events')
               ],
             ),
           ),
 
           //Games
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
+          GestureDetector(
+            onTap: () => 
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Promotion(),
                       ),
-                    );
-                  },
-                  icon: Icon(FontAwesomeIcons.gamepad),
-                ),
-                Text('Games')
-              ],
+                    ),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/game.png'),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Games')
+                ],
+              ),
             ),
           ),
-// COme back and fic the redirection
+
           //Projects
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, ProjectPage.id);
-                  },
-                  icon: Icon(FontAwesomeIcons.tasks),
-                ),
-                Text('Projects')
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProjectPage.id);
+            },
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/pro.png'),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Projects')
+                ],
+              ),
             ),
           ),
 
           //News
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => News(),
-                      ),
-                    );
-                  },
-                  icon: Icon(FontAwesomeIcons.newspaper),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => News(),
                 ),
-                Text('News')
-              ],
+              );
+            },
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/news.svg'),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('News')
+                ],
+              ),
             ),
           ),
         ],

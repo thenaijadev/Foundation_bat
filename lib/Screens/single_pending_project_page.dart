@@ -80,7 +80,7 @@ void initState() {
                     ),
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
@@ -118,15 +118,10 @@ void initState() {
                     ),
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Text(
-                        widget.singlePending.projectTitle,
-                        style: kPageHeader,
-                      ),
-                      SizedBox(height: 8),
                       Text(
                         widget.singlePending.projectVenue,
                         style: kBodyTextStyle,

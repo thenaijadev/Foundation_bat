@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -84,12 +85,12 @@ class _PendingPageState extends State<PendingPage> {
                                   provider.allPendingProjects![index];
                               return GestureDetector(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             CompletedProjectDetails(
-                                  //                 completed)));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PendingDetails(
+                                                  pending)));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
