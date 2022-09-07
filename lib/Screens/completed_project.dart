@@ -65,7 +65,7 @@ class _CompletedPageState extends State<CompletedPage> {
                 : provider.allCompletedProjects!.isEmpty
                     ? Center(
                         child: Text(
-                          'No Completed Project, \nPlease check Your Internet Connection \nand drag to Refresh',
+                          'No Completed Project, \nPlease check Your Internet Connection',
                           style: kBodyTextStyle,
                         ),
                       )
@@ -108,7 +108,7 @@ class _CompletedPageState extends State<CompletedPage> {
                                           child: CachedNetworkImage(
                                               imageUrl:completed.projectImage,
                                               fit: BoxFit.cover),
-                                        )
+                                        ),
                           ),
                           Expanded(
                             child: Container(

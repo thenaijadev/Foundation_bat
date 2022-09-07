@@ -17,9 +17,12 @@ import 'package:batnf/providers/completed_provider.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
+import 'package:batnf/providers/pending_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+
+import 'Screens/pending_project.dart';
 
 class MyHttpoverrides extends HttpOverrides {
   @override
@@ -58,6 +61,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CompletedProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => PendingProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'BATNF',
@@ -75,6 +81,7 @@ class MyApp extends StatelessWidget {
           ProjectPage.id: (context) => ProjectPage(),
           InprogressPage.id: (context) => InprogressPage(),
           CompletedPage.id: (context) => CompletedPage(),
+          PendingPage.id: (context) => PendingPage(),
         },
       ),
     );
