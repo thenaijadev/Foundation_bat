@@ -54,7 +54,9 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/icons/home.png'),
-                  SizedBox(height: 10.1,),
+                  SizedBox(
+                    height: 10.1,
+                  ),
                   Text('Home')
                 ],
               ),
@@ -62,35 +64,32 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           ),
 
           //Events
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, EventCenter.id);
-                  },
-                  icon: Icon(FontAwesomeIcons.calendarAlt, size: 23,),
-                ),
-                // SizedBox(
-                //   height: 10.1,
-                // ),
-                Text('Events')
-              ],
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, EventCenter.id),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/Calendar.png'),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Events')
+                ],
+              ),
             ),
           ),
 
           //Games
           GestureDetector(
-            onTap: () => 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Promotion(),
-                      ),
-                    ),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Promotion(),
+              ),
+            ),
             child: Container(
               color: kBackground,
               height: 100,
