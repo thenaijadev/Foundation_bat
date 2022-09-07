@@ -182,7 +182,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 30),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: '10',
+                            Number: '2',
                             colour: Color(0xffEF7D00),
                             label: 'Pending \nProjects',
                             childCard: Icon(
