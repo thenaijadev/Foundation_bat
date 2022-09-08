@@ -41,6 +41,8 @@ class _EventDetailsState extends State<EventDetails> {
           },
           child: ListView(
             children: [
+
+              //Event Image
               SizedBox(
                 height: 150,
                 width: 428,
@@ -49,6 +51,8 @@ class _EventDetailsState extends State<EventDetails> {
                   fit: BoxFit.fitWidth,
                 ),
               ),
+
+              //Event Name
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                 child: Text(
@@ -56,10 +60,13 @@ class _EventDetailsState extends State<EventDetails> {
                   style: kPageHeader,
                 ),
               ),
+               
+               //Event Timeline and Dates
               Container(
                 margin: EdgeInsets.only(left: 30, bottom: 21),
                 child: Row(
                   children: [
+
                     Container(
                       margin: EdgeInsets.only(right: 15),
                       padding: EdgeInsets.all(8),
@@ -93,6 +100,8 @@ class _EventDetailsState extends State<EventDetails> {
                   ],
                 ),
               ),
+
+              //Event Location
               Container(
                 margin: EdgeInsets.only(bottom: 30),
                 child: Row(
@@ -112,7 +121,7 @@ class _EventDetailsState extends State<EventDetails> {
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
@@ -120,11 +129,17 @@ class _EventDetailsState extends State<EventDetails> {
                           widget.singleEvent.venue,
                           style: kBodyTextStyle,
                         ),
+                        Text(
+                          widget.singleEvent.eventLocation,
+                          style: kBodyTextStyle,
+                        ),
                       ],
                     )
                   ],
                 ),
               ),
+
+              //Description Header
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
@@ -132,6 +147,8 @@ class _EventDetailsState extends State<EventDetails> {
                   textAlign: TextAlign.left,
                 ),
               ),
+
+              //Event Description
               Container(
                 margin:
                     EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
@@ -141,10 +158,14 @@ class _EventDetailsState extends State<EventDetails> {
                   style: kBodyTextStyle,
                 ),
               ),
+
+              //Map Header
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text('Location'),
               ),
+
+              // Location Map
               Container(
                 height: 192,
                 margin:
@@ -154,6 +175,8 @@ class _EventDetailsState extends State<EventDetails> {
                 ),
                 child: Image.asset('assets/map.png'),
               ),
+
+              //Registration Button
               Padding(
                 padding:
                     const EdgeInsets.only(left: 30, right: 30, bottom: 20.0),
@@ -163,10 +186,7 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   height: 45.0,
                   color: kButtonColor,
-                  onPressed: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => HomePage()));
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Register',
                     textAlign: TextAlign.center,

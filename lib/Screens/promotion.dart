@@ -26,9 +26,10 @@ class _PromotionState extends State<Promotion> {
           // crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.start,
           children: [
+                //Game Logo
             Row(
               children: [
-                // Container for search box etc
+
                 Column(
                   children: [
                     Row(

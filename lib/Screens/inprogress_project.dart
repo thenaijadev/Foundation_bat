@@ -144,7 +144,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                               ),
                                               RichText(
                                                   text: TextSpan(
-                                                    text: 'Start: ', style: kLandpageskiptextstyle,
+                                                    text: 'Started: ', style: kLandpageskiptextstyle,
                                                     children: [
                                                       TextSpan(
                                                         text: inprogress.projectStartDate,style: kNewsDateSTyle

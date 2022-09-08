@@ -5,6 +5,7 @@ class EventModel {
   String eventName = '';
   String eventDesc = '';
   String venue = '';
+  String eventLocation = '';
   String eventStartDate = '';
   String eventStartTime = '';
   String eventFlier = '';
@@ -23,6 +24,7 @@ class EventModel {
     required this.createdDate,
     required this.adminId,
     required this.status,
+    required this.eventLocation
   });
 
   EventModel.fromJson(Map<String, dynamic> data) {
@@ -36,5 +38,6 @@ class EventModel {
     createdDate = data['createdDate'] == null ? "unknown" : data['createdDate'];
     status = data['status'] == null ? "unknown" : data['status'];
     adminId = data['adminId'] == null ? "unknown" : data['adminId'];
+    eventLocation = data['eventLocation'] == null ? "unknown" : data['eventLocation'];
   }
 }

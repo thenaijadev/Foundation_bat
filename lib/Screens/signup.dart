@@ -18,9 +18,12 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
-  bool Newagreement = false;
+   void _togglePasswordView() {
+    setState(() {
+      hidepassword = !hidepassword;
+    });
+  }
   bool status = false;
-  String password = '';
   bool hidepassword = true;
 
   String? selectedItem;
@@ -82,14 +85,18 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 20, left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
-                          textcontroller: _emailTextController,
+                          textcontroller: _usernameTextController,
                           label: "Full Name",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Name can not be empty"
+                                : null;
+                          },
                         ),
                       ),
                     ),
@@ -98,14 +105,18 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.envelope,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
                           label: "Email",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Email can not be empty"
+                                : null;
+                          },
                         ),
                       ),
                     ),
@@ -114,14 +125,18 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _locationTextController,
                           label: "Location",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "{Please Provide Your Location}"
+                                : null;
+                          },
                         ),
                       ),
                     ),
@@ -130,14 +145,18 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
                           cardChild: Icon(FontAwesomeIcons.calendarAlt,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _dobTextController,
                           label: "DD-MM-YY",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Enter Date of Birth"
+                                : null;
+                          },
                         ),
                       ),
                     ),
@@ -146,10 +165,10 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45.0,
-                        child: TextField(
+                        child: TextFormField(
+                          obscureText: hidepassword,
                           controller: _passwordTextController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top: 2),
@@ -168,13 +187,9 @@ class _SignUpState extends State<SignUp> {
                             prefixIcon: Icon(Icons.lock,
                                 size: 15, color: kTextboxhintColor),
                             suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidepassword = !hidepassword;
-                                });
-                              },
+                              onPressed: _togglePasswordView,
                               icon: Icon(
-                                  size: 15.0,
+                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
                                       : FontAwesomeIcons.eyeSlash),
@@ -242,34 +257,29 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            textAlign: TextAlign.center,
-                            "Already have an account? ",
-                            style: TextStyle(
-                                color: kGeneralbodytextColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: 2.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, SignIn.id);
-                              ;
-                            },
-                            child: Text(
-                              textAlign: TextAlign.right,
-                              'Sign In',
-                              style: kForgetpasswordstyle,
-                            ),
-                          ),
-                        ],
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                             Navigator.pushNamed(context, SignIn.id);
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                            text: "Already have an account? ", style: TextStyle(
+                                  color: kGeneralbodytextColor,
+                                  fontStyle: FontStyle.normal,
+                                  fontFamily: 'Inter',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400), 
+                            children: [
+                              TextSpan(
+                                text: 'Sign In', style: kForgetpasswordstyle,
+                                onEnter: (event) {
+                                  Navigator.pushNamed(context, SignIn.id);
+                                },
+                              )
+                            ]
+                          )),
+                        ),
                       ),
                     ),
                   ],

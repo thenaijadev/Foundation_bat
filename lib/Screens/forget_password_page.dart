@@ -33,6 +33,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       ),
       body: ListView(
         children: [
+          // Title
           Container(
             height: 29,
             margin: EdgeInsets.only(top: 15.0, left: 30, bottom: 175),
@@ -41,33 +42,35 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               style: kSigningtextstyle,
             ),
           ),
+
+          //Email cornfirmaion
           Center(
               child: Text(
             'Code has been sent to lo***um@domain.com',
             style: kTextboxhintstyle,
           )),
+
+          // Code text Box
           Container(
             height: 47,
             margin: EdgeInsets.only(top: 109, left: 30, bottom: 75, right: 30),
             child: PinCodeTextField(
-              pinTheme: PinTheme(
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(13),
-                fieldHeight: 45,
-                fieldWidth: 50,
-                activeFillColor: kBackground,
-                activeColor: kBackground,
-                inactiveFillColor: kBackground,
-              ),
-              boxShadows: [
-                kBoxshadow
-              ],
-              cursorColor: kGeneralbodytextColor,
-              keyboardType: TextInputType.number,
-              animationDuration: const Duration(milliseconds: 300),
-              backgroundColor: kBackground,
-              blinkWhenObscuring: true,
-              animationType: AnimationType.fade,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(13),
+                  fieldHeight: 45,
+                  fieldWidth: 50,
+                  activeFillColor: kBackground,
+                  activeColor: kBackground,
+                  inactiveFillColor: kBackground,
+                ),
+                boxShadows: [kBoxshadow],
+                cursorColor: kGeneralbodytextColor,
+                keyboardType: TextInputType.number,
+                animationDuration: const Duration(milliseconds: 300),
+                backgroundColor: kBackground,
+                blinkWhenObscuring: true,
+                animationType: AnimationType.fade,
                 appContext: context,
                 length: 6,
                 onChanged: ((value) {
@@ -75,22 +78,21 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     // currentText = value;
                   });
                 })),
-                
           ),
+
+          // Resend Code Count Down
           Center(
             child: RichText(
               text: TextSpan(
-              text: 'Resend Code in ',
-               style: kTextboxhintstyle,
-               children: [
-                TextSpan(
-                  text: '56s',
-                  style: kForgetpasswordstyle
-                )
-               ]
-            ),
+                  text: 'Resend Code in ',
+                  style: kTextboxhintstyle,
+                  children: [
+                    TextSpan(text: '56s', style: kForgetpasswordstyle)
+                  ]),
             ),
           ),
+
+          //Verify Button
           Padding(
             padding: const EdgeInsets.only(
                 top: 226.0, left: 30, right: 30, bottom: 75.0),

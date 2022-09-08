@@ -13,6 +13,7 @@ class InprogressModel {
   String entryDate = '';
   String projectStatus = '';
   String projectVenue = '';
+  String projectLocation = '';
 
   InprogressModel(
       {required this.projectId,
@@ -26,6 +27,7 @@ class InprogressModel {
       required this.dateModified,
       required this.entryDate,
       required this.projectVenue,
+      required this.projectLocation,
       required this.projectStatus});
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
@@ -48,6 +50,9 @@ class InprogressModel {
     adminId = data['adminId'] == null ? "unknown" : data['adminId'];
     projectStatus =
         data['projectStatus'] == null ? "unknown" : data['projectStatus'];
-    projectVenue = data['projectVenue'] == null ? "unknown" : data['projectVenue'];
+    projectVenue =
+        data['projectVenue'] == null ? "unknown" : data['projectVenue'];
+    projectLocation =
+        data['projectLocation'] == null ? "unknown" : data['projectLocation'];
   }
 }

@@ -40,6 +40,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
           },
           child: ListView(
             children: [
+
+              //Project Image
               SizedBox(
                 height: 265,
                 child: CachedNetworkImage(
@@ -47,6 +49,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   fit: BoxFit.cover,
                 ),
               ),
+
+              //Project Title
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                 child: Text(
@@ -54,6 +58,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   style: kPageHeader,
                 ),
               ),
+
+              //Project Timeline
               Container(
                 margin: EdgeInsets.only(left: 30, bottom: 21),
                 child: Row(
@@ -79,7 +85,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       children: [
                         RichText(
                             text: TextSpan(
-                                text: 'Starts: ',
+                                text: 'Started: ',
                                 style: kLandpageskiptextstyle,
                                 children: [
                               TextSpan(
@@ -92,6 +98,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   ],
                 ),
               ),
+
+              //Project Location and venue
               Container(
                 margin: EdgeInsets.only(bottom: 30),
                 child: Row(
@@ -111,17 +119,17 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
-                          widget.singleProgress.projectTitle,
+                          widget.singleProgress.projectVenue,
                           style: kPageHeader,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          widget.singleProgress.projectVenue,
+                          widget.singleProgress.projectLocation,
                           style: kBodyTextStyle,
                         )
                       ],
@@ -129,6 +137,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   ],
                 ),
               ),
+
+              //Project Description Header
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
@@ -137,6 +147,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   textAlign: TextAlign.left,
                 ),
               ),
+
+              //Project Description
               Container(
                 alignment: AlignmentDirectional.center,
                 margin:

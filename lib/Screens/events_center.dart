@@ -238,7 +238,7 @@ class _EventCenterState extends State<EventCenter> {
                                                           child: Text(
                                                             textAlign:
                                                                 TextAlign.left,
-                                                            event.venue,
+                                                            event.eventLocation,
                                                             style: TextStyle(
                                                                 color:
                                                                     kTextboxhintColor,

@@ -47,6 +47,8 @@ void initState() {
         },
         child: ListView(
           children: [
+
+            //Project Image
             SizedBox(
               height: 265,
               child: CachedNetworkImage(
@@ -54,6 +56,8 @@ void initState() {
                 fit: BoxFit.cover,
               ),
             ),
+
+            //Project Title
             Container(
               margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
               child: Text(
@@ -61,6 +65,8 @@ void initState() {
                 style: kPageHeader,
               ),
             ),
+
+            //Project Timeline
             Container(
               margin: EdgeInsets.only(left: 30, bottom: 21),
               child: Row(
@@ -99,6 +105,8 @@ void initState() {
                 ],
               ),
             ),
+
+             //Project venue and location
             Container(
               margin: EdgeInsets.only(bottom: 30),
               child: Row(
@@ -117,6 +125,7 @@ void initState() {
                       color: kButtonColor,
                     ),
                   ),
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,12 +134,19 @@ void initState() {
                       Text(
                         widget.singlePending.projectVenue,
                         style: kBodyTextStyle,
-                      )
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        widget.singlePending.projectLocation,
+                        style: kBodyTextStyle,
+                      ),
                     ],
                   )
                 ],
               ),
             ),
+
+            //Project description Header
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(
@@ -139,6 +155,8 @@ void initState() {
                 textAlign: TextAlign.left,
               ),
             ),
+
+            //Project Description
             Container(
               alignment: AlignmentDirectional.center,
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),

@@ -40,6 +40,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
           },
           child: ListView(
             children: [
+
+              // Project Image
               SizedBox(
                 height: 265,
                 child: CachedNetworkImage(
@@ -47,6 +49,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                   fit: BoxFit.cover,
                 ),
               ),
+
+              //Project Title
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                 child: Text(
@@ -54,6 +58,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                   style: kPageHeader,
                 ),
               ),
+
+              //Project Timeline
               Container(
                 margin: EdgeInsets.only(left: 30, bottom: 21),
                 child: Row(
@@ -102,6 +108,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                   ],
                 ),
               ),
+
+              //Project Loction and Venue
               Container(
                 margin: EdgeInsets.only(bottom: 30),
                 child: Row(
@@ -126,12 +134,12 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
-                          'Mother & Child Orphanage Home',
+                          widget.singleCompleted.projectVenue,
                           style: kBodyTextStyle,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          widget.singleCompleted.projectVenue,
+                          widget.singleCompleted.projectLocation,
                           style: kBodyTextStyle,
                         )
                       ],
@@ -139,6 +147,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                   ],
                 ),
               ),
+
+              //Project Decription Header
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
@@ -147,6 +157,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                   textAlign: TextAlign.left,
                 ),
               ),
+
+              //Project Description
               Container(
                 alignment: AlignmentDirectional.center,
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),

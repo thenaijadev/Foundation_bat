@@ -5,6 +5,7 @@ class PendingModel {
   String projectTitle = '';
   String projectDescription = '';
   String projectVenue = '';
+  String projectLocation = '';
   String projectImage = '';
   String projectStartDate = '';
   String projectEndDate = '';
@@ -18,6 +19,7 @@ class PendingModel {
       required this.projectStartDate,
       required this.projectEndDate,
       required this.projectVenue,
+      required this.projectLocation,
       required this.projectStatus});
 
   PendingModel.fromJson(Map<String, dynamic> data) {
@@ -37,5 +39,7 @@ class PendingModel {
         data['projectStatus'] == null ? "unknown" : data['projectStatus'];
     projectVenue =
         data['projectVenue'] == null ? "unknown" : data['projectVenue'];
+    projectLocation =
+        data['projectLocation'] == null ? "unknown" : data['projectLocation'];
   }
 }

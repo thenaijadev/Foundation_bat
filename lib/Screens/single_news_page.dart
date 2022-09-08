@@ -39,6 +39,8 @@ class _NewsDetailsState extends State<NewsDetails> {
           },
           child: ListView(
             children: [
+
+              //News title
               Container(
                 margin: EdgeInsets.only(left: 30,),
                 child: Column(
@@ -54,6 +56,8 @@ class _NewsDetailsState extends State<NewsDetails> {
                   ],
                 ),
               ),
+
+              //News Image
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: CachedNetworkImage(
@@ -61,6 +65,8 @@ class _NewsDetailsState extends State<NewsDetails> {
                   fit: BoxFit.cover,
                 ),
               ),
+
+              // New Details
               Container(
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                 child: Text(

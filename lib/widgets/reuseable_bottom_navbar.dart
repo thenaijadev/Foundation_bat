@@ -130,12 +130,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           //News
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => News(),
-                ),
-              );
+              Navigator.pushNamed(context, News.id);
             },
             child: Container(
               color: kBackground,

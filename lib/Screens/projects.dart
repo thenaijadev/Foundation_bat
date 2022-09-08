@@ -136,6 +136,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
+                        
                         //Projects In Progress
                         GestureDetector(
                           onTap: () {

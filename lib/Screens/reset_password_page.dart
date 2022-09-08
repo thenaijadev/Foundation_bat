@@ -16,18 +16,22 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  @override
-  Widget build(BuildContext context) {
+
+   void togglePasswordView() {
+      setState(() {
+        hidepassword = !hidepassword;
+      });
+    }
     bool status = false;
-    
-    String password = '';
 
     bool hidepassword = true;
+  final _formKey = GlobalKey<FormState>();
 
     TextEditingController _confirmpasswordController = TextEditingController();
 
     TextEditingController _newpasswordController = TextEditingController();
-
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackground,
       appBar: AppBar(
@@ -36,173 +40,146 @@ class _ResetPasswordState extends State<ResetPassword> {
         elevation: 0,
         leading: BackButton(color: kButtonColor),
       ),
-      body: ListView(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            height: 29,
-            margin: EdgeInsets.only(top: 15.0, left: 30, bottom: 45),
-            child: Text(
-              'Reset Password',
-              style: kSigningtextstyle,
-            ),
-          ),
-          Container(
-            height: 19,
-            margin: EdgeInsets.only(left: 30, bottom: 75),
-            child: Text(
-              'Create a new password',
-              style: kTextboxhintstyle,
-            ),
-          ),
-
-          //Request for New Password
-          Padding(
-            padding: const EdgeInsets.only(left: 30, bottom: 10),
-            child: Text(
-              'New Password *',
-              style: kPageHeader,
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
-            child: SizedBox(
-              height: 45,
-              child: TextField(
-                controller: _newpasswordController,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 2, left: 25),
-                  hintText: ' New Password',
-                  hintStyle: kTextboxhintstyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(45.0),
-                    ),
-                    borderSide: BorderSide(
-                      style: BorderStyle.solid,
-                      color: kTextfieldborderColor,
-                      width: 2.0,
+          Expanded(
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  Container(
+                    height: 29,
+                    margin: EdgeInsets.only(top: 15.0, left: 30, bottom: 45),
+                    child: Text(
+                      'Reset Password',
+                      style: kSigningtextstyle,
                     ),
                   ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        hidepassword = !hidepassword;
-                      });
-                    },
-                    icon: Padding(
-                      padding: const EdgeInsets.only(right: 14.15),
-                      child: Icon(
-                          color: Color(0xff979797),
-                          size: 19.0,
-                          !hidepassword
-                              ? FontAwesomeIcons.eye
-                              : FontAwesomeIcons.eyeSlash),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          //Confirm  Password
-          Padding(
-            padding: const EdgeInsets.only(left: 30, bottom: 10),
-            child: Text(
-              'Confirm Password *',
-              style: kPageHeader,
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 31.0),
-            child: SizedBox(
-              height: 45,
-              child: TextField(
-                controller: _confirmpasswordController,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 2, left: 25),
-                  hintText: '  Confirm New Password',
-                  hintStyle: kTextboxhintstyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(45.0),
-                    ),
-                    borderSide: BorderSide(
-                      style: BorderStyle.solid,
-                      color: kTextfieldborderColor,
-                      width: 2.0,
-                    ),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        hidepassword = !hidepassword;
-                      });
-                    },
-                    icon: Padding(
-                      padding: const EdgeInsets.only(right: 14.15),
-                      child: Icon(
-                          color: Color(0xff979797),
-                          size: 19.0,
-                          !hidepassword
-                              ? FontAwesomeIcons.eye
-                              : FontAwesomeIcons.eyeSlash),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          // Remember me
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: Row(
-              children: [
-                FlutterSwitch(
+                  Container(
                     height: 19,
-                    width: 32,
-                    toggleSize: 12,
-                    activeColor: kButtonColor,
-                    value: status,
-                    onToggle: (val) {
-                      setState(() {
-                        status = val;
-                      });
-                    }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'Remember me',
-                  style: TextStyle(
+                    margin: EdgeInsets.only(left: 30, bottom: 75),
+                    child: Text(
+                      'Create a new password',
+                      style: kTextboxhintstyle,
+                    ),
+                  ),
+            
+                  //Request for New Password
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, bottom: 10),
+                    child: Text(
+                      'New Password *',
+                      style: kPageHeader,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+                    child: SizedBox(
+                      height: 45,
+                      child: TextFormField(
+                        obscureText: hidepassword,
+                        controller: _newpasswordController,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 2, left: 25),
+                          hintText: ' New Password',
+                          hintStyle: kTextboxhintstyle,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
+                            ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: togglePasswordView,
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 14.15),
+                              child: Icon(
+                                  color: Color(0xff979797),
+                                  size: 19.0,
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            
+                  //Confirm  Password
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, bottom: 10),
+                    child: Text(
+                      'Confirm Password *',
+                      style: kPageHeader,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 31.0),
+                    child: SizedBox(
+                      height: 45,
+                      child: TextFormField(
+                        obscureText: hidepassword,
+                        controller: _confirmpasswordController,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 2, left: 25),
+                          hintText: '  Confirm New Password',
+                          hintStyle: kTextboxhintstyle,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
+                            ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: togglePasswordView,
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 14.15),
+                              child: Icon(
+                                  color: Color(0xff979797),
+                                  size: 19.0,
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            
+                  //Comfirmation Button
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 303.0, left: 30, right: 30, bottom: 75.0),
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45.0),
+                      ),
+                      height: 45.0,
                       color: kButtonColor,
-                      fontStyle: FontStyle.normal,
-                      fontFamily: 'Inter',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 303.0, left: 30, right: 30, bottom: 75.0),
-            child: MaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(45.0),
-              ),
-              height: 45.0,
-              color: kButtonColor,
-              onPressed: () {
-                Navigator.pushNamed(context, ResetCompleted.id);
-              },
-              child: Text(
-                'Confirm',
-                textAlign: TextAlign.center,
-                style: kButtontextstyle,
+                      onPressed: () {
+                        Navigator.pushNamed(context, ResetCompleted.id);
+                      },
+                      child: Text(
+                        'Confirm',
+                        textAlign: TextAlign.center,
+                        style: kButtontextstyle,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

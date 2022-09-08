@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, use_build_context_synchronously
 
-import 'dart:ui';
-
+import 'dart:convert';
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:http/http.dart' as http;
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -19,8 +19,39 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  Future<void> login({required String email, required String password}) async {
+    var response =
+        await http.post(Uri.parse('https://geeteefarms.com/events/api/login'),
+            body: jsonEncode({
+              "identity": email,
+              "password": password,
+            }),
+            headers: {"Content-Type": "application/json"});
+    if (mounted)
+      // ignore: curly_braces_in_flow_control_structures
+      setState(() {
+        loading = false;
+      });
+
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Login Sucessfull')));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Kindly Provide your email and password')));
+    }
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      hidepassword = !hidepassword;
+    });
+  }
+
+  bool loading = false;
   bool status = false;
-  String password = '';
 
   bool hidepassword = true;
 
@@ -53,7 +84,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    // BATNF LAbel
+                    // BATNF Label
                     Center(
                       child: Text(
                         textAlign: TextAlign.left,
@@ -72,19 +103,22 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    //Request for User name
+                    //Request for User Email
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
+                      child: SizedBox(
                         height: 45,
                         child: ReuseableTextField(
-                          cardChild: Icon(FontAwesomeIcons.user,
-                          size: 15,
-                              color: kTextboxhintColor),
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Email can not be empty"
+                                : null;
+                          },
+                          cardChild: Icon(FontAwesomeIcons.solidEnvelope,
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
-                          label: "User Name",
+                          label: "Email",
                         ),
                       ),
                     ),
@@ -93,14 +127,14 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
+                      child: SizedBox(
                         height: 45,
-                        color: kBackground,
-                        child: TextField(
+                        child: TextFormField(
+                          obscureText: hidepassword,
                           controller: _passwordTextController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top: 2),
-                            hintText: 'Password',
+                            hintText: "password",
                             hintStyle: kTextboxhintstyle,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
@@ -112,21 +146,15 @@ class _SignInState extends State<SignIn> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon:
-                                Icon(Icons.lock,
-                                size: 15,
-                                 color: kTextboxhintColor),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
                             suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidepassword = !hidepassword;
-                                });
-                              },
+                              onPressed: _togglePasswordView,
                               icon: Padding(
                                 padding: const EdgeInsets.only(right: 14.15),
                                 child: Icon(
                                     color: Color(0xff979797),
-                                    size: 15.0,
+                                    size: 19.0,
                                     !hidepassword
                                         ? FontAwesomeIcons.eye
                                         : FontAwesomeIcons.eyeSlash),
@@ -180,16 +208,29 @@ class _SignInState extends State<SignIn> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                          if (_formKey.currentState!.validate() && !loading) {
+                            setState(() {
+                              loading = true;
+                            });
+                            login(
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text);
+                          }
+
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => HomePage()));
                         },
-                        child: Text(
-                          'Sign In',
-                          textAlign: TextAlign.center,
-                          style: kButtontextstyle,
-                        ),
+                        child: loading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white))
+                            : Text(
+                                'Sign In',
+                                textAlign: TextAlign.center,
+                                style: kButtontextstyle,
+                              ),
                       ),
                     ),
 
@@ -213,34 +254,27 @@ class _SignInState extends State<SignIn> {
                         bottom: 75.0,
                         top: 260,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            textAlign: TextAlign.center,
-                            "Already have an account? ",
-                            style: TextStyle(
-                                color: kGeneralbodytextColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: 2.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, SignUp.id);
-                              ;
-                            },
-                            child: Text(
-                              textAlign: TextAlign.right,
-                              'Sign Up',
-                              style: kForgetpasswordstyle,
-                            ),
-                          ),
-                        ],
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                             Navigator.pushNamed(context, SignUp.id);
+                          },
+                          child: RichText(
+                              text: TextSpan(
+                                  text: "Don't have an account? ",
+                                  style: TextStyle(
+                                      color: kGeneralbodytextColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                TextSpan(
+                                    text: 'Sign Up',
+                                    style: kForgetpasswordstyle)
+                              ])),
+                        ),
                       ),
                     ),
                   ],

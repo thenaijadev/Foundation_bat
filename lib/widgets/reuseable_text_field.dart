@@ -11,7 +11,9 @@ class ReuseableTextField extends StatelessWidget {
   ReuseableTextField(
       {required this.cardChild,
       required this.textcontroller,
-      required this.label,});
+      required this.label, 
+      required String? 
+      Function(dynamic val) validator,});
 
   String label;
   final TextEditingController textcontroller;
@@ -19,7 +21,7 @@ class ReuseableTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: textcontroller,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(top: 2),
