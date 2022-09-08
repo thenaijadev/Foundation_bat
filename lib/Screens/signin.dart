@@ -38,9 +38,12 @@ class _SignInState extends State<SignIn> {
           .showSnackBar(SnackBar(content: Text('Login Sucessfull')));
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else if (response.statusCode == 404) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Login Failed')));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Kindly Provide your email and password')));
+          SnackBar(content: Text('New Here?!. Please SignUp', textAlign: TextAlign.center,)));
     }
   }
 
@@ -55,11 +58,11 @@ class _SignInState extends State<SignIn> {
 
   bool hidepassword = true;
 
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
-  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class _SignInState extends State<SignIn> {
         children: [
           Expanded(
             child: Form(
-                key: _formKey,
+                key: formKey,
                 child: ListView(
                   children: [
                     // Logo
@@ -108,8 +111,9 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.only(
                           left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45,
+                        height: 65,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.emailAddress,
                           validator: (val) {
                             return val!.isEmpty
                                 ? "Email can not be empty"
@@ -117,7 +121,7 @@ class _SignInState extends State<SignIn> {
                           },
                           cardChild: Icon(FontAwesomeIcons.solidEnvelope,
                               size: 15, color: kTextboxhintColor),
-                          textcontroller: _emailTextController,
+                          textcontroller: emailController,
                           label: "Email",
                         ),
                       ),
@@ -128,10 +132,13 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 21.0),
                       child: SizedBox(
-                        height: 45,
+                        height: 65,
                         child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
                           obscureText: hidepassword,
-                          controller: _passwordTextController,
+                          controller: passwordController,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top: 2),
                             hintText: "password",
@@ -208,13 +215,13 @@ class _SignInState extends State<SignIn> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          if (_formKey.currentState!.validate() && !loading) {
+                          if (formKey.currentState!.validate() && !loading) {
                             setState(() {
                               loading = true;
                             });
                             login(
-                                email: _emailTextController.text,
-                                password: _passwordTextController.text);
+                                email: emailController.text,
+                                password: passwordController.text);
                           }
 
                           // Navigator.push(
@@ -257,7 +264,7 @@ class _SignInState extends State<SignIn> {
                       child: Center(
                         child: GestureDetector(
                           onTap: () {
-                             Navigator.pushNamed(context, SignUp.id);
+                            Navigator.pushNamed(context, SignUp.id);
                           },
                           child: RichText(
                               text: TextSpan(

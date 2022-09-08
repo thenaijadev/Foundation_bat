@@ -103,6 +103,7 @@ class _EventCenterState extends State<EventCenter> {
                         height: 45.0,
                         child: TextField(
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
                             hintText: 'Search',
                             hintStyle: kTextboxhintstyle,
                             prefixIcon: Icon(

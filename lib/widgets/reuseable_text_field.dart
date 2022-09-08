@@ -8,20 +8,26 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReuseableTextField extends StatelessWidget {
-  ReuseableTextField(
-      {required this.cardChild,
-      required this.textcontroller,
-      required this.label, 
-      required String? 
-      Function(dynamic val) validator,});
+  ReuseableTextField({
+    required this.cardChild,
+    required this.textcontroller,
+    required this.keyboard,
+    required this.label,
+    required String? Function(dynamic val) validator,
+  });
 
   String label;
   final TextEditingController textcontroller;
   Widget cardChild;
+  TextInputType keyboard;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "This Field is Required" : null;
+      },
+      keyboardType: keyboard,
       controller: textcontroller,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(top: 2),

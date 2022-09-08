@@ -87,6 +87,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     height: 45.0,
                     child: TextField(
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(top: 2),
                         hintText: 'Search',
                         hintStyle: kTextboxhintstyle,
                         prefixIcon: Icon(

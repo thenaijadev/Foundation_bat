@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUp extends StatefulWidget {
   static String id = 'signup';
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -18,25 +19,22 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
+  bool hidepassword = true;
+  String? selectedItem;
+  bool status = false;
+
+  TextEditingController _dobTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _locationTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _usernameTextController = TextEditingController();
+
    void _togglePasswordView() {
     setState(() {
       hidepassword = !hidepassword;
     });
   }
-  bool status = false;
-  bool hidepassword = true;
-
-  String? selectedItem;
-
-  final _formKey = GlobalKey<FormState>();
-
-  TextEditingController _usernameTextController = TextEditingController();
-  TextEditingController _locationTextController = TextEditingController();
-  TextEditingController _dobTextController = TextEditingController();
-
-  TextEditingController _emailTextController = TextEditingController();
-
-  TextEditingController _passwordTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +86,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _usernameTextController,
@@ -108,6 +107,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.emailAddress,
                           cardChild: Icon(FontAwesomeIcons.envelope,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
@@ -128,6 +128,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _locationTextController,
@@ -148,6 +149,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 45.0,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.datetime,
                           cardChild: Icon(FontAwesomeIcons.calendarAlt,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _dobTextController,
