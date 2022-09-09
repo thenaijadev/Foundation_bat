@@ -122,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           top: 20, left: 30.0, right: 30.0, bottom: 21.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: ReuseableTextField(
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: ReuseableTextField(
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: ReuseableTextField(
                           keyboard: TextInputType.emailAddress,
                           cardChild: Icon(FontAwesomeIcons.envelope,
@@ -185,8 +185,11 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
                           obscureText: hidepassword,
                           controller: _passwordTextController,
                           decoration: InputDecoration(
@@ -223,8 +226,11 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
                           obscureText: hidepassword,
                           controller: _passwordconfirmTextController,
                           decoration: InputDecoration(
@@ -261,7 +267,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: ReuseableTextField(
                           keyboard: TextInputType.text,
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
@@ -282,7 +288,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 21.0),
                       child: SizedBox(
-                        height: 45.0,
+                        height: 65.0,
                         child: ReuseableTextField(
                           keyboard: TextInputType.datetime,
                           cardChild: Icon(FontAwesomeIcons.calendarAlt,
