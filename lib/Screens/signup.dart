@@ -1,13 +1,16 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names, curly_braces_in_flow_control_structures
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUp extends StatefulWidget {
   static String id = 'signup';
@@ -20,20 +23,55 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   bool hidepassword = true;
-  String? selectedItem;
+  bool loading = false;
   bool status = false;
-
-  TextEditingController _dobTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _locationTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _usernameTextController = TextEditingController();
 
-   void _togglePasswordView() {
+  void _togglePasswordView() {
     setState(() {
       hidepassword = !hidepassword;
     });
+  }
+
+  TextEditingController _firstnameTextController = TextEditingController();
+  TextEditingController _lastnameTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _passwordconfirmTextController = TextEditingController();
+  TextEditingController _locationTextController = TextEditingController();
+  TextEditingController _dobTextController = TextEditingController();
+
+  Future<void> signup(
+      {required String firstname,
+      required String lastname,
+      required String email,
+      required String password,
+      required String passwordconfirm,
+      required String location,
+      required String dob}) async {
+    var response =
+        await http.post(Uri.parse('http://geeteefarms.com/events/api/create'),
+            body: jsonEncode({
+              "first_name": firstname,
+              "last_name ": lastname,
+              "email": email,
+              "password": password,
+              "password_confirm": passwordconfirm,
+              "location": location,
+              "dob": dob,
+            }),
+            headers: {"Content-Type": "application/json"});
+    if (mounted)
+      setState(() {
+        loading = false;
+      });
+    if (response.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SignIn()));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Invalid Credentials')));
+    }
   }
 
   @override
@@ -79,7 +117,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    //Request for User Name
+                    //Request for First Name
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 20, left: 30.0, right: 30.0, bottom: 21.0),
@@ -89,8 +127,29 @@ class _SignUpState extends State<SignUp> {
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
-                          textcontroller: _usernameTextController,
-                          label: "Full Name",
+                          textcontroller: _firstnameTextController,
+                          label: "First Name",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Name can not be empty"
+                                : null;
+                          },
+                        ),
+                      ),
+                    ),
+
+                    // Request for LastName
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 20.0),
+                      child: SizedBox(
+                        height: 45.0,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.name,
+                          cardChild: Icon(FontAwesomeIcons.user,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: _lastnameTextController,
+                          label: "Last Name",
                           validator: (val) {
                             return val!.isEmpty
                                 ? "Name can not be empty"
@@ -121,52 +180,10 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    //Request for Location
+                    //Request for Password
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: SizedBox(
-                        height: 45.0,
-                        child: ReuseableTextField(
-                          keyboard: TextInputType.name,
-                          cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
-                              size: 15, color: kTextboxhintColor),
-                          textcontroller: _locationTextController,
-                          label: "Location",
-                          validator: (val) {
-                            return val!.isEmpty
-                                ? "{Please Provide Your Location}"
-                                : null;
-                          },
-                        ),
-                      ),
-                    ),
-
-                    //Request for Date of Birth
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 20.0),
-                      child: SizedBox(
-                        height: 45.0,
-                        child: ReuseableTextField(
-                          keyboard: TextInputType.datetime,
-                          cardChild: Icon(FontAwesomeIcons.calendarAlt,
-                              size: 15, color: kTextboxhintColor),
-                          textcontroller: _dobTextController,
-                          label: "DD-MM-YY",
-                          validator: (val) {
-                            return val!.isEmpty
-                                ? "Enter Date of Birth"
-                                : null;
-                          },
-                        ),
-                      ),
-                    ),
-
-                    //Request for User Password
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 21.0),
                       child: SizedBox(
                         height: 45.0,
                         child: TextFormField(
@@ -197,6 +214,84 @@ class _SignUpState extends State<SignUp> {
                                       : FontAwesomeIcons.eyeSlash),
                             ),
                           ),
+                        ),
+                      ),
+                    ),
+
+                    //Confirm Password
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 20.0),
+                      child: SizedBox(
+                        height: 45.0,
+                        child: TextFormField(
+                          obscureText: hidepassword,
+                          controller: _passwordconfirmTextController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: 'Confirm Password',
+                            hintStyle: kTextboxhintstyle,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
+                            suffixIcon: IconButton(
+                              onPressed: _togglePasswordView,
+                              icon: Icon(
+                                  size: 19.0,
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    //Request for Location
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 20.0),
+                      child: SizedBox(
+                        height: 45.0,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.text,
+                          cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: _locationTextController,
+                          label: "Location",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "{Please Provide Your Location}"
+                                : null;
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //Request for Date of Birth
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 21.0),
+                      child: SizedBox(
+                        height: 45.0,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.datetime,
+                          cardChild: Icon(FontAwesomeIcons.calendarAlt,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: _dobTextController,
+                          label: "DD-MM-YY",
+                          validator: (val) {
+                            return val!.isEmpty ? "Enter Date of Birth" : null;
+                          },
                         ),
                       ),
                     ),
@@ -244,13 +339,30 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          Navigator.pushNamed(context, SignIn.id);
+                          if (_formKey.currentState!.validate() && !loading) {
+                            setState(() {
+                              loading = true;
+                            });
+                            signup(
+                                firstname: _firstnameTextController.text,
+                                lastname: _lastnameTextController.text,
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text,
+                                passwordconfirm:
+                                    _passwordconfirmTextController.text,
+                                location: _locationTextController.text,
+                                dob: _dobTextController.text);
+                          }
                         },
-                        child: Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: kButtontextstyle,
-                        ),
+                        child: loading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white))
+                            : Text(
+                                'Sign Up',
+                                textAlign: TextAlign.center,
+                                style: kButtontextstyle,
+                              ),
                       ),
                     ),
 
@@ -262,25 +374,26 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                         child: GestureDetector(
                           onTap: () {
-                             Navigator.pushNamed(context, SignIn.id);
+                            Navigator.pushNamed(context, SignIn.id);
                           },
                           child: RichText(
-                            text: TextSpan(
-                            text: "Already have an account? ", style: TextStyle(
-                                  color: kGeneralbodytextColor,
-                                  fontStyle: FontStyle.normal,
-                                  fontFamily: 'Inter',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400), 
-                            children: [
-                              TextSpan(
-                                text: 'Sign In', style: kForgetpasswordstyle,
-                                onEnter: (event) {
-                                  Navigator.pushNamed(context, SignIn.id);
-                                },
-                              )
-                            ]
-                          )),
+                              text: TextSpan(
+                                  text: "Already have an account? ",
+                                  style: TextStyle(
+                                      color: kGeneralbodytextColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                  children: [
+                                TextSpan(
+                                  text: 'Sign In',
+                                  style: kForgetpasswordstyle,
+                                  onEnter: (event) {
+                                    Navigator.pushNamed(context, SignIn.id);
+                                  },
+                                )
+                              ])),
                         ),
                       ),
                     ),

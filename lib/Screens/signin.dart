@@ -21,7 +21,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   Future<void> login({required String email, required String password}) async {
     var response =
-        await http.post(Uri.parse('https://geeteefarms.com/events/api/login'),
+        await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
             body: jsonEncode({
               "identity": email,
               "password": password,
@@ -41,9 +41,13 @@ class _SignInState extends State<SignIn> {
     } else if (response.statusCode == 404) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Login Failed')));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('New Here?!. Please SignUp', textAlign: TextAlign.center,)));
+    }else {
+      print(email);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'New Here?!. Please SignUp',
+        textAlign: TextAlign.center,
+      )));
     }
   }
 
