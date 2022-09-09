@@ -294,7 +294,7 @@ class _SignUpState extends State<SignUp> {
                           cardChild: Icon(FontAwesomeIcons.calendarAlt,
                               size: 15, color: kTextboxhintColor),
                           textcontroller: _dobTextController,
-                          label: "DD-MM-YY",
+                          label: "YYYY-MM-DD",
                           validator: (val) {
                             return val!.isEmpty ? "Enter Date of Birth" : null;
                           },
