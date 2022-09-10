@@ -2,7 +2,13 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/date_picker_constants.dart';
+import 'package:flutter_holo_date_picker/date_time_formatter.dart';
+import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
+// import 'package:flutter_holo_date_picker/date_time_formatter.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +17,7 @@ import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
+import 'package:intl/intl.dart';
 
 class SignUp extends StatefulWidget {
   static String id = 'signup';
@@ -23,10 +30,12 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   bool hidepassword = true;
+  final df = DateFormat('yyyy-MM-dd');
+  DateTime? _myDateTime;
+  String time = '?';
   bool loading = false;
   bool status = false;
   final _formKey = GlobalKey<FormState>();
-
   void _togglePasswordView() {
     setState(() {
       hidepassword = !hidepassword;
@@ -37,9 +46,10 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _lastnameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _passwordconfirmTextController = TextEditingController();
+  TextEditingController _passwordconfirmTextController =
+      TextEditingController();
   TextEditingController _locationTextController = TextEditingController();
-  TextEditingController _dobTextController = TextEditingController();
+  TextEditingController _date = TextEditingController();
 
   Future<void> signup(
       {required String firstname,
@@ -48,7 +58,7 @@ class _SignUpState extends State<SignUp> {
       required String password,
       required String passwordconfirm,
       required String location,
-      required String dob}) async {
+      required String date}) async {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/create'),
             body: jsonEncode({
@@ -58,7 +68,7 @@ class _SignUpState extends State<SignUp> {
               "password": password,
               "password_confirm": passwordconfirm,
               "location": location,
-              "dob": dob,
+              "dob": date,
             }),
             headers: {"Content-Type": "application/json"});
     if (mounted)
@@ -289,15 +299,81 @@ class _SignUpState extends State<SignUp> {
                           left: 30.0, right: 30.0, bottom: 21.0),
                       child: SizedBox(
                         height: 65.0,
-                        child: ReuseableTextField(
-                          keyboard: TextInputType.datetime,
-                          cardChild: Icon(FontAwesomeIcons.calendarAlt,
-                              size: 15, color: kTextboxhintColor),
-                          textcontroller: _dobTextController,
-                          label: "YYYY-MM-DD",
-                          validator: (val) {
-                            return val!.isEmpty ? "Enter Date of Birth" : null;
+                        child: TextFormField(
+                          readOnly: true,
+                          onTap: () async {
+                            _myDateTime = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1789),
+                              lastDate: DateTime.now(),
+                            );
+
+                            if (_myDateTime != null) {
+                              setState(() {
+                                _date.text = df.format(_myDateTime!);
+                              });
+                            }
+
+                            // setState(() {
+                            //   _date =
+                            //       DateFormat('yyyy-mm-dd').format(_myDateTime);
+                            // });
+                            // DateTime? pickeddate = await showDatePicker(
+                            // context: context,
+
+                            // initialDate: DateTime.now(),
+                            // firstDate: DateTime.(1789),
+                            // lastDate: DateTime.now(),
+                            // initialDatePickerMode: DatePickerMode.year,
+                            // locale: Locale('en', 'us'),
+                            // confirmText: 'Done',
+                            // initialEntryMode: DatePickerEntryMode.calendarOnly
+                            // );
+
+                            // var datePicked =
+                            //     await DatePicker.showSimpleDatePicker(
+                            //   context,
+                            //   initialDate: DateTime.now(),
+                            //   firstDate: DateTime(2005),
+                            //   lastDate: DateTime.now(),
+                            //   dateFormat: "YYYY-MM-DD",
+                            //   looping: true
+                            // );
+
+                            //   setState(() {
+                            //     datePicked;
+                            //   });
+
+                            // if (pickeddate != null) {
+                            //   setState(() {
+                            //     _date = DateTimeFormatter().toString() as TextEditingController;
+                            //   });
+                            // }
                           },
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Date of Birth is Required"
+                                : null;
+                          },
+                          controller: _date,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: 'YYYY-MM-DD',
+                            hintStyle: kTextboxhintstyle,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            prefixIcon: Icon(FontAwesomeIcons.calendarAlt,
+                                size: 15, color: kTextboxhintColor),
+                          ),
                         ),
                       ),
                     ),
@@ -357,7 +433,7 @@ class _SignUpState extends State<SignUp> {
                                 passwordconfirm:
                                     _passwordconfirmTextController.text,
                                 location: _locationTextController.text,
-                                dob: _dobTextController.text);
+                                date: _date.text);
                           }
                         },
                         child: loading
