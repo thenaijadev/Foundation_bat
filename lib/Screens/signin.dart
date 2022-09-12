@@ -42,15 +42,20 @@ class _SignInState extends State<SignIn> {
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } else if (response.statusCode == 404) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Login Failed')));
-    }else {
-      print(email);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'New Here?!. Please SignUp',
+          .showSnackBar(SnackBar(content: Text('No Data Submitted',
         textAlign: TextAlign.center,
       )));
-    }
+    } else if (response.statusCode == 405) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Invalid Email, Please SignUp',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 406) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Login Failed',
+        textAlign: TextAlign.center,
+      )));
+    } 
   }
 
   void _togglePasswordView() {

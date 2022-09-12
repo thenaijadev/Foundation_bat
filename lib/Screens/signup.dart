@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names, curly_braces_in_flow_control_structures, use_build_context_synchronously
 
 import 'dart:convert';
 
@@ -77,9 +77,41 @@ class _SignUpState extends State<SignUp> {
       // print(date);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => SignIn()));
-    } else {
+    } else if (response.statusCode == 201) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Invalid Credentials')));
+          .showSnackBar(SnackBar(content: Text('Success, Unable to send to mail',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 401) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Password Mismatch',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 402) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Registration Failed, Try again',
+        textAlign: TextAlign.center,
+      )));
+    } else if(response.statusCode == 404) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('No Data Submitted',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 405) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Too Young to Register',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 406) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Invalid Email',
+        textAlign: TextAlign.center,
+      )));
+    } else if (response.statusCode == 407) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Email Already Exist',
+        textAlign: TextAlign.center,
+      )));
     }
   }
 
