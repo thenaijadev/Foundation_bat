@@ -25,8 +25,8 @@ class _SignInState extends State<SignIn> {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
             body: jsonEncode({
-              "identity": email,
-              "password": password,
+              "identity":email,
+              "password":password,
             }),
             headers: {"Content-Type": "application/json"});
     if (mounted)
@@ -238,11 +238,6 @@ class _SignInState extends State<SignIn> {
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
-
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => HomePage()));
                         },
                         child: loading
                             ? CircularProgressIndicator(
@@ -256,7 +251,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    //Forget Pasword Request
+                    //Forget Password Request
                     Center(
                       child: GestureDetector(
                         onTap: () {
