@@ -23,6 +23,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  
   Future<void> login({required String email, required String password}) async {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
@@ -37,7 +38,6 @@ class _SignInState extends State<SignIn> {
       box1.put('passwordController', passwordController.text);
     }
     if (mounted)
-      // ignore: curly_braces_in_flow_control_structures
       setState(() {
         loading = false;
       });
