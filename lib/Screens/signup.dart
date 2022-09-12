@@ -67,7 +67,12 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         loading = false;
       });
-    if (response.statusCode == 200) {
+    if (response.statusCode == 405) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'Too Young to Register',
+        textAlign: TextAlign.center,
+      )));
       // print(firstname);
       // print(lastname);
       // print(email);
@@ -75,8 +80,6 @@ class _SignUpState extends State<SignUp> {
       // print(passwordconfirm);
       // print(location);
       // print(date);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignIn()));
     } else if (response.statusCode == 201) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Success, Unable to send to mail',
@@ -97,11 +100,9 @@ class _SignUpState extends State<SignUp> {
           .showSnackBar(SnackBar(content: Text('No Data Submitted',
         textAlign: TextAlign.center,
       )));
-    } else if (response.statusCode == 405) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Too Young to Register',
-        textAlign: TextAlign.center,
-      )));
+    } else if (response.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SignIn()));
     } else if (response.statusCode == 406) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Invalid Email',

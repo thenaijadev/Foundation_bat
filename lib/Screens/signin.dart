@@ -35,27 +35,30 @@ class _SignInState extends State<SignIn> {
         loading = false;
       });
 
-    if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Login Sucessfull')));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+    if (response.statusCode == 406) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'Login Failed',
+        textAlign: TextAlign.center,
+      )));
     } else if (response.statusCode == 404) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('No Data Submitted',
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'No Data Submitted',
         textAlign: TextAlign.center,
       )));
     } else if (response.statusCode == 405) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Invalid Email, Please SignUp',
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'Invalid Email, Please SignUp',
         textAlign: TextAlign.center,
       )));
-    } else if (response.statusCode == 406) {
+    } else if (response.statusCode == 200) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Login Failed',
-        textAlign: TextAlign.center,
-      )));
-    } 
+          .showSnackBar(SnackBar(content: Text('Login Successful')));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    }
   }
 
   void _togglePasswordView() {
@@ -66,6 +69,7 @@ class _SignInState extends State<SignIn> {
 
   bool loading = false;
   bool status = false;
+  int val = 0;
 
   bool hidepassword = true;
 
