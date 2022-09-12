@@ -25,7 +25,6 @@ class _SignUpState extends State<SignUp> {
   bool hidepassword = true;
   final df = DateFormat('yyyy-MM-dd');
   DateTime? _myDateTime;
-  // String time = '?';
   bool loading = false;
   bool status = false;
   final _formKey = GlobalKey<FormState>();
