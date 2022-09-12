@@ -126,7 +126,7 @@ class _EventCenterState extends State<EventCenter> {
                   ],
                 ),
               ),
-              
+
               Expanded(
                 child: provider.allEvents == null
                     ? Center(

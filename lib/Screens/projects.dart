@@ -5,14 +5,23 @@ import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/pending_project.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_completed_project_page.dart';
+import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../Models/inprogress_model.dart';
+import '../Models/pending_model.dart';
+import '../providers/completed_provider.dart';
+import '../providers/inprogress_provider.dart';
+import '../providers/pending_provider.dart';
 import '../widgets/reuseable_project_summary_containers.dart';
+import '../Models/completed_model.dart';
 
 class ProjectPage extends StatefulWidget {
   static String id = 'projects';
@@ -24,7 +33,17 @@ class ProjectPage extends StatefulWidget {
 
 class _ProjectPageState extends State<ProjectPage> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<PendingProvider>(context, listen: false).getPendingProjects();
+    Provider.of<InprogressProvider>(context, listen: false).getInprogressProjects();
+    Provider.of<CompletedProvider>(context, listen: false).getCompletedProjects();
+  }
+  @override
   Widget build(BuildContext context) {
+    CompletedProvider completedProvider = Provider.of<CompletedProvider>(context);
+    PendingProvider pendingProvider =  Provider.of<PendingProvider>(context);
+    InprogressProvider inprogressProvider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -115,6 +134,8 @@ class _ProjectPageState extends State<ProjectPage> {
             Expanded(
               child: ListView(
                 children: [
+
+
                   // Project Summary List Header
                   Padding(
                     padding: const EdgeInsets.only(
@@ -146,7 +167,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(left: 30, right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: '3',
+                            Number: inprogressProvider.allInprogressProjects!.length,
                             colour: Color(0xff0E2B63),
                             label: 'Projects in \nProgress',
                             childCard: Icon(
@@ -165,7 +186,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: '2',
+                            Number: completedProvider.allCompletedProjects!.length,
                             colour: Color(0xff50AF47),
                             label: 'Projects \nCompleted',
                             childCard: Icon(
@@ -184,7 +205,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 30),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: '2',
+                            Number: pendingProvider.allPendingProjects!.length,
                             colour: Color(0xffEF7D00),
                             label: 'Pending \nProjects',
                             childCard: Icon(
@@ -226,17 +247,32 @@ class _ProjectPageState extends State<ProjectPage> {
                           ),
                         ),
                         Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => ProgressDetails()));
-                            },
-                            child: ListView.builder(
-                                itemCount: 3,
-                                itemBuilder: ((context, index) {
-                                  return Container(
+                          child: inprogressProvider.allInprogressProjects == null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : inprogressProvider.allInprogressProjects!.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        'No Pending ProJect or Please check Your Internet Connection',
+                                        style: kBodyTextStyle,
+                                      ),
+                                    )
+                                  : ListView.builder(
+                              itemCount: 2,
+                              itemBuilder: ((context, index) {
+                                        InprogressModel inprogress =
+                                            inprogressProvider
+                                                .allInprogressProjects![index];
+                                return GestureDetector(
+                                  onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProgressDetails(inprogress)));
+                                          },
+                                  child: Container(
                                     margin: EdgeInsets.only(
                                         bottom: 15.0, left: 30, right: 30),
                                     decoration: BoxDecoration(
@@ -255,16 +291,14 @@ class _ProjectPageState extends State<ProjectPage> {
                                               right: 15.0),
                                           height: 74,
                                           width: 74,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                  'assets/projects.png'),
-                                            ),
-                                            color: kBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                          ),
+                                          child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl: inprogress.projectImage,
+                                                        fit: BoxFit.cover),
+                                                  ),
                                         ),
                                         Expanded(
                                           child: Container(
@@ -286,7 +320,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   color: kBackground,
                                                   height: 19,
                                                   child: Text(
-                                                    'Lorem Ipsum Project',
+                                                    inprogress.projectTitle,
                                                     style: kNewsSubHeader,
                                                   ),
                                                 ),
@@ -297,7 +331,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             kLandpageskiptextstyle,
                                                         children: [
                                                       TextSpan(
-                                                          text: '2022-09-01',
+                                                          text: inprogress.projectStartDate,
                                                           style: kNewsDateSTyle)
                                                     ])),
                                                 RichText(
@@ -307,7 +341,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             kLandpageskiptextstyle,
                                                         children: [
                                                       TextSpan(
-                                                          text: '2022-09-40',
+                                                          text: inprogress.projectEndDate,
                                                           style: kNewsDateSTyle)
                                                     ])),
                                               ],
@@ -316,15 +350,15 @@ class _ProjectPageState extends State<ProjectPage> {
                                         )
                                       ],
                                     ),
-                                  );
-                                })),
-                          ),
+                                  ),
+                                );
+                              })),
                         ),
                       ],
                     ),
                   ),
 
-                  // In completeed label
+                  // Completed label
                   SizedBox(
                     height: 319,
                     child: Column(
@@ -353,17 +387,30 @@ class _ProjectPageState extends State<ProjectPage> {
                           ),
                         ),
                         Expanded(
-                          child: ListView.builder(
+                          child: completedProvider.allCompletedProjects == null
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : completedProvider.allCompletedProjects!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'Please check Your Internet Connection',
+                                  style: kBodyTextStyle,
+                                ),
+                              )
+                            :ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: 3,
+                            itemCount: 2,
                             itemBuilder: ((context, index) {
+                                  CompletedModel completed = completedProvider
+                                      .allCompletedProjects![index];
                               return GestureDetector(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             CompletedProjectDetails()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CompletedProjectDetails(completed)));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
@@ -384,16 +431,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                             right: 15.0),
                                         height: 74,
                                         width: 74,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/projects.png'),
-                                          ),
-                                          color: kBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ),
+                                        child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: CachedNetworkImage(
+                                                  imageUrl: completed.projectImage,
+                                                  fit: BoxFit.cover),
+                                            ),
                                       ),
                                       Expanded(
                                         child: Container(
@@ -415,7 +459,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  'Lorem Ipsum Project',
+                                                  completed.projectTitle,
                                                   style: kPageHeader,
                                                 ),
                                               ),
@@ -427,7 +471,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       // ignore: prefer_const_literals_to_create_immutables
                                                       children: [
                                                     TextSpan(
-                                                      text: 'Dec 21 2021',
+                                                      text: completed.projectStartDate,
                                                       style: kTextboxhintstyle,
                                                     )
                                                   ])),
@@ -439,7 +483,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       // ignore: prefer_const_literals_to_create_immutables
                                                       children: [
                                                     TextSpan(
-                                                      text: 'Aug 13 2023',
+                                                      text: completed.projectEndDate,
                                                       style: kTextboxhintstyle,
                                                     )
                                                   ])),
@@ -491,80 +535,101 @@ class _ProjectPageState extends State<ProjectPage> {
                           ),
                         ),
                         Expanded(
-                          child: ListView.builder(
-                              itemCount: 3,
+                          child:  pendingProvider.allPendingProjects == null
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : pendingProvider.allPendingProjects!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'Please check Your Internet Connection',
+                                  style: kBodyTextStyle,
+                                ),
+                              )
+                            :ListView.builder(
+                              itemCount: 2,
                               itemBuilder: ((context, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(
-                                      bottom: 15.0, left: 30, right: 30),
-                                  decoration: BoxDecoration(
-                                    color: kBackground,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    boxShadow: [kBoxshadow],
-                                  ),
-                                  height: 104,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 15,
-                                            left: 15,
-                                            bottom: 15.0,
-                                            right: 15.0),
-                                        height: 74,
-                                        width: 74,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/projects.png'),
-                                          ),
-                                          color: kBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 93,
+                                        PendingModel pending =
+                                            pendingProvider
+                                                .allPendingProjects![index];
+                                return GestureDetector(
+                                  onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PendingDetails(pending)));
+                                          },
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                        bottom: 15.0, left: 30, right: 30),
+                                    decoration: BoxDecoration(
+                                      color: kBackground,
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      boxShadow: [kBoxshadow],
+                                    ),
+                                    height: 104,
+                                    child: Row(
+                                      children: [
+                                        Container(
                                           margin: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 10,
-                                              left: 10.0,
-                                              right: 6.0),
-                                          color: kBackground,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  'Lorem Ipsum Project',
-                                                  style: kNewsSubHeader,
-                                                ),
-                                              ),
-                                              RichText(
-                                                  text: TextSpan(
-                                                      text: 'To Begin: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                    TextSpan(
-                                                      text: 'Mar 17 2025',
-                                                      style: kTextboxhintstyle,
-                                                    )
-                                                  ])),
-                                            ],
-                                          ),
+                                              top: 15,
+                                              left: 15,
+                                              bottom: 15.0,
+                                              right: 15.0),
+                                          height: 74,
+                                          width: 74,
+                                          child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl: pending.projectImage,
+                                                        fit: BoxFit.cover),
+                                                  ),
                                         ),
-                                      )
-                                    ],
+                                        Expanded(
+                                          child: Container(
+                                            height: 93,
+                                            margin: EdgeInsets.only(
+                                                top: 5,
+                                                bottom: 10,
+                                                left: 10.0,
+                                                right: 6.0),
+                                            color: kBackground,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                Container(
+                                                  color: kBackground,
+                                                  height: 19,
+                                                  child: Text(
+                                                    pending.projectTitle,
+                                                    style: kNewsSubHeader,
+                                                  ),
+                                                ),
+                                                RichText(
+                                                    text: TextSpan(
+                                                        text: 'To Begin: ',
+                                                        style:
+                                                            kLandpageskiptextstyle,
+                                                        // ignore: prefer_const_literals_to_create_immutables
+                                                        children: [
+                                                      TextSpan(
+                                                        text: pending.projectStartDate,
+                                                        style: kTextboxhintstyle,
+                                                      )
+                                                    ])),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 );
                               })),

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:batnf/constants/color_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,7 @@ class ProjectSummaryContainer extends StatelessWidget {
       required this.margin});
 
   String label;
-  String Number;
+  int Number;
   final Color colour;
   final Widget childCard;
   final Color innercontainer;
@@ -49,7 +51,7 @@ class ProjectSummaryContainer extends StatelessWidget {
           Container(
               margin: EdgeInsets.only(left: 15),
               child: Text(
-                Number,
+                Number.toString(),
                 style: kProjectsummarytextstyle,
               )),
           Container(

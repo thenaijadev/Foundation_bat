@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
   bool hidepassword = true;
   final df = DateFormat('yyyy-MM-dd');
   DateTime? _myDateTime;
-  String time = '?';
+  // String time = '?';
   bool loading = false;
   bool status = false;
   final _formKey = GlobalKey<FormState>();
@@ -62,13 +62,13 @@ class _SignUpState extends State<SignUp> {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/create'),
             body: jsonEncode({
-              "first_name": firstname,
-              "last_name ": lastname,
-              "email": email,
-              "password": password,
-              "password_confirm": passwordconfirm,
-              "location": location,
-              "dob": date,
+              "first_name":firstname,
+              "last_name":lastname,
+              "email":email,
+              "password":password,
+              "password_confirm":passwordconfirm,
+              "location":location,
+              "dob":date,
             }),
             headers: {"Content-Type": "application/json"});
     if (mounted)
@@ -76,6 +76,13 @@ class _SignUpState extends State<SignUp> {
         loading = false;
       });
     if (response.statusCode == 200) {
+      // print(firstname);
+      // print(lastname);
+      // print(email);
+      // print(password);
+      // print(passwordconfirm);
+      // print(location);
+      // print(date);
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => SignIn()));
     } else {
@@ -314,42 +321,6 @@ class _SignUpState extends State<SignUp> {
                                 _date.text = df.format(_myDateTime!);
                               });
                             }
-
-                            // setState(() {
-                            //   _date =
-                            //       DateFormat('yyyy-mm-dd').format(_myDateTime);
-                            // });
-                            // DateTime? pickeddate = await showDatePicker(
-                            // context: context,
-
-                            // initialDate: DateTime.now(),
-                            // firstDate: DateTime.(1789),
-                            // lastDate: DateTime.now(),
-                            // initialDatePickerMode: DatePickerMode.year,
-                            // locale: Locale('en', 'us'),
-                            // confirmText: 'Done',
-                            // initialEntryMode: DatePickerEntryMode.calendarOnly
-                            // );
-
-                            // var datePicked =
-                            //     await DatePicker.showSimpleDatePicker(
-                            //   context,
-                            //   initialDate: DateTime.now(),
-                            //   firstDate: DateTime(2005),
-                            //   lastDate: DateTime.now(),
-                            //   dateFormat: "YYYY-MM-DD",
-                            //   looping: true
-                            // );
-
-                            //   setState(() {
-                            //     datePicked;
-                            //   });
-
-                            // if (pickeddate != null) {
-                            //   setState(() {
-                            //     _date = DateTimeFormatter().toString() as TextEditingController;
-                            //   });
-                            // }
                           },
                           validator: (val) {
                             return val!.isEmpty
@@ -378,38 +349,6 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    // Remember me
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          FlutterSwitch(
-                              height: 20,
-                              width: 40,
-                              toggleSize: 12,
-                              activeColor: kButtonColor,
-                              value: status,
-                              onToggle: (val) {
-                                setState(() {
-                                  status = val;
-                                });
-                              }),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Remember me',
-                            style: TextStyle(
-                                color: kButtonColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     //Sign Up Button
                     Padding(
                       padding: const EdgeInsets.only(
@@ -426,14 +365,13 @@ class _SignUpState extends State<SignUp> {
                               loading = true;
                             });
                             signup(
-                                firstname: _firstnameTextController.text,
-                                lastname: _lastnameTextController.text,
-                                email: _emailTextController.text,
-                                password: _passwordTextController.text,
-                                passwordconfirm:
-                                    _passwordconfirmTextController.text,
-                                location: _locationTextController.text,
-                                date: _date.text);
+                                firstname:_firstnameTextController.text,
+                                lastname:_lastnameTextController.text,
+                                email:_emailTextController.text,
+                                password:_passwordTextController.text,
+                                passwordconfirm:_passwordconfirmTextController.text,
+                                location:_locationTextController.text,
+                                date:_date.text);
                           }
                         },
                         child: loading
