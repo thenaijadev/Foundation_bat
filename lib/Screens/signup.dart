@@ -2,14 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_holo_date_picker/date_picker.dart';
-import 'package:flutter_holo_date_picker/date_picker_constants.dart';
-import 'package:flutter_holo_date_picker/date_time_formatter.dart';
-import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
-// import 'package:flutter_holo_date_picker/date_time_formatter.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
