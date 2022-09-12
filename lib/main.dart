@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/events_center.dart';
@@ -36,6 +38,7 @@ class MyHttpoverrides extends HttpOverrides {
 }
 
 void main() async {
+  await Hive.initFlutter();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();

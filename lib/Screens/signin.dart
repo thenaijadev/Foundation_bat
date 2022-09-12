@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:batnf/Screens/dash_board.dart';
@@ -25,10 +27,15 @@ class _SignInState extends State<SignIn> {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
             body: jsonEncode({
-              "identity":email,
-              "password":password,
+              "identity": email,
+              "password": password,
             }),
             headers: {"Content-Type": "application/json"});
+
+    if (status) {
+      box1.put('emailController', emailController.text);
+      box1.put('passwordController', passwordController.text);
+    }
     if (mounted)
       // ignore: curly_braces_in_flow_control_structures
       setState(() {
@@ -67,9 +74,34 @@ class _SignInState extends State<SignIn> {
     });
   }
 
+  late Box box1;
+
+  @override
+  void initState() {
+    super.initState();
+    createBox();
+  }
+
+  void createBox() async {
+    box1 = await Hive.openBox('logindata');
+    getdata();
+  }
+
+  void getdata() async {
+    if (box1.get('emailController') != null) {
+      emailController.text = box1.get('emailController');
+      status = true;
+      setState(() {});
+    }
+    if (box1.get('passwordController') != null) {
+      passwordController.text = box1.get('passwordController');
+      status = true;
+      setState(() {});
+    }
+  }
+
   bool loading = false;
   bool status = false;
-  int val = 0;
 
   bool hidepassword = true;
 
@@ -92,6 +124,7 @@ class _SignInState extends State<SignIn> {
                 key: formKey,
                 child: ListView(
                   children: [
+
                     // Logo
                     Padding(
                       padding: const EdgeInsets.only(top: 75.0, bottom: 15.0),
