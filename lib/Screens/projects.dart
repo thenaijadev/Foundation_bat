@@ -1,5 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/pending_project.dart';
@@ -10,18 +15,14 @@ import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
+import '../Models/completed_model.dart';
 import '../Models/inprogress_model.dart';
 import '../Models/pending_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/pending_provider.dart';
 import '../widgets/reuseable_project_summary_containers.dart';
-import '../Models/completed_model.dart';
 
 class ProjectPage extends StatefulWidget {
   static String id = 'projects';

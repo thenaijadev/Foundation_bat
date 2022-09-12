@@ -2,6 +2,10 @@
 
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
+
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
@@ -19,9 +23,7 @@ import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:batnf/providers/pending_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:provider/provider.dart';
+
 import 'Screens/pending_project.dart';
 
 class MyHttpoverrides extends HttpOverrides {

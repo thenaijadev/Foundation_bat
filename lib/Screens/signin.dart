@@ -1,16 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, use_build_context_synchronously
 
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
-import 'package:flutter/material.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:http/http.dart' as http;
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
