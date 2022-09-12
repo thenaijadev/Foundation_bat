@@ -73,13 +73,6 @@ class _SignUpState extends State<SignUp> {
         'Too Young to Register',
         textAlign: TextAlign.center,
       )));
-      // print(firstname);
-      // print(lastname);
-      // print(email);
-      // print(password);
-      // print(passwordconfirm);
-      // print(location);
-      // print(date);
     } else if (response.statusCode == 201) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Success, Unable to send to mail',
