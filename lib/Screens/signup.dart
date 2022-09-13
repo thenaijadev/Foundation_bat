@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
@@ -54,59 +55,94 @@ class _SignUpState extends State<SignUp> {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/create'),
             body: jsonEncode({
-              "first_name":firstname,
-              "last_name":lastname,
-              "email":email,
-              "password":password,
-              "password_confirm":passwordconfirm,
-              "location":location,
-              "dob":date,
+              "first_name": firstname,
+              "last_name": lastname,
+              "email": email,
+              "password": password,
+              "password_confirm": passwordconfirm,
+              "location": location,
+              "dob": date,
             }),
             headers: {"Content-Type": "application/json"});
     if (mounted)
       setState(() {
         loading = false;
       });
-    if (response.statusCode == 405) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'Too Young to Register',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Success, Unable to send to mail',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 401) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Password Mismatch',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 402) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Registration Failed, Try again',
-        textAlign: TextAlign.center,
-      )));
-    } else if(response.statusCode == 404) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('No Data Submitted',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 200) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignIn()));
-    } else if (response.statusCode == 406) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Invalid Email',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 407) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Email Already Exist',
-        textAlign: TextAlign.center,
-      )));
+
+
+      if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      if (data['status'] == 200) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SignIn()));
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: data['message'],
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
     }
+
+
+
+    // if (response.statusCode == 405) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Too Young to Register',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 201) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Success, Unable to send to mail',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 401) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Password Mismatch',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 402) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Registration Failed, Try again',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 404) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'No Data Submitted',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 200) {
+    //   var data = jsonDecode(response.body);
+    //   print(data);
+    //   Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => SignIn()));
+    // } else if (response.statusCode == 406) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Invalid Email',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 407) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Email Already Exist',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // }
   }
 
   @override
@@ -383,13 +419,14 @@ class _SignUpState extends State<SignUp> {
                               loading = true;
                             });
                             signup(
-                                firstname:_firstnameTextController.text,
-                                lastname:_lastnameTextController.text,
-                                email:_emailTextController.text,
-                                password:_passwordTextController.text,
-                                passwordconfirm:_passwordconfirmTextController.text,
-                                location:_locationTextController.text,
-                                date:_date.text);
+                                firstname: _firstnameTextController.text,
+                                lastname: _lastnameTextController.text,
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text,
+                                passwordconfirm:
+                                    _passwordconfirmTextController.text,
+                                location: _locationTextController.text,
+                                date: _date.text);
                           }
                         },
                         child: loading

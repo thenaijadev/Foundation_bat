@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
@@ -37,37 +38,68 @@ class _SignInState extends State<SignIn> {
       box1.put('emailController', emailController.text);
       box1.put('passwordController', passwordController.text);
     }
-    if (mounted)
+
+    if (mounted) {
       setState(() {
         loading = false;
       });
-
-    if (response.statusCode == 406) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'Login Failed',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 404) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'No Data Submitted',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 405) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'Invalid Email, Please SignUp',
-        textAlign: TextAlign.center,
-      )));
-    } else if (response.statusCode == 200) {
-      // var = jsonDecode(response.body);
-      // print(v),
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Login Successful')));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      if (data['status'] == 200) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Login Successful",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: data['message'],
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    }
+
+
+    //   try {
+    //     if (response.statusCode == 406) {
+    //       print('fail');
+    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //           content: Text(
+    //         'Login Failed',
+    //         textAlign: TextAlign.center,
+    //       )));
+    //     }else if (response.statusCode == 405) {
+    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //           content: Text(
+    //         'Invalid Email, Please SignUp',
+    //         textAlign: TextAlign.center,
+    //       )));
+    //     } else
+    //if (response.statusCode == 200) {
+    //       var data = jsonDecode(response.body);
+    //       print(data);
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: "Login Successful",
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //       Navigator.pushReplacement(
+    //           context, MaterialPageRoute(builder: (context) => HomePage()));
+    //     }
+    //   } catch (e) {
+    //     print(e);
+    //   }
   }
 
   void _togglePasswordView() {
@@ -126,7 +158,6 @@ class _SignInState extends State<SignIn> {
                 key: formKey,
                 child: ListView(
                   children: [
-
                     // Logo
                     Padding(
                       padding: const EdgeInsets.only(top: 75.0, bottom: 15.0),
