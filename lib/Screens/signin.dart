@@ -23,7 +23,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  
+
   Future<void> login({required String email, required String password}) async {
     var response =
         await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
@@ -61,6 +61,8 @@ class _SignInState extends State<SignIn> {
         textAlign: TextAlign.center,
       )));
     } else if (response.statusCode == 200) {
+      // var = jsonDecode(response.body);
+      // print(v),
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Login Successful')));
       Navigator.pushReplacement(
