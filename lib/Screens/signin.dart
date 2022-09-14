@@ -24,6 +24,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
+  final userId = ['useremail', 'userpassword'];
   late String userpassword;
   late String useremail;
 
@@ -297,12 +299,16 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.only(
                           top: 36.0, left: 30, right: 30, bottom: 35.0),
                       child: MaterialButton(
+                        splashColor: kBackground,
+                        hoverColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),
                         ),
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
+                          // print(useremail);
+                          // print(userpassword);
                           if (formKey.currentState!.validate() && !loading) {
                             setState(() {
                               loading = true;
@@ -338,7 +344,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    // Sign Up Redurection
+                    // Sign Up Redirection
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,

@@ -22,7 +22,6 @@ import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/news_provider.dart';
-import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);

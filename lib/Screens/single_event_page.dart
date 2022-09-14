@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:batnf/services/registration.dart';
 
 import '../providers/event_provider.dart';
 
@@ -20,6 +21,12 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,7 +48,6 @@ class _EventDetailsState extends State<EventDetails> {
           },
           child: ListView(
             children: [
-
               //Event Image
               SizedBox(
                 height: 150,
@@ -60,13 +66,12 @@ class _EventDetailsState extends State<EventDetails> {
                   style: kPageHeader,
                 ),
               ),
-               
-               //Event Timeline and Dates
+
+              //Event Timeline and Dates
               Container(
                 margin: EdgeInsets.only(left: 30, bottom: 21),
                 child: Row(
                   children: [
-
                     Container(
                       margin: EdgeInsets.only(right: 15),
                       padding: EdgeInsets.all(8),
