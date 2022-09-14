@@ -53,8 +53,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   fluttertoast: ^8.0.9
-  # flutter_session:
-  shared_preferences: ^2.0.15
+  # flutter_session: ^0.1.1
+  # shared_preferences: ^0.5.8
 
 dev_dependencies:
   flutter_test:

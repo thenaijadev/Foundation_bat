@@ -14,6 +14,7 @@ class ReuseableTextField extends StatelessWidget {
     required this.textcontroller,
     required this.keyboard,
     required this.label,
+    required this.onChange,
     required String? Function(dynamic val) validator,
   });
 
@@ -21,10 +22,12 @@ class ReuseableTextField extends StatelessWidget {
   final TextEditingController textcontroller;
   Widget cardChild;
   TextInputType keyboard;
+  Function onChange ;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: (value) {},
       validator: (val) {
         return val!.isEmpty ? "This Field is Required" : null;
       },

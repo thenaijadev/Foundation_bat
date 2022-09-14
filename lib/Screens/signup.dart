@@ -44,6 +44,12 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _locationTextController = TextEditingController();
   TextEditingController _date = TextEditingController();
 
+  late String userfirstname;
+  late String userlastname;
+  late String useremail;
+  late String userlocation;
+  late String userdob;
+
   Future<void> signup(
       {required String firstname,
       required String lastname,
@@ -69,8 +75,7 @@ class _SignUpState extends State<SignUp> {
         loading = false;
       });
 
-
-      if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       if (data['status'] == 200) {
         Fluttertoast.showToast(
@@ -92,8 +97,6 @@ class _SignUpState extends State<SignUp> {
             backgroundColor: kButtonColor);
       }
     }
-
-
 
     // if (response.statusCode == 405) {
     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -195,6 +198,9 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
+                          onChange: (value) {
+                            userfirstname = value;
+                          },
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
@@ -216,6 +222,9 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
+                          onChange: (value) {
+                            userlastname = value;
+                          },
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
@@ -237,6 +246,9 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
+                          onChange: (value) {
+                            useremail = value;
+                          },
                           keyboard: TextInputType.emailAddress,
                           cardChild: Icon(FontAwesomeIcons.envelope,
                               size: 15, color: kTextboxhintColor),
@@ -340,6 +352,9 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
+                          onChange: (value) {
+                            userlocation = value;
+                          },
                           keyboard: TextInputType.text,
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
                               size: 15, color: kTextboxhintColor),
@@ -361,6 +376,9 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
+                          onChanged: (value) {
+                            userdob = value;
+                          },
                           readOnly: true,
                           onTap: () async {
                             _myDateTime = await showDatePicker(

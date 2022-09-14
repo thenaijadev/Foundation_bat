@@ -24,6 +24,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  late String userpassword;
+  late String useremail;
 
   Future<void> login({required String email, required String password}) async {
     var response =
@@ -67,7 +69,6 @@ class _SignInState extends State<SignIn> {
             backgroundColor: kButtonColor);
       }
     }
-
 
     //   try {
     //     if (response.statusCode == 406) {
@@ -194,6 +195,9 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: ReuseableTextField(
+                          onChange: (value) {
+                            useremail = value;
+                          },
                           keyboard: TextInputType.emailAddress,
                           validator: (val) {
                             return val!.isEmpty
@@ -215,6 +219,9 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: TextFormField(
+                          onChanged: (value) {
+                            userpassword = value;
+                          },
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },

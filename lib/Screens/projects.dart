@@ -168,7 +168,9 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(left: 30, right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: inprogressProvider.allInprogressProjects!.length,
+                            Number: inprogressProvider
+                                .allInprogressProjects ! == null ? inprogressProvider.allInprogressProjects!.length: inprogressProvider
+                                    .allInprogressProjects!.length,
                             colour: Color(0xff0E2B63),
                             label: 'Projects in \nProgress',
                             childCard: Icon(
@@ -187,7 +189,8 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: completedProvider.allCompletedProjects!.length,
+                            Number:  completedProvider
+                                    .allCompletedProjects!.length,
                             colour: Color(0xff50AF47),
                             label: 'Projects \nCompleted',
                             childCard: Icon(
