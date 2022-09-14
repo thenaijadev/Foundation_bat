@@ -1,12 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, use_build_context_synchronously, avoid_print
 
 import 'dart:convert';
 
+import 'package:batnf/Screens/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -24,10 +24,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
-  final userId = ['useremail', 'userpassword'];
-  late String userpassword;
-  late String useremail;
+  // late String userpassword;
+  // late String useremail;
 
   Future<void> login({required String email, required String password}) async {
     var response =
@@ -37,6 +35,8 @@ class _SignInState extends State<SignIn> {
               "password": password,
             }),
             headers: {"Content-Type": "application/json"});
+
+    print(response.body);
 
     if (status) {
       box1.put('emailController', emailController.text);
@@ -49,27 +49,32 @@ class _SignInState extends State<SignIn> {
       });
     }
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      if (data['status'] == 200) {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: "Login Successful",
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      } else {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: data['message'],
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        if (data['status'] == 200) {
+          userId = [email, password];
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Login Successful",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
       }
+    } catch (e) {
+      print(e);
     }
 
     //   try {
@@ -197,9 +202,6 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: ReuseableTextField(
-                          onChange: (value) {
-                            useremail = value;
-                          },
                           keyboard: TextInputType.emailAddress,
                           validator: (val) {
                             return val!.isEmpty
@@ -221,9 +223,6 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: TextFormField(
-                          onChanged: (value) {
-                            userpassword = value;
-                          },
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -307,8 +306,6 @@ class _SignInState extends State<SignIn> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          // print(useremail);
-                          // print(userpassword);
                           if (formKey.currentState!.validate() && !loading) {
                             setState(() {
                               loading = true;
@@ -317,6 +314,8 @@ class _SignInState extends State<SignIn> {
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
+                          // print(useremail);
+                          // print(userpassword);
                         },
                         child: loading
                             ? CircularProgressIndicator(

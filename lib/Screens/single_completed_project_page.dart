@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:batnf/Models/completed_model.dart';
 import 'package:batnf/constants/text_style_constant.dart';
@@ -109,7 +109,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                 ),
               ),
 
-              //Project Loction and Venue
+              //Project Location and Venue
               Container(
                 margin: EdgeInsets.only(bottom: 30),
                 child: Row(
@@ -148,7 +148,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                 ),
               ),
 
-              //Project Decription Header
+              //Project Description Header
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(

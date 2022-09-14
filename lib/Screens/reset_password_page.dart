@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_final_fields
 
 import 'package:batnf/Screens/reset_Completed_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -159,7 +158,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   ),
             
-                  //Comfirmation Button
+                  //Confirmation Button
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 303.0, left: 30, right: 30, bottom: 75.0),

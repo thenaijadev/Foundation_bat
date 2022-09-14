@@ -1,12 +1,8 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
-
-import 'dart:ui';
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
-import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReuseableTextField extends StatelessWidget {
   ReuseableTextField({
@@ -14,7 +10,7 @@ class ReuseableTextField extends StatelessWidget {
     required this.textcontroller,
     required this.keyboard,
     required this.label,
-    required this.onChange,
+    // required this.onChange,
     required String? Function(dynamic val) validator,
   });
 
@@ -22,12 +18,12 @@ class ReuseableTextField extends StatelessWidget {
   final TextEditingController textcontroller;
   Widget cardChild;
   TextInputType keyboard;
-  Function onChange ;
+  // Function onChange ;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {},
+      // onChanged: (value) {},
       validator: (val) {
         return val!.isEmpty ? "This Field is Required" : null;
       },

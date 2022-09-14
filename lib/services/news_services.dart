@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:batnf/Models/events_model.dart';
 import 'package:batnf/Models/news_model.dart';
 import 'package:http/http.dart' as http;
 

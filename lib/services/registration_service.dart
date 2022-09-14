@@ -1,11 +1,10 @@
 import 'dart:convert';
+import 'package:batnf/Screens/user_info.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 class Registration {
-  late String userId;
-  late String eventId;
   
   Future<void> register(
       {required String email, required String password}) async {

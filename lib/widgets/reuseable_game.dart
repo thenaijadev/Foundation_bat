@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class ReuseableGameContainer extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(left: 11.0, right: 12.0, bottom: 11.0),
+              margin: const EdgeInsets.only(left: 11.0, right: 12.0, bottom: 11.0),
               height: 125.0,
               width: 152.0,
               decoration: BoxDecoration(

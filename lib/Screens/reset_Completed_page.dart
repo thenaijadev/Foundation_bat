@@ -1,4 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';

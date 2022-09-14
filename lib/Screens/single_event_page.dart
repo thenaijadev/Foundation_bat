@@ -1,13 +1,17 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors, avoid_print
+
+import 'dart:convert';
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Screens/user_info.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:batnf/services/registration.dart';
+import 'package:http/http.dart' as http;
 
 import '../providers/event_provider.dart';
 
@@ -21,10 +25,37 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  bool loading = false;
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> register({required List userId, required String eventId}) async {
+    var response = await http
+        .post(Uri.parse('https://geeteefarms.com/events/api/attendevent'),
+            body: jsonEncode({
+              "userId": userId,
+              "eventId": eventId,
+            }),
+            headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      if (data['status'] == 200) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: data['message'],
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    }
   }
 
   @override
@@ -191,12 +222,22 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   height: 45.0,
                   color: kButtonColor,
-                  onPressed: () {},
-                  child: Text(
-                    'Register',
-                    textAlign: TextAlign.center,
-                    style: kButtontextstyle,
-                  ),
+                  onPressed: () {
+                    print(eventId);
+                    print(userId);
+                    setState(() {
+                      loading = true;
+                    });
+                    register(userId: userId, eventId: eventId);
+                  },
+                  child: loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white))
+                      : Text(
+                          'Register',
+                          textAlign: TextAlign.center,
+                          style: kButtontextstyle,
+                        ),
                 ),
               ),
             ],
