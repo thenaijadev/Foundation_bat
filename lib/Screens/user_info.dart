@@ -1,2 +1,4 @@
-List userId = [];
-String eventId = '';
+ 
+import 'package:batnf/Models/events_model.dart';
+ 
+ var userId;

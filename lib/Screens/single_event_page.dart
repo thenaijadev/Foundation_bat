@@ -29,33 +29,36 @@ class _EventDetailsState extends State<EventDetails> {
 
   Future<void> register({required List userId, required String eventId}) async {
     var response = await http
-        .post(Uri.parse('https://geeteefarms.com/events/api/attendevent'),
+        .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
             body: jsonEncode({
               "userId": userId,
-              "eventId": eventId,
+              "eventId": widget.singleEvent.eventId,
             }),
             headers: {"Content-Type": "application/json"});
+            // print(response.body);
+            var data = jsonDecode(response.body);
+            print(data);
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      if (data['status'] == 200) {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: "Registration Successful",
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-      } else {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: data['message'],
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-      }
-    }
+    // if (response.statusCode == 201) {
+    //   var data = jsonDecode(response.body);
+    //   if (data['status'] == 200) {
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: "Registration Successful",
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //   } else {
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: data['message'],
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //   }
+    // }
   }
 
   @override
@@ -79,6 +82,7 @@ class _EventDetailsState extends State<EventDetails> {
           },
           child: ListView(
             children: [
+
               //Event Image
               SizedBox(
                 height: 150,
@@ -223,12 +227,12 @@ class _EventDetailsState extends State<EventDetails> {
                   height: 45.0,
                   color: kButtonColor,
                   onPressed: () {
-                    print(eventId);
+                    print(widget.singleEvent.eventId);
                     print(userId);
                     setState(() {
                       loading = true;
                     });
-                    register(userId: userId, eventId: eventId);
+                    register(userId: userId, eventId: widget.singleEvent.eventId);
                   },
                   child: loading
                       ? CircularProgressIndicator(

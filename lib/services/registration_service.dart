@@ -9,7 +9,7 @@ class Registration {
   Future<void> register(
       {required String email, required String password}) async {
     var response = await http
-        .post(Uri.parse('https://geeteefarms.com/events/api/attendevent'),
+        .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
             body: jsonEncode({
               "userId": userId,
               "eventId": eventId,

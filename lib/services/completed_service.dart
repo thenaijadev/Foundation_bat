@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/completed_model.dart';
 
 class AppCompletedProjects {
-  final String baseUrl = 'https://geeteefarms.com/events/api/';
+  final String baseUrl = 'https://dalexintegrated.com/events/api/';
 
   Future<List<CompletedModel>> getCompletedProjects() async {
     String url = 'getcompletedprojects';

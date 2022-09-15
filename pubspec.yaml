@@ -43,14 +43,14 @@ dependencies:
   http_status_code: ^0.0.2
   page_indicator: ^0.4.1
   provider: ^6.0.3
-  cached_network_image:
+  cached_network_image: ^3.2.1
   flutter_switch: ^0.3.2
   pin_code_fields: ^7.4.0
   flutter_holo_date_picker: ^1.0.6
   intl: ^0.17.0
-  hive_flutter:
+  hive_flutter: ^1.1.0
   fluttertoast: ^8.0.9
-  flutter_session:
+  # flutter_session:
   shared_preferences:
 
 dev_dependencies:

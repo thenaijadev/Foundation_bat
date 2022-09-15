@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:batnf/Screens/user_info.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +17,8 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 
+import 'package:batnf/Screens/user_info.dart';
+
 class SignIn extends StatefulWidget {
   static String id = 'signin';
   @override
@@ -24,12 +26,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  // late String userpassword;
-  // late String useremail;
 
   Future<void> login({required String email, required String password}) async {
     var response =
-        await http.post(Uri.parse('http://geeteefarms.com/events/api/login'),
+        await http.post(Uri.parse('http://dalexintegrated.com/events/api/login'),
             body: jsonEncode({
               "identity": email,
               "password": password,
@@ -53,7 +53,7 @@ class _SignInState extends State<SignIn> {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         if (data['status'] == 200) {
-          userId = [email, password];
+          userId = email;
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,

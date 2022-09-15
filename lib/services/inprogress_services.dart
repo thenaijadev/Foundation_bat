@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/inprogress_model.dart';
 
 class AppInprogressProjects {
-  final String baseUrl = 'https://geeteefarms.com/events/api/';
+  final String baseUrl = 'https://dalexintegrated.com/events/api/';
 
   Future<List<InprogressModel>> getInprogressProjects() async {
     String url = 'getinprogressprojects';

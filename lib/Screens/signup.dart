@@ -12,6 +12,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 import 'package:intl/intl.dart';
+import 'package:batnf/Screens/user_info.dart';
 
 class SignUp extends StatefulWidget {
   static String id = 'signup';
@@ -59,7 +60,7 @@ class _SignUpState extends State<SignUp> {
       required String location,
       required String date}) async {
     var response =
-        await http.post(Uri.parse('http://geeteefarms.com/events/api/create'),
+        await http.post(Uri.parse('http://dalexintegrated.com/events/api/create'),
             body: jsonEncode({
               "first_name": firstname,
               "last_name": lastname,
