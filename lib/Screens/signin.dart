@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
 
     Map<String, String> requestHeader = {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ${login.token}'
+      'Authorization': 'Bearer ${login.token}'
     };
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
@@ -199,6 +199,7 @@ class _SignInState extends State<SignIn> {
                 key: formKey,
                 child: ListView(
                   children: [
+
                     // Logo
                     Padding(
                       padding: const EdgeInsets.only(top: 75.0, bottom: 15.0),
