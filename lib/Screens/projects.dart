@@ -160,7 +160,7 @@ class _ProjectPageState extends State<ProjectPage> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         
-                        //Projects In Progress
+                        // Projects In Progress
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, InprogressPage.id);
@@ -168,9 +168,23 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(left: 30, right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: inprogressProvider
-                                .allInprogressProjects ! == null ? inprogressProvider.allInprogressProjects!.length: inprogressProvider
-                                    .allInprogressProjects!.length,
+                            number: inprogressProvider.allInprogressProjects!.length,
+
+                              // inprogressProvider.allInprogressProjects == null
+                              // ? Center(
+                              //     child: Text('0'),
+                              //   )
+                              // : inprogressProvider.allInprogressProjects!.isEmpty
+                              //     ? Center(
+                              //         child: Text(
+                              //           'loading....',
+                              //           style: kBodyTextStyle,
+                              //         ),
+                              //       )
+                              //     :
+
+                            // inprogressProvider.length,
+                            // inprogressProvider.allInprogressProjects.length,
                             colour: Color(0xff0E2B63),
                             label: 'Projects in \nProgress',
                             childCard: Icon(
@@ -182,42 +196,41 @@ class _ProjectPageState extends State<ProjectPage> {
                         ),
 
                         //Completed Project
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, CompletedPage.id);
-                          },
-                          child: ProjectSummaryContainer(
-                            margin: EdgeInsets.only(right: 41.5),
-                            innercontainer: kBackground.withOpacity(0.1),
-                            Number:  completedProvider
-                                    .allCompletedProjects!.length,
-                            colour: Color(0xff50AF47),
-                            label: 'Projects \nCompleted',
-                            childCard: Icon(
-                              FontAwesomeIcons.checkSquare,
-                              size: 17.5,
-                              color: kBackground,
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.pushNamed(context, CompletedPage.id);
+                        //   },
+                        //   child: ProjectSummaryContainer(
+                        //     margin: EdgeInsets.only(right: 41.5),
+                        //     innercontainer: kBackground.withOpacity(0.1),
+                        //     number:  completedProvider.allCompletedProjects!.length,
+                        //     colour: Color(0xff50AF47),
+                        //     label: 'Projects \nCompleted',
+                        //     childCard: Icon(
+                        //       FontAwesomeIcons.checkSquare,
+                        //       size: 17.5,
+                        //       color: kBackground,
+                        //     ),
+                        //   ),
+                        // ),
 
-                        //Pending project
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, PendingPage.id);
-                          },
-                          child: ProjectSummaryContainer(
-                            margin: EdgeInsets.only(right: 30),
-                            innercontainer: kBackground.withOpacity(0.1),
-                            Number: pendingProvider.allPendingProjects!.length,
-                            colour: Color(0xffEF7D00),
-                            label: 'Pending \nProjects',
-                            childCard: Icon(
-                              FontAwesomeIcons.commentDots,
-                              color: kBackground,
-                            ),
-                          ),
-                        ),
+                        // Pending project
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.pushNamed(context, PendingPage.id);
+                        //   },
+                        //   child: ProjectSummaryContainer(
+                        //     margin: EdgeInsets.only(right: 30),
+                        //     innercontainer: kBackground.withOpacity(0.1),
+                        //     number: pendingProvider.allPendingProjects!.length,
+                        //     colour: Color(0xffEF7D00),
+                        //     label: 'Pending \nProjects',
+                        //     childCard: Icon(
+                        //       FontAwesomeIcons.commentDots,
+                        //       color: kBackground,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

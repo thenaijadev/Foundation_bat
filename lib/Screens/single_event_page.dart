@@ -27,7 +27,7 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   bool loading = false;
 
-  Future<void> register({required List userId, required String eventId}) async {
+  Future<void> register({required int userId, required String eventId}) async {
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
             body: jsonEncode({
@@ -35,7 +35,6 @@ class _EventDetailsState extends State<EventDetails> {
               "eventId": widget.singleEvent.eventId,
             }),
             headers: {"Content-Type": "application/json"});
-            // print(response.body);
             var data = jsonDecode(response.body);
             print(data);
 
@@ -58,7 +57,15 @@ class _EventDetailsState extends State<EventDetails> {
     //         textColor: kBackground,
     //         backgroundColor: kButtonColor);
     //   }
-    // }
+    // }else{
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: 'Service Timeout',
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //     }
   }
 
   @override

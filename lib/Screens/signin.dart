@@ -2,13 +2,17 @@
 
 import 'dart:convert';
 
-
+import 'package:batnf/Models/login_request_model.dart';
+import 'package:batnf/Models/login_response_model.dart';
+import 'package:batnf/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
@@ -16,6 +20,8 @@ import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
+import 'package:batnf/providers/event_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'package:batnf/Screens/user_info.dart';
 
@@ -26,34 +32,45 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  
+  @override
+  void initState() {
+    super.initState();
+    createBox();
+    // Provider.of<EventProvider>(context, listen: false).login();
+  }
 
   Future<void> login({required String email, required String password}) async {
-    var response =
-        await http.post(Uri.parse('http://dalexintegrated.com/events/api/login'),
+
+    Map<String, String> requestHeader = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ${login.token}'
+    };
+    var response = await http
+        .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
+        // http://geeteefarms.com/events/api/login
             body: jsonEncode({
               "identity": email,
               "password": password,
             }),
-            headers: {"Content-Type": "application/json"});
+            headers: requestHeader,
+            // {"Content-Type": "application/json"});
+            // {'Authorization': "Bearer $token"};
+            // final jwt = JWT.verify(token, SecretKey('W@23intheRealm*({]&%!+'));
+            // print(response.body);
+            // print(jwt)
 
-    print(response.body);
+    var data = jsonDecode(response.body.token);
 
-    if (status) {
-      box1.put('emailController', emailController.text);
-      box1.put('passwordController', passwordController.text);
-    }
+    print(data["token"]);
 
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
 
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
+        print(data);
         if (data['status'] == 200) {
-          userId = email;
+          userId = userId;
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -72,12 +89,31 @@ class _SignInState extends State<SignIn> {
               textColor: kBackground,
               backgroundColor: kButtonColor);
         }
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: 'Service Timeout',
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
       }
     } catch (e) {
       print(e);
     }
 
-    //   try {
+    if (status) {
+      box1.put('emailController', emailController.text);
+      box1.put('passwordController', passwordController.text);
+    }
+
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+
+      // try {
     //     if (response.statusCode == 406) {
     //       print('fail');
     //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -108,6 +144,8 @@ class _SignInState extends State<SignIn> {
     //   } catch (e) {
     //     print(e);
     //   }
+
+
   }
 
   void _togglePasswordView() {
@@ -118,11 +156,6 @@ class _SignInState extends State<SignIn> {
 
   late Box box1;
 
-  @override
-  void initState() {
-    super.initState();
-    createBox();
-  }
 
   void createBox() async {
     box1 = await Hive.openBox('logindata');
@@ -310,12 +343,32 @@ class _SignInState extends State<SignIn> {
                             setState(() {
                               loading = true;
                             });
-                            login(
+                             login(
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
-                          // print(useremail);
-                          // print(userpassword);
+                            // LoginRequestModel model = LoginRequestModel(
+                            //     identity: emailController.text,
+                            //     password: passwordController.text);
+
+                            // APIService.login(model).then((response) {
+                            //   setState(() {
+                            //   loading = false;
+                            // });
+                            //   if (response) {
+                            //     Navigator.pushNamedAndRemoveUntil(
+                            //         context, HomePage.id, (route) => false);
+                            //   } else {
+                            //     Fluttertoast.showToast(
+                            //         fontSize: 18,
+                            //         toastLength: Toast.LENGTH_LONG,
+                            //         gravity: ToastGravity.CENTER,
+                            //         msg:  "Login failed \n Invalid password or email",
+                            //         textColor: kBackground,
+                            //         backgroundColor: kButtonColor);
+                            //   }
+                            // });
+
                         },
                         child: loading
                             ? CircularProgressIndicator(

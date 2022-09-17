@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class Registration {
   
   Future<void> register(
-      {required String email, required String password}) async {
+      {required String userId, required String eventId}) async {
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
             body: jsonEncode({

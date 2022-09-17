@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:batnf/Screens/dash_board.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -71,11 +72,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: LandindPage.id,
+        initialRoute: LandingPage.id,
+        // HomePage.id,
         routes: {
-          LandindPage.id: (context) => const LandindPage(),
+          LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),
           SignIn.id: (context) => SignIn(),
+          HomePage.id: (context) => HomePage(),
           SignUp.id: (context) => SignUp(),
           ForgetPassword.id: (context) => ForgetPassword(),
           ResetPassword.id: (context) => ResetPassword(),

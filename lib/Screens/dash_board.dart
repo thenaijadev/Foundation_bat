@@ -22,8 +22,10 @@ import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/news_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class HomePage extends StatefulWidget {
+  static String id = 'home';
   HomePage({Key? key}) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)

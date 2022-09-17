@@ -60,7 +60,7 @@ class _SignUpState extends State<SignUp> {
       required String location,
       required String date}) async {
     var response =
-        await http.post(Uri.parse('http://dalexintegrated.com/events/api/create'),
+        await http.post(Uri.parse('https://dalexintegrated.com/events/api/create'),
             body: jsonEncode({
               "first_name": firstname,
               "last_name": lastname,

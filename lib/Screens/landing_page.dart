@@ -9,16 +9,16 @@ import 'package:page_indicator/page_indicator.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
 
-class LandindPage extends StatefulWidget {
+class LandingPage extends StatefulWidget {
   static String id = 'landing_page';
 
-  const LandindPage({Key? key}) : super(key: key);
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
-  State<LandindPage> createState() => _LandindPageState();
+  State<LandingPage> createState() => _LandindPageState();
 }
 
-class _LandindPageState extends State<LandindPage> {
+class _LandindPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();

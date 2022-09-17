@@ -10,13 +10,13 @@ class ProjectSummaryContainer extends StatelessWidget {
   ProjectSummaryContainer(
       {required this.colour,
       required this.label,
-      required this.Number,
+      required this.number,
       required this.childCard,
       required this.innercontainer,
       required this.margin});
 
   String label;
-  int Number;
+  int number;
   final Color colour;
   final Widget childCard;
   final Color innercontainer;
@@ -52,7 +52,7 @@ class ProjectSummaryContainer extends StatelessWidget {
           Container(
               margin: EdgeInsets.only(left: 15),
               child: Text(
-                Number.toString(),
+                number.toString(),
                 style: kProjectsummarytextstyle,
               )),
           Container(
