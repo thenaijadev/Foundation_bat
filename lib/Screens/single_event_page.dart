@@ -42,6 +42,7 @@ class _EventDetailsState extends State<EventDetails> {
               "eventId": widget.singleEvent.eventId,
             }),
             headers: {"Content-Type": "application/json"});
+<<<<<<< HEAD
     var data = jsonDecode(response.body);
     print(data);
 
@@ -97,6 +98,10 @@ class _EventDetailsState extends State<EventDetails> {
     } catch (e) {
       print(e);
     }
+=======
+            var data = jsonDecode(response.body);
+            print(data);
+>>>>>>> 96129c30b4821bd70b07fb1b3946f1933f4399b9
 
     // if (response.statusCode == 201) {
     //   var data = jsonDecode(response.body);
@@ -117,7 +122,15 @@ class _EventDetailsState extends State<EventDetails> {
     //         textColor: kBackground,
     //         backgroundColor: kButtonColor);
     //   }
-    // }
+    // }else{
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: 'Service Timeout',
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //     }
   }
 
   @override

@@ -168,8 +168,28 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(left: 30, right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
+<<<<<<< HEAD
                             number: inprogressProvider.allInprogressProjects?.length == null ? 0 : inprogressProvider
                                     .allInprogressProjects!.length,
+=======
+                            number: inprogressProvider.allInprogressProjects!.length,
+
+                              // inprogressProvider.allInprogressProjects == null
+                              // ? Center(
+                              //     child: Text('0'),
+                              //   )
+                              // : inprogressProvider.allInprogressProjects!.isEmpty
+                              //     ? Center(
+                              //         child: Text(
+                              //           'loading....',
+                              //           style: kBodyTextStyle,
+                              //         ),
+                              //       )
+                              //     :
+
+                            // inprogressProvider.length,
+                            // inprogressProvider.allInprogressProjects.length,
+>>>>>>> 96129c30b4821bd70b07fb1b3946f1933f4399b9
                             colour: Color(0xff0E2B63),
                             label: 'Projects in \nProgress', 
                             childCard: Icon(
@@ -181,6 +201,7 @@ class _ProjectPageState extends State<ProjectPage> {
                         ),
 
                         //Completed Project
+<<<<<<< HEAD
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, CompletedPage.id);
@@ -226,6 +247,43 @@ class _ProjectPageState extends State<ProjectPage> {
                             ),
                           ),
                         ),
+=======
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.pushNamed(context, CompletedPage.id);
+                        //   },
+                        //   child: ProjectSummaryContainer(
+                        //     margin: EdgeInsets.only(right: 41.5),
+                        //     innercontainer: kBackground.withOpacity(0.1),
+                        //     number:  completedProvider.allCompletedProjects!.length,
+                        //     colour: Color(0xff50AF47),
+                        //     label: 'Projects \nCompleted',
+                        //     childCard: Icon(
+                        //       FontAwesomeIcons.checkSquare,
+                        //       size: 17.5,
+                        //       color: kBackground,
+                        //     ),
+                        //   ),
+                        // ),
+
+                        // Pending project
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.pushNamed(context, PendingPage.id);
+                        //   },
+                        //   child: ProjectSummaryContainer(
+                        //     margin: EdgeInsets.only(right: 30),
+                        //     innercontainer: kBackground.withOpacity(0.1),
+                        //     number: pendingProvider.allPendingProjects!.length,
+                        //     colour: Color(0xffEF7D00),
+                        //     label: 'Pending \nProjects',
+                        //     childCard: Icon(
+                        //       FontAwesomeIcons.commentDots,
+                        //       color: kBackground,
+                        //     ),
+                        //   ),
+                        // ),
+>>>>>>> 96129c30b4821bd70b07fb1b3946f1933f4399b9
                       ],
                     ),
                   ),

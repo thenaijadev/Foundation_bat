@@ -56,7 +56,7 @@ class _SignInState extends State<SignIn> {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         var userid = data['userId'];
-        var finalUserid = userid;
+         finalUserid = userid;
         print(finalUserid);
         if (data['status'] == 200) {
           Fluttertoast.showToast(
