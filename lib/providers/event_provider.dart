@@ -5,11 +5,11 @@ import 'package:batnf/Screens/signin.dart';
 
 class EventProvider extends ChangeNotifier {
   int userId = 0;
+
   List<EventModel>? allEvents;
 
   getAllEvents() async {
     allEvents = await AppEvents().getAllEvents();
-    // userId = await SignInState().getAllEvent();
     notifyListeners();
   }
 }

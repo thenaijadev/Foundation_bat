@@ -17,8 +17,6 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 
-var finalUserid;
-
 class SignIn extends StatefulWidget {
   static String id = 'signin';
   @override
@@ -44,7 +42,6 @@ class _SignInState extends State<SignIn> {
             }),
             headers: {
           "Content-Type": "application/json",
-          // "Authorization": "Bearer $token",
         });
 
     // final SharedPreferences sharedPreferences =
@@ -55,10 +52,11 @@ class _SignInState extends State<SignIn> {
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        var userid = data['userId'];
-         finalUserid = userid;
-        print(finalUserid);
+
         if (data['status'] == 200) {
+          int userid = int.parse(data['userId'].toString());
+          Provider.of<EventProvider>(context, listen: false).userId = userid;
+
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
