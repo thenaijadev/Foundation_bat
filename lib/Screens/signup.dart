@@ -58,8 +58,8 @@ class _SignUpState extends State<SignUp> {
       required String passwordconfirm,
       required String location,
       required String date}) async {
-    var response =
-        await http.post(Uri.parse('https://dalexintegrated.com/events/api/create'),
+    var response = await http
+        .post(Uri.parse('https://dalexintegrated.com/events/api/create'),
             body: jsonEncode({
               "first_name": firstname,
               "last_name": lastname,
@@ -70,6 +70,9 @@ class _SignUpState extends State<SignUp> {
               "dob": date,
             }),
             headers: {"Content-Type": "application/json"});
+
+            // var data = jsonDecode(response.body);
+            // print(data);
     if (mounted)
       setState(() {
         loading = false;
@@ -77,6 +80,7 @@ class _SignUpState extends State<SignUp> {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      print(data);
       if (data['status'] == 200) {
         Fluttertoast.showToast(
             fontSize: 18,
@@ -85,8 +89,8 @@ class _SignUpState extends State<SignUp> {
             msg: "Registration Successful",
             textColor: kBackground,
             backgroundColor: kButtonColor);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SignIn()));
+        // Navigator.pushReplacement(
+        //     context, MaterialPageRoute(builder: (context) => SignIn()));
       } else {
         Fluttertoast.showToast(
             fontSize: 18,
@@ -161,7 +165,6 @@ class _SignUpState extends State<SignUp> {
                 key: _formKey,
                 child: ListView(
                   children: [
-                    
                     // logo
                     Padding(
                       padding: const EdgeInsets.only(

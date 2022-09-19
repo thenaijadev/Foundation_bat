@@ -54,7 +54,7 @@ class _InprogressPageState extends State<InprogressPage> {
             Container(
               margin: EdgeInsets.only(top: 15, left: 30, bottom: 50),
               child: Text(
-                'Projects in Progress',
+                'Projects InProgress',
                 style: kSigningtextstyle,
               ),
             ),

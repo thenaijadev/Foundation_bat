@@ -15,11 +15,8 @@ import 'package:batnf/constants/text_style_constant.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
 
-<<<<<<< HEAD
 String finalEmail = '';
 
-=======
->>>>>>> 96129c30b4821bd70b07fb1b3946f1933f4399b9
 class LandingPage extends StatefulWidget {
   static String id = 'landing_page';
 

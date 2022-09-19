@@ -17,7 +17,8 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 
-var finalUserid;
+import '../providers/event_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -30,7 +31,6 @@ class _SignInState extends State<SignIn> {
   void initState() {
     super.initState();
     createBox();
-    // Provider.of<EventProvider>(context, listen: false).login();
   }
 
   Future<void> login({required String email, required String password}) async {
@@ -40,25 +40,18 @@ class _SignInState extends State<SignIn> {
             body: jsonEncode({
               "identity": email,
               "password": password,
-              // "token": token
             }),
             headers: {
           "Content-Type": "application/json",
-          // "Authorization": "Bearer $token",
         });
-
-    // final SharedPreferences sharedPreferences =
-    //     await SharedPreferences.getInstance();
-    // var userid = sharedPreferences.getInt('userId');
-    // finalUserid = userid;
-
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        var userid = data['userId'];
-         finalUserid = userid;
-        print(finalUserid);
         if (data['status'] == 200) {
+          int userid = int.parse(data['userId']).toInt();
+          // int.parse(data['userId']).toString();
+          Provider.of<EventProvider>(context, listen: false).userId = userid;
+          //  finalUserid = Provider.of<EventProvider>(context, listen: false).userId;
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -336,27 +329,6 @@ class _SignInState extends State<SignIn> {
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
-                          // LoginRequestModel model = LoginRequestModel(
-                          //     identity: emailController.text,
-                          //     password: passwordController.text);
-
-                          // APIService.login(model).then((response) {
-                          //   setState(() {
-                          //   loading = false;
-                          // });
-                          //   if (response) {
-                          //     Navigator.pushNamedAndRemoveUntil(
-                          //         context, HomePage.id, (route) => false);
-                          //   } else {
-                          //     Fluttertoast.showToast(
-                          //         fontSize: 18,
-                          //         toastLength: Toast.LENGTH_LONG,
-                          //         gravity: ToastGravity.CENTER,
-                          //         msg:  "Login failed \n Invalid password or email",
-                          //         textColor: kBackground,
-                          //         backgroundColor: kButtonColor);
-                          //   }
-                          // });
                         },
                         child: loading
                             ? CircularProgressIndicator(

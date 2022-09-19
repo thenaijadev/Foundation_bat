@@ -9,7 +9,6 @@ class EventProvider extends ChangeNotifier {
 
   getAllEvents() async {
     allEvents = await AppEvents().getAllEvents();
-    // userId = await SignInState().getAllEvent();
     notifyListeners();
   }
 }
