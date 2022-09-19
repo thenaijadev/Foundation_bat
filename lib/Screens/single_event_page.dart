@@ -3,7 +3,6 @@
 import 'dart:convert';
 
 import 'package:batnf/Models/events_model.dart';
-import 'package:batnf/Screens/user_info.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:batnf/Screens/signin.dart';
 
 import '../providers/event_provider.dart';
 
@@ -25,28 +25,87 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SignIn();
+  }
+
   bool loading = false;
 
-  Future<void> register({required List userId, required String eventId}) async {
+  Future<void> register({required int userId, required String eventId}) async {
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
             body: jsonEncode({
-              "userId": userId,
+              "userId": finalUserid,
               "eventId": widget.singleEvent.eventId,
             }),
             headers: {"Content-Type": "application/json"});
-            // print(response.body);
-            var data = jsonDecode(response.body);
-            print(data);
+    var data = jsonDecode(response.body);
+    print(data);
+
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+
+    try {
+      if (response.statusCode == 201) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful, mail Delivered",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      } else if (response.statusCode == 202) {
+        print(finalUserid);
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful, mail not delivered",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      } else if (response.statusCode == 200) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful, no mail sent",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      } else if (response.statusCode == 400) {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Already Registered",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Server Unavailable",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    } catch (e) {
+      print(e);
+    }
 
     // if (response.statusCode == 201) {
     //   var data = jsonDecode(response.body);
-    //   if (data['status'] == 200) {
+    //   if (data['status'] == 201) {
     //     Fluttertoast.showToast(
     //         fontSize: 18,
     //         toastLength: Toast.LENGTH_LONG,
     //         gravity: ToastGravity.CENTER,
-    //         msg: "Registration Successful",
+    //         msg: "Registration Successful, Check your mail",
     //         textColor: kBackground,
     //         backgroundColor: kButtonColor);
     //   } else {
@@ -82,7 +141,6 @@ class _EventDetailsState extends State<EventDetails> {
           },
           child: ListView(
             children: [
-
               //Event Image
               SizedBox(
                 height: 150,
@@ -228,11 +286,26 @@ class _EventDetailsState extends State<EventDetails> {
                   color: kButtonColor,
                   onPressed: () {
                     print(widget.singleEvent.eventId);
-                    print(userId);
-                    setState(() {
-                      loading = true;
-                    });
-                    register(userId: userId, eventId: widget.singleEvent.eventId);
+                    print(finalUserid);
+
+                    if (finalUserid != null) {
+                      setState(() {
+                        loading = true;
+                      });
+                      register(
+                          userId: finalUserid,
+                          eventId: widget.singleEvent.eventId);
+                    }
+
+                    // print(widget.singleEvent.eventId);
+                    // print(userId);
+                    // setState(() {
+                    //   loading = true;
+                    // });
+
+                    // register(
+                    //   userId: userId,
+                    // eventId: widget.singleEvent.eventId);
                   },
                   child: loading
                       ? CircularProgressIndicator(

@@ -160,7 +160,7 @@ class _ProjectPageState extends State<ProjectPage> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         
-                        //Projects In Progress
+                        // Projects In Progress
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, InprogressPage.id);
@@ -168,11 +168,10 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(left: 30, right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: inprogressProvider
-                                .allInprogressProjects ! == null ? inprogressProvider.allInprogressProjects!.length: inprogressProvider
+                            number: inprogressProvider.allInprogressProjects?.length == null ? 0 : inprogressProvider
                                     .allInprogressProjects!.length,
                             colour: Color(0xff0E2B63),
-                            label: 'Projects in \nProgress',
+                            label: 'Projects in \nProgress', 
                             childCard: Icon(
                               Icons.pie_chart_rounded,
                               size: 17.5,
@@ -189,7 +188,11 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 41.5),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number:  completedProvider
+                            number:  completedProvider
+                                        .allCompletedProjects?.length ==
+                                    null
+                                ? 0
+                                : completedProvider
                                     .allCompletedProjects!.length,
                             colour: Color(0xff50AF47),
                             label: 'Projects \nCompleted',
@@ -201,7 +204,7 @@ class _ProjectPageState extends State<ProjectPage> {
                           ),
                         ),
 
-                        //Pending project
+                        // Pending project
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, PendingPage.id);
@@ -209,7 +212,12 @@ class _ProjectPageState extends State<ProjectPage> {
                           child: ProjectSummaryContainer(
                             margin: EdgeInsets.only(right: 30),
                             innercontainer: kBackground.withOpacity(0.1),
-                            Number: pendingProvider.allPendingProjects!.length,
+                            number: pendingProvider
+                                        .allPendingProjects?.length ==
+                                    null
+                                ? 0
+                                : pendingProvider
+                                    .allPendingProjects!.length,
                             colour: Color(0xffEF7D00),
                             label: 'Pending \nProjects',
                             childCard: Icon(
@@ -258,12 +266,12 @@ class _ProjectPageState extends State<ProjectPage> {
                               : inprogressProvider.allInprogressProjects!.isEmpty
                                   ? Center(
                                       child: Text(
-                                        'No Pending ProJect or Please check Your Internet Connection',
+                                        'No Pending ProJects',
                                         style: kBodyTextStyle,
                                       ),
                                     )
                                   : ListView.builder(
-                              itemCount: 2,
+                              itemCount: inprogressProvider.allInprogressProjects!.length,
                               itemBuilder: ((context, index) {
                                         InprogressModel inprogress =
                                             inprogressProvider
@@ -398,13 +406,13 @@ class _ProjectPageState extends State<ProjectPage> {
                         : completedProvider.allCompletedProjects!.isEmpty
                             ? Center(
                                 child: Text(
-                                  'Please check Your Internet Connection',
+                                  'No Completed Projects',
                                   style: kBodyTextStyle,
                                 ),
                               )
                             :ListView.builder(
                             scrollDirection: Axis.vertical,
-                            itemCount: 2,
+                            itemCount: completedProvider.allCompletedProjects!.length,
                             itemBuilder: ((context, index) {
                                   CompletedModel completed = completedProvider
                                       .allCompletedProjects![index];
@@ -546,12 +554,12 @@ class _ProjectPageState extends State<ProjectPage> {
                         : pendingProvider.allPendingProjects!.isEmpty
                             ? Center(
                                 child: Text(
-                                  'Please check Your Internet Connection',
+                                  'No Pending Projects',
                                   style: kBodyTextStyle,
                                 ),
                               )
                             :ListView.builder(
-                              itemCount: 2,
+                              itemCount: pendingProvider.allPendingProjects!.length,
                               itemBuilder: ((context, index) {
                                         PendingModel pending =
                                             pendingProvider

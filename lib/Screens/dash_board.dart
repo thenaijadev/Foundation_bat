@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
@@ -22,8 +23,10 @@ import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/news_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class HomePage extends StatefulWidget {
+  static String id = 'home';
   HomePage({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +34,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   // @override
   // void initState() {
   //   super.initState();
@@ -41,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)
@@ -92,7 +95,10 @@ class _HomePageState extends State<HomePage> {
                               size: 15,
                               FontAwesomeIcons.signOutAlt,
                               color: kButtonColor),
-                          onPressed: () {
+                          onPressed: () async {
+                            final SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.remove('email');
                             Navigator.pushNamed(context, SignIn.id);
                           },
                         ),
@@ -131,7 +137,6 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: ListView(
                 children: [
-                  
                   //Ads
                   Container(
                     margin: EdgeInsets.only(left: 30, right: 30),
@@ -171,14 +176,14 @@ class _HomePageState extends State<HomePage> {
                           )
                         : completedProvider.allCompletedProjects!.isEmpty
                             ? Center(
-                                child: Text(
-                                  'Please check Your Internet Connection',
+                                child: MaterialButton(onPressed: (){},child: Text(
+                                  'No Recent Completed Project',
                                   style: kBodyTextStyle,
-                                ),
+                                ),),
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 2,
+                                itemCount: completedProvider.allCompletedProjects!.length,
                                 itemBuilder: ((context, index) {
                                   CompletedModel completed = completedProvider
                                       .allCompletedProjects![index];
@@ -271,13 +276,13 @@ class _HomePageState extends State<HomePage> {
                         : eventProvider.allEvents!.isEmpty
                             ? Center(
                                 child: Text(
-                                  'Please check Your Internet Connection',
+                                  'No Recent Event',
                                   style: kBodyTextStyle,
                                 ),
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 3,
+                                itemCount: eventProvider.allEvents!.length,
                                 itemBuilder: ((context, index) {
                                   EventModel event =
                                       eventProvider.allEvents![index];
@@ -403,12 +408,12 @@ class _HomePageState extends State<HomePage> {
                               : newsProvider.allNews!.isEmpty
                                   ? Center(
                                       child: Text(
-                                        'No Latest News, \nPlease check Your Internet Connection \nand drag to Refresh',
+                                        'No Latest News',
                                         style: kBodyTextStyle,
                                       ),
                                     )
                                   : ListView.builder(
-                                      itemCount: 3,
+                                      itemCount: newsProvider.allNews!.length,
                                       itemBuilder: ((context, index) {
                                         NewsModel news =
                                             newsProvider.allNews![index];

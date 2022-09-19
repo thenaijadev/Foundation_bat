@@ -2,13 +2,13 @@
 
 import 'dart:convert';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/forget_password_page.dart';
@@ -17,7 +17,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 
-import 'package:batnf/Screens/user_info.dart';
+var finalUserid;
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -26,34 +26,39 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  @override
+  void initState() {
+    super.initState();
+    createBox();
+    // Provider.of<EventProvider>(context, listen: false).login();
+  }
 
   Future<void> login({required String email, required String password}) async {
-    var response =
-        await http.post(Uri.parse('http://dalexintegrated.com/events/api/login'),
+    var response = await http
+        .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
+            // http://geeteefarms.com/events/api/login
             body: jsonEncode({
               "identity": email,
               "password": password,
+              // "token": token
             }),
-            headers: {"Content-Type": "application/json"});
+            headers: {
+          "Content-Type": "application/json",
+          // "Authorization": "Bearer $token",
+        });
 
-    print(response.body);
-
-    if (status) {
-      box1.put('emailController', emailController.text);
-      box1.put('passwordController', passwordController.text);
-    }
-
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
+    // final SharedPreferences sharedPreferences =
+    //     await SharedPreferences.getInstance();
+    // var userid = sharedPreferences.getInt('userId');
+    // finalUserid = userid;
 
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
+        var userid = data['userId'];
+        var finalUserid = userid;
+        print(finalUserid);
         if (data['status'] == 200) {
-          userId = email;
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -72,12 +77,31 @@ class _SignInState extends State<SignIn> {
               textColor: kBackground,
               backgroundColor: kButtonColor);
         }
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: 'Service Timeout',
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
       }
     } catch (e) {
       print(e);
     }
 
-    //   try {
+    if (status) {
+      box1.put('emailController', emailController.text);
+      box1.put('passwordController', passwordController.text);
+    }
+
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+
+    // try {
     //     if (response.statusCode == 406) {
     //       print('fail');
     //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -117,12 +141,6 @@ class _SignInState extends State<SignIn> {
   }
 
   late Box box1;
-
-  @override
-  void initState() {
-    super.initState();
-    createBox();
-  }
 
   void createBox() async {
     box1 = await Hive.openBox('logindata');
@@ -305,7 +323,11 @@ class _SignInState extends State<SignIn> {
                         ),
                         height: 45.0,
                         color: kButtonColor,
-                        onPressed: () {
+                        onPressed: () async {
+                          final SharedPreferences sharedPrefernces =
+                              await SharedPreferences.getInstance();
+                          sharedPrefernces.setString(
+                              'email', emailController.text);
                           if (formKey.currentState!.validate() && !loading) {
                             setState(() {
                               loading = true;
@@ -314,8 +336,27 @@ class _SignInState extends State<SignIn> {
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
-                          // print(useremail);
-                          // print(userpassword);
+                          // LoginRequestModel model = LoginRequestModel(
+                          //     identity: emailController.text,
+                          //     password: passwordController.text);
+
+                          // APIService.login(model).then((response) {
+                          //   setState(() {
+                          //   loading = false;
+                          // });
+                          //   if (response) {
+                          //     Navigator.pushNamedAndRemoveUntil(
+                          //         context, HomePage.id, (route) => false);
+                          //   } else {
+                          //     Fluttertoast.showToast(
+                          //         fontSize: 18,
+                          //         toastLength: Toast.LENGTH_LONG,
+                          //         gravity: ToastGravity.CENTER,
+                          //         msg:  "Login failed \n Invalid password or email",
+                          //         textColor: kBackground,
+                          //         backgroundColor: kButtonColor);
+                          //   }
+                          // });
                         },
                         child: loading
                             ? CircularProgressIndicator(

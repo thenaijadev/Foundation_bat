@@ -12,6 +12,7 @@
         "getdata",
         "hidepassword",
         "Imagename",
+        "inthe",
         "Landind",
         "Landpage",
         "logindata",
@@ -20,6 +21,7 @@
         "ontap",
         "Projectsumdetailtextstyle",
         "signin",
-        "textcontroller"
+        "textcontroller",
+        "userid"
     ]
 }

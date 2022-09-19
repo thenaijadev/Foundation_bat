@@ -134,7 +134,7 @@ class _EventCenterState extends State<EventCenter> {
                       )
                     : provider.allEvents!.isEmpty
                         ? Center(
-                            child: Text('No Events, \nPlease check Your Internet Connection \nand drag to Refresh', style: kBodyTextStyle,),
+                            child: Text('No Events,', style: kBodyTextStyle,),
                           )
                         : ListView.builder(
                             scrollDirection: Axis.vertical,

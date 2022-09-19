@@ -66,7 +66,7 @@ class _PendingPageState extends State<PendingPage> {
                   : provider.allPendingProjects!.isEmpty
                       ? Center(
                           child: Text(
-                            'No Completed Project, \nPlease check Your Internet Connection',
+                            'No Completed Project,',
                             style: kBodyTextStyle,
                           ),
                         )

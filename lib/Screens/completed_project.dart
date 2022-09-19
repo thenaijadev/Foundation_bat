@@ -65,7 +65,7 @@ class _CompletedPageState extends State<CompletedPage> {
                 : provider.allCompletedProjects!.isEmpty
                     ? Center(
                         child: Text(
-                          'No Completed Project, \nPlease check Your Internet Connection',
+                          'No Completed Project,',
                           style: kBodyTextStyle,
                         ),
                       )

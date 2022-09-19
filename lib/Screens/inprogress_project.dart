@@ -66,7 +66,7 @@ class _InprogressPageState extends State<InprogressPage> {
                   : provider.allInprogressProjects!.isEmpty
                       ? Center(
                           child: Text(
-                            'No Ongoing Project, \nPlease check Your Internet Connection \nand drag to Refresh',
+                            'No Ongoing Project,',
                             style: kBodyTextStyle,
                           ),
                         )
