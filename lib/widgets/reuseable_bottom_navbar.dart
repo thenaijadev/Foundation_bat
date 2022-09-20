@@ -52,7 +52,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/home.png'),
+                  Image.asset('assets/icons/home.png', color: kButtonColor,),
                   SizedBox(
                     height: 10.1,
                   ),
@@ -71,7 +71,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/Calendar.png'),
+                  Image.asset('assets/icons/Calendar.png', color: kButtonColor),
                   SizedBox(
                     height: 10.1,
                   ),
@@ -95,9 +95,9 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/game.png'),
+                  Image.asset('assets/icons/game.png', color: kButtonColor),
                   SizedBox(
-                    height: 10.1,
+                    height: 15,
                   ),
                   Text('Games')
                 ],
@@ -116,7 +116,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/pro.png'),
+                  Image.asset('assets/icons/pro.png', color: kButtonColor),
                   SizedBox(
                     height: 10.1,
                   ),
@@ -137,7 +137,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/news.svg'),
+                  Image.asset('assets/icons/news.svg', color: kButtonColor),
                   SizedBox(
                     height: 10.1,
                   ),

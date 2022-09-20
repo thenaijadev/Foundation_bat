@@ -71,8 +71,8 @@ class _SignUpState extends State<SignUp> {
             }),
             headers: {"Content-Type": "application/json"});
 
-            // var data = jsonDecode(response.body);
-            // print(data);
+    // var data = jsonDecode(response.body);
+    // print(data);
     if (mounted)
       setState(() {
         loading = false;

@@ -186,88 +186,92 @@ class _EventCenterState extends State<EventCenter> {
                                           color: kBackground,
                                           //Event Information
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             // ignore: prefer_const_literals_to_create_immutables
                                             children: [
 
                                               //Event start date
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  event.eventStartDate,
-                                                  style: kEventDatestyle,
+                                              Expanded(
+                                                child: Container(
+                                                  color: kBackground,
+                                                  height: 19,
+                                                  child: Text(
+                                                    event.eventStartDate,
+                                                    style: kEventDatestyle,
+                                                  ),
                                                 ),
                                               ),
 
                                               //Event Name
-                                              Container(
-                                                color: kBackground,
-                                                height: 38,
-                                                child: Text(
-                                                  event.eventName,
-                                                  style: kPageHeader,
+                                              Expanded(
+                                                child: Container(
+                                                  color: kBackground,
+                                                  height: 55,
+                                                  child: Text(
+                                                    event.eventName,
+                                                    style: kPageHeader,
+                                                  ),
                                                 ),
                                               ),
 
                                               //Event Location
-                                              Container(
-                                                color: kBackground,
-                                                height: 36,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    //Event Location Icon
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 6.67,
-                                                          bottom: 13.67),
-                                                      color: kBackground,
-                                                      child: Icon(
-                                                        FontAwesomeIcons
-                                                            .mapMarkerAlt,
-                                                        size: 14.67,
-                                                        color:
-                                                            kTextboxhintColor,
-                                                      ),
-                                                    ),
-
-                                                    //Event Location
-                                                    Expanded(
-                                                      child: Container(
+                                              Expanded(
+                                                child: SizedBox(
+                                                  height: 36,
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      //Event Location Icon
+                                                      Container(
                                                         margin: EdgeInsets.only(
-                                                          top: 5,
-                                                          right: 11,
-                                                        ),
-                                                        height: 32,
-                                                        width: 207,
+                                                            top: 4,
+                                                            ),
                                                         color: kBackground,
-                                                        child: Text(
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          event.eventLocation,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  kTextboxhintColor,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontFamily:
-                                                                  'Inter',
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
+                                                        child: Icon(
+                                                          FontAwesomeIcons
+                                                              .mapMarkerAlt,
+                                                          size: 16.67,
+                                                          color:
+                                                              kTextboxhintColor,
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                
+                                                      //Event Location
+                                                      Expanded(
+                                                        child: Container(
+                                                          margin: EdgeInsets.only(
+                                                            top: 15,
+                                                          ),
+                                                          height: 32,
+                                                          child: Text(
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            event.eventLocation,
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kTextboxhintColor,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               )
+                                            
                                             ],
                                           ),
                                         ),
