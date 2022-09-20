@@ -53,7 +53,7 @@ class _EventCenterState extends State<EventCenter> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
                           margin:

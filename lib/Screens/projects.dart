@@ -64,6 +64,7 @@ class _ProjectPageState extends State<ProjectPage> {
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         margin:

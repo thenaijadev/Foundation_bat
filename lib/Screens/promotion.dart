@@ -33,6 +33,7 @@ class _PromotionState extends State<Promotion> {
                 Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
                           margin:
@@ -45,7 +46,7 @@ class _PromotionState extends State<Promotion> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: 50, left: 10, bottom: 26, right: 140),
+                              top: 50, left: 50, bottom: 26, right: 140),
                           color: kBackground,
                           height: 29,
                           child: Text(

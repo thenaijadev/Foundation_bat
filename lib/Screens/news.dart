@@ -44,6 +44,7 @@ class _NewsState extends State<News> {
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         margin:

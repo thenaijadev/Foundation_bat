@@ -77,10 +77,10 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(
-                            left: 24.0, top: 45, bottom: 20, right: 190),
+                        margin: EdgeInsets.only( top: 45, bottom: 20, right: 195),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
