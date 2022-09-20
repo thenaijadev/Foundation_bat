@@ -193,9 +193,6 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
-                          // onChange: (value) {
-                          //   userfirstname = value;
-                          // },
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
@@ -217,9 +214,6 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
-                          // onChange: (value) {
-                          //   userlastname = value;
-                          // },
                           keyboard: TextInputType.name,
                           cardChild: Icon(FontAwesomeIcons.user,
                               size: 15, color: kTextboxhintColor),
@@ -241,9 +235,6 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
-                          // onChange: (value) {
-                          //   useremail = value;
-                          // },
                           keyboard: TextInputType.emailAddress,
                           cardChild: Icon(FontAwesomeIcons.envelope,
                               size: 15, color: kTextboxhintColor),
@@ -347,9 +338,6 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: ReuseableTextField(
-                          // onChange: (value) {
-                          //   userlocation = value;
-                          // },
                           keyboard: TextInputType.text,
                           cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
                               size: 15, color: kTextboxhintColor),
@@ -419,7 +407,7 @@ class _SignUpState extends State<SignUp> {
                     //Sign Up Button
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 36.0, left: 30, right: 30, bottom: 312.0),
+                          top: 36.0, left: 30, right: 30, bottom: 112.0),
                       child: MaterialButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),

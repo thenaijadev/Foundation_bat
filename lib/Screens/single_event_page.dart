@@ -24,13 +24,7 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    SignIn();
-  }
-
+  
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
     var response = await http.post(
@@ -40,6 +34,7 @@ class _EventDetailsState extends State<EventDetails> {
           "eventId": widget.singleEvent.eventId,
         }),
         headers: {"Content-Type": "application/json"});
+        
     var data = jsonDecode(response.body);
     print(data);
 
@@ -310,7 +305,7 @@ class _EventDetailsState extends State<EventDetails> {
                     }else if (Provider.of<EventProvider>(context,
                                 listen: false)
                             .userId ==
-                        null){
+                        0){
                           
                       setState(() {
                         loading = true;
