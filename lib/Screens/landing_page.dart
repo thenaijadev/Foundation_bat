@@ -112,7 +112,7 @@ class _LandindPageState extends State<LandingPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(30, 45, 30, 10),
+                          margin: EdgeInsets.fromLTRB(30, 45, 30, 30),
                           height: 58,
                           child: Text(
                             textAlign: TextAlign.center,
@@ -122,7 +122,7 @@ class _LandindPageState extends State<LandingPage> {
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(left: 56, right: 56, bottom: 36),
+                              EdgeInsets.only(left: 56, right: 56, bottom: 46),
                           height: 95,
                           child: Text(
                             textAlign: TextAlign.center,

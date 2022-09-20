@@ -168,6 +168,7 @@ class _EventCenterState extends State<EventCenter> {
                                         width: 110,
                                         margin: EdgeInsets.only(
                                             bottom: 7.0, top: 7.0, left: 9.0),
+                                            // Event Image
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
@@ -180,15 +181,18 @@ class _EventCenterState extends State<EventCenter> {
                                           height: 93,
                                           margin: EdgeInsets.only(
                                               top: 5,
-                                              bottom: 10,
                                               left: 10.0,
                                               right: 6.0),
                                           color: kBackground,
+                                          //Event Information
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             // ignore: prefer_const_literals_to_create_immutables
                                             children: [
+
+                                              //Event start date
                                               Container(
                                                 color: kBackground,
                                                 height: 19,
@@ -197,6 +201,8 @@ class _EventCenterState extends State<EventCenter> {
                                                   style: kEventDatestyle,
                                                 ),
                                               ),
+
+                                              //Event Name
                                               Container(
                                                 color: kBackground,
                                                 height: 38,
@@ -205,58 +211,61 @@ class _EventCenterState extends State<EventCenter> {
                                                   style: kPageHeader,
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                  color: kBackground,
-                                                  height: 86,
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [
-                                                      Container(
+
+                                              //Event Location
+                                              Container(
+                                                color: kBackground,
+                                                height: 36,
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    //Event Location Icon
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 6.67,
+                                                          bottom: 13.67),
+                                                      color: kBackground,
+                                                      child: Icon(
+                                                        FontAwesomeIcons
+                                                            .mapMarkerAlt,
+                                                        size: 14.67,
+                                                        color:
+                                                            kTextboxhintColor,
+                                                      ),
+                                                    ),
+
+                                                    //Event Location
+                                                    Expanded(
+                                                      child: Container(
                                                         margin: EdgeInsets.only(
-                                                            top: 6.67,
-                                                            bottom: 23.67),
+                                                          top: 5,
+                                                          right: 11,
+                                                        ),
+                                                        height: 32,
+                                                        width: 207,
                                                         color: kBackground,
-                                                        child: Icon(
-                                                          FontAwesomeIcons
-                                                              .mapMarkerAlt,
-                                                          size: 14.67,
-                                                          color:
-                                                              kTextboxhintColor,
+                                                        child: Text(
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          event.eventLocation,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  kTextboxhintColor,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
+                                                              fontFamily:
+                                                                  'Inter',
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
                                                         ),
                                                       ),
-                                                      Expanded(
-                                                        child: Container(
-                                                          margin: EdgeInsets.only(
-                                                            top: 5,
-                                                            right: 11,
-                                                          ),
-                                                          height: 32,
-                                                          width: 207,
-                                                          color: kBackground,
-                                                          child: Text(
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            event.eventLocation,
-                                                            style: TextStyle(
-                                                                color:
-                                                                    kTextboxhintColor,
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .normal,
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               )
                                             ],

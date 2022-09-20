@@ -162,6 +162,7 @@ class _NewsState extends State<News> {
                                   ),
                                   child: Row(
                                     children: [
+                                      //News Image
                                       Container(
                                         height: 110,
                                         width: 110,
@@ -175,6 +176,8 @@ class _NewsState extends State<News> {
                                               fit: BoxFit.cover),
                                         ),
                                       ),
+
+                                      //News Details
                                       Expanded(
                                         child: Container(
                                           height: 93,
@@ -185,29 +188,37 @@ class _NewsState extends State<News> {
                                               right: 6.0),
                                           color: kBackground,
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             // ignore: prefer_const_literals_to_create_immutables
                                             children: [
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  news.title,
-                                                  style: kNewsSubHeader,
-                                                ),
-                                              ),
+
+                                              //News Header
                                               Expanded(
                                                 child: Container(
-                                                    // margin: EdgeInsets.only(bottom: 4.0),
+                                                  color: kBackground,
+                                                  height: 20,
+                                                  child: Text(
+                                                    news.title,
+                                                    style: kNewsSubHeader,
+                                                  ),
+                                                ),
+                                              ),
+
+                                              //News Information
+                                              Expanded(
+                                                child: Container(
                                                     color: kBackground,
-                                                    height: 7.0,
+                                                    height: 10,
                                                     child: Text(
                                                       textAlign: TextAlign.left,
                                                       news.information,
                                                       style: kBodyTextStyle,
                                                     )),
                                               ),
+
+                                              // News Date
                                               Text(
                                                 textAlign: TextAlign.left,
                                                 news.entryDate,

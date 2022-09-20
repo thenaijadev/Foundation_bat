@@ -181,20 +181,11 @@ class _SignInState extends State<SignIn> {
                     // Logo
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 15.0, top: 75.0, left: 158.0, right: 159.0),
+                          bottom: 10.0, top: 70.0, left: 140.0, right: 140.0),
                       child: Center(
                         child: Image.asset(
                           'assets/logo.png',
                         ),
-                      ),
-                    ),
-
-                    // BATNF Label
-                    Center(
-                      child: Text(
-                        textAlign: TextAlign.left,
-                        'BATNF',
-                        style: kAppnametextstyle,
                       ),
                     ),
 
@@ -362,7 +353,7 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
-                        top: 260,
+                        top: 110,
                       ),
                       child: Center(
                         child: GestureDetector(
