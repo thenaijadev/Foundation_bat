@@ -307,6 +307,21 @@ class _EventDetailsState extends State<EventDetails> {
                               Provider.of<EventProvider>(context, listen: false)
                                   .userId,
                           eventId: widget.singleEvent.eventId);
+                    }else if (Provider.of<EventProvider>(context,
+                                listen: false)
+                            .userId ==
+                        null){
+                          
+                      setState(() {
+                        loading = true;
+                      });
+                      Fluttertoast.showToast(
+                          fontSize: 18,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          msg: 'Please Login to Register',
+                          textColor: kBackground,
+                          backgroundColor: kButtonColor);
                     }
                   },
                   child: loading

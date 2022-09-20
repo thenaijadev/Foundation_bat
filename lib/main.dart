@@ -25,6 +25,7 @@ import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:batnf/providers/pending_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/pending_project.dart';
 
@@ -37,9 +38,12 @@ class MyHttpoverrides extends HttpOverrides {
   }
 }
 
+var email;
+
 void main() async {
   await Hive.initFlutter();
-
+  // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  // var email = sharedPreferences.getString('email');
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // WidgetsFlutterBinding.ensureInitialized();
@@ -73,9 +77,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: finalEmail == null ? LandingPage.id : HomePage.id,
-        // LandingPage.id,
-        // HomePage.id,
+        initialRoute: email == null ? LandingPage.id : HomePage.id,
         routes: {
           LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),

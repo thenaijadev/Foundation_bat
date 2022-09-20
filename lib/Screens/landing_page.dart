@@ -15,7 +15,7 @@ import 'package:batnf/constants/text_style_constant.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
 
-String finalEmail = '';
+var finalEmail;
 
 class LandingPage extends StatefulWidget {
   static String id = 'landing_page';
@@ -30,9 +30,13 @@ class _LandindPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    // getValidationData().whenComplete(() async {
-    //   Timer(Duration(microseconds: 0), () => Navigator.pushNamed(context, finalEmail == null ? SignIn.id : HomePage.id));
-    // });
+    getValidationData().whenComplete(() async {
+      Timer(
+          Duration(microseconds: 0),
+          () => Navigator.pushNamed(
+              context, finalEmail == null ? WelcomePage.id : HomePage.id));
+    }
+    );
     FlutterNativeSplash.remove();
   }
 
@@ -46,12 +50,22 @@ class _LandindPageState extends State<LandingPage> {
     print(finalEmail);
   }
 
+  int currentPage = 0;
+  PageController controller = PageController();
+
+  onChange(int index){
+    setState(() {
+      currentPage = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
           child: PageView(
+            controller: controller,
             children: [
               ReuseableLandingScreen(
                 Imagename: 'assets/boarding1.png',

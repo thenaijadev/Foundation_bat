@@ -89,8 +89,8 @@ class _SignUpState extends State<SignUp> {
             msg: "Registration Successful",
             textColor: kBackground,
             backgroundColor: kButtonColor);
-        // Navigator.pushReplacement(
-        //     context, MaterialPageRoute(builder: (context) => SignIn()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SignIn()));
       } else {
         Fluttertoast.showToast(
             fontSize: 18,

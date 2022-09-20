@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,15 +35,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   FlutterNativeSplash.remove();
-  // }
+  String email = '';
+
+  Future getEmail() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var email = sharedPreferences.getString('email');
+    setState(() {
+      var email = sharedPreferences.getString('email');
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    getEmail();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
@@ -99,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                             final SharedPreferences sharedPreferences =
                                 await SharedPreferences.getInstance();
                             sharedPreferences.remove('email');
-                            Navigator.pushNamed(context, SignIn.id);
+                            Navigator.pushNamed(context, WelcomePage.id);
                           },
                         ),
                       )
@@ -176,14 +182,18 @@ class _HomePageState extends State<HomePage> {
                           )
                         : completedProvider.allCompletedProjects!.isEmpty
                             ? Center(
-                                child: MaterialButton(onPressed: (){},child: Text(
-                                  'No Recent Completed Project',
-                                  style: kBodyTextStyle,
-                                ),),
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'No Recent Completed Project',
+                                    style: kBodyTextStyle,
+                                  ),
+                                ),
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: completedProvider.allCompletedProjects!.length,
+                                itemCount: completedProvider
+                                    .allCompletedProjects!.length,
                                 itemBuilder: ((context, index) {
                                   CompletedModel completed = completedProvider
                                       .allCompletedProjects![index];

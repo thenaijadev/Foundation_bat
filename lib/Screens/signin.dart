@@ -34,6 +34,8 @@ class _SignInState extends State<SignIn> {
   }
 
   Future<void> login({required String email, required String password}) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString(email, emailController.text);
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
             // http://geeteefarms.com/events/api/login
@@ -44,6 +46,7 @@ class _SignInState extends State<SignIn> {
             headers: {
           "Content-Type": "application/json",
         });
+
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
@@ -177,7 +180,8 @@ class _SignInState extends State<SignIn> {
                   children: [
                     // Logo
                     Padding(
-                      padding: const EdgeInsets.only(top: 75.0, bottom: 15.0),
+                      padding: const EdgeInsets.only(
+                          bottom: 15.0, top: 75.0, left: 158.0, right: 159.0),
                       child: Center(
                         child: Image.asset(
                           'assets/logo.png',
