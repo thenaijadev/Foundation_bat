@@ -35,25 +35,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String email = '';
-
-  // Future getEmail() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   var email = sharedPreferences.getString('email');
-  //   setState(() {
-  //     var email = sharedPreferences.getString('email');
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
-    // getEmail();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)
         .getCompletedProjects();
+  }
+
+  getId() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool exist = sharedPreferences.containsKey('autoLogin');
+    if (exist) {
+       bool  autoLogin = sharedPreferences.getBool('autoLogin');
+      String  userID = autoLogin ? sharedPreferences.getBool('UserID')
+    }
   }
 
   @override

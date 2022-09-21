@@ -31,7 +31,6 @@ class _SignInState extends State<SignIn> {
   void initState() {
     getEmail();
     super.initState();
-    createBox();
   }
 
   Future<void> login({required String email, required String password}) async {
@@ -54,7 +53,10 @@ class _SignInState extends State<SignIn> {
         print(Provider.of<EventProvider>(context, listen: false).userName);
         if (data['status'] == 200) {
           int userid = int.parse(data['userId']).toInt();
+          
           Provider.of<EventProvider>(context, listen: false).userId = userid;
+          sharedPreferences.setInt('userId', userid);
+
           sharedPreferences.setString('email', email);
           sharedPreferences.setBool('autoLogin', true);
           Fluttertoast.showToast(
@@ -64,7 +66,6 @@ class _SignInState extends State<SignIn> {
               msg: "Login Successful",
               textColor: kBackground,
               backgroundColor: kButtonColor);
-              // Navigator.pushNamedAndRemoveUntil(context, newRouteName, (route) => false)
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         } else {
@@ -89,74 +90,17 @@ class _SignInState extends State<SignIn> {
       print(e);
     }
 
-    if (status) {
-      box1.put('emailController', emailController.text);
-      box1.put('passwordController', passwordController.text);
-    }
-
     if (mounted) {
       setState(() {
         loading = false;
       });
     }
-
-    // try {
-    //     if (response.statusCode == 406) {
-    //       print('fail');
-    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //           content: Text(
-    //         'Login Failed',
-    //         textAlign: TextAlign.center,
-    //       )));
-    //     }else if (response.statusCode == 405) {
-    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //           content: Text(
-    //         'Invalid Email, Please SignUp',
-    //         textAlign: TextAlign.center,
-    //       )));
-    //     } else
-    //if (response.statusCode == 200) {
-    //       var data = jsonDecode(response.body);
-    //       print(data);
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: "Login Successful",
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //       Navigator.pushReplacement(
-    //           context, MaterialPageRoute(builder: (context) => HomePage()));
-    //     }
-    //   } catch (e) {
-    //     print(e);
-    //   }
   }
 
   void _togglePasswordView() {
     setState(() {
       hidepassword = !hidepassword;
     });
-  }
-
-  late Box box1;
-
-  void createBox() async {
-    box1 = await Hive.openBox('logindata');
-    getdata();
-  }
-
-  void getdata() async {
-    if (box1.get('emailController') != null) {
-      emailController.text = box1.get('emailController');
-      status = true;
-      setState(() {});
-    }
-    if (box1.get('passwordController') != null) {
-      passwordController.text = box1.get('passwordController');
-      status = true;
-      setState(() {});
-    }
   }
 
   bool loading = false;
@@ -166,9 +110,9 @@ class _SignInState extends State<SignIn> {
 
   getEmail() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    bool exist = await sharedPreferences.containsKey('email');
+    bool exist = sharedPreferences.containsKey('email');
     if (exist) {
-      String email = await sharedPreferences.getString('email')!;
+      String email = sharedPreferences.getString('email')!;
       emailController.text = email;
     }
   }

@@ -15,7 +15,7 @@ import 'package:batnf/constants/text_style_constant.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
 
-var finalEmail;
+
 
 class LandingPage extends StatefulWidget {
   static String id = 'landing_page';
@@ -30,26 +30,8 @@ class _LandindPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    // getValidationData().whenComplete(() async {
-    //   Timer(
-    //       Duration(microseconds: 0),
-    //       () => Navigator.pushNamed(
-    //           context, finalEmail == null ? WelcomePage.id : HomePage.id));
-    // }
-    // );
     FlutterNativeSplash.remove();
   }
-
-  // Future getValidationData() async {
-  //   final SharedPreferences sharedPreferences =
-  //       await SharedPreferences.getInstance();
-  //   var obtainedEmail = sharedPreferences.getString('email').toString();
-  //   setState(() {
-  //     finalEmail = obtainedEmail;
-  //   });
-  //   print(finalEmail);
-  // }
-
   int currentPage = 0;
   PageController controller = PageController();
 
