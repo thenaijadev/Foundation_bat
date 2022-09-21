@@ -5,7 +5,7 @@ import 'package:batnf/Screens/signin.dart';
 
 class EventProvider extends ChangeNotifier {
   int userId = 0;
-  String userName = '';
+  var userName = '';
 
   List<EventModel>? allEvents;
 

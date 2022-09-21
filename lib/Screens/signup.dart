@@ -117,47 +117,54 @@ class _SignUpState extends State<SignUp> {
             }),
             headers: {"Content-Type": "application/json"});
 
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
+    
     if (mounted)
       setState(() {
         loading = false;
       });
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      print(data);
-      if (data['status'] == 200) {
-        String username = data['last_name'];
-        int userid = int.parse(data['userId']).toInt();
+    // try{
+    // if (response.statusCode == 200) {
+    //   var data = jsonDecode(response.body);
+    //   print(data);
+    //   if (data['status'] == 200) {
+    //     print('okkkk');
+    //     print(location);
+    //     String username = data['last_name'];
+    //     int userid = int.parse(data['userId']).toInt();
 
-        Provider.of<EventProvider>(context, listen: false).userName = username;
+    //     Provider.of<EventProvider>(context, listen: false).userName = username;
 
-        Provider.of<EventProvider>(context, listen: false).userId = userid;
-        preferences.setInt('userId', userid);
+    //     Provider.of<EventProvider>(context, listen: false).userId = userid;
+    //     preferences.setInt('userId', userid);
 
-        preferences.setString('email', email);
-        preferences.setBool('autoLogin', true);
-        preferences.setString('username', username);
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: "Registration Successful",
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SignIn()));
-      } else {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: data['message'],
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-      }
-    }
+    //     preferences.setString('email', email);
+    //     preferences.setBool('autoLogin', true);
+    //     preferences.setString('username', username);
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: "Registration Successful",
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //     Navigator.pushReplacement(
+    //         context, MaterialPageRoute(builder: (context) => SignIn()));
+    //   } else {
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: data['message'],
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //   }
+    // }
+    // }catch(e){
+    //   print(e);
+    // }
 
     // if (response.statusCode == 405) {
     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

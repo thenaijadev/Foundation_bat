@@ -46,23 +46,34 @@ class _SignInState extends State<SignIn> {
             headers: {
           "Content-Type": "application/json",
         });
+    var data = jsonDecode(response.body);
+    print(data);
 
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
         if (data['status'] == 200) {
-          String username = data['last_name'];
+          var username = data['last_name'];
+          print('paulo');
+
           int userid = int.parse(data['userId']).toInt();
+          print('paaaaaulo');
 
           Provider.of<EventProvider>(context, listen: false).userId = userid;
+          print('paulllllo');
           Provider.of<EventProvider>(context, listen: false).userName =
-              username;
+              username.toString();
+          print('paulo00000');
           sharedPreferences.setInt('userId', userid);
+          print('paulssssso');
 
           sharedPreferences.setString('email', email);
+          print('osheyyyy');
           sharedPreferences.setBool('autoLogin', true);
-          sharedPreferences.setString('username', username);
+          print('osheeeeey');
+          sharedPreferences.setString('username', username.toString());
+          print('oshey');
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,

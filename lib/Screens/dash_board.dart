@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
       if (autoLogin) {
         int userID = sharedPreferences.getInt('userId')!;
-        String username = sharedPreferences.getString('username');
+        String username = sharedPreferences.getString('username')!;
         provider.userId = userID;
         provider.userName = username;
       }
