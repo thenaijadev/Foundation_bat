@@ -108,13 +108,8 @@ class _HomePageState extends State<HomePage> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-<<<<<<< HEAD
-                              FontAwesomeIcons.solidBell,
-                              size: 15,
-=======
-                              size: 15,
                               FontAwesomeIcons.signOutAlt,
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () async {
                             final SharedPreferences sharedPreferences =
@@ -513,18 +508,18 @@ class _HomePageState extends State<HomePage> {
                                                                     kBackground,
                                                                 height: 7.0,
                                                                 child: Text(
+                                                                  news.information,
                                                                   textAlign:
                                                                       TextAlign
                                                                           .left,
-                                                                  news.information,
                                                                   style:
                                                                       kBodyTextStyle,
                                                                 )),
                                                           ),
                                                           Text(
+                                                            news.entryDate,
                                                             textAlign:
                                                                 TextAlign.left,
-                                                            news.entryDate,
                                                             style:
                                                                 kNewsDateSTyle,
                                                           )

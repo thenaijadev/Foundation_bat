@@ -35,82 +35,6 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
-<<<<<<< HEAD
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Container for search box etc
-            Container(
-              color: kBackground,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                        color: kBackground,
-                        height: 40.0,
-                        child: Image.asset(
-                          'assets/logo.png',
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 50, right: 160, bottom: 26),
-                        color: kBackground,
-                        height: 29,
-                        child: Text(
-                          'Events',
-                          style: kPageHeader,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(
-                              FontAwesomeIcons.solidBell,
-                              size: 15,
-                              color: kButtonColor),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (provider.allEvents != null &&
-                      provider.allEvents!.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                      color: kBackground,
-                      height: 45.0,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          hintStyle: kTextboxhintstyle,
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.search,
-                            size: 13.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(45.0),
-                            ),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: kTextfieldborderColor,
-                              width: 2.0,
-                            ),
-=======
         body: RefreshIndicator(
           color: kBackground,
           backgroundColor: kButtonColor,
@@ -137,7 +61,6 @@ class _EventCenterState extends State<EventCenter> {
                           height: 40.0,
                           child: Image.asset(
                             'assets/logo.png',
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                           ),
                         ),
                         Container(
@@ -317,9 +240,9 @@ class _EventCenterState extends State<EventCenter> {
                                               
                                                   //Event Location
                                                   Text(
+                                                    event.eventLocation,
                                                     textAlign:
                                                         TextAlign.left,
-                                                    event.eventLocation,
                                                     style: TextStyle(
                                                         color:
                                                             kTextboxhintColor,

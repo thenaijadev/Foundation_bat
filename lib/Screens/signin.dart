@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -215,13 +214,12 @@ class _SignInState extends State<SignIn> {
                               icon: Padding(
                                 padding: const EdgeInsets.only(right: 14.15),
                                 child: Icon(
-                                    color: Color(0xff979797),
-                                    size: 19.0,
                                     !hidepassword
                                         ? FontAwesomeIcons.eye
                                         : FontAwesomeIcons.eyeSlash,
+                                  size: 19.0,
                                     color: Color(0xff979797),
-                                    size: 15.0,),
+                                    ),
                               ),
                             ),
                           ),

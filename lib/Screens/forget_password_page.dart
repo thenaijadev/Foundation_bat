@@ -8,7 +8,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ForgetPassword extends StatefulWidget {
   static String id = 'forget_password';
-  const ForgetPassword({super.key});
+
+  const ForgetPassword({Key? key}) : super(key: key);
 
   @override
   State<ForgetPassword> createState() => _ForgetPasswordState();

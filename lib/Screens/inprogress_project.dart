@@ -117,15 +117,6 @@ class _InprogressPageState extends State<InprogressPage> {
                                               fit: BoxFit.cover),
                                         ),
                                       ),
-<<<<<<< HEAD
-                                    ),
-                                    Text(
-                                      ' Started: Dec 21 2021',
-                                      textAlign: TextAlign.left,
-                                      style: kNewsDateSTyle,
-                                    )
-                                  ],
-=======
                                       Expanded(
                                         child: Container(
                                           height: 93,
@@ -176,7 +167,6 @@ class _InprogressPageState extends State<InprogressPage> {
                                       )
                                     ],
                                   ),
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                 ),
                               );
                             }),

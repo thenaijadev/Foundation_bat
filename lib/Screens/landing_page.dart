@@ -46,6 +46,7 @@ class _LandindPageState extends State<LandingPage> {
     return Scaffold(
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
+          
           child: PageView(
             controller: controller,
             children: [
@@ -97,8 +98,8 @@ class _LandindPageState extends State<LandingPage> {
                           margin: EdgeInsets.fromLTRB(30, 45, 30, 30),
                           height: 58,
                           child: Text(
-                            textAlign: TextAlign.center,
                             "Explore the Foundation's \n Projects",
+                            textAlign: TextAlign.center,
                             style: kLandpageHeadertextstyle,
                           ),
                         ),
@@ -107,8 +108,8 @@ class _LandindPageState extends State<LandingPage> {
                               EdgeInsets.only(left: 56, right: 56, bottom: 46),
                           height: 95,
                           child: Text(
-                            textAlign: TextAlign.center,
                             'Lorem ipsum dolor sit amet, consectetur \nelit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                             textAlign: TextAlign.center,
                             style: kLandpagebodytextstyle,
                           ),
                         ),
@@ -125,50 +126,6 @@ class _LandindPageState extends State<LandingPage> {
                               Navigator.pushNamed(context, WelcomePage.id);
                             },
                             child: Text(
-<<<<<<< HEAD
-                              "Explore the Foundation's \n Upcoming Events",
-                              textAlign: TextAlign.center,
-                              style: kLandpageHeadertextstyle,
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: 56, right: 56, bottom: 36),
-                            height: 95,
-                            child: Text(
-                              'Lorem ipsum dolor sit amet, consectetur \nelit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
-                              textAlign: TextAlign.center,
-                              style: kLandpagebodytextstyle,
-                            ),
-                          ),
-                          Container(
-                            margin:
-                                EdgeInsets.only(top: 30, left: 30, right: 30),
-                            height: 45,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(45.0),
-                              ),
-                              height: 45.0,
-                              color: kButtonColor,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => WelcomePage(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'Get Started',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-=======
                               'Get Started',
                               textAlign: TextAlign.center,
                               style: kButtontextstyle,
@@ -176,7 +133,6 @@ class _LandindPageState extends State<LandingPage> {
                           ),
                         ),
                       ],
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                     ),
                   ),
                 ],

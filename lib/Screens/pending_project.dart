@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
-=======
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
 
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_pending_project_page.dart';
@@ -63,61 +59,6 @@ class _PendingPageState extends State<PendingPage> {
               ),
             ),
             Expanded(
-<<<<<<< HEAD
-              child: ListView.builder(
-                itemCount: 9,
-                itemBuilder: ((context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(bottom: 15.0, left: 30, right: 30),
-                    decoration: BoxDecoration(
-                      color: kBackground,
-                      borderRadius: BorderRadius.circular(18.0),
-                      boxShadow: [kBoxshadow],
-                    ),
-                    height: 104,
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: 15, bottom: 15.0, right: 15.0, top: 15),
-                          height: 74,
-                          width: 74,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/projects.png'),
-                            ),
-                            color: kBackground,
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 93,
-                            margin: EdgeInsets.only(
-                                top: 5, bottom: 10, left: 10.0, right: 6.0),
-                            color: kBackground,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                Container(
-                                  color: kBackground,
-                                  height: 19,
-                                  child: Text(
-                                    'Lorem Ipsum Project',
-                                    style: kNewsSubHeader,
-                                  ),
-                                ),
-                                Text(
-                                  ' To Begin: Mar 17 2025',
-                                  textAlign: TextAlign.left,
-                                  style: kNewsDateSTyle,
-                                ),
-                              ],
-                            ),
-=======
               child: provider.allPendingProjects == null
                   ? Center(
                       child: CircularProgressIndicator(),
@@ -127,7 +68,6 @@ class _PendingPageState extends State<PendingPage> {
                           child: Text(
                             'No Completed Project,',
                             style: kBodyTextStyle,
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                           ),
                         )
                       : RefreshIndicator(

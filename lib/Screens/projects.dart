@@ -298,12 +298,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
-<<<<<<< HEAD
-                                              Text(
-                                                ' Started: Dec 21 2021',
-                                                textAlign: TextAlign.left,
-                                                style: kNewsDateSTyle,
-=======
 
                                               // Inprogress Information
                                               Expanded(
@@ -346,7 +340,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     ],
                                                   ),
                                                 ),
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                               )
                                             ],
                                           ),
@@ -354,79 +347,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                       );
                                     }),
                                   ),
-<<<<<<< HEAD
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: kBackground,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    boxShadow: [kBoxshadow],
-                                  ),
-                                  height: 120,
-                                  width: 375,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            bottom: 15.0, right: 15.0),
-                                        height: 120,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image:
-                                                AssetImage('assets/projects.png'),
-                                          ),
-                                          color: kBackground,
-                                          borderRadius: BorderRadius.circular(18.0),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 93,
-                                          margin: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 10,
-                                              left: 10.0,
-                                              right: 6.0),
-                                          color: kBackground,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  'Lorem Ipsum Project',
-                                                  style: kNewsSubHeader,
-                                                ),
-                                              ),
-                                              Text(
-                                                ' Started: Dec 21 2021',
-                                                textAlign: TextAlign.left,
-                                                style: kNewsDateSTyle,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-=======
                       ),
                     ],
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                   ),
                 ),
 
@@ -518,12 +440,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
-<<<<<<< HEAD
-                                              Text(
-                                                ' Started: Dec 21 2021',
-                                                textAlign: TextAlign.left,
-                                                style: kNewsDateSTyle,
-=======
                                               // Completed Project Info
                                               Expanded(
                                                 child: Container(
@@ -584,7 +500,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     ],
                                                   ),
                                                 ),
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                               )
                                             ],
                                           ),
@@ -628,68 +543,6 @@ class _ProjectPageState extends State<ProjectPage> {
                             ),
                           ],
                         ),
-<<<<<<< HEAD
-                        Expanded(
-                          child: ListView(
-                            // padding: EdgeInsets.only(bottom: 15),
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: 15.0),
-                                decoration: BoxDecoration(
-                                  color: kBackground,
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  boxShadow: [kBoxshadow],
-                                ),
-                                height: 120,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: 15.0, right: 15.0),
-                                      height: 120,
-                                      width: 120,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image:
-                                              AssetImage('assets/projects.png'),
-                                        ),
-                                        color: kBackground,
-                                        borderRadius: BorderRadius.circular(18.0),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 93,
-                                        margin: EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 10,
-                                            left: 10.0,
-                                            right: 6.0),
-                                        color: kBackground,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // ignore: prefer_const_literals_to_create_immutables
-                                          children: [
-                                            Container(
-                                              color: kBackground,
-                                              height: 19,
-                                              child: Text(
-                                                'Lorem Ipsum Project',
-                                                style: kNewsSubHeader,
-                                              ),
-                                            ),
-                                            Text(
-                                              ' Started: Dec 21 2021',
-                                              textAlign: TextAlign.left,
-                                              style: kNewsDateSTyle,
-                                            )
-                                          ],
-                                        ),
-=======
                       ),
                       Expanded(
                           child: pendingProvider.allPendingProjects == null
@@ -701,7 +554,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                       child: Text(
                                         'No Pending Projects',
                                         style: kBodyTextStyle,
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                       ),
                                     )
                                   : ListView.builder(
@@ -731,29 +583,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   BorderRadius.circular(18.0),
                                               boxShadow: [kBoxshadow],
                                             ),
-<<<<<<< HEAD
-                                            Text(
-                                              ' Started: Dec 21 2021',
-                                              textAlign: TextAlign.left,
-                                              style: kNewsDateSTyle,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-=======
                                             child: Row(
                                               children: [
                                                 //pending Project Image
@@ -827,7 +656,6 @@ class _ProjectPageState extends State<ProjectPage> {
                 )
               ],
             )),
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
           ],
         ),
         bottomNavigationBar: ReuseableBottomBar(),

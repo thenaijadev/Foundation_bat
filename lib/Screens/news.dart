@@ -64,27 +64,6 @@ class _NewsState extends State<News> {
                           style: kPageHeader,
                         ),
                       ),
-<<<<<<< HEAD
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(
-                              FontAwesomeIcons.solidBell,
-                              size: 15,
-                              color: kButtonColor),
-                          onPressed: () {},
-                        ),
-                      ),
-=======
-
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                     ],
                   ),
                   if (provider.allNews != null && provider.allNews!.isNotEmpty)
@@ -212,16 +191,16 @@ class _NewsState extends State<News> {
                                                     color: kBackground,
                                                     height: 10,
                                                     child: Text(
-                                                      textAlign: TextAlign.left,
                                                       news.information,
+                                                      textAlign: TextAlign.left,
                                                       style: kBodyTextStyle,
                                                     )),
                                               ),
 
                                               // News Date
                                               Text(
+                                                  news.entryDate,
                                                 textAlign: TextAlign.left,
-                                                news.entryDate,
                                                 style: kNewsDateSTyle,
                                               )
                                             ],
