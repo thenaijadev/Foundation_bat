@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool exist = sharedPreferences.containsKey('autoLogin');
     if (exist) {
-       bool  autoLogin = sharedPreferences.getBool('autoLogin');
-      String  userID = autoLogin ? sharedPreferences.getBool('UserID')
+       bool  autoLogin = sharedPreferences.getBool('autoLogin')!;
+     bool  userID = autoLogin ? sharedPreferences.getBool('UserID')!:false;
     }
   }
 
