@@ -337,10 +337,6 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
-<<<<<<< HEAD
-=======
-                                  size: 19.0,
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
                                       : FontAwesomeIcons.eyeSlash,
@@ -382,10 +378,11 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
-                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 19.0,
+                                      ),
                             ),
                           ),
                         ),
@@ -503,59 +500,11 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-<<<<<<< HEAD
-                    //Forget Pasword Request
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          'forgot password?',
-                          textAlign: TextAlign.right,
-                          style: kForgetpasswordstyle,
-                        ),
-                      ),
-                    ),
-
-                    // Sign Up Redurection
-=======
                     // Sign In Redirection
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
                       ),
-<<<<<<< HEAD
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account? ",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kGeneralbodytextColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: 2.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignIn()));
-                            },
-                            child: Text(
-                              'Sign In',
-                              textAlign: TextAlign.right,
-                              style: kForgetpasswordstyle,
-                            ),
-                          ),
-                        ],
-=======
                       child: Center(
                         child: GestureDetector(
                           onTap: () {
@@ -580,7 +529,6 @@ class _SignUpState extends State<SignUp> {
                                 )
                               ])),
                         ),
->>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                       ),
                     ),
                   ],
