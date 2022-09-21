@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getId();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
@@ -47,11 +48,21 @@ class _HomePageState extends State<HomePage> {
 
   getId() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    bool exist = sharedPreferences.containsKey('autoLogin');
+    EventProvider provider = Provider.of<EventProvider>(context, listen: false);
+    bool exist = sharedPreferences.containsKey('autoLogin') &&
+        sharedPreferences.containsKey('userId') &&
+        sharedPreferences.containsKey('username');
     if (exist) {
-       bool  autoLogin = sharedPreferences.getBool('autoLogin')!;
-     bool  userID = autoLogin ? sharedPreferences.getBool('UserID')!:false;
+      bool autoLogin = sharedPreferences.getBool('autoLogin')!;
+
+      if (autoLogin) {
+        int userID = sharedPreferences.getInt('userId')!;
+        String username = sharedPreferences.getString('username');
+        provider.userId = userID;
+        provider.userName = username;
+      }
     }
+    if (mounted) setState(() {});
   }
 
   @override

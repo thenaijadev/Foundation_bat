@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
       if (data['status'] == 200) {
         String username = data['last_name'];
         int userid = int.parse(data['userId']).toInt();
-        
+
         Provider.of<EventProvider>(context, listen: false).userName = username;
 
         Provider.of<EventProvider>(context, listen: false).userId = userid;
@@ -138,6 +138,7 @@ class _SignUpState extends State<SignUp> {
 
         preferences.setString('email', email);
         preferences.setBool('autoLogin', true);
+        preferences.setString('username', username);
         Fluttertoast.showToast(
             fontSize: 18,
             toastLength: Toast.LENGTH_LONG,

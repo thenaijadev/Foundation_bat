@@ -41,7 +41,9 @@ class MyHttpoverrides extends HttpOverrides {
 void main() async {
   await Hive.initFlutter();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  bool exist =  sharedPreferences.containsKey('autoLogin');
+  bool exist = sharedPreferences.containsKey('autoLogin') &&
+      sharedPreferences.containsKey('userId') &&
+      sharedPreferences.containsKey('username');
   bool autoLogin = exist ? sharedPreferences.getBool('autoLogin')! : false;
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
