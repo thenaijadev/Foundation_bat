@@ -50,9 +50,11 @@ class _SignInState extends State<SignIn> {
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
+          print(Provider.of<EventProvider>(context, listen: false).userName);
         if (data['status'] == 200) {
           int userid = int.parse(data['userId']).toInt();
           Provider.of<EventProvider>(context, listen: false).userId = userid;
+          print(Provider.of<EventProvider>(context, listen: false).userName);
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,

@@ -12,7 +12,6 @@ class EventModel {
   String createdDate = '';
   String adminId = '';
   String status = '';
-  int userID = 0;
 
 
   EventModel({
@@ -41,6 +40,5 @@ class EventModel {
     status = data['status'] == null ? "unknown" : data['status'];
     adminId = data['adminId'] == null ? "unknown" : data['adminId'];
     eventLocation = data['eventLocation'] == null ? "unknown" : data['eventLocation'];
-    userID  = data['userId'] == null ? 0 : int.parse(data['userId'].toString());
   }
 }

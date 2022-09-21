@@ -6,12 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:dropdownfield2/dropdownfield2.dart';
 
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 import 'package:intl/intl.dart';
+
+import '../providers/event_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   static String id = 'signup';
@@ -23,8 +27,48 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
+  List<String> states = [
+    'Abia',
+    'Abuja',
+    'Adamawa',
+    'Akwa Ibom',
+    'Anambara',
+    'Bauchi',
+    'Bayelsa',
+    'Benue',
+    'Borno',
+    'Cross River',
+    'Delta',
+    'Ebonyi',
+    'Edo',
+    'Ekiti',
+    'Enugu',
+    'Gombe',
+    'Imo',
+    'Jigawa',
+    'Kaduna',
+    'Kano',
+    'Katsina',
+    'Kabbi',
+    'Kogi',
+    'Kwara',
+    'Lagos',
+    'Nasarawa',
+    'Niger',
+    'Ogun',
+    'Ondo',
+    'Osun',
+    'Oyo',
+    'Plateau',
+    'Rivers',
+    'Sokoto',
+    'Taraba',
+    'Yobe',
+    'Zamfara',
+  ];
   bool hidepassword = true;
   final df = DateFormat('yyyy-MM-dd');
+  String selectedState = '';
   DateTime? _myDateTime;
   bool loading = false;
   bool status = false;
@@ -82,6 +126,8 @@ class _SignUpState extends State<SignUp> {
       var data = jsonDecode(response.body);
       print(data);
       if (data['status'] == 200) {
+        String username = data['last_name'];
+        Provider.of<EventProvider>(context, listen: false).userName = username;
         Fluttertoast.showToast(
             fontSize: 18,
             toastLength: Toast.LENGTH_LONG,
@@ -334,22 +380,22 @@ class _SignUpState extends State<SignUp> {
                     //Request for Location
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 20.0),
-                      child: SizedBox(
-                        height: 65.0,
-                        child: ReuseableTextField(
-                          keyboard: TextInputType.text,
-                          cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
-                              size: 15, color: kTextboxhintColor),
-                          textcontroller: _locationTextController,
-                          label: "Location",
-                          validator: (val) {
-                            return val!.isEmpty
-                                ? "{Please Provide Your Location}"
-                                : null;
+                          left: 30.0, right: 30.0, bottom: 22.0),
+                      child: DropDownField(
+                        // setter: (dynamic value) {
+                        //   selectedState = value;
+                        // },
+                          onValueChanged: (value) {
+                            setState(() {
+                              selectedState = value;
+                            });
                           },
-                        ),
-                      ),
+                          itemsVisibleInDropdown: 5,
+                          controller: _locationTextController,
+                          hintText: "Location",
+                          textStyle: kBodyTextStyle,
+                          enabled: true,
+                          items: states),
                     ),
 
                     //Request for Date of Birth

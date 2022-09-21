@@ -311,57 +311,32 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
+                                                            .spaceEvenly,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [
-                                                      Expanded(
-                                                        child: Container(
-                                                          color: kBackground,
-                                                          height: 19,
-                                                          child: Text(
+                                                    children: [ 
+                                                      Text(
                                                             inprogress
                                                                 .projectTitle,
                                                             style: kPageHeader,
                                                           ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Started: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: inprogress
-                                                                    .projectStartDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
-                                                      ),
-                                                      Expanded(
-                                                        child: RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'To be Completed: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: inprogress
-                                                                    .projectEndDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
-                                                      ),
+                                                      RichText(
+                                                          text: TextSpan(
+                                                              text:
+                                                                  'Started: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                            TextSpan(
+                                                              text: inprogress
+                                                                  .projectStartDate,
+                                                              style:
+                                                                  kTextboxhintstyle,
+                                                            )
+                                                          ])),
                                                     ],
                                                   ),
                                                 ),
@@ -484,54 +459,44 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [
                                                       // Project Title
-                                                      Expanded(
-                                                        child: Container(
-                                                          color: kBackground,
-                                                          height: 19,
-                                                          child: Text(
-                                                            completed
-                                                                .projectTitle,
-                                                            style: kPageHeader,
-                                                          ),
-                                                        ),
+                                                      Text(
+                                                        completed
+                                                            .projectTitle,
+                                                        style: kPageHeader,
                                                       ),
                                                       // project Start Date
-                                                      Expanded(
-                                                        child: RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Started: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: completed
-                                                                    .projectStartDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
-                                                      ),
+                                                      RichText(
+                                                          text: TextSpan(
+                                                              text:
+                                                                  'Started: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                            TextSpan(
+                                                              text: completed
+                                                                  .projectStartDate,
+                                                              style:
+                                                                  kTextboxhintstyle,
+                                                            )
+                                                          ])),
 
                                                       //Project Completed date
-                                                      Expanded(
-                                                        child: RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Completed: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: completed
-                                                                    .projectEndDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
-                                                      ),
+                                                      RichText(
+                                                          text: TextSpan(
+                                                              text:
+                                                                  'Completed: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                            TextSpan(
+                                                              text: completed
+                                                                  .projectEndDate,
+                                                              style:
+                                                                  kTextboxhintstyle,
+                                                            )
+                                                          ])),
                                                     ],
                                                   ),
                                                 ),
@@ -657,35 +622,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             .spaceEvenly,
                                                     children: [
                                                       //Project Title
-                                                      Expanded(
-                                                        child: Container(
-                                                          color: kBackground,
-                                                          height: 19,
-                                                          child: Text(
+                                                      Text(
                                                               pending
                                                                   .projectTitle,
                                                               style:
                                                                   kNewsSubHeader),
-                                                        ),
-                                                      ),
 
                                                       //Project Begin Date
-                                                      Expanded(
-                                                        child: RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'To Begin: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                children: [
-                                                              TextSpan(
-                                                                text: pending
-                                                                    .projectStartDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              ),
-                                                            ])),
-                                                      )
+                                                      RichText(
+                                                          text: TextSpan(
+                                                              text:
+                                                                  'To Begin: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              children: [
+                                                            TextSpan(
+                                                              text: pending
+                                                                  .projectStartDate,
+                                                              style:
+                                                                  kTextboxhintstyle,
+                                                            ),
+                                                          ]))
                                                     ],
                                                   ),
                                                 ))

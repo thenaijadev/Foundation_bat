@@ -116,7 +116,7 @@ class _LandindPageState extends State<LandingPage> {
                           height: 58,
                           child: Text(
                             textAlign: TextAlign.center,
-                            "Explore the Foundation's \n Upcoming Events",
+                            "Explore the Foundation's \n Projects",
                             style: kLandpageHeadertextstyle,
                           ),
                         ),

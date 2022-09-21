@@ -111,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
+                  // Text("Welcome $Provider.of<EventProvider>(context, listen: false).userName")
                   Container(
                     margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 10),
                     color: kBackground,

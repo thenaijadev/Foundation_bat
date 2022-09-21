@@ -51,7 +51,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(30, 45, 30, 30),
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 40),
                 height: 58,
                 child: Text(
                   widget.Headerlabel,

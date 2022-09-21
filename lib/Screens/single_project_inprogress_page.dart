@@ -93,6 +93,16 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 style: kPageHeader,
                               )
                             ])),
+                            RichText(
+                            text: TextSpan(
+                                text: 'To be Completed: ',
+                                style: kLandpageskiptextstyle,
+                                children: [
+                              TextSpan(
+                                text: widget.singleProgress.projectEndDate,
+                                style: kPageHeader,
+                              )
+                            ])),
                       ],
                     )
                   ],
