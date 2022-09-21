@@ -20,6 +20,13 @@ const kAppnametextstyle = TextStyle(
     fontSize: 36.0,
     fontStyle: FontStyle.normal);
 
+const kProjectsummarytextstyle = TextStyle(
+    color: kBackground,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Inter',
+    fontSize: 36.0,
+    fontStyle: FontStyle.normal);
+
 const kLandpageHeadertextstyle = TextStyle(
     color: kButtonColor,
     fontWeight: FontWeight.w600,
@@ -78,6 +85,13 @@ const kForgetpasswordstyle = TextStyle(
 
 const kWelcomesubstyle = TextStyle(
     color: kTextboxhintColor,
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: FontWeight.w600);
+
+const kProjectsumdetailtextstyle = TextStyle(
+    color: kBackground,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,

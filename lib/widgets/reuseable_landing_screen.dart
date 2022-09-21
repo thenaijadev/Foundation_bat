@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, non_constant_identifier_names
 
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/constants/color_constant.dart';
@@ -21,8 +21,6 @@ class ReuseableLandingScreen extends StatefulWidget {
 }
 
 class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -53,7 +51,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(30, 45, 30, 10),
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 40),
                 height: 58,
                 child: Text(
                   widget.Headerlabel,
@@ -62,7 +60,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 56, right: 56, bottom: 36),
+                margin: EdgeInsets.only(left: 56, right: 56, bottom: 46),
                 height: 95,
                 child: Text(
                   widget.Bodylabel,
@@ -70,38 +68,41 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   style: kLandpagebodytextstyle,
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WelcomePage(),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Skip',
-                  style: kLandpageskiptextstyle,
-                ),
-              ),
               Container(
-                margin: EdgeInsets.only(left: 30, right: 30, bottom: 45),
+                margin: EdgeInsets.only(left: 30, right: 30, bottom: 65),
                 height: 45,
                 child: MaterialButton(
+                  elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(45.0),
                   ),
-                  height: 45.0,
                   color: kButtonColor,
                   onPressed: () {
-                  },
+                  Navigator.pushNamed(context, WelcomePage.id);},
                   child: Text(
-                    'Next',
+                    'skip',
                     textAlign: TextAlign.center,
                     style: kButtontextstyle,
                   ),
                 ),
               ),
+              // Container(
+              //   margin: EdgeInsets.only(top: 5, left: 30, right: 30, bottom: 45),
+              //   height: 45,
+              //   child: MaterialButton(
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(45.0),
+              //     ),
+              //     color: kButtonColor,
+              //     onPressed: () {
+              //     },
+              //     child: Text(
+              //       'Next',
+              //       textAlign: TextAlign.center,
+              //       style: kButtontextstyle,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

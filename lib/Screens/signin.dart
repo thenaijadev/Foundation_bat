@@ -1,32 +1,131 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, unnecessary_import
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, use_build_context_synchronously, avoid_print
 
-import 'dart:ui';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:batnf/Screens/dash_board.dart';
-import 'package:flutter/material.dart';
+import 'package:batnf/Screens/forget_password_page.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+
+import '../providers/event_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
+  static String id = 'signin';
   @override
   State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
+  @override
+  void initState() {
+    getEmail();
+    super.initState();
+  }
+
+  Future<void> login({required String email, required String password}) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    var response = await http
+        .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
+            // http://geeteefarms.com/events/api/login
+            body: jsonEncode({
+              "identity": email,
+              "password": password,
+            }),
+            headers: {
+          "Content-Type": "application/json",
+        });
+
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+
+        if (data['status'] == 200) {
+          String username = data['last_name'];
+          int userid = int.parse(data['userId']).toInt();
+
+          Provider.of<EventProvider>(context, listen: false).userId = userid;
+          Provider.of<EventProvider>(context, listen: false).userName =
+              username;
+          sharedPreferences.setInt('userId', userid);
+
+          sharedPreferences.setString('email', email);
+          sharedPreferences.setBool('autoLogin', true);
+          sharedPreferences.setString('username', username);
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Login Successful",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: 'Service Timeout',
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      hidepassword = !hidepassword;
+    });
+  }
+
+  bool loading = false;
   bool status = false;
-  String password = '';
 
   bool hidepassword = true;
 
-  final _formKey = GlobalKey<FormState>();
+  getEmail() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool exist = sharedPreferences.containsKey('email');
+    if (exist) {
+      String email = sharedPreferences.getString('email')!;
+      emailController.text = email;
+    }
+  }
 
-  TextEditingController _emailTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,25 +137,17 @@ class _SignInState extends State<SignIn> {
         children: [
           Expanded(
             child: Form(
-                key: _formKey,
+                key: formKey,
                 child: ListView(
                   children: [
                     // Logo
                     Padding(
-                      padding: const EdgeInsets.only(top: 75.0, bottom: 15.0),
+                      padding: const EdgeInsets.only(
+                          bottom: 10.0, top: 70.0, left: 140.0, right: 140.0),
                       child: Center(
                         child: Image.asset(
                           'assets/logo.png',
                         ),
-                      ),
-                    ),
-
-                    // BATNF LAbel
-                    Center(
-                      child: Text(
-                        'BATNF',
-                        textAlign: TextAlign.left,
-                        style: kAppnametextstyle,
                       ),
                     ),
 
@@ -70,18 +161,23 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    //Request for User name
+                    //Request for User Email
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45,
+                      child: SizedBox(
+                        height: 65,
                         child: ReuseableTextField(
-                          cardChild: Icon(FontAwesomeIcons.user,
-                              color: kTextboxhintColor),
-                          textcontroller: _emailTextController,
-                          label: "User Name",
+                          keyboard: TextInputType.emailAddress,
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Email can not be empty"
+                                : null;
+                          },
+                          cardChild: Icon(FontAwesomeIcons.solidEnvelope,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: emailController,
+                          label: "Email",
                         ),
                       ),
                     ),
@@ -90,13 +186,17 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
-                        height: 45,
-                        color: kBackground,
-                        child: TextField(
-                          controller: _passwordTextController,
+                      child: SizedBox(
+                        height: 65,
+                        child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
+                          obscureText: hidepassword,
+                          controller: passwordController,
                           decoration: InputDecoration(
-                            hintText: 'Password',
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: "password",
                             hintStyle: kTextboxhintstyle,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
@@ -108,17 +208,15 @@ class _SignInState extends State<SignIn> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon:
-                                Icon(Icons.lock, color: kTextboxhintColor),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
                             suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidepassword = !hidepassword;
-                                });
-                              },
+                              onPressed: _togglePasswordView,
                               icon: Padding(
                                 padding: const EdgeInsets.only(right: 14.15),
                                 child: Icon(
+                                    color: Color(0xff979797),
+                                    size: 19.0,
                                     !hidepassword
                                         ? FontAwesomeIcons.eye
                                         : FontAwesomeIcons.eyeSlash,
@@ -132,26 +230,25 @@ class _SignInState extends State<SignIn> {
                     ),
 
                     // Remember me
-
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: Row(
                         children: [
                           FlutterSwitch(
-                            height: 20,
-                            width: 40,
-                            toggleSize: 12,
-                            activeColor: kButtonColor,
+                              height: 20,
+                              width: 40,
+                              toggleSize: 12,
+                              activeColor: kButtonColor,
                               value: status,
                               onToggle: (val) {
                                 setState(() {
                                   status = val;
                                 });
                               }),
-
-                              SizedBox(width: 10,),
-
-                              Text(
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
                             'Remember me',
                             style: TextStyle(
                                 color: kButtonColor,
@@ -169,29 +266,45 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.only(
                           top: 36.0, left: 30, right: 30, bottom: 35.0),
                       child: MaterialButton(
+                        splashColor: kBackground,
+                        hoverColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),
                         ),
                         height: 45.0,
                         color: kButtonColor,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                        onPressed: () async {
+                          final SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.setString(
+                              'email', emailController.text);
+                          if (formKey.currentState!.validate() && !loading) {
+                            setState(() {
+                              loading = true;
+                            });
+                            login(
+                                email: emailController.text,
+                                password: passwordController.text);
+                          }
                         },
-                        child: Text(
-                          'Sign In',
-                          textAlign: TextAlign.center,
-                          style: kButtontextstyle,
-                        ),
+                        child: loading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white))
+                            : Text(
+                                'Sign In',
+                                textAlign: TextAlign.center,
+                                style: kButtontextstyle,
+                              ),
                       ),
                     ),
 
-                    //Forget Pasword Request
+                    //Forget Password Request
                     Center(
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, ForgetPassword.id);
+                        },
                         child: Text(
                           'forgot password?',
                           textAlign: TextAlign.right,
@@ -200,42 +313,33 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    // Sign Up Redurection
+                    // Sign Up Redirection
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
-                        top: 260,
+                        top: 110,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account? ",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: kGeneralbodytextColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            width: 2.0,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignUp()));
-                            },
-                            child: Text(
-                              'Sign Up',
-                              textAlign: TextAlign.right,
-                              style: kForgetpasswordstyle,
-                            ),
-                          ),
-                        ],
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, SignUp.id);
+                          },
+                          child: RichText(
+                              text: TextSpan(
+                                  text: "Don't have an account? ",
+                                  style: TextStyle(
+                                      color: kGeneralbodytextColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                TextSpan(
+                                    text: 'Sign Up',
+                                    style: kForgetpasswordstyle)
+                              ])),
+                        ),
                       ),
                     ),
                   ],

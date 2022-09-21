@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:batnf/Models/events_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class AppEvents {
-  final String baseUrl = 'https://nubiaville.com/events/api/';
+  final String baseUrl = 'https://dalexintegrated.com/events/api/';
 
   Future<List<EventModel>> getAllEvents() async {
     String url = 'getallevents';

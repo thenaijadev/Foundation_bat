@@ -7,7 +7,6 @@ import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/promotion.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReuseableBottomBar extends StatefulWidget {
   const ReuseableBottomBar({
@@ -26,10 +25,9 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: kButtonColor.withOpacity(0.6),
-            offset: Offset(0,7),
-            blurRadius: 15.0
-          ),
+              color: kButtonColor.withOpacity(0.6),
+              offset: Offset(0, 7),
+              blurRadius: 15.0),
         ],
         color: kBackground,
         borderRadius: BorderRadius.only(
@@ -41,102 +39,111 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           //Home
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.home),),
-                Text('Home')
-              ],
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
+            ),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/home.png', color: kButtonColor,),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Home')
+                ],
+              ),
             ),
           ),
 
           //Events
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EventCenter(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.calendarAlt),),
-                Text('Events')
-              ],
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, EventCenter.id),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/Calendar.png', color: kButtonColor),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Events')
+                ],
+              ),
             ),
           ),
 
           //Games
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Promotion(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.gamepad),),
-                Text('Games')
-              ],
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Promotion(),
+              ),
+            ),
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/game.png', color: kButtonColor),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text('Games')
+                ],
+              ),
             ),
           ),
-// COme back and fic the redirection
+
           //Projects
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProjectPage(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.tasks),),
-                Text('Projects')
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProjectPage.id);
+            },
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/pro.png', color: kButtonColor),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('Projects')
+                ],
+              ),
             ),
           ),
 
           //News
-          Container(
-            color: kBackground,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => News(),
-                          ),
-                        );
-                      }, icon: Icon(FontAwesomeIcons.newspaper),),
-                Text('News')
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, News.id);
+            },
+            child: Container(
+              color: kBackground,
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/news.svg', color: kButtonColor),
+                  SizedBox(
+                    height: 10.1,
+                  ),
+                  Text('News')
+                ],
+              ),
             ),
           ),
         ],

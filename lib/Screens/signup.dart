@@ -1,15 +1,26 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, non_constant_identifier_names, curly_braces_in_flow_control_structures, use_build_context_synchronously
+
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:dropdownfield2/dropdownfield2.dart';
+
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../providers/event_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
+  static String id = 'signup';
+
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -17,22 +28,186 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
-  bool Newagreement = false;
-  bool status = false;
-  String password = '';
+  List<String> states = [
+    'Abia',
+    'Abuja',
+    'Adamawa',
+    'Akwa Ibom',
+    'Anambara',
+    'Bauchi',
+    'Bayelsa',
+    'Benue',
+    'Borno',
+    'Cross River',
+    'Delta',
+    'Ebonyi',
+    'Edo',
+    'Ekiti',
+    'Enugu',
+    'Gombe',
+    'Imo',
+    'Jigawa',
+    'Kaduna',
+    'Kano',
+    'Katsina',
+    'Kabbi',
+    'Kogi',
+    'Kwara',
+    'Lagos',
+    'Nasarawa',
+    'Niger',
+    'Ogun',
+    'Ondo',
+    'Osun',
+    'Oyo',
+    'Plateau',
+    'Rivers',
+    'Sokoto',
+    'Taraba',
+    'Yobe',
+    'Zamfara',
+  ];
   bool hidepassword = true;
-
-  String? selectedItem;
-
+  final df = DateFormat('yyyy-MM-dd');
+  String selectedState = '';
+  DateTime? _myDateTime;
+  bool loading = false;
+  bool status = false;
   final _formKey = GlobalKey<FormState>();
+  void _togglePasswordView() {
+    setState(() {
+      hidepassword = !hidepassword;
+    });
+  }
 
-  TextEditingController _usernameTextController = TextEditingController();
-  TextEditingController _locationTextController = TextEditingController();
-  TextEditingController _dobTextController = TextEditingController();
-
+  TextEditingController _firstnameTextController = TextEditingController();
+  TextEditingController _lastnameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
-
   TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _passwordconfirmTextController =
+      TextEditingController();
+  TextEditingController _locationTextController = TextEditingController();
+  TextEditingController _date = TextEditingController();
+
+  late String userfirstname;
+  late String userlastname;
+  late String useremail;
+  late String userlocation;
+  late String userdob;
+
+  Future<void> signup(
+      {required String firstname,
+      required String lastname,
+      required String email,
+      required String password,
+      required String passwordconfirm,
+      required String location,
+      required String date}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await http
+        .post(Uri.parse('https://dalexintegrated.com/events/api/create'),
+            body: jsonEncode({
+              "first_name": firstname,
+              "last_name": lastname,
+              "email": email,
+              "password": password,
+              "password_confirm": passwordconfirm,
+              "location": location,
+              "dob": date,
+            }),
+            headers: {"Content-Type": "application/json"});
+
+    // var data = jsonDecode(response.body);
+    // print(data);
+    if (mounted)
+      setState(() {
+        loading = false;
+      });
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      if (data['status'] == 200) {
+        String username = data['last_name'];
+        int userid = int.parse(data['userId']).toInt();
+
+        Provider.of<EventProvider>(context, listen: false).userName = username;
+
+        Provider.of<EventProvider>(context, listen: false).userId = userid;
+        preferences.setInt('userId', userid);
+
+        preferences.setString('email', email);
+        preferences.setBool('autoLogin', true);
+        preferences.setString('username', username);
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SignIn()));
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: data['message'],
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    }
+
+    // if (response.statusCode == 405) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Too Young to Register',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 201) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Success, Unable to send to mail',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 401) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Password Mismatch',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 402) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Registration Failed, Try again',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 404) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'No Data Submitted',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 200) {
+    //   var data = jsonDecode(response.body);
+    //   print(data);
+    //   Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => SignIn()));
+    // } else if (response.statusCode == 406) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Invalid Email',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // } else if (response.statusCode == 407) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text(
+    //     'Email Already Exist',
+    //     textAlign: TextAlign.center,
+    //   )));
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,20 +225,11 @@ class _SignUpState extends State<SignUp> {
                     // logo
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 15.0, top: 75.0, left: 158.0, right: 159.0),
+                          bottom: 10.0, top: 70.0, left: 140.0, right: 140.0),
                       child: Center(
                         child: Image.asset(
                           'assets/logo.png',
                         ),
-                      ),
-                    ),
-
-                    // BATNF Label
-                    Center(
-                      child: Text(
-                        'BATNF',
-                        textAlign: TextAlign.left,
-                        style: kAppnametextstyle,
                       ),
                     ),
 
@@ -77,31 +243,44 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    //Request for User Name
+                    //Request for First Name
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 20, left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45.0,
-                        child: TextField(
-                          controller: _usernameTextController,
-                          decoration: InputDecoration(
-                            hintText: 'Full Name',
-                            hintStyle: kTextboxhintstyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(45.0),
-                              ),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                                color: kTextfieldborderColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            prefixIcon:
-                                Icon(Icons.person, color: kTextboxhintColor),
-                          ),
+                      child: SizedBox(
+                        height: 65.0,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.name,
+                          cardChild: Icon(FontAwesomeIcons.user,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: _firstnameTextController,
+                          label: "First Name",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Name can not be empty"
+                                : null;
+                          },
+                        ),
+                      ),
+                    ),
+
+                    // Request for LastName
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 20.0),
+                      child: SizedBox(
+                        height: 65.0,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.name,
+                          cardChild: Icon(FontAwesomeIcons.user,
+                              size: 15, color: kTextboxhintColor),
+                          textcontroller: _lastnameTextController,
+                          label: "Last Name",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Name can not be empty"
+                                : null;
+                          },
                         ),
                       ),
                     ),
@@ -110,60 +289,37 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45.0,
+                      child: SizedBox(
+                        height: 65.0,
                         child: ReuseableTextField(
+                          keyboard: TextInputType.emailAddress,
                           cardChild: Icon(FontAwesomeIcons.envelope,
-                              color: kTextboxhintColor),
+                              size: 15, color: kTextboxhintColor),
                           textcontroller: _emailTextController,
                           label: "Email",
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Email can not be empty"
+                                : null;
+                          },
                         ),
                       ),
                     ),
 
-                    //Request for Location
+                    //Request for Password
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45.0,
-                        child: ReuseableTextField(
-                          cardChild: Icon(FontAwesomeIcons.mapMarkerAlt,
-                              color: kTextboxhintColor),
-                          textcontroller: _locationTextController,
-                          label: "Location",
-                        ),
-                      ),
-                    ),
-
-                    //Request for Date of Birth
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 20.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45.0,
-                        child: ReuseableTextField(
-                          cardChild: Icon(FontAwesomeIcons.calendarAlt,
-                              color: kTextboxhintColor),
-                          textcontroller: _dobTextController,
-                          label: "DOB",
-                        ),
-                      ),
-                    ),
-
-                    //Request for User Password
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 21.0),
-                      child: Container(
-                        color: kBackground,
-                        height: 45.0,
-                        child: TextField(
+                      child: SizedBox(
+                        height: 65.0,
+                        child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
+                          obscureText: hidepassword,
                           controller: _passwordTextController,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
                             hintText: 'Enter Your Password',
                             hintStyle: kTextboxhintstyle,
                             border: OutlineInputBorder(
@@ -176,15 +332,15 @@ class _SignUpState extends State<SignUp> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon:
-                                Icon(Icons.lock, color: kTextboxhintColor),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
                             suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidepassword = !hidepassword;
-                                });
-                              },
+                              onPressed: _togglePasswordView,
                               icon: Icon(
+<<<<<<< HEAD
+=======
+                                  size: 19.0,
+>>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
                                       : FontAwesomeIcons.eyeSlash,
@@ -195,42 +351,124 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    // Remember me
+                    //Confirm Password
                     Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          FlutterSwitch(
-                              height: 20,
-                              width: 40,
-                              toggleSize: 12,
-                              activeColor: kButtonColor,
-                              value: status,
-                              onToggle: (val) {
-                                setState(() {
-                                  status = val;
-                                });
-                              }),
-                          SizedBox(
-                            width: 10,
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 20.0),
+                      child: SizedBox(
+                        height: 65.0,
+                        child: TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
+                          obscureText: hidepassword,
+                          controller: _passwordconfirmTextController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: 'Confirm Password',
+                            hintStyle: kTextboxhintstyle,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: kTextboxhintColor),
+                            suffixIcon: IconButton(
+                              onPressed: _togglePasswordView,
+                              icon: Icon(
+                                  size: 19.0,
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash),
+                            ),
                           ),
-                          Text(
-                            'Remember me',
-                            style: TextStyle(
-                                color: kButtonColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+
+                    //Request for Location
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 22.0),
+                      child: DropDownField(
+                          // setter: (dynamic value) {
+                          //   selectedState = value;
+                          // },
+                          onValueChanged: (value) {
+                            setState(() {
+                              selectedState = value;
+                            });
+                          },
+                          itemsVisibleInDropdown: 5,
+                          controller: _locationTextController,
+                          hintText: "Location",
+                          textStyle: kBodyTextStyle,
+                          enabled: true,
+                          items: states),
+                    ),
+
+                    //Request for Date of Birth
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30.0, right: 30.0, bottom: 21.0),
+                      child: SizedBox(
+                        height: 65.0,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            userdob = value;
+                          },
+                          readOnly: true,
+                          onTap: () async {
+                            _myDateTime = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1789),
+                              lastDate: DateTime.now(),
+                            );
+
+                            if (_myDateTime != null) {
+                              setState(() {
+                                _date.text = df.format(_myDateTime!);
+                              });
+                            }
+                          },
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Date of Birth is Required"
+                                : null;
+                          },
+                          controller: _date,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: 'YYYY-MM-DD',
+                            hintStyle: kTextboxhintstyle,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            prefixIcon: Icon(FontAwesomeIcons.calendarAlt,
+                                size: 15, color: kTextboxhintColor),
                           ),
-                        ],
+                        ),
                       ),
                     ),
 
                     //Sign Up Button
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 36.0, left: 30, right: 30, bottom: 35.0),
+                          top: 36.0, left: 30, right: 30, bottom: 112.0),
                       child: MaterialButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45.0),
@@ -238,19 +476,34 @@ class _SignUpState extends State<SignUp> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignIn()));
+                          if (_formKey.currentState!.validate() && !loading) {
+                            setState(() {
+                              loading = true;
+                            });
+                            signup(
+                                firstname: _firstnameTextController.text,
+                                lastname: _lastnameTextController.text,
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text,
+                                passwordconfirm:
+                                    _passwordconfirmTextController.text,
+                                location: _locationTextController.text,
+                                date: _date.text);
+                          }
                         },
-                        child: Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: kButtontextstyle,
-                        ),
+                        child: loading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white))
+                            : Text(
+                                'Sign Up',
+                                textAlign: TextAlign.center,
+                                style: kButtontextstyle,
+                              ),
                       ),
                     ),
 
+<<<<<<< HEAD
                     //Forget Pasword Request
                     Center(
                       child: GestureDetector(
@@ -264,11 +517,14 @@ class _SignUpState extends State<SignUp> {
                     ),
 
                     // Sign Up Redurection
+=======
+                    // Sign In Redirection
+>>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
-                        top: 260,
                       ),
+<<<<<<< HEAD
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -299,6 +555,32 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ],
+=======
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, SignIn.id);
+                          },
+                          child: RichText(
+                              text: TextSpan(
+                                  text: "Already have an account? ",
+                                  style: TextStyle(
+                                      color: kGeneralbodytextColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                  children: [
+                                TextSpan(
+                                  text: 'Sign In',
+                                  style: kForgetpasswordstyle,
+                                  onEnter: (event) {
+                                    Navigator.pushNamed(context, SignIn.id);
+                                  },
+                                )
+                              ])),
+                        ),
+>>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                       ),
                     ),
                   ],

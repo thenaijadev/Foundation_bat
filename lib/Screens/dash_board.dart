@@ -1,21 +1,33 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/welcone_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/signin.dart';
+import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/Screens/single_news_page.dart';
-import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
+import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:provider/provider.dart';
-// import 'dart:convert';
+
+import '../Models/completed_model.dart';
+import '../Models/events_model.dart';
+import '../providers/completed_provider.dart';
+import '../providers/news_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class HomePage extends StatefulWidget {
+  static String id = 'home';
   HomePage({Key? key}) : super(key: key);
 
   @override
@@ -24,7 +36,41 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    getId();
+    FlutterNativeSplash.remove();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+    Provider.of<EventProvider>(context, listen: false).getAllEvents();
+    Provider.of<CompletedProvider>(context, listen: false)
+        .getCompletedProjects();
+  }
+
+  getId() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    EventProvider provider = Provider.of<EventProvider>(context, listen: false);
+    bool exist = sharedPreferences.containsKey('autoLogin') &&
+        sharedPreferences.containsKey('userId') &&
+        sharedPreferences.containsKey('username');
+    if (exist) {
+      bool autoLogin = sharedPreferences.getBool('autoLogin')!;
+
+      if (autoLogin) {
+        int userID = sharedPreferences.getInt('userId')!;
+        String username = sharedPreferences.getString('username')!;
+        provider.userId = userID;
+        provider.userName = username;
+      }
+    }
+    if (mounted) setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
+    NewsProvider newsProvider = Provider.of<NewsProvider>(context);
+    EventProvider eventProvider = Provider.of<EventProvider>(context);
+    CompletedProvider completedProvider =
+        Provider.of<CompletedProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -35,16 +81,16 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Container for search box etc
             Container(
-              height: 173.0,
+              height: 200.0,
               color: kBackground,
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                            EdgeInsets.only(top: 45, bottom: 20, right: 195),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
@@ -53,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                          right: 30,
                           top: 47,
                           bottom: 22,
                         ),
@@ -63,20 +108,37 @@ class _HomePageState extends State<HomePage> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
+<<<<<<< HEAD
                               FontAwesomeIcons.solidBell,
                               size: 15,
+=======
+                              size: 15,
+                              FontAwesomeIcons.signOutAlt,
+>>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
                               color: kButtonColor),
-                          onPressed: () {},
+                          onPressed: () async {
+                            final SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setBool('autoLogin', false);
+
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                WelcomePage.id,
+                                (Route<dynamic> route) => false);
+                          },
                         ),
-                      ),
+                      )
                     ],
                   ),
+                  // Text("Welcome $Provider.of<EventProvider>(context, listen: false).userName")
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                    margin: EdgeInsets.only(
+                        left: 30, right: 20, bottom: 21, top: 10),
                     color: kBackground,
                     height: 45.0,
                     child: TextField(
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(top: 2),
                         hintText: 'Search',
                         hintStyle: kTextboxhintstyle,
                         prefixIcon: Icon(
@@ -104,9 +166,235 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   //Ads
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 30),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 10),
                     color: kBackground,
                     child: Image.asset('assets/Ads.png'),
+                  ),
+
+                  // Project List Header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30.0, left: 30.0, right: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Projects',
+                          style: kPageHeader,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, ProjectPage.id);
+                          },
+                          child: Text(
+                            'See All',
+                            style: kForgetpasswordstyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 205,
+                    width: 237,
+                    child: completedProvider.allCompletedProjects == null
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : completedProvider.allCompletedProjects!.isEmpty
+                            ? Center(
+                                child: MaterialButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'No Recent Completed Project',
+                                    style: kBodyTextStyle,
+                                  ),
+                                ),
+                              )
+                            : ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: completedProvider
+                                    .allCompletedProjects!.length,
+                                itemBuilder: ((context, index) {
+                                  CompletedModel completed = completedProvider
+                                      .allCompletedProjects![index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CompletedProjectDetails(
+                                                      completed)));
+                                    },
+                                    child: Container(
+                                      height: 202,
+                                      width: 237,
+                                      margin: EdgeInsets.only(
+                                          left: 36.27,
+                                          right: 15.0,
+                                          bottom: 9.0),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [kBoxshadow],
+                                        color: kBackground,
+                                        borderRadius: BorderRadius.circular(18),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 145,
+                                            width: 217,
+                                            margin: EdgeInsets.only(
+                                                left: 9.0, right: 10.15),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: CachedNetworkImage(
+                                                  imageUrl:
+                                                      completed.projectImage,
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 16, left: 39, bottom: 16),
+                                            height: 19,
+                                            child: Text(
+                                              completed.projectTitle,
+                                              style: kPageHeader,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ),
+                  ),
+
+                  //Upcoming events header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Upcoming Events',
+                          style: kPageHeader,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, EventCenter.id);
+                          },
+                          child: Text(
+                            'See All',
+                            style: kForgetpasswordstyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 320,
+                    width: 237,
+                    child: eventProvider.allEvents == null
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : eventProvider.allEvents!.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'No Recent Event',
+                                  style: kBodyTextStyle,
+                                ),
+                              )
+                            : ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: eventProvider.allEvents!.length,
+                                itemBuilder: ((context, index) {
+                                  EventModel event =
+                                      eventProvider.allEvents![index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetails(event)));
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: 36.27,
+                                          right: 15.0,
+                                          bottom: 9.0),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [kBoxshadow],
+                                        color: kBackground,
+                                        borderRadius: BorderRadius.circular(18),
+                                      ),
+                                      height: 255.0,
+                                      width: 237.0,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding:
+                                                EdgeInsets.only(bottom: 6.0),
+                                            margin: EdgeInsets.only(
+                                                left: 9.0, right: 10.15),
+                                            height: 145,
+                                            width: 218,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: CachedNetworkImage(
+                                                  imageUrl: event.eventFlier,
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 6.0,
+                                                left: 9.0,
+                                                bottom: 10.0),
+                                            child: Text(
+                                              event.eventName,
+                                              style: kPageHeader,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 9.0, bottom: 10.0),
+                                            child: Text(
+                                              event.eventStartDate,
+                                              style: kWelcomesubstyle,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0, bottom: 27.0),
+                                            child: ListTile(
+                                              leading: Icon(
+                                                FontAwesomeIcons.mapMarkerAlt,
+                                                color: kTextboxhintColor,
+                                              ),
+                                              title: Text(
+                                                event.venue,
+                                                textAlign: TextAlign.left,
+                                                style: kWelcomesubstyle,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ),
                   ),
 
                   // News list header
@@ -144,277 +432,115 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Expanded(
-                          child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: ((context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 23.0, right: 23.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             NewsDetails()));
-                                  },
-                                  child: Container(
-                                    color: kBackground,
-                                    height: 120,
-                                    width: 375,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              bottom: 15.0, right: 15.0),
-                                          height: 120,
-                                          width: 120,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image:
-                                                  AssetImage('assets/news.png'),
-                                            ),
-                                            color: kBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            height: 120,
-                                            margin:
-                                                EdgeInsets.only(bottom: 15.0),
-                                            color: kBackground,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              // ignore: prefer_const_literals_to_create_immutables
-                                              children: [
-                                                Text(
-                                                  'Lorem Ipsum',
-                                                  style: kNewsSubHeader,
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                      color: kBackground,
-                                                      height: 7.0,
-                                                      child: Text(
-                                                        'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: kBodyTextStyle,
-                                                      )),
-                                                ),
-                                                Text(
-                                                  'Dec 21 2021',
-                                                  textAlign: TextAlign.left,
-                                                  style: kNewsDateSTyle,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-
-                  // Project List Header
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30.0, left: 30.0, right: 30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Projects',
-                          style: kPageHeader,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProjectPage()));
-                          },
-                          child: Text(
-                            'See All',
-                            style: kForgetpasswordstyle,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 205,
-                    width: 237,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      itemBuilder: ((context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProgressDetails()));
-                          },
-                          child: Container(
-                            height: 202,
-                            width: 237,
-                            margin: EdgeInsets.only(
-                                left: 36.27, right: 15.0, bottom: 9.0),
-                            decoration: BoxDecoration(
-                              boxShadow: [kBoxshadow],
-                              color: kBackground,
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin:
-                                      EdgeInsets.only(left: 9.0, right: 10.15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/project2.png',
+                          child: newsProvider.allNews == null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : newsProvider.allNews!.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        'No Latest News',
+                                        style: kBodyTextStyle,
                                       ),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: newsProvider.allNews!.length,
+                                      itemBuilder: ((context, index) {
+                                        NewsModel news =
+                                            newsProvider.allNews![index];
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 23.0, right: 23.0),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          NewsDetails(news)));
+                                            },
+                                            child: Container(
+                                              margin: EdgeInsets.only(top: 25),
+                                              decoration: BoxDecoration(
+                                                boxShadow: [kBoxshadow],
+                                                color: kBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                              ),
+                                              height: 120,
+                                              width: 375,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 15.0,
+                                                        right: 15.0),
+                                                    height: 120,
+                                                    width: 120,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                      child: CachedNetworkImage(
+                                                          imageUrl:
+                                                              news.newsImage,
+                                                          fit: BoxFit.cover),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(
+                                                      height: 120,
+                                                      margin: EdgeInsets.only(
+                                                          bottom: 15.0),
+                                                      color: kBackground,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        // ignore: prefer_const_literals_to_create_immutables
+                                                        children: [
+                                                          Text(
+                                                            news.title,
+                                                            style:
+                                                                kNewsSubHeader,
+                                                          ),
+                                                          Expanded(
+                                                            child: Container(
+                                                                color:
+                                                                    kBackground,
+                                                                height: 7.0,
+                                                                child: Text(
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .left,
+                                                                  news.information,
+                                                                  style:
+                                                                      kBodyTextStyle,
+                                                                )),
+                                                          ),
+                                                          Text(
+                                                            textAlign:
+                                                                TextAlign.left,
+                                                            news.entryDate,
+                                                            style:
+                                                                kNewsDateSTyle,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
                                     ),
-                                  ),
-                                  height: 145,
-                                  width: 218,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 16.0, left: 39.0, bottom: 10.0),
-                                  child: Text(
-                                    'Lorem Ispum Project',
-                                    style: kPageHeader,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-
-                  //Upcoming events header
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Upcoming Events',
-                          style: kPageHeader,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => EventCenter()));
-                          },
-                          child: Text(
-                            'See All',
-                            style: kForgetpasswordstyle,
-                          ),
                         )
                       ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 320,
-                    width: 237,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 3,
-                      itemBuilder: ((context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => EventDetails()));
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                left: 36.27, right: 15.0, bottom: 9.0),
-                            decoration: BoxDecoration(
-                              boxShadow: [kBoxshadow],
-                              color: kBackground,
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            height: 255.0,
-                            width: 237.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.only(bottom: 6.0),
-                                  margin:
-                                      EdgeInsets.only(left: 9.0, right: 10.15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/oscars.png'),
-                                    ),
-                                  ),
-                                  height: 145,
-                                  width: 218,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 6.0, left: 9.0, bottom: 10.0),
-                                  child: Text(
-                                    '94th Academy Awards',
-                                    style: kPageHeader,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 9.0, bottom: 10.0),
-                                  child: Text(
-                                    'Sunday, March 27, 2022',
-                                    style: kWelcomesubstyle,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, bottom: 27.0),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      FontAwesomeIcons.mapMarkerAlt,
-                                      color: kTextboxhintColor,
-                                    ),
-                                    title: Text(
-                                      '36 Guild Street London, UK',
-                                      textAlign: TextAlign.left,
-                                      style: kWelcomesubstyle,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
                     ),
                   ),
                   SizedBox(

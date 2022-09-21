@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
@@ -25,64 +26,49 @@ class _PromotionState extends State<Promotion> {
           // crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.start,
           children: [
+                //Game Logo
             Row(
               children: [
-            // Container for search box etc
-            Column(
-              children: [
-                Row(
+
+                Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 24.0, top: 45, bottom: 30),
-                      color: kBackground,
-                      height: 40.0,
-                      child: Image.asset(
-                        'assets/logo.png',
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: 50, left: 10, bottom: 36, right: 142),
-                      color: kBackground,
-                      height: 29,
-                      child: Text(
-                        'Games',
-                        style: kPageHeader,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 47,
-                        bottom: 22,
-                      ),
-                      decoration: BoxDecoration(
-                          color: kSignupbuttonColor.withOpacity(0.15),
-                          shape: BoxShape.circle),
-                      height: 36,
-                      child: IconButton(
-                        icon: Icon(
-                            FontAwesomeIcons.solidBell,
-                            size: 15,
-                            color: kButtonColor),
-                        onPressed: () {},
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(left: 24.0, top: 45, bottom: 30, right: 20),
+                          color: kBackground,
+                          height: 40.0,
+                          child: Image.asset(
+                            'assets/logo.png',
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: 50, bottom: 26, right: 140),
+                          color: kBackground,
+                          height: 29,
+                          child: Text(
+                            'Games',
+                            style: kPageHeader,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
-            ),],
             ),
             Padding(
-              padding:
-                  const EdgeInsets.only(left: 30.0, bottom: 50.0),
+              padding: const EdgeInsets.only(left: 30.0, bottom: 50.0),
               child: Text(
                 'Play to win!',
                 style: kBodyTextStyle,
               ),
             ),
-    
+
             //Games display
-    
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -96,7 +82,9 @@ class _PromotionState extends State<Promotion> {
                 )
               ],
             ),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -110,7 +98,9 @@ class _PromotionState extends State<Promotion> {
                 )
               ],
             ),
-            SizedBox(height: 342,),
+            SizedBox(
+              height: 342,
+            ),
           ],
         ),
         bottomNavigationBar: ReuseableBottomBar(),

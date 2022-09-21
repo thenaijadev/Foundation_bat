@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 // import 'package:batnf/Models/events_model.dart';
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
@@ -14,6 +15,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EventCenter extends StatefulWidget {
+  static String id = 'event';
   EventCenter({Key? key}) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
+<<<<<<< HEAD
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -107,157 +110,244 @@ class _EventCenterState extends State<EventCenter> {
                               color: kTextfieldborderColor,
                               width: 2.0,
                             ),
+=======
+        body: RefreshIndicator(
+          color: kBackground,
+          backgroundColor: kButtonColor,
+          onRefresh: () async {
+            await Provider.of<EventProvider>(context, listen: false)
+                .getAllEvents();
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Container for search box etc
+              Container(
+                color: kBackground,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                          color: kBackground,
+                          height: 40.0,
+                          child: Image.asset(
+                            'assets/logo.png',
+>>>>>>> 442cf35f4c1826c22300c4ba4cc7d88d8cf7fe8f
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: 50, left: 10, bottom: 26, right: 130),
+                          color: kBackground,
+                          height: 29,
+                          child: Text(
+                            'Events',
+                            style: kPageHeader,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (provider.allEvents != null &&
+                        provider.allEvents!.isNotEmpty)
+                      Container(
+                        margin: EdgeInsets.only(left: 30, right: 30, bottom: 21),
+                        color: kBackground,
+                        height: 45.0,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: 'Search',
+                            hintStyle: kTextboxhintstyle,
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.search,
+                              size: 13.0,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            Expanded(
-              child: provider.allEvents == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : provider.allEvents!.isEmpty
-                      ? Center(
-                          child: Text('No Events'),
-                        )
-                      : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: provider.allEvents!.length,
-                          itemBuilder: ((context, index) {
-                            EventModel event = provider.allEvents![index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            EventDetails(event)));
-                              },
-                              child: Container(
-                                height: 124,
-                                margin: EdgeInsets.only(
-                                  left: 30,
-                                  right: 30,
-                                  bottom: 30.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: kBackground,
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  boxShadow: [kBoxshadow],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 110,
-                                      width: 110,
-                                      margin: EdgeInsets.only(
-                                          bottom: 7.0, top: 7.0, left: 9.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(18),
-                                        child: CachedNetworkImage(
-                                            imageUrl: 'https://portswigger.net/cms/images/63/12/0c8b-article-211117-linux-rng.jpg',
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 93,
+              Expanded(
+                child: provider.allEvents == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : provider.allEvents!.isEmpty
+                        ? Center(
+                            child: Text('No Events,', style: kBodyTextStyle,),
+                          )
+                        : ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: provider.allEvents!.length,
+                            itemBuilder: ((context, index) {
+                              EventModel event = provider.allEvents![index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EventDetails(event)));
+                                },
+                                child: Container(
+                                  height: 124,
+                                  margin: EdgeInsets.only(
+                                    left: 30,
+                                    right: 30,
+                                    bottom: 30.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: kBackground,
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    boxShadow: [kBoxshadow],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: 110,
+                                        width: 110,
                                         margin: EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 10,
-                                            left: 10.0,
-                                            right: 6.0),
-                                        color: kBackground,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // ignore: prefer_const_literals_to_create_immutables
-                                          children: [
-                                            Container(
-                                              color: kBackground,
-                                              height: 19,
-                                              child: Text(
-                                                event.eventDate,
-                                                style: kEventDatestyle,
-                                              ),
-                                            ),
-                                            Container(
-                                              color: kBackground,
-                                              height: 38,
-                                              child: Text(
-                                                event.eventName,
-                                                style: kPageHeader,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                color: kBackground,
-                                                height: 86,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          top: 6.67,
-                                                          bottom: 23.67),
-                                                      color: kBackground,
-                                                      child: Icon(
-                                                        FontAwesomeIcons
-                                                            .mapMarkerAlt,
-                                                        size: 14.67,
-                                                        color:
-                                                            kTextboxhintColor,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                          top: 5,
-                                                          right: 11,
-                                                        ),
-                                                        height: 32,
-                                                        width: 207,
-                                                        color: kBackground,
-                                                        child: Text(
-                                                          event.venue,
-                                                          textAlign:
-                                                              TextAlign.left,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  kTextboxhintColor,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontFamily:
-                                                                  'Inter',
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                            // Event Image
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(18),
+                                          child: CachedNetworkImage(
+                                              imageUrl: event.eventFlier,
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        child: Container(
+                                          height: 93,
+                                          margin: EdgeInsets.only(
+                                              // top: 5,
+                                              left: 10.0,
+                                              right: 6.0),
+                                          color: kBackground,
+                                          //Event Information
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Text(
+                                                        event.eventStartDate,
+                                                        style: kEventDatestyle,
+                                                      ),
+                                                      Text(
+                                                        event.eventName,
+                                                        style: kPageHeader,
+                                                      ),
+
+                                              //Event Name
+                                              // Expanded(
+                                              //   child: Container(
+                                              //     color: kButtonColor,
+                                              //     height: 70,
+                                              //     child: Column(
+                                              //       crossAxisAlignment: CrossAxisAlignment.start,
+                                              //       children: [
+                                              //         Text(
+                                              //           event.eventStartDate,
+                                              //           style: kEventDatestyle,
+                                              //         ),
+                                              //         // SizedBox(
+                                              //         //   height: 10,
+                                              //         // ),
+                                              //         Text(
+                                              //           event.eventName,
+                                              //           style: kPageHeader,
+                                              //         ),
+                                                      
+                                              //       ],
+                                              //     ),
+                                              //   ),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 10,
+                                              // ),
+
+                                              // //Event start date
+                                              // Expanded(
+                                              //   child: Container(
+                                              //     color: kBackground,
+                                              //     height: 19,
+                                              //     child: Text(
+                                              //       event.eventStartDate,
+                                              //       style: kEventDatestyle,
+                                              //     ),
+                                              //   ),
+                                              // ),
+
+                                              
+
+                                              //Event Location
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                // ignore: prefer_const_literals_to_create_immutables
+                                                children: [
+                                                  //Event Location Icon
+                                                  Icon(
+                                                    FontAwesomeIcons
+                                                        .mapMarkerAlt,
+                                                    size: 16.67,
+                                                    color:
+                                                        kTextboxhintColor,
+                                                  ),
+                                              
+                                                  //Event Location
+                                                  Text(
+                                                    textAlign:
+                                                        TextAlign.left,
+                                                    event.eventLocation,
+                                                    style: TextStyle(
+                                                        color:
+                                                            kTextboxhintColor,
+                                                        fontStyle:
+                                                            FontStyle
+                                                                .normal,
+                                                        fontFamily:
+                                                            'Inter',
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight
+                                                                .w400),
+                                                  ),
+                                                ],
+                                              )
+                                            
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          })),
-            ),
-          ],
+                              );
+                            })),
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: ReuseableBottomBar(),
       ),
