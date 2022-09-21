@@ -80,26 +80,6 @@ class _ProjectPageState extends State<ProjectPage> {
                         height: 29,
                         child: Text('Projects', style: kPageHeader),
                       ),
-                      Container(
-                        height: 36,
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                          color: kSignupbuttonColor.withOpacity(0.15),
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, SignIn.id);
-                          },
-                          icon: Icon(
-                              size: 15,
-                              FontAwesomeIcons.signOutAlt,
-                              color: kButtonColor),
-                        ),
-                      ),
                     ],
                   ),
                   Container(
@@ -352,7 +332,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       Expanded(
                                                         child: RichText(
                                                             text: TextSpan(
-                                                                text: 'Started: ',
+                                                                text:
+                                                                    'Started: ',
                                                                 style:
                                                                     kLandpageskiptextstyle,
                                                                 // ignore: prefer_const_literals_to_create_immutables
@@ -467,7 +448,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                           height: 104,
                                           child: Row(
                                             children: [
-
                                               // Completed Image
                                               Container(
                                                 margin: EdgeInsets.only(
@@ -504,7 +484,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             .start,
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [
-
                                                       // Project Title
                                                       Expanded(
                                                         child: Container(
@@ -521,7 +500,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       Expanded(
                                                         child: RichText(
                                                             text: TextSpan(
-                                                                text: 'Started: ',
+                                                                text:
+                                                                    'Started: ',
                                                                 style:
                                                                     kLandpageskiptextstyle,
                                                                 // ignore: prefer_const_literals_to_create_immutables
@@ -641,7 +621,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                             ),
                                             child: Row(
                                               children: [
-
                                                 //pending Project Image
                                                 Container(
                                                   margin: EdgeInsets.only(
@@ -671,12 +650,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       bottom: 10,
                                                       right: 6.0),
                                                   child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-
                                                       //Project Title
                                                       Expanded(
                                                         child: Container(

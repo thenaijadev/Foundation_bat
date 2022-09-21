@@ -439,7 +439,12 @@ class _HomePageState extends State<HomePage> {
                                                           NewsDetails(news)));
                                             },
                                             child: Container(
-                                              color: kBackground,
+                                              margin: EdgeInsets.only(top: 25),
+                                              decoration: BoxDecoration(
+                                                boxShadow: [kBoxshadow],
+                                                color: kBackground,
+                                                borderRadius: BorderRadius.circular(18),
+                                              ),
                                               height: 120,
                                               width: 375,
                                               child: Row(
