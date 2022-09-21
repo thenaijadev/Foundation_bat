@@ -35,14 +35,8 @@ class _SignInState extends State<SignIn> {
   }
 
   Future<void> login({required String email, required String password}) async {
-<<<<<<< HEAD
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.;
-    
-=======
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
->>>>>>> 88651a67fde45594a91c11209bc8815b5cccf708
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
             // http://geeteefarms.com/events/api/login
@@ -174,7 +168,7 @@ class _SignInState extends State<SignIn> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool exist = await sharedPreferences.containsKey('email');
     if (exist) {
-      String email = await sharedPreferences.getString('email');
+      String email = await sharedPreferences.getString('email')!;
       emailController.text = email;
     }
   }
