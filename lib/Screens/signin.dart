@@ -35,7 +35,8 @@ class _SignInState extends State<SignIn> {
 
   Future<void> login({required String email, required String password}) async {
     // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.setString(email, emailController.text);
+    // sharedPreferences.;
+    
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
             // http://geeteefarms.com/events/api/login
@@ -62,6 +63,7 @@ class _SignInState extends State<SignIn> {
               msg: "Login Successful",
               textColor: kBackground,
               backgroundColor: kButtonColor);
+              // Navigator.pushNamedAndRemoveUntil(context, newRouteName, (route) => false)
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         } else {
