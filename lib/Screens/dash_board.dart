@@ -63,8 +63,8 @@ class _HomePageState extends State<HomePage> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.solidBell,
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () {},
                         ),
@@ -203,15 +203,15 @@ class _HomePageState extends State<HomePage> {
                                                       color: kBackground,
                                                       height: 7.0,
                                                       child: Text(
+                                                        'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
                                                         textAlign:
                                                             TextAlign.left,
-                                                        'Lorem Ipsum dolor sit ament, consectetur adipiscing elit....',
                                                         style: kBodyTextStyle,
                                                       )),
                                                 ),
                                                 Text(
-                                                  textAlign: TextAlign.left,
                                                   'Dec 21 2021',
+                                                  textAlign: TextAlign.left,
                                                   style: kNewsDateSTyle,
                                                 )
                                               ],
@@ -404,8 +404,8 @@ class _HomePageState extends State<HomePage> {
                                       color: kTextboxhintColor,
                                     ),
                                     title: Text(
-                                      textAlign: TextAlign.left,
                                       '36 Guild Street London, UK',
+                                      textAlign: TextAlign.left,
                                       style: kWelcomesubstyle,
                                     ),
                                   ),

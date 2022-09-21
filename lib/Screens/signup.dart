@@ -61,8 +61,8 @@ class _SignUpState extends State<SignUp> {
                     // BATNF Label
                     Center(
                       child: Text(
-                        textAlign: TextAlign.left,
                         'BATNF',
+                        textAlign: TextAlign.left,
                         style: kAppnametextstyle,
                       ),
                     ),
@@ -71,8 +71,8 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(top: 35.0, left: 30.0),
                       child: Text(
-                        textAlign: TextAlign.left,
                         'Sign Up',
+                        textAlign: TextAlign.left,
                         style: kSigningtextstyle,
                       ),
                     ),
@@ -185,10 +185,10 @@ class _SignUpState extends State<SignUp> {
                                 });
                               },
                               icon: Icon(
-                                  size: 15.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 15.0),
                             ),
                           ),
                         ),
@@ -256,8 +256,8 @@ class _SignUpState extends State<SignUp> {
                       child: GestureDetector(
                         onTap: () {},
                         child: Text(
-                          textAlign: TextAlign.right,
                           'forgot password?',
+                          textAlign: TextAlign.right,
                           style: kForgetpasswordstyle,
                         ),
                       ),
@@ -273,8 +273,8 @@ class _SignUpState extends State<SignUp> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            textAlign: TextAlign.center,
                             "Already have an account? ",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kGeneralbodytextColor,
                                 fontStyle: FontStyle.normal,
@@ -293,8 +293,8 @@ class _SignUpState extends State<SignUp> {
                                       builder: (context) => SignIn()));
                             },
                             child: Text(
-                              textAlign: TextAlign.right,
                               'Sign In',
+                              textAlign: TextAlign.right,
                               style: kForgetpasswordstyle,
                             ),
                           ),

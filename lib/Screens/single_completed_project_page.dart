@@ -120,8 +120,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
               alignment: AlignmentDirectional.center,
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
               child: Text(
-                textAlign: TextAlign.justify,
                 " Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget. Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget. Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.",
+                 textAlign: TextAlign.justify,
                 style: kBodyTextStyle,
               ),
             ),

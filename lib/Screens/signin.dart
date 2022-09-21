@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, unnecessary_import
 
 import 'dart:ui';
 
@@ -54,8 +54,8 @@ class _SignInState extends State<SignIn> {
                     // BATNF LAbel
                     Center(
                       child: Text(
-                        textAlign: TextAlign.left,
                         'BATNF',
+                        textAlign: TextAlign.left,
                         style: kAppnametextstyle,
                       ),
                     ),
@@ -64,8 +64,8 @@ class _SignInState extends State<SignIn> {
                     Padding(
                       padding: const EdgeInsets.only(top: 35.0, left: 30.0),
                       child: Text(
-                        textAlign: TextAlign.left,
                         'Sign in',
+                        textAlign: TextAlign.left,
                         style: kSigningtextstyle,
                       ),
                     ),
@@ -119,11 +119,11 @@ class _SignInState extends State<SignIn> {
                               icon: Padding(
                                 padding: const EdgeInsets.only(right: 14.15),
                                 child: Icon(
-                                    color: Color(0xff979797),
-                                    size: 15.0,
                                     !hidepassword
                                         ? FontAwesomeIcons.eye
-                                        : FontAwesomeIcons.eyeSlash),
+                                        : FontAwesomeIcons.eyeSlash,
+                                    color: Color(0xff979797),
+                                    size: 15.0,),
                               ),
                             ),
                           ),
@@ -193,8 +193,8 @@ class _SignInState extends State<SignIn> {
                       child: GestureDetector(
                         onTap: () {},
                         child: Text(
-                          textAlign: TextAlign.right,
                           'forgot password?',
+                          textAlign: TextAlign.right,
                           style: kForgetpasswordstyle,
                         ),
                       ),
@@ -210,8 +210,8 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            textAlign: TextAlign.center,
                             "Already have an account? ",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: kGeneralbodytextColor,
                                 fontStyle: FontStyle.normal,
@@ -230,8 +230,8 @@ class _SignInState extends State<SignIn> {
                                       builder: (context) => SignUp()));
                             },
                             child: Text(
-                              textAlign: TextAlign.right,
                               'Sign Up',
+                              textAlign: TextAlign.right,
                               style: kForgetpasswordstyle,
                             ),
                           ),

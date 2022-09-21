@@ -95,8 +95,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                       ),
                                     ),
                                     Text(
-                                      textAlign: TextAlign.left,
                                       ' Started: Dec 21 2021',
+                                      textAlign: TextAlign.left,
                                       style: kNewsDateSTyle,
                                     )
                                   ],

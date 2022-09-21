@@ -124,8 +124,8 @@ class _EventDetailsState extends State<EventDetails> {
             Container(
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
               child: Text(
-                textAlign: TextAlign.justify,
                 widget.singleEvent.eventDesc,
+                textAlign: TextAlign.justify,
                 style: kBodyTextStyle,
               ),
             ),

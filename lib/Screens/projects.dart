@@ -67,8 +67,8 @@ class _ProjectPageState extends State<ProjectPage> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.solidBell,
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () {},
                         ),
@@ -252,8 +252,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
                                               ),
                                               Text(
-                                                textAlign: TextAlign.left,
                                                 ' Started: Dec 21 2021',
+                                                textAlign: TextAlign.left,
                                                 style: kNewsDateSTyle,
                                               )
                                             ],
@@ -313,8 +313,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
                                               ),
                                               Text(
-                                                textAlign: TextAlign.left,
                                                 ' Started: Dec 21 2021',
+                                                textAlign: TextAlign.left,
                                                 style: kNewsDateSTyle,
                                               )
                                             ],
@@ -428,8 +428,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
                                               ),
                                               Text(
-                                                textAlign: TextAlign.left,
                                                 ' Started: Dec 21 2021',
+                                                textAlign: TextAlign.left,
                                                 style: kNewsDateSTyle,
                                               )
                                             ],
@@ -532,8 +532,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                               ),
                                             ),
                                             Text(
-                                              textAlign: TextAlign.left,
                                               ' Started: Dec 21 2021',
+                                              textAlign: TextAlign.left,
                                               style: kNewsDateSTyle,
                                             )
                                           ],
@@ -593,8 +593,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                               ),
                                             ),
                                             Text(
-                                              textAlign: TextAlign.left,
                                               ' Started: Dec 21 2021',
+                                              textAlign: TextAlign.left,
                                               style: kNewsDateSTyle,
                                             )
                                           ],

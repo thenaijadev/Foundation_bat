@@ -74,8 +74,8 @@ class _NewsState extends State<News> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.solidBell,
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () {},
                         ),
@@ -183,14 +183,14 @@ class _NewsState extends State<News> {
                                           color: kBackground,
                                           height: 7.0,
                                           child: Text(
-                                            textAlign: TextAlign.left,
                                             news.information,
+                                            textAlign: TextAlign.left,
                                             style: kBodyTextStyle,
                                           )),
                                     ),
                                     Text(
-                                      textAlign: TextAlign.left,
                                       news.entryDate,
+                                      textAlign: TextAlign.left,
                                       style: kNewsDateSTyle,
                                     )
                                   ],

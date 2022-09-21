@@ -76,8 +76,8 @@ class _EventCenterState extends State<EventCenter> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.solidBell,
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () {},
                         ),
@@ -225,9 +225,9 @@ class _EventCenterState extends State<EventCenter> {
                                                         width: 207,
                                                         color: kBackground,
                                                         child: Text(
+                                                          event.venue,
                                                           textAlign:
                                                               TextAlign.left,
-                                                          event.venue,
                                                           style: TextStyle(
                                                               color:
                                                                   kTextboxhintColor,

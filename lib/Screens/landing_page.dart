@@ -80,8 +80,8 @@ class _LandindPageState extends State<LandindPage> {
                             margin: EdgeInsets.fromLTRB(30, 45, 30, 10),
                             height: 58,
                             child: Text(
-                              textAlign: TextAlign.center,
                               "Explore the Foundation's \n Upcoming Events",
+                              textAlign: TextAlign.center,
                               style: kLandpageHeadertextstyle,
                             ),
                           ),
@@ -90,8 +90,8 @@ class _LandindPageState extends State<LandindPage> {
                                 left: 56, right: 56, bottom: 36),
                             height: 95,
                             child: Text(
-                              textAlign: TextAlign.center,
                               'Lorem ipsum dolor sit amet, consectetur \nelit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                              textAlign: TextAlign.center,
                               style: kLandpagebodytextstyle,
                             ),
                           ),

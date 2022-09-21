@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
 
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/constants/color_constant.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PendingPage extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   PendingPage({Key? key}) : super(key: key);
 
   @override
@@ -93,8 +94,8 @@ class _PendingPageState extends State<PendingPage> {
                                   ),
                                 ),
                                 Text(
-                                  textAlign: TextAlign.left,
                                   ' To Begin: Mar 17 2025',
+                                  textAlign: TextAlign.left,
                                   style: kNewsDateSTyle,
                                 ),
                               ],

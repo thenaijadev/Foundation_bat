@@ -98,13 +98,13 @@ class _CompletedPageState extends State<CompletedPage> {
                                   ),
                                 ),
                                 Text(
+                                  " Started: Dec 21 2021",
                                   textAlign: TextAlign.left,
-                                  ' Started: Dec 21 2021',
                                   style: kNewsDateSTyle,
                                 ),
                                 Text(
-                                  textAlign: TextAlign.left,
                                   ' Completed: Aug 13 2023',
+                                  textAlign: TextAlign.left,
                                   style: kNewsDateSTyle,
                                 )
                               ],

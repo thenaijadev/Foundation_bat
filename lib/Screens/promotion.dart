@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
@@ -61,8 +61,8 @@ class _PromotionState extends State<Promotion> {
                       height: 36,
                       child: IconButton(
                         icon: Icon(
-                            size: 15,
                             FontAwesomeIcons.solidBell,
+                            size: 15,
                             color: kButtonColor),
                         onPressed: () {},
                       ),
