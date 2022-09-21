@@ -38,12 +38,13 @@ class MyHttpoverrides extends HttpOverrides {
   }
 }
 
-var email = "";
+var useremail;
 
 void main() async {
   await Hive.initFlutter();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var email = sharedPreferences.getString('email').toString();
+  useremail = email;
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: email.isEmpty ? LandingPage.id : HomePage.id,
+        initialRoute: useremail == null ? HomePage.id : LandingPage.id,
         routes: {
           LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),
