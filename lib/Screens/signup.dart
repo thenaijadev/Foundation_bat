@@ -102,6 +102,7 @@ class _SignUpState extends State<SignUp> {
       required String passwordconfirm,
       required String location,
       required String date}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/create'),
             body: jsonEncode({
@@ -128,6 +129,8 @@ class _SignUpState extends State<SignUp> {
       if (data['status'] == 200) {
         String username = data['last_name'];
         Provider.of<EventProvider>(context, listen: false).userName = username;
+        preferences.setString('email', email);
+        preferences.setBool('autoLogin', true);
         Fluttertoast.showToast(
             fontSize: 18,
             toastLength: Toast.LENGTH_LONG,
@@ -382,9 +385,9 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 22.0),
                       child: DropDownField(
-                        // setter: (dynamic value) {
-                        //   selectedState = value;
-                        // },
+                          // setter: (dynamic value) {
+                          //   selectedState = value;
+                          // },
                           onValueChanged: (value) {
                             setState(() {
                               selectedState = value;

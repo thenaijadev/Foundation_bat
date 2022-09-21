@@ -38,23 +38,22 @@ class MyHttpoverrides extends HttpOverrides {
   }
 }
 
-var useremail;
-
 void main() async {
   await Hive.initFlutter();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var email = sharedPreferences.getString('email').toString();
-  useremail = email;
+  bool exist =  sharedPreferences.containsKey('autoLogin');
+  bool autoLogin = exist ? sharedPreferences.getBool('autoLogin')! : false;
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = MyHttpoverrides();
-  runApp(const MyApp());
+  runApp(MyApp(autoLogin));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool autoLogin;
+  const MyApp(this.autoLogin, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -78,7 +77,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: useremail == null ? HomePage.id : LandingPage.id,
+        initialRoute: !autoLogin ? LandingPage.id : HomePage.id,
         routes: {
           LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),
