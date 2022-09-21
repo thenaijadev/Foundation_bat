@@ -37,18 +37,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String email = '';
 
-  Future getEmail() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var email = sharedPreferences.getString('email');
-    setState(() {
-      var email = sharedPreferences.getString('email');
-    });
-  }
+  // Future getEmail() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   var email = sharedPreferences.getString('email');
+  //   setState(() {
+  //     var email = sharedPreferences.getString('email');
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    getEmail();
+    // getEmail();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
@@ -80,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        margin: EdgeInsets.only( top: 45, bottom: 20, right: 195),
+                        margin:
+                            EdgeInsets.only(top: 45, bottom: 20, right: 195),
                         color: kBackground,
                         height: 40.0,
                         child: Image.asset(
@@ -104,8 +105,12 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () async {
                             final SharedPreferences sharedPreferences =
                                 await SharedPreferences.getInstance();
-                            sharedPreferences.remove('email');
-                            Navigator.pushNamed(context, WelcomePage.id);
+                            sharedPreferences.setBool('autoLogin', false);
+
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                WelcomePage.id,
+                                (Route<dynamic> route) => false);
                           },
                         ),
                       )
@@ -113,7 +118,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   // Text("Welcome $Provider.of<EventProvider>(context, listen: false).userName")
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 10),
+                    margin: EdgeInsets.only(
+                        left: 30, right: 20, bottom: 21, top: 10),
                     color: kBackground,
                     height: 45.0,
                     child: TextField(
@@ -444,7 +450,8 @@ class _HomePageState extends State<HomePage> {
                                               decoration: BoxDecoration(
                                                 boxShadow: [kBoxshadow],
                                                 color: kBackground,
-                                                borderRadius: BorderRadius.circular(18),
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
                                               ),
                                               height: 120,
                                               width: 375,

@@ -29,13 +29,14 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   void initState() {
+    getEmail();
     super.initState();
     createBox();
   }
 
   Future<void> login({required String email, required String password}) async {
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // sharedPreferences.setString(email, emailController.text);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
             // http://geeteefarms.com/events/api/login
@@ -50,11 +51,12 @@ class _SignInState extends State<SignIn> {
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-          print(Provider.of<EventProvider>(context, listen: false).userName);
+        print(Provider.of<EventProvider>(context, listen: false).userName);
         if (data['status'] == 200) {
           int userid = int.parse(data['userId']).toInt();
           Provider.of<EventProvider>(context, listen: false).userId = userid;
-          print(Provider.of<EventProvider>(context, listen: false).userName);
+          sharedPreferences.setString('email', email);
+          sharedPreferences.setBool('autoLogin', true);
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -160,6 +162,15 @@ class _SignInState extends State<SignIn> {
   bool status = false;
 
   bool hidepassword = true;
+
+  getEmail() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool exist = await sharedPreferences.containsKey('email');
+    if (exist) {
+      String email = await sharedPreferences.getString('email');
+      emailController.text = email;
+    }
+  }
 
   final formKey = GlobalKey<FormState>();
 
