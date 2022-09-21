@@ -33,11 +33,10 @@ class _PromotionState extends State<Promotion> {
                 Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
                           margin:
-                              EdgeInsets.only(left: 24.0, top: 45, bottom: 30),
+                              EdgeInsets.only(left: 24.0, top: 45, bottom: 30, right: 20),
                           color: kBackground,
                           height: 40.0,
                           child: Image.asset(
@@ -46,7 +45,7 @@ class _PromotionState extends State<Promotion> {
                         ),
                         Container(
                           margin: EdgeInsets.only(
-                              top: 50, left: 50, bottom: 26, right: 140),
+                              top: 50, bottom: 26, right: 140),
                           color: kBackground,
                           height: 29,
                           child: Text(

@@ -34,8 +34,8 @@ class _SignInState extends State<SignIn> {
   }
 
   Future<void> login({required String email, required String password}) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(email, emailController.text);
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // sharedPreferences.setString(email, emailController.text);
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
             // http://geeteefarms.com/events/api/login
@@ -310,9 +310,9 @@ class _SignInState extends State<SignIn> {
                         height: 45.0,
                         color: kButtonColor,
                         onPressed: () async {
-                          final SharedPreferences sharedPrefernces =
+                          final SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();
-                          sharedPrefernces.setString(
+                          sharedPreferences.setString(
                               'email', emailController.text);
                           if (formKey.currentState!.validate() && !loading) {
                             setState(() {

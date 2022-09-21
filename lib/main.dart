@@ -42,8 +42,8 @@ var email;
 
 void main() async {
   await Hive.initFlutter();
-  // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  // var email = sharedPreferences.getString('email');
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+   email = sharedPreferences.getString('email');
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: email == null ? LandingPage.id : HomePage.id,
+        initialRoute: email == null ? WelcomePage.id : HomePage.id,
         routes: {
           LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),

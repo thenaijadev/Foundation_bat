@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Container for search box etc
             Container(
-              height: 173.0,
+              height: 200.0,
               color: kBackground,
               child: Column(
                 children: [
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 10),
                     color: kBackground,
                     height: 45.0,
                     child: TextField(
@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   //Ads
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 30),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 10),
                     color: kBackground,
                     child: Image.asset('assets/Ads.png'),
                   ),

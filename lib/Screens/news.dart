@@ -44,7 +44,6 @@ class _NewsState extends State<News> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         margin:
@@ -65,26 +64,7 @@ class _NewsState extends State<News> {
                           style: kPageHeader,
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(
-                              size: 15,
-                              FontAwesomeIcons.signOutAlt,
-                              color: kButtonColor),
-                          onPressed: () {
-                            Navigator.pushNamed(context, SignIn.id);
-                          },
-                        ),
-                      )
-                    
+
                     ],
                   ),
                   if (provider.allNews != null && provider.allNews!.isNotEmpty)

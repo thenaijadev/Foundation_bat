@@ -30,25 +30,25 @@ class _LandindPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
-    getValidationData().whenComplete(() async {
-      Timer(
-          Duration(microseconds: 0),
-          () => Navigator.pushNamed(
-              context, finalEmail == null ? WelcomePage.id : HomePage.id));
-    }
-    );
+    // getValidationData().whenComplete(() async {
+    //   Timer(
+    //       Duration(microseconds: 0),
+    //       () => Navigator.pushNamed(
+    //           context, finalEmail == null ? WelcomePage.id : HomePage.id));
+    // }
+    // );
     FlutterNativeSplash.remove();
   }
 
-  Future getValidationData() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    var obtainedEmail = sharedPreferences.getString('email').toString();
-    setState(() {
-      finalEmail = obtainedEmail;
-    });
-    print(finalEmail);
-  }
+  // Future getValidationData() async {
+  //   final SharedPreferences sharedPreferences =
+  //       await SharedPreferences.getInstance();
+  //   var obtainedEmail = sharedPreferences.getString('email').toString();
+  //   setState(() {
+  //     finalEmail = obtainedEmail;
+  //   });
+  //   print(finalEmail);
+  // }
 
   int currentPage = 0;
   PageController controller = PageController();

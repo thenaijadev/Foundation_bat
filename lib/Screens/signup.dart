@@ -442,7 +442,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
 
-                    // Sign In Redurection
+                    // Sign In Redirection
                     Padding(
                       padding: const EdgeInsets.only(
                         bottom: 75.0,
