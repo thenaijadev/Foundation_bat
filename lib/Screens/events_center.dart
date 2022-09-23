@@ -240,9 +240,9 @@ class _EventCenterState extends State<EventCenter> {
                                               
                                                   //Event Location
                                                   Text(
+                                                    event.eventLocation,
                                                     textAlign:
                                                         TextAlign.left,
-                                                    event.eventLocation,
                                                     style: TextStyle(
                                                         color:
                                                             kTextboxhintColor,

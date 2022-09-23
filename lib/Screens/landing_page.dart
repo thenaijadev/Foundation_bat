@@ -46,6 +46,7 @@ class _LandindPageState extends State<LandingPage> {
     return Scaffold(
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
+          
           child: PageView(
             controller: controller,
             children: [
@@ -97,8 +98,8 @@ class _LandindPageState extends State<LandingPage> {
                           margin: EdgeInsets.fromLTRB(30, 45, 30, 30),
                           height: 58,
                           child: Text(
-                            textAlign: TextAlign.center,
                             "Explore the Foundation's \n Projects",
+                            textAlign: TextAlign.center,
                             style: kLandpageHeadertextstyle,
                           ),
                         ),
@@ -107,8 +108,8 @@ class _LandindPageState extends State<LandingPage> {
                               EdgeInsets.only(left: 56, right: 56, bottom: 46),
                           height: 95,
                           child: Text(
-                            textAlign: TextAlign.center,
                             'Lorem ipsum dolor sit amet, consectetur \nelit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                             textAlign: TextAlign.center,
                             style: kLandpagebodytextstyle,
                           ),
                         ),

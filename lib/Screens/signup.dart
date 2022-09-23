@@ -192,8 +192,8 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.only(top: 35.0, left: 30.0),
                       child: Text(
-                        textAlign: TextAlign.left,
                         'Sign Up',
+                        textAlign: TextAlign.left,
                         style: kSigningtextstyle,
                       ),
                     ),
@@ -292,10 +292,10 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
-                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 15.0),
                             ),
                           ),
                         ),
@@ -333,10 +333,11 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
-                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 19.0,
+                                      ),
                             ),
                           ),
                         ),

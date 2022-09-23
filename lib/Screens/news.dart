@@ -64,7 +64,6 @@ class _NewsState extends State<News> {
                           style: kPageHeader,
                         ),
                       ),
-
                     ],
                   ),
                   if (provider.allNews != null && provider.allNews!.isNotEmpty)
@@ -192,16 +191,16 @@ class _NewsState extends State<News> {
                                                     color: kBackground,
                                                     height: 10,
                                                     child: Text(
-                                                      textAlign: TextAlign.left,
                                                       news.information,
+                                                      textAlign: TextAlign.left,
                                                       style: kBodyTextStyle,
                                                     )),
                                               ),
 
                                               // News Date
                                               Text(
+                                                  news.entryDate,
                                                 textAlign: TextAlign.left,
-                                                news.entryDate,
                                                 style: kNewsDateSTyle,
                                               )
                                             ],

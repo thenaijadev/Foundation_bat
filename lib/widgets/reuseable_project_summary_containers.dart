@@ -58,8 +58,8 @@ class ProjectSummaryContainer extends StatelessWidget {
           Container(
               margin: EdgeInsets.only(left: 15, bottom: 35),
               child: Text(
-                textAlign: TextAlign.justify,
                 label,
+                textAlign: TextAlign.justify,
                 style: kProjectsumdetailtextstyle,
               )),
         ],

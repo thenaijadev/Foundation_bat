@@ -99,11 +99,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                             icon: Padding(
                               padding: const EdgeInsets.only(right: 14.15),
                               child: Icon(
-                                  color: Color(0xff979797),
-                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  color: Color(0xff979797),
+                                  size: 19.0,),
                             ),
                           ),
                         ),
@@ -146,11 +146,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                             icon: Padding(
                               padding: const EdgeInsets.only(right: 14.15),
                               child: Icon(
-                                  color: Color(0xff979797),
-                                  size: 19.0,
                                   !hidepassword
                                       ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash),
+                                      : FontAwesomeIcons.eyeSlash,
+                                  color: Color(0xff979797),
+                                  size: 19.0,),
                             ),
                           ),
                         ),

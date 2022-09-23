@@ -70,8 +70,8 @@ class _NewsDetailsState extends State<NewsDetails> {
               Container(
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                 child: Text(
-                  textAlign: TextAlign.justify,
                   widget.singleNews.information,
+                  textAlign: TextAlign.justify,
                   style: kBodyTextStyle,
                 ),
               ),

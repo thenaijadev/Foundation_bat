@@ -116,8 +116,8 @@ class _HomePageState extends State<HomePage> {
                         height: 36,
                         child: IconButton(
                           icon: Icon(
-                              size: 15,
                               FontAwesomeIcons.signOutAlt,
+                              size: 15,
                               color: kButtonColor),
                           onPressed: () async {
                             final SharedPreferences sharedPreferences =
@@ -523,18 +523,18 @@ class _HomePageState extends State<HomePage> {
                                                                     kBackground,
                                                                 height: 7.0,
                                                                 child: Text(
+                                                                  news.information,
                                                                   textAlign:
                                                                       TextAlign
                                                                           .left,
-                                                                  news.information,
                                                                   style:
                                                                       kBodyTextStyle,
                                                                 )),
                                                           ),
                                                           Text(
+                                                            news.entryDate,
                                                             textAlign:
                                                                 TextAlign.left,
-                                                            news.entryDate,
                                                             style:
                                                                 kNewsDateSTyle,
                                                           )
@@ -553,7 +553,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-
                   SizedBox(
                     height: 50.0,
                   ),
