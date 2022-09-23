@@ -117,103 +117,51 @@ class _SignUpState extends State<SignUp> {
             }),
             headers: {"Content-Type": "application/json"});
 
-    var data = jsonDecode(response.body);
-    print(data);
-    
-    if (mounted)
+    // var data = jsonDecode(response.body);
+    // print(data);
+
+    if (mounted) {
       setState(() {
         loading = false;
       });
+    }
 
-    // try{
-    // if (response.statusCode == 200) {
-    //   var data = jsonDecode(response.body);
-    //   print(data);
-    //   if (data['status'] == 200) {
-    //     print('okkkk');
-    //     print(location);
-    //     String username = data['last_name'];
-    //     int userid = int.parse(data['userId']).toInt();
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        if (data['status'] == 200) {
+          var username = data['last_name'];
 
-    //     Provider.of<EventProvider>(context, listen: false).userName = username;
+          Provider.of<EventProvider>(context, listen: false).userName =
+              username.toString();
+          // Provider.of<EventProvider>(context, listen: false).userId = userid;
+          // preferences.setInt('userId', userid);
 
-    //     Provider.of<EventProvider>(context, listen: false).userId = userid;
-    //     preferences.setInt('userId', userid);
-
-    //     preferences.setString('email', email);
-    //     preferences.setBool('autoLogin', true);
-    //     preferences.setString('username', username);
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Registration Successful",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //     Navigator.pushReplacement(
-    //         context, MaterialPageRoute(builder: (context) => SignIn()));
-    //   } else {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: data['message'],
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   }
-    // }
-    // }catch(e){
-    //   print(e);
-    // }
-
-    // if (response.statusCode == 405) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Too Young to Register',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 201) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Success, Unable to send to mail',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 401) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Password Mismatch',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 402) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Registration Failed, Try again',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 404) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'No Data Submitted',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 200) {
-    //   var data = jsonDecode(response.body);
-    //   print(data);
-    //   Navigator.pushReplacement(
-    //       context, MaterialPageRoute(builder: (context) => SignIn()));
-    // } else if (response.statusCode == 406) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Invalid Email',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // } else if (response.statusCode == 407) {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text(
-    //     'Email Already Exist',
-    //     textAlign: TextAlign.center,
-    //   )));
-    // }
+          preferences.setString('email', email);
+          preferences.setBool('autoLogin', true);
+          preferences.setString('username', username.toString());
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Registration Successful",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => SignIn()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

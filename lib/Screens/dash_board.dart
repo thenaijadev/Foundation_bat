@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +61,20 @@ class _HomePageState extends State<HomePage> {
         String username = sharedPreferences.getString('username')!;
         provider.userId = userID;
         provider.userName = username;
+        user = username;
       }
     }
     if (mounted) setState(() {});
   }
 
+  var user = '';
+
+ 
+
   @override
   Widget build(BuildContext context) {
+    
+    EventProvider provider = Provider.of<EventProvider>(context, listen: false);
     NewsProvider newsProvider = Provider.of<NewsProvider>(context);
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     CompletedProvider completedProvider =
@@ -125,7 +133,14 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  // Text("Welcome $Provider.of<EventProvider>(context, listen: false).userName")
+                  // RichText(
+                  //     text: TextSpan(
+                  //         text: 'Welcome Back ',
+                  //         style: kBodyTextStyle,
+                  //         children: [
+                  //       TextSpan(text: Provider.of<EventProvider>(context,
+                  //               listen: false).userName, style: kBodyTextStyle)
+                  //     ])),
                   Container(
                     margin: EdgeInsets.only(
                         left: 30, right: 20, bottom: 21, top: 10),

@@ -27,11 +27,27 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool loading = false;
+  bool status = false;
+  bool hidepassword = true;
+
+   void _togglePasswordView() {
+    setState(() {
+      hidepassword = !hidepassword;
+    });
+  }
+
   @override
   void initState() {
     getEmail();
     super.initState();
   }
+
+   final formKey = GlobalKey<FormState>();
+
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
 
   Future<void> login({required String email, required String password}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -46,8 +62,8 @@ class _SignInState extends State<SignIn> {
             headers: {
           "Content-Type": "application/json",
         });
-    var data = jsonDecode(response.body);
-    print(data);
+    // var data = jsonDecode(response.body);
+    // print(data);
 
     try {
       if (response.statusCode == 200) {
@@ -55,25 +71,16 @@ class _SignInState extends State<SignIn> {
 
         if (data['status'] == 200) {
           var username = data['last_name'];
-          print('paulo');
-
           int userid = int.parse(data['userId']).toInt();
-          print('paaaaaulo');
 
           Provider.of<EventProvider>(context, listen: false).userId = userid;
-          print('paulllllo');
           Provider.of<EventProvider>(context, listen: false).userName =
               username.toString();
-          print('paulo00000');
           sharedPreferences.setInt('userId', userid);
-          print('paulssssso');
 
           sharedPreferences.setString('email', email);
-          print('osheyyyy');
           sharedPreferences.setBool('autoLogin', true);
-          print('osheeeeey');
           sharedPreferences.setString('username', username.toString());
-          print('oshey');
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -112,17 +119,7 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  void _togglePasswordView() {
-    setState(() {
-      hidepassword = !hidepassword;
-    });
-  }
-
-  bool loading = false;
-  bool status = false;
-
-  bool hidepassword = true;
-
+ 
   getEmail() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool exist = sharedPreferences.containsKey('email');
@@ -132,11 +129,7 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  final formKey = GlobalKey<FormState>();
-
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
+ 
 
   @override
   Widget build(BuildContext context) {
