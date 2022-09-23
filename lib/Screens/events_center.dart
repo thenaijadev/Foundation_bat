@@ -178,51 +178,7 @@ class _EventCenterState extends State<EventCenter> {
                                                       Text(
                                                         event.eventName,
                                                         style: kPageHeader,
-                                                      ),
-
-                                              //Event Name
-                                              // Expanded(
-                                              //   child: Container(
-                                              //     color: kButtonColor,
-                                              //     height: 70,
-                                              //     child: Column(
-                                              //       crossAxisAlignment: CrossAxisAlignment.start,
-                                              //       children: [
-                                              //         Text(
-                                              //           event.eventStartDate,
-                                              //           style: kEventDatestyle,
-                                              //         ),
-                                              //         // SizedBox(
-                                              //         //   height: 10,
-                                              //         // ),
-                                              //         Text(
-                                              //           event.eventName,
-                                              //           style: kPageHeader,
-                                              //         ),
-                                                      
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                              // SizedBox(
-                                              //   height: 10,
-                                              // ),
-
-                                              // //Event start date
-                                              // Expanded(
-                                              //   child: Container(
-                                              //     color: kBackground,
-                                              //     height: 19,
-                                              //     child: Text(
-                                              //       event.eventStartDate,
-                                              //       style: kEventDatestyle,
-                                              //     ),
-                                              //   ),
-                                              // ),
-
-                                              
-
-                                              //Event Location
+                                                      ), //Event Location
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment:
