@@ -112,7 +112,7 @@ class _SignUpState extends State<SignUp> {
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
-              msg: "Login Successful",
+              msg: "Account Activated",
               textColor: kBackground,
               backgroundColor: kButtonColor);
           Navigator.pushReplacement(
@@ -196,7 +196,7 @@ class _SignUpState extends State<SignUp> {
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
-              msg: "Registration Successful",
+              msg: "Registration Successful\n check yor mail to activate account",
               textColor: kBackground,
               backgroundColor: kButtonColor);
           // Navigator.pushReplacement(
