@@ -29,43 +29,43 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   List<String> states = [
-    'Abia',
-    'Abuja',
-    'Adamawa',
-    'Akwa Ibom',
-    'Anambara',
-    'Bauchi',
-    'Bayelsa',
-    'Benue',
-    'Borno',
-    'Cross River',
-    'Delta',
-    'Ebonyi',
-    'Edo',
-    'Ekiti',
-    'Enugu',
-    'Gombe',
-    'Imo',
-    'Jigawa',
-    'Kaduna',
-    'Kano',
-    'Katsina',
-    'Kabbi',
-    'Kogi',
-    'Kwara',
-    'Lagos',
-    'Nasarawa',
-    'Niger',
-    'Ogun',
-    'Ondo',
-    'Osun',
-    'Oyo',
-    'Plateau',
-    'Rivers',
-    'Sokoto',
-    'Taraba',
-    'Yobe',
-    'Zamfara',
+    'Abia State',
+    'Abuja State',
+    'Adamawa State',
+    'Akwa Ibom State',
+    'Anambara State',
+    'Bauchi State',
+    'Bayelsa State',
+    'Benue State',
+    'Borno State',
+    'Cross River State',
+    'Delta State',
+    'Ebonyi State',
+    'Edo State',
+    'Ekiti State',
+    'Enugu State',
+    'Gombe State',
+    'Imo State',
+    'Jigawa State',
+    'Kaduna State',
+    'Kano State',
+    'Katsina State',
+    'Kabbi State',
+    'Kogi State',
+    'Kwara State',
+    'Lagos State',
+    'Nasarawa State',
+    'Niger State',
+    'Ogun State',
+    'Ondo State',
+    'Osun State',
+    'Oyo State',
+    'Plateau State',
+    'Rivers State',
+    'Sokoto State',
+    'Taraba State',
+    'Yobe State',
+    'Zamfara State',
   ];
   bool hidepassword = true;
   final df = DateFormat('yyyy-MM-dd');
@@ -100,48 +100,48 @@ class _SignUpState extends State<SignUp> {
       Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
       // http://geeteefarms.com/events/api/login
     );
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
     if (mounted) {
       setState(() {
         loading = false;
       });
     }
-    try {
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+    // try {
+    //   if (response.statusCode == 200) {
+    //     var data = jsonDecode(response.body);
 
-        if (data['status'] == 200) {
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: "Account Activated",
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => SignIn()));
-        } else {
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: data['message'],
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-        }
-      } else {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: 'Service Timeout',
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-      }
-    } catch (e) {
-      print(e);
-    }
+    //     if (data['status'] == 200) {
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: "Account Activated",
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //       Navigator.pushReplacement(
+    //           context, MaterialPageRoute(builder: (context) => SignIn()));
+    //     } else {
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: data['message'],
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //     }
+    //   } else {
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: 'Service Timeout',
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
 
     if (mounted) {
       setState(() {
@@ -172,8 +172,8 @@ class _SignUpState extends State<SignUp> {
             }),
             headers: {"Content-Type": "application/json"});
 
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
 
     // if (mounted) {
     //   setState(() {
@@ -181,44 +181,44 @@ class _SignUpState extends State<SignUp> {
     //   });
     // }
 
-    try {
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        if (data['status'] == 200) {
-          var username = data['last_name'];
+    // try {
+    //   if (response.statusCode == 200) {
+    //     var data = jsonDecode(response.body);
+    //     if (data['status'] == 200) {
+    //       var username = data['last_name'];
 
-          Provider.of<EventProvider>(context, listen: false).userName =
-              username.toString();
-          // Provider.of<EventProvider>(context, listen: false).userId = userid;
-          // preferences.setInt('userId', userid);
+    //       Provider.of<EventProvider>(context, listen: false).userName =
+    //           username.toString();
+    //       // Provider.of<EventProvider>(context, listen: false).userId = userid;
+    //       // preferences.setInt('userId', userid);
 
-          preferences.setString('email', email);
-          preferences.setBool('autoLogin', true);
-          preferences.setString('username', username.toString());
-          activate();
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg:
-                  "Registration Successful\n check yor mail to activate account",
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-          // Navigator.pushReplacement(
-          //     context, MaterialPageRoute(builder: (context) => SignIn()));
-        } else {
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: data['message'],
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-        }
-      }
-    } catch (e) {
-      print(e);
-    }
+    //       preferences.setString('email', email);
+    //       preferences.setBool('autoLogin', true);
+    //       preferences.setString('username', username.toString());
+    //       activate();
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg:
+    //               "Registration Successful\n check yor mail to activate account",
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //       // Navigator.pushReplacement(
+    //       //     context, MaterialPageRoute(builder: (context) => SignIn()));
+    //     } else {
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: data['message'],
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //     }
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   @override
@@ -494,12 +494,12 @@ class _SignUpState extends State<SignUp> {
                                 lastname: _lastnameTextController.text,
                                 email: _emailTextController.text,
                                 password: _passwordTextController.text,
-                                passwordconfirm:
-                                    _passwordconfirmTextController.text,
+                                passwordconfirm: _passwordconfirmTextController.text,
                                 location: _locationTextController.text,
                                 date: _date.text);
+                              activate();
                           }
-                          activate();
+                          
                         },
                         child: loading
                             ? CircularProgressIndicator(
