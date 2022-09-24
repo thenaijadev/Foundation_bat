@@ -102,7 +102,11 @@ class _SignUpState extends State<SignUp> {
     );
     // var data = jsonDecode(response.body);
     // print(data);
-
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
     try {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
@@ -171,11 +175,11 @@ class _SignUpState extends State<SignUp> {
     // var data = jsonDecode(response.body);
     // print(data);
 
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
+    // if (mounted) {
+    //   setState(() {
+    //     loading = false;
+    //   });
+    // }
 
     try {
       if (response.statusCode == 200) {
@@ -196,7 +200,8 @@ class _SignUpState extends State<SignUp> {
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
-              msg: "Registration Successful\n check yor mail to activate account",
+              msg:
+                  "Registration Successful\n check yor mail to activate account",
               textColor: kBackground,
               backgroundColor: kButtonColor);
           // Navigator.pushReplacement(
@@ -494,6 +499,7 @@ class _SignUpState extends State<SignUp> {
                                 location: _locationTextController.text,
                                 date: _date.text);
                           }
+                          activate();
                         },
                         child: loading
                             ? CircularProgressIndicator(
