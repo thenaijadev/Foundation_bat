@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/pending_model.dart';
 
 class AppPendingProjects {
-  final String baseUrl = 'https://dalexintegrated.com/events/api/';
+  final String baseUrl = 'https://dalexintegrated.com/foundation/api/';
 
   Future<List<PendingModel>> getPendingProjects() async {
     String url = 'getpendingprojects';

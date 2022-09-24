@@ -95,6 +95,61 @@ class _SignUpState extends State<SignUp> {
   late String userlocation;
   late String userdob;
 
+  Future<void> activate() async {
+    var response = await http.get(
+      Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
+      // http://geeteefarms.com/events/api/login
+    );
+    // var data = jsonDecode(response.body);
+    // print(data);
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+
+        if (data['status'] == 200) {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Account Activated",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => SignIn()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: 'Service Timeout',
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
   Future<void> signup(
       {required String firstname,
       required String lastname,
@@ -105,7 +160,7 @@ class _SignUpState extends State<SignUp> {
       required String date}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/events/api/create'),
+        .post(Uri.parse('https://dalexintegrated.com/foundation/api/create'),
             body: jsonEncode({
               "first_name": firstname,
               "last_name": lastname,
@@ -120,11 +175,11 @@ class _SignUpState extends State<SignUp> {
     // var data = jsonDecode(response.body);
     // print(data);
 
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
+    // if (mounted) {
+    //   setState(() {
+    //     loading = false;
+    //   });
+    // }
 
     try {
       if (response.statusCode == 200) {
@@ -140,15 +195,17 @@ class _SignUpState extends State<SignUp> {
           preferences.setString('email', email);
           preferences.setBool('autoLogin', true);
           preferences.setString('username', username.toString());
+          activate();
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
-              msg: "Registration Successful",
+              msg:
+                  "Registration Successful\n check yor mail to activate account",
               textColor: kBackground,
               backgroundColor: kButtonColor);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => SignIn()));
+          // Navigator.pushReplacement(
+          //     context, MaterialPageRoute(builder: (context) => SignIn()));
         } else {
           Fluttertoast.showToast(
               fontSize: 18,
@@ -333,11 +390,11 @@ class _SignUpState extends State<SignUp> {
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
-                                  !hidepassword
-                                      ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash,
-                                  size: 19.0,
-                                      ),
+                                !hidepassword
+                                    ? FontAwesomeIcons.eye
+                                    : FontAwesomeIcons.eyeSlash,
+                                size: 19.0,
+                              ),
                             ),
                           ),
                         ),
@@ -442,6 +499,7 @@ class _SignUpState extends State<SignUp> {
                                 location: _locationTextController.text,
                                 date: _date.text);
                           }
+                          activate();
                         },
                         child: loading
                             ? CircularProgressIndicator(

@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
   bool status = false;
   bool hidepassword = true;
 
-   void _togglePasswordView() {
+  void _togglePasswordView() {
     setState(() {
       hidepassword = !hidepassword;
     });
@@ -42,7 +42,7 @@ class _SignInState extends State<SignIn> {
     super.initState();
   }
 
-   final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
 
@@ -52,8 +52,9 @@ class _SignInState extends State<SignIn> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
+        .post(Uri.parse('https://dalexintegrated.com/foundation/api/login'),
             // http://geeteefarms.com/events/api/login
+            // https://dalexintegrated.com/events
             body: jsonEncode({
               "identity": email,
               "password": password,
@@ -61,55 +62,56 @@ class _SignInState extends State<SignIn> {
             headers: {
           "Content-Type": "application/json",
         });
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
 
-    try {
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+    // try {
+    //   if (response.statusCode == 200) {
+    //     var data = jsonDecode(response.body);
 
-        if (data['status'] == 200) {
-          var username = data['last_name'];
-          int userid = int.parse(data['userId']).toInt();
+    //     if (data['status'] == 200) {
+    //       var username = data['last_name'];
+    //       int userid = int.parse(data['userId']).toInt();
 
-          Provider.of<EventProvider>(context, listen: false).userId = userid;
-          Provider.of<EventProvider>(context, listen: false).userName =
-              username.toString();
-          sharedPreferences.setInt('userId', userid);
+    //       Provider.of<EventProvider>(context, listen: false).userId = userid;
+    //       Provider.of<EventProvider>(context, listen: false).userName =
+    //           username.toString();
+    //       sharedPreferences.setInt('userId', userid);
 
-          sharedPreferences.setString('email', email);
-          sharedPreferences.setBool('autoLogin', true);
-          sharedPreferences.setString('username', username.toString());
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: "Login Successful",
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else {
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: data['message'],
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-        }
-      } else {
-        Fluttertoast.showToast(
-            fontSize: 18,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            msg: 'Service Timeout',
-            textColor: kBackground,
-            backgroundColor: kButtonColor);
-      }
-    } catch (e) {
-      print(e);
-    }
+    //       sharedPreferences.setString('email', email);
+    //       sharedPreferences.setBool('autoLogin', true);
+    //       sharedPreferences.setString('username', username.toString());
+    //       activate();
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: "Login Successful",
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //       Navigator.pushReplacement(
+    //           context, MaterialPageRoute(builder: (context) => HomePage()));
+    //     } else {
+    //       Fluttertoast.showToast(
+    //           fontSize: 18,
+    //           toastLength: Toast.LENGTH_LONG,
+    //           gravity: ToastGravity.CENTER,
+    //           msg: data['message'],
+    //           textColor: kBackground,
+    //           backgroundColor: kButtonColor);
+    //     }
+    //   } else {
+    //     Fluttertoast.showToast(
+    //         fontSize: 18,
+    //         toastLength: Toast.LENGTH_LONG,
+    //         gravity: ToastGravity.CENTER,
+    //         msg: 'Service Timeout',
+    //         textColor: kBackground,
+    //         backgroundColor: kButtonColor);
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
 
     if (mounted) {
       setState(() {
@@ -118,7 +120,6 @@ class _SignInState extends State<SignIn> {
     }
   }
 
- 
   getEmail() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool exist = sharedPreferences.containsKey('email');
@@ -127,8 +128,6 @@ class _SignInState extends State<SignIn> {
       emailController.text = email;
     }
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -218,12 +217,12 @@ class _SignInState extends State<SignIn> {
                               icon: Padding(
                                 padding: const EdgeInsets.only(right: 14.15),
                                 child: Icon(
-                                    !hidepassword
-                                        ? FontAwesomeIcons.eye
-                                        : FontAwesomeIcons.eyeSlash,
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash,
                                   size: 19.0,
-                                    color: Color(0xff979797),
-                                    ),
+                                  color: Color(0xff979797),
+                                ),
                               ),
                             ),
                           ),

@@ -8,7 +8,7 @@ class Registration {
   Future<void> register(
       {required String userId, required String eventId}) async {
     var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/events/api/attendevent'),
+        .post(Uri.parse('https://dalexintegrated.com/foundation/api/attendevent'),
             body: jsonEncode({
               "userId": userId,
               "eventId": eventId,
