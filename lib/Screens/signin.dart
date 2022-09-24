@@ -52,8 +52,9 @@ class _SignInState extends State<SignIn> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/events/api/login'),
+        .post(Uri.parse('https://dalexintegrated.com/foundation/api/login'),
             // http://geeteefarms.com/events/api/login
+            // https://dalexintegrated.com/events
             body: jsonEncode({
               "identity": email,
               "password": password,
