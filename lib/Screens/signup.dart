@@ -95,61 +95,6 @@ class _SignUpState extends State<SignUp> {
   late String userlocation;
   late String userdob;
 
-  Future<void> activate() async {
-    var response = await http.get(
-      Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
-      // http://geeteefarms.com/events/api/login
-    );
-    var data = jsonDecode(response.body);
-    print(data);
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
-    // try {
-    //   if (response.statusCode == 200) {
-    //     var data = jsonDecode(response.body);
-
-    //     if (data['status'] == 200) {
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: "Account Activated",
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //       Navigator.pushReplacement(
-    //           context, MaterialPageRoute(builder: (context) => SignIn()));
-    //     } else {
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: data['message'],
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //     }
-    //   } else {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: 'Service Timeout',
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
-  }
-
   Future<void> signup(
       {required String firstname,
       required String lastname,
@@ -175,51 +120,108 @@ class _SignUpState extends State<SignUp> {
     var data = jsonDecode(response.body);
     print(data);
 
-    // if (mounted) {
-    //   setState(() {
-    //     loading = false;
-    //   });
-    // }
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
 
-    // try {
-    //   if (response.statusCode == 200) {
-    //     var data = jsonDecode(response.body);
-    //     if (data['status'] == 200) {
-    //       var username = data['last_name'];
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        if (data['status'] == 200) {
+          var username = data['last_name'];
 
-    //       Provider.of<EventProvider>(context, listen: false).userName =
-    //           username.toString();
-    //       // Provider.of<EventProvider>(context, listen: false).userId = userid;
-    //       // preferences.setInt('userId', userid);
+          Provider.of<EventProvider>(context, listen: false).userName =
+              username.toString();
+          // Provider.of<EventProvider>(context, listen: false).userId = userid;
+          // preferences.setInt('userId', userid);
 
-    //       preferences.setString('email', email);
-    //       preferences.setBool('autoLogin', true);
-    //       preferences.setString('username', username.toString());
-    //       activate();
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg:
-    //               "Registration Successful\n check yor mail to activate account",
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //       // Navigator.pushReplacement(
-    //       //     context, MaterialPageRoute(builder: (context) => SignIn()));
-    //     } else {
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: data['message'],
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //     }
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
-  }
+          preferences.setString('email', email);
+          preferences.setBool('autoLogin', true);
+          preferences.setString('username', username.toString());
+          // activate();
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg:
+                  "Registration Successful\n check yor mail to activate account",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => SignIn()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+    
+    Future<void> activate() async {
+      var response = await http.get(
+        Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
+        // http://geeteefarms.com/events/api/login
+      );
+      var data2 = jsonDecode(response.body);
+      print(data);
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
+      try {
+        if (response.statusCode == 200) {
+          var data2 = jsonDecode(response.body);
+
+          if (data2['status'] == 200) {
+            Fluttertoast.showToast(
+                fontSize: 18,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                msg: "Account Activated",
+                textColor: kBackground,
+                backgroundColor: kButtonColor);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => SignIn()));
+          } else {
+            Fluttertoast.showToast(
+                fontSize: 18,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                msg: data['message'],
+                textColor: kBackground,
+                backgroundColor: kButtonColor);
+          }
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: 'Service Timeout',
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      } catch (e) {
+        print(e);
+      }
+
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
+    }
+
+
+}
 
   @override
   Widget build(BuildContext context) {

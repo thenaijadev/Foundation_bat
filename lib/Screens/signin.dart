@@ -2,11 +2,13 @@
 
 import 'dart:convert';
 
+import 'package:batnf/providers/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:batnf/Screens/dash_board.dart';
@@ -15,6 +17,7 @@ import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
+
 class SignIn extends StatefulWidget {
   static String id = 'signin';
   @override
@@ -61,53 +64,54 @@ class _SignInState extends State<SignIn> {
     var data = jsonDecode(response.body);
     print(data);
 
-    // try {
-    //   if (response.statusCode == 200) {
-    //     var data = jsonDecode(response.body);
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
 
-    //     if (data['status'] == 200) {
-    //       var username = data['last_name'];
-    //       int userid = int.parse(data['userId']).toInt();
+        if (data['status'] == 200) {
+          activate();
+          var username = data['last_name'];
+          int userid = int.parse(data['userId']).toInt();
 
-    //       Provider.of<EventProvider>(context, listen: false).userId = userid;
-    //       Provider.of<EventProvider>(context, listen: false).userName =
-    //           username.toString();
-    //       sharedPreferences.setInt('userId', userid);
+          Provider.of<EventProvider>(context, listen: false).userId = userid;
+          Provider.of<EventProvider>(context, listen: false).userName =
+              username.toString();
+          sharedPreferences.setInt('userId', userid);
 
-    //       sharedPreferences.setString('email', email);
-    //       sharedPreferences.setBool('autoLogin', true);
-    //       sharedPreferences.setString('username', username.toString());
-    //       activate();
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: "Login Successful",
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //       Navigator.pushReplacement(
-    //           context, MaterialPageRoute(builder: (context) => HomePage()));
-    //     } else {
-    //       Fluttertoast.showToast(
-    //           fontSize: 18,
-    //           toastLength: Toast.LENGTH_LONG,
-    //           gravity: ToastGravity.CENTER,
-    //           msg: data['message'],
-    //           textColor: kBackground,
-    //           backgroundColor: kButtonColor);
-    //     }
-    //   } else {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: 'Service Timeout',
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
+          sharedPreferences.setString('email', email);
+          sharedPreferences.setBool('autoLogin', true);
+          sharedPreferences.setString('username', username.toString());
+          
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Login Successful",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+        }
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: 'Service Timeout',
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+      }
+    } catch (e) {
+      print(e);
+    }
 
     if (mounted) {
       setState(() {
@@ -282,6 +286,7 @@ class _SignInState extends State<SignIn> {
                             login(
                                 email: emailController.text,
                                 password: passwordController.text);
+                            activate();
                           }
                         },
                         child: loading
