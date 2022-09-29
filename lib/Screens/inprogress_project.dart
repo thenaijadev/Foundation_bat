@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
+import 'package:batnf/Models/files.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -83,6 +84,8 @@ class _InprogressPageState extends State<InprogressPage> {
                             itemBuilder: ((context, index) {
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
+                              Files files =
+                                  provider.allInprogressProjects![index] as Files;
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -111,7 +114,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                         height: 74,
                                         width: 74,
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(18),
+                                          borderRadius:
+                                              BorderRadius.circular(18),
                                           child: CachedNetworkImage(
                                               imageUrl: inprogress.projectfiles.fileUrl,
                                               fit: BoxFit.cover),
@@ -137,28 +141,30 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  inprogress.projectfiles.id,
+                                                  inprogress.projectId,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
                                               RichText(
                                                   text: TextSpan(
-                                                    text: 'Started: ', style: kLandpageskiptextstyle,
-                                                    children: [
-                                                      TextSpan(
-                                                        text: inprogress.projectStartDate,
-                                                        style: kNewsDateSTyle
-                                                      )
-                                                    ]
-                                                  )),
-                                                  RichText(
+                                                      text: 'Started: ',
+                                                      style:
+                                                          kLandpageskiptextstyle,
+                                                      children: [
+                                                    TextSpan(
+                                                        text: inprogress
+                                                            .projectStartDate,
+                                                        style: kNewsDateSTyle)
+                                                  ])),
+                                              RichText(
                                                   text: TextSpan(
                                                       text: 'To End: ',
                                                       style:
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress.projectEndDate,
+                                                        text: inprogress
+                                                            .projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

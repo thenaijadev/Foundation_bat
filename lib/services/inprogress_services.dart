@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:batnf/Models/files.dart';
 import 'package:http/http.dart' as http;
 
 import '../Models/inprogress_model.dart';
@@ -13,11 +14,11 @@ class AppInprogressProjects {
       final response = await http.get(Uri.parse(baseUrl + url));
 
       // print(response.toString());
-      // var data = jsonDecode(response.body);
-      // InprogressModel model = InprogressModel.fromJson(data);
-      // print(model.files.toString());
-      // print(data);
-      
+      var data = jsonDecode(response.body);
+      InprogressModel model = InprogressModel.fromJson(data);
+      Files files = model.projectfiles;
+      print(files.fileUrl.toString());
+      print(data);
 
       if (response.statusCode == 200) {
         List data = jsonDecode(response.body);

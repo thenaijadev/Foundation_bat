@@ -7,6 +7,19 @@ import 'package:batnf/Models/files.dart';
 class InprogressModel {
   // late List<String> progress;
   late Files projectfiles;
+
+  late List<String> progress = [
+    projectId,
+   projectTitle ='',
+  projectDescription = '',
+   projectImage = '',
+  projectStartDate = '',
+  projectEndDate = '',
+  projectStatus = '',
+   projectVenue = '',
+   projectLocation = ''
+  ];
+
   String projectId = '';
   String projectTitle = '';
   String projectDescription = '';
@@ -23,9 +36,9 @@ class InprogressModel {
 
   InprogressModel(
       {
-      // required this.progress,
+        // required this.progress,
       required this.projectfiles,
-        required this.projectId,
+      required this.projectId,
       required this.projectTitle,
       required this.projectDescription,
       required this.projectImage,
@@ -37,12 +50,15 @@ class InprogressModel {
       // required this.entryDate,
       required this.projectVenue,
       required this.projectLocation,
-      required this.projectStatus
-      });
+      required this.projectStatus});
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
     // progress = List<String>.from(data['progress']);
-    projectfiles = data['projectfiles'];
+
+    // projectfiles = data['projectfiles'];
+    projectfiles = Files.fromJson(data[projectfiles]);
+
+
 
     projectId = data['projectId'] == null ? "unknown" : data['projectId'];
     projectTitle =
