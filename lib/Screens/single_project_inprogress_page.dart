@@ -45,7 +45,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               SizedBox(
                 height: 265,
                 child: CachedNetworkImage(
-                  imageUrl: widget.singleProgress.projectImage,
+                  imageUrl: 'widget.singleProgress.projectImage',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -54,7 +54,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                 child: Text(
-                  widget.singleProgress.projectTitle,
+                  'widget.singleProgress.projectTitle',
                   style: kPageHeader,
                 ),
               ),
@@ -89,7 +89,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 style: kLandpageskiptextstyle,
                                 children: [
                               TextSpan(
-                                  text: widget.singleProgress.projectStartDate,
+                                  text: 'widget.singleProgress.projectStartDate',
                                 style: kPageHeader,
                               )
                             ])),
@@ -99,7 +99,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 style: kLandpageskiptextstyle,
                                 children: [
                               TextSpan(
-                                text: widget.singleProgress.projectEndDate,
+                                text: 'widget.singleProgress.projectEndDate',
                                 style: kPageHeader,
                               )
                             ])),
@@ -134,12 +134,12 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
-                          widget.singleProgress.projectVenue,
+                          'widget.singleProgress.projectVenue',
                           style: kPageHeader,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          widget.singleProgress.projectLocation,
+                          'widget.singleProgress.projectLocation',
                           style: kBodyTextStyle,
                         )
                       ],
@@ -164,7 +164,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                 margin:
                     EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                 child: Text(
-                  widget.singleProgress.projectDescription,
+                  'widget.singleProgress.projectDescription',
                   textAlign: TextAlign.justify,
                   style: kBodyTextStyle,
                 ),

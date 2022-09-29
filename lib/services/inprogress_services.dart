@@ -12,6 +12,12 @@ class AppInprogressProjects {
     try {
       final response = await http.get(Uri.parse(baseUrl + url));
 
+      // print(response.toString());
+      // var data = jsonDecode(response.body);
+      // InprogressModel model = InprogressModel.fromJson(data);
+      // print(model.files.toString());
+      // print(data);
+
       if (response.statusCode == 200) {
         List data = jsonDecode(response.body);
 

@@ -55,6 +55,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   dart_jsonwebtoken: ^2.4.2
   api_cache_manager: ^1.0.2
+  flutter_vlc_player:
   dropdownfield2:
 
 dev_dependencies:

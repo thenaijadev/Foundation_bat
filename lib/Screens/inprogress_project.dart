@@ -113,7 +113,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                         child: ClipRRect(
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: inprogress.projectImage,
+                                              imageUrl: inprogress.projectfiles.fileUrl,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -137,7 +137,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  inprogress.projectTitle,
+                                                  inprogress.projectfiles.id,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
@@ -146,7 +146,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                                     text: 'Started: ', style: kLandpageskiptextstyle,
                                                     children: [
                                                       TextSpan(
-                                                        text: inprogress.projectStartDate,style: kNewsDateSTyle
+                                                        text: inprogress.projectStartDate,
+                                                        style: kNewsDateSTyle
                                                       )
                                                     ]
                                                   )),
@@ -157,8 +158,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress
-                                                            .projectEndDate,
+                                                        text: inprogress.projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

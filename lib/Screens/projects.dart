@@ -293,8 +293,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: inprogress
-                                                          .projectImage,
+                                                      imageUrl: 'inprogress.projectImage',
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -318,8 +317,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [ 
                                                       Text(
-                                                            inprogress
-                                                                .projectTitle,
+                                                            'inprogress.projectTitle',
                                                             style: kPageHeader,
                                                           ),
                                                       RichText(
@@ -331,8 +329,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                             TextSpan(
-                                                              text: inprogress
-                                                                  .projectStartDate,
+                                                              text: 'inprogress.projectStartDate',
                                                               style:
                                                                   kTextboxhintstyle,
                                                             )
