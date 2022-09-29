@@ -82,10 +82,12 @@ class _InprogressPageState extends State<InprogressPage> {
                           child: ListView.builder(
                             itemCount: provider.allInprogressProjects!.length,
                             itemBuilder: ((context, index) {
+
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
-                              Files files =
-                                  provider.allInprogressProjects![index] as Files;
+
+                                  Files files =
+                               provider.allInprogressProjects![index] as Files;
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -117,7 +119,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: inprogress.projectfiles.fileUrl,
+                                              imageUrl: files.fileUrl,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -141,7 +143,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  inprogress.projectId,
+                                                  files.projectId,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
@@ -152,8 +154,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress
-                                                            .projectStartDate,
+                                                        text: files.projectId,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                               RichText(
@@ -163,8 +164,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress
-                                                            .projectEndDate,
+                                                        text: files.fileUrl,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],
