@@ -7,7 +7,7 @@ import 'package:batnf/Models/inprogress.dart';
 
 class InprogressModel {
   List<Files>? projectfiles;
-  List<Inprogress>? progressdetails;
+  List<Inprogress>? progress;
 
   // String projectId = '';
   // String projectTitle = '';
@@ -19,7 +19,7 @@ class InprogressModel {
   // String projectVenue = '';
   // String projectLocation = '';
 
-  InprogressModel({required this.progressdetails, required this.projectfiles
+  InprogressModel({required this.progress, required this.projectfiles
       // required this.progressList,
       // required this.projectfiles,
       // required this.projectId,
@@ -34,7 +34,7 @@ class InprogressModel {
       });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-    progressdetails = <Inprogress>[];
+    progress = <Inprogress>[];
     projectfiles = <Files>[];
 
     if (data['projectfiles'] != null) {
@@ -42,17 +42,13 @@ class InprogressModel {
       for (var item in (data['projectfiles'] as List)) {
         projectfiles!.add(Files.fromJson(item));
       }
-    } else {
-      [];
     }
 
-    if (data['progressdetails'] != null) {
-      progressdetails = <Inprogress>[];
-      for (var item in (data['progressdetails'] as List)) {
-        progressdetails!.add(Inprogress.fromJson(item));
+    if (data['progress'] != null) {
+      progress = <Inprogress>[];
+      for (var item in (data['progress'] as List)) {
+        progress!.add(Inprogress.fromJson(item));
       }
-    } else {
-      [];
     }
 
     // projectId = data['projectId'] == null ? "unknown" : data['projectId'];

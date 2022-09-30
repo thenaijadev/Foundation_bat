@@ -31,7 +31,7 @@ class Inprogress {
         ? "unknown"
         : data['projectDescription'];
     projectImage =
-        data['projectImage'] == null ? "unknown" : data['projectImage'];
+        data['fileUrl'] == null ? "unknown" : data['fileUrl'];
     projectStartDate =
         data['projectStartDate'] == null ? "unknown" : data['projectStartDate'];
     projectEndDate =

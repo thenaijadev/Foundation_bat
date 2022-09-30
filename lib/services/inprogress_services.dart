@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:batnf/Models/files.dart';
 import 'package:http/http.dart' as http;
 import '../Models/inprogress_model.dart';
 
@@ -15,7 +16,8 @@ class AppInprogressProjects {
         List data = jsonDecode(response.body);
         
 
-        List<InprogressModel> inprogressProjects = [];
+        List<InprogressModel> inprogressProjects = [
+        ];
 
         for (Map<String, dynamic> item in data) {
           inprogressProjects.add(InprogressModel.fromJson(item));
