@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:batnf/Models/files.dart';
+import 'package:batnf/Models/inprogress.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -24,6 +25,8 @@ class _InprogressPageState extends State<InprogressPage> {
   @override
   void initState() {
     super.initState();
+    Provider.of<InprogressProvider>(context, listen: false)
+        .getInprogressProjects();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
   }
@@ -85,6 +88,9 @@ class _InprogressPageState extends State<InprogressPage> {
 
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
+
+                                  Inprogress progress =
+                               provider.allInprogressProjects![index] as Inprogress;
 
                                   Files files =
                                provider.allInprogressProjects![index] as Files;
@@ -154,7 +160,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: files.projectId,
+                                                        text: progress.projectStartDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                               RichText(
@@ -164,7 +170,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: files.fileUrl,
+                                                        text: progress.projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

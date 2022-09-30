@@ -3,9 +3,11 @@
 import 'dart:convert';
 
 import 'package:batnf/Models/files.dart';
+import 'package:batnf/Models/inprogress.dart';
 
 class InprogressModel {
   List<Files>? projectfiles;
+  List<Inprogress>? progressdetails;
 
   // String projectId = '';
   // String projectTitle = '';
@@ -34,12 +36,20 @@ class InprogressModel {
   // });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-
     
     if (data['projectfiles'] != null) {
       projectfiles = <Files>[];
       for (var item in (data['projectfiles'] as List)) {
         projectfiles!.add(Files.fromJson(item));
+      }
+    } else {
+      [];
+    }
+
+    if (data['progressdetails'] != null) {
+      progressdetails = <Inprogress>[];
+      for (var item in (data['progressdetails'] as List)) {
+        progressdetails!.add(Inprogress.fromJson(item));
       }
     } else {
       [];
