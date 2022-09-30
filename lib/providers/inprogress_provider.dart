@@ -7,8 +7,23 @@ import '../services/inprogress_services.dart';
 class InprogressProvider extends ChangeNotifier {
   List<InprogressModel>? allInprogressProjects = [
     InprogressModel(
-      progressdetails: [],
-     projectfiles: [])
+      progressdetails: [
+        Inprogress(
+          projectId: 'projectId',
+         projectTitle: 'projectTitle',
+          projectDescription: 'projectDescription',
+           projectImage: 'projectImage',
+            projectStartDate: 'projectStartDate',
+             projectEndDate: 'projectEndDate',
+              projectVenue: 'projectVenue',
+               projectLocation: 'projectLocation',
+                projectStatus: 'projectStatus')],
+
+     projectfiles: [
+      Files(
+      projectId: 'projectId',
+     fileUrl: 'fileUrl',
+     fileExt: 'fileExt')])
   ];
 
 
