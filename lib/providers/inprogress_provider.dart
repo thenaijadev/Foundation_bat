@@ -5,18 +5,16 @@ import '../Models/inprogress_model.dart';
 import '../services/inprogress_services.dart';
 
 class InprogressProvider extends ChangeNotifier {
-  List<InprogressModel>? allInprogressProjects;
-  // List<Files>? allInprogressPic;
-  // List<Inprogress>? allInprogressDetails;
+  List<InprogressModel>? allInprogressProjects = [
+    InprogressModel(
+      progressdetails: [],
+     projectfiles: [])
+  ];
 
 
   getInprogressProjects() async {
     allInprogressProjects =
         await AppInprogressProjects().getInprogressProjects();
-        // allInprogressPic =
-        // (await AppInprogressProjects().getInprogressProjects()).cast<Files>();
-        // allInprogressDetails =
-        // (await AppInprogressProjects().getInprogressProjects()).cast<Inprogress>();
     notifyListeners();
     
   }

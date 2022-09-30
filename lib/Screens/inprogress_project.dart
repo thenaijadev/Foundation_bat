@@ -27,8 +27,6 @@ class _InprogressPageState extends State<InprogressPage> {
     super.initState();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
-    Provider.of<InprogressProvider>(context, listen: false)
-        .getInprogressProjects();
   }
 
   @override
@@ -94,6 +92,8 @@ class _InprogressPageState extends State<InprogressPage> {
 
                                   Files files =
                                provider.allInprogressProjects![index] as Files;
+
+
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
@@ -149,7 +149,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  files.projectId,
+                                                  progress.projectStartDate,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),

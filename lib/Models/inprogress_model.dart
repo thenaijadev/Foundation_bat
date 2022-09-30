@@ -19,24 +19,24 @@ class InprogressModel {
   // String projectVenue = '';
   // String projectLocation = '';
 
-  // InprogressModel(
-  // {
-  // required this.progress,
-  // required this.progressList,
-  // required this.projectfiles,
-  // required this.projectId,
-  // required this.projectTitle,
-  // required this.projectDescription,
-  // required this.projectImage,
-  // required this.projectStartDate,
-  // required this.projectEndDate,
-  // required this.projectVenue,
-  // required this.projectLocation,
-  // required this.projectStatus
-  // });
+  InprogressModel({required this.progressdetails, required this.projectfiles
+      // required this.progressList,
+      // required this.projectfiles,
+      // required this.projectId,
+      // required this.projectTitle,
+      // required this.projectDescription,
+      // required this.projectImage,
+      // required this.projectStartDate,
+      // required this.projectEndDate,
+      // required this.projectVenue,
+      // required this.projectLocation,
+      // required this.projectStatus
+      });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-    
+    progressdetails = <Inprogress>[];
+    projectfiles = <Files>[];
+
     if (data['projectfiles'] != null) {
       projectfiles = <Files>[];
       for (var item in (data['projectfiles'] as List)) {
