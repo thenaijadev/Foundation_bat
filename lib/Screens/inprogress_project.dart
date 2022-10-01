@@ -125,7 +125,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: progress.projectImage,
+                                              imageUrl: files.fileUrl,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
