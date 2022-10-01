@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
+import 'dart:io';
+
+import 'package:batnf/Models/files.dart';
+import 'package:batnf/Models/inprogress.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +41,7 @@ class _ProjectPageState extends State<ProjectPage> {
   @override
   void initState() {
     super.initState();
+    FlutterNativeSplash.remove();
     Provider.of<PendingProvider>(context, listen: false).getPendingProjects();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
@@ -226,7 +232,7 @@ class _ProjectPageState extends State<ProjectPage> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, CompletedPage.id);
+                                Navigator.pushNamed(context, InprogressPage.id);
                               },
                               child: Text(
                                 'See All',
@@ -254,6 +260,16 @@ class _ProjectPageState extends State<ProjectPage> {
                                     itemCount: inprogressProvider
                                         .allInprogressProjects!.length,
                                     itemBuilder: ((context, index) {
+
+
+                                      Inprogress progress = inprogressProvider
+                                          .allInprogressProjects![index]
+                                          .progress as Inprogress ;
+
+                                      Files files = inprogressProvider
+                                          .allInprogressProjects![index]
+                                          .projectfiles as Files;
+
                                       InprogressModel inprogress =
                                           inprogressProvider
                                               .allInprogressProjects![index];
@@ -293,7 +309,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: 'inprogress.projectImage',
+                                                      imageUrl: files.fileUrl,
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -315,21 +331,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [ 
+                                                    children: [
                                                       Text(
-                                                            'inprogress.projectTitle',
-                                                            style: kPageHeader,
-                                                          ),
+                                                        progress.projectTitle,
+                                                        style: kPageHeader,
+                                                      ),
                                                       RichText(
                                                           text: TextSpan(
-                                                              text:
-                                                                  'Started: ',
+                                                              text: 'Started: ',
                                                               style:
                                                                   kLandpageskiptextstyle,
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                             TextSpan(
-                                                              text: 'inprogress.projectStartDate',
+                                                              text: progress
+                                                                  .projectStartDate,
                                                               style:
                                                                   kTextboxhintstyle,
                                                             )
@@ -338,6 +354,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   ),
                                                 ),
                                               )
+                                            
                                             ],
                                           ),
                                         ),
@@ -457,15 +474,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     children: [
                                                       // Project Title
                                                       Text(
-                                                        completed
-                                                            .projectTitle,
+                                                        completed.projectTitle,
                                                         style: kPageHeader,
                                                       ),
                                                       // project Start Date
                                                       RichText(
                                                           text: TextSpan(
-                                                              text:
-                                                                  'Started: ',
+                                                              text: 'Started: ',
                                                               style:
                                                                   kLandpageskiptextstyle,
                                                               // ignore: prefer_const_literals_to_create_immutables
@@ -619,11 +634,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             .spaceEvenly,
                                                     children: [
                                                       //Project Title
-                                                      Text(
-                                                              pending
-                                                                  .projectTitle,
-                                                              style:
-                                                                  kNewsSubHeader),
+                                                      Text(pending.projectTitle,
+                                                          style:
+                                                              kNewsSubHeader),
 
                                                       //Project Begin Date
                                                       RichText(

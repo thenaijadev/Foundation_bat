@@ -9,28 +9,10 @@ class InprogressModel {
   List<Files>? projectfiles;
   List<Inprogress>? progress;
 
-  // String projectId = '';
-  // String projectTitle = '';
-  // String projectDescription = '';
-  // String projectImage = '';
-  // String projectStartDate = '';
-  // String projectEndDate = '';
-  // String projectStatus = '';
-  // String projectVenue = '';
-  // String projectLocation = '';
-
-  InprogressModel({required this.progress, required this.projectfiles
-      // required this.progressList,
-      // required this.projectfiles,
-      // required this.projectId,
-      // required this.projectTitle,
-      // required this.projectDescription,
-      // required this.projectImage,
-      // required this.projectStartDate,
-      // required this.projectEndDate,
-      // required this.projectVenue,
-      // required this.projectLocation,
-      // required this.projectStatus
+  InprogressModel({
+    required this.progress,
+     required this.projectfiles
+     
       });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
@@ -38,7 +20,7 @@ class InprogressModel {
     // projectfiles = [];
 
     if (data['projectfiles'] != null) {
-      projectfiles = <Files>[];
+        projectfiles = <Files>[];
       for (var item in (data['projectfiles'] as List)) {
         projectfiles!.add(Files.fromJson(item));
       }

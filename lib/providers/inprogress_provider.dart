@@ -17,13 +17,14 @@ class InprogressProvider extends ChangeNotifier {
              projectEndDate: 'projectEndDate',
               projectVenue: 'projectVenue',
                projectLocation: 'projectLocation',
-                projectStatus: 'projectStatus')],
+                projectStatus: 'projectStatus') as Inprogress],
 
      projectfiles: [
       Files(
       projectId: 'projectId',
      fileUrl: 'fileUrl',
-     fileExt: 'fileExt')])
+     fileExt: 'fileExt')]
+     )
   ];
 
 

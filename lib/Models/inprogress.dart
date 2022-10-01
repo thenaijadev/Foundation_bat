@@ -12,7 +12,8 @@ class Inprogress {
   String projectLocation = '';
 
   Inprogress(
-      {required this.projectId,
+      {
+      required this.projectId,
       required this.projectTitle,
       required this.projectDescription,
       required this.projectImage,
@@ -24,10 +25,10 @@ class Inprogress {
 
   Inprogress.fromJson(Map<String, dynamic> data) {
     projectId = data['projectId'];
-    projectTitle = data['projectTitle'];
+    projectTitle = data['projectTitle'] == null ? "unknown" : data['projectTitle'];
     projectDescription = data['projectDescription'];
     projectImage = data['projectImage'];
-    projectStartDate = data['projectStartDate'];
+    projectStartDate = data['projectStartDate'] == null ? "unknown" : data['projectStartDate'];
     projectEndDate = data['projectEndDate'];
     projectStatus = data['projectStatus'];
     projectVenue = data['projectVenue'];
