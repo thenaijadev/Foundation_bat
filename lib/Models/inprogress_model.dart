@@ -34,8 +34,8 @@ class InprogressModel {
       });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-    // progress = <Inprogress>[];
-    // projectfiles = <Files>[];
+    // progress = [];
+    // projectfiles = [];
 
     if (data['projectfiles'] != null) {
       projectfiles = <Files>[];
