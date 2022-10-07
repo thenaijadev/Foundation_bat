@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class AppNews {
   final String baseUrl = 'https://dalexintegrated.com/foundation/api/';
+  // 'https://batnf.net/api/'
 
   Future<List<NewsModel>> getAllNews() async {
     String url = 'getallnews';

@@ -106,6 +106,7 @@ class _SignUpState extends State<SignUp> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await http
         .post(Uri.parse('https://dalexintegrated.com/foundation/api/create'),
+        // 'https://batnf.net/api/'
             body: jsonEncode({
               "first_name": firstname,
               "last_name": lastname,
