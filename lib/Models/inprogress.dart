@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_if_null_operators
 
+import 'package:batnf/Models/files.dart';
+
 class Inprogress {
+  List<Files>? projectfiles;
   String projectId = '';
   String projectTitle = '';
   String projectDescription = '';
@@ -12,7 +15,7 @@ class Inprogress {
   String projectLocation = '';
 
   Inprogress(
-      {
+      {required this.projectfiles,
       required this.projectId,
       required this.projectTitle,
       required this.projectDescription,
@@ -33,5 +36,12 @@ class Inprogress {
     projectStatus = data['projectStatus'];
     projectVenue = data['projectVenue'];
     projectLocation = data['projectLocation'];
+
+    if (data['projectfiles'] != null) {
+      projectfiles = <Files>[];
+      for (var item in (data['projectfiles'] as List)) {
+        projectfiles!.add(Files.fromJson(item));
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@ import 'package:batnf/Models/events_model.dart';
 import 'package:http/http.dart' as http;
 
 class AppEvents {
-  final String baseUrl = 'https://dalexintegrated.com/foundation/api/';
+  final String baseUrl = 'https://batnf.net/api/';
   // 'https://batnf.net/api/'
 
   Future<List<EventModel>> getAllEvents() async {

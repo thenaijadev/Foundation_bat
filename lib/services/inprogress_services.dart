@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../Models/inprogress.dart';
 import '../Models/inprogress_model.dart';
 
 class AppInprogressProjects {
-  final String baseUrl = 'https://dalexintegrated.com/foundation/api/';
+  final String baseUrl = 'https://batnf.net/api/';
   // 'https://batnf.net/api/'
 
-  Future<List<InprogressModel>> getInprogressProjects() async {
+  Future<List<Inprogress>> getInprogressProjects() async {
     String url = 'getinprogressprojects';
 
     try {
@@ -15,10 +16,10 @@ class AppInprogressProjects {
       if (response.statusCode == 200) {
         List data = jsonDecode(response.body);
 
-        List<InprogressModel> inprogressProjects = [];
+        List<Inprogress> inprogressProjects = [];
 
         for (Map<String, dynamic> item in data) {
-          inprogressProjects.add(InprogressModel.fromJson(item));
+          inprogressProjects.add(Inprogress.fromJson(item));
         }
         return inprogressProjects;
       } else {

@@ -84,11 +84,11 @@ class _InprogressPageState extends State<InprogressPage> {
                             itemCount: provider.allInprogressProjects!.length,
                             itemBuilder: ((context, index) {
 
-                              InprogressModel inprogress =
-                                  provider.allInprogressProjects![index];
+                              // InprogressModel inprogress =
+                              //     provider.allInprogressProjects![index];
 
                                   Inprogress progress =
-                               provider.allInprogressProjects![index].progress as Inprogress;
+                               provider.allInprogressProjects![index];
 
                                   Files files =
                                provider.allInprogressProjects![index].projectfiles as Files;
@@ -96,11 +96,11 @@ class _InprogressPageState extends State<InprogressPage> {
 
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProgressDetails(inprogress)));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             ProgressDetails(inprogress)));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
@@ -125,7 +125,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: inprogress.projectImage,
+                                              imageUrl: progress.projectImage,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -149,7 +149,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  inprogress.projectTitle,
+                                                  progress.projectTitle,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
@@ -160,7 +160,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress.projectStartDate,
+                                                        text: progress.projectStartDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                               RichText(
@@ -170,7 +170,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress.projectEndDate,
+                                                        text: progress.projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

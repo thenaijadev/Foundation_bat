@@ -5,10 +5,8 @@ import '../Models/inprogress_model.dart';
 import '../services/inprogress_services.dart';
 
 class InprogressProvider extends ChangeNotifier {
-  List<InprogressModel>? allInprogressProjects = [
-    InprogressModel(
-      progress: [
-        Inprogress(
+  List<Inprogress>? allInprogressProjects = [
+    Inprogress(
           projectId: 'projectId',
          projectTitle: 'projectTitle',
           projectDescription: 'projectDescription',
@@ -17,14 +15,15 @@ class InprogressProvider extends ChangeNotifier {
              projectEndDate: 'projectEndDate',
               projectVenue: 'projectVenue',
                projectLocation: 'projectLocation',
-                projectStatus: 'projectStatus') as Inprogress],
+                projectStatus: 'projectStatus',
+                projectfiles: [])
 
-     projectfiles: [
-      Files(
-      projectId: 'projectId',
-     fileUrl: 'fileUrl',
-     fileExt: 'fileExt')]
-     )
+    //  projectfiles: [
+    //   Files(
+    //   projectId: 'projectId',
+    //  fileUrl: 'fileUrl',
+    //  fileExt: 'fileExt')]
+    //  )
   ];
 
 

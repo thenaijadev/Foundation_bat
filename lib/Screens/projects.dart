@@ -263,24 +263,23 @@ class _ProjectPageState extends State<ProjectPage> {
 
 
                                       Inprogress progress = inprogressProvider
-                                          .allInprogressProjects![index]
-                                          .progress as Inprogress ;
+                                          .allInprogressProjects![index];
 
                                       Files files = inprogressProvider
                                           .allInprogressProjects![index]
                                           .projectfiles as Files;
 
-                                      InprogressModel inprogress =
-                                          inprogressProvider
-                                              .allInprogressProjects![index];
+                                      // InprogressModel inprogress =
+                                      //     inprogressProvider
+                                      //         .allInprogressProjects![index];
                                       return GestureDetector(
                                         onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProgressDetails(
-                                                          inprogress)));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             ProgressDetails(
+                                          //                 inprogress)));
                                         },
                                         child: Container(
                                           margin: EdgeInsets.only(

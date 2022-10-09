@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/completed_model.dart';
 
 class AppCompletedProjects {
-  final String baseUrl = 'https://dalexintegrated.com/foundation/api/';
+  final String baseUrl = 'https://batnf.net/api/';
   // 'https://batnf.net/api/'
   
 
