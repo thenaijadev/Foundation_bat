@@ -90,8 +90,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                   Inprogress progress =
                                provider.allInprogressProjects![index];
 
-                                  Files files =
-                               provider.allInprogressProjects![index].projectfiles as Files;
+                              //     Files files =
+                              //  provider.allInprogressProjects![index].projectfiles as Files;
 
 
                               return GestureDetector(

@@ -265,9 +265,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                       Inprogress progress = inprogressProvider
                                           .allInprogressProjects![index];
 
-                                      Files files = inprogressProvider
-                                          .allInprogressProjects![index]
-                                          .projectfiles as Files;
+                                      // Files files = inprogressProvider
+                                      //     .allInprogressProjects![index]
+                                      //     .projectfiles as Files;
 
                                       // InprogressModel inprogress =
                                       //     inprogressProvider
@@ -308,7 +308,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: files.fileUrl,
+                                                      imageUrl: progress.projectImage,
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),

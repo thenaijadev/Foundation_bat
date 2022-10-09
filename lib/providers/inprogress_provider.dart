@@ -16,14 +16,14 @@ class InprogressProvider extends ChangeNotifier {
               projectVenue: 'projectVenue',
                projectLocation: 'projectLocation',
                 projectStatus: 'projectStatus',
-                projectfiles: [])
-
-    //  projectfiles: [
-    //   Files(
-    //   projectId: 'projectId',
-    //  fileUrl: 'fileUrl',
-    //  fileExt: 'fileExt')]
-    //  )
+                projectfiles: [
+                  Files(
+      projectId: 'projectId',
+     fileUrl: 'fileUrl',
+     fileExt: 'fileExt')
+     ]
+     
+     )
   ];
 
 

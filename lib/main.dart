@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BATNF',
         debugShowCheckedModeBanner: false,
-        initialRoute: !autoLogin ? LandingPage.id : ProjectPage.id,
+        initialRoute: !autoLogin ? LandingPage.id : HomePage.id,
         routes: {
           LandingPage.id: (context) => const LandingPage(),
           WelcomePage.id: (context) => WelcomePage(),
