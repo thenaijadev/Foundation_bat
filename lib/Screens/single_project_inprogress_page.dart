@@ -29,7 +29,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: BackButton(color: kBackground),
+          leading: BackButton(color: kButtonColor),
         ),
         body: RefreshIndicator(
           color: kBackground,

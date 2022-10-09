@@ -83,10 +83,10 @@ class _EventDetailsState extends State<EventDetails> {
         backgroundColor: kBackground,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          toolbarHeight: 50,
+          // toolbarHeight: 50,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: BackButton(color: kBackground),
+          leading: BackButton(color: kButtonColor),
         ),
         body: RefreshIndicator(
           color: kBackground,

@@ -12,8 +12,6 @@ class EventModel {
   String createdDate = '';
   String status = '';
 
-  // final String uri = 'https://www.batnf.net/api/';
-
   EventModel(
       {required this.eventId,
       required this.eventName,

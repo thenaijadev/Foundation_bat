@@ -29,7 +29,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: BackButton(color: kBackground),
+          leading: BackButton(color: kButtonColor),
         ),
         body: RefreshIndicator(
           color: kBackground,
@@ -45,7 +45,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
               SizedBox(
                 height: 265,
                 child: CachedNetworkImage(
-                  imageUrl: widget.singleCompleted.projectImage,
+                  imageUrl: 'https://www.batnf.net/${widget.singleCompleted.projectImage}',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -160,7 +160,6 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
 
               //Project Description
               Container(
-                alignment: AlignmentDirectional.center,
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                 child: Text(
                   widget.singleCompleted.projectDescription,
