@@ -64,10 +64,7 @@ class _CompletedPageState extends State<CompletedPage> {
                   )
                 : provider.allCompletedProjects!.isEmpty
                     ? Center(
-                        child: Text(
-                          'No Completed Project,',
-                          style: kBodyTextStyle,
-                        ),
+                        child: Image.asset('assets/noitem.png.gif'),
                       )
                     : RefreshIndicator(
                         color: kBackground,

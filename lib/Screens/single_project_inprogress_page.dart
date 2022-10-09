@@ -89,7 +89,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 style: kLandpageskiptextstyle,
                                 children: [
                               TextSpan(
-                                  text: 'widget.singleProgress.projectStartDate',
+                                  text: widget.singleProgress.projectStartDate,
                                 style: kPageHeader,
                               )
                             ])),
@@ -99,7 +99,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 style: kLandpageskiptextstyle,
                                 children: [
                               TextSpan(
-                                text: 'widget.singleProgress.projectEndDate',
+                                text: widget.singleProgress.projectEndDate,
                                 style: kPageHeader,
                               )
                             ])),
@@ -134,12 +134,12 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
-                          'widget.singleProgress.projectVenue',
+                          widget.singleProgress.projectVenue,
                           style: kPageHeader,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'widget.singleProgress.projectLocation',
+                          widget.singleProgress.projectLocation,
                           style: kBodyTextStyle,
                         )
                       ],

@@ -250,10 +250,7 @@ class _ProjectPageState extends State<ProjectPage> {
                               )
                             : inprogressProvider.allInprogressProjects!.isEmpty
                                 ? Center(
-                                    child: Text(
-                                      'No Projects Inprogress',
-                                      style: kBodyTextStyle,
-                                    ),
+                                    child: Image.asset('assets/noitem.png.gif'),
                                   )
                                 : ListView.builder(
                                     scrollDirection: Axis.vertical,
@@ -262,24 +259,24 @@ class _ProjectPageState extends State<ProjectPage> {
                                     itemBuilder: ((context, index) {
 
 
-                                      Inprogress progress = inprogressProvider
-                                          .allInprogressProjects![index];
+                                      // Inprogress progress = inprogressProvider
+                                      //     .allInprogressProjects![index];
 
                                       // Files files = inprogressProvider
                                       //     .allInprogressProjects![index]
                                       //     .projectfiles as Files;
 
-                                      // InprogressModel inprogress =
-                                      //     inprogressProvider
-                                      //         .allInprogressProjects![index];
+                                      InprogressModel inprogress =
+                                          inprogressProvider
+                                              .allInprogressProjects![index];
                                       return GestureDetector(
                                         onTap: () {
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             ProgressDetails(
-                                          //                 inprogress)));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProgressDetails(
+                                                          inprogress)));
                                         },
                                         child: Container(
                                           margin: EdgeInsets.only(
@@ -308,7 +305,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: progress.projectImage,
+                                                      imageUrl: inprogress.projectImage,
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -332,7 +329,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [
                                                       Text(
-                                                        progress.projectTitle,
+                                                        inprogress.projectTitle,
                                                         style: kPageHeader,
                                                       ),
                                                       RichText(
@@ -343,7 +340,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                             TextSpan(
-                                                              text: progress
+                                                              text: inprogress
                                                                   .projectStartDate,
                                                               style:
                                                                   kTextboxhintstyle,
@@ -353,7 +350,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   ),
                                                 ),
                                               )
-                                            
                                             ],
                                           ),
                                         ),
@@ -399,10 +395,7 @@ class _ProjectPageState extends State<ProjectPage> {
                               )
                             : completedProvider.allCompletedProjects!.isEmpty
                                 ? Center(
-                                    child: Text(
-                                      'No Completed Projects',
-                                      style: kBodyTextStyle,
-                                    ),
+                                    child: Image.asset('assets/noitem.png.gif'),
                                   )
                                 : ListView.builder(
                                     scrollDirection: Axis.vertical,
@@ -562,10 +555,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                 )
                               : pendingProvider.allPendingProjects!.isEmpty
                                   ? Center(
-                                      child: Text(
-                                        'No Pending Projects',
-                                        style: kBodyTextStyle,
-                                      ),
+                                      child: Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
                                       itemCount: pendingProvider

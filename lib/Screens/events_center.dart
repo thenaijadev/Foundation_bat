@@ -114,7 +114,7 @@ class _EventCenterState extends State<EventCenter> {
                       )
                     : provider.allEvents!.isEmpty
                         ? Center(
-                            child: Text('No Events,', style: kBodyTextStyle,),
+                            child: Image.asset('assets/noitem.png.gif'),
                           )
                         : ListView.builder(
                             scrollDirection: Axis.vertical,

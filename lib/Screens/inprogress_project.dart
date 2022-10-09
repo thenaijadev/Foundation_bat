@@ -67,11 +67,7 @@ class _InprogressPageState extends State<InprogressPage> {
                     )
                   : provider.allInprogressProjects!.isEmpty
                       ? Center(
-                          child: Text(
-                            'No Ongoing Project,',
-                            style: kBodyTextStyle,
-                          ),
-                        )
+                          child: Image.asset('assets/noitem.png.gif')                        )
                       : RefreshIndicator(
                           color: kBackground,
                           backgroundColor: kButtonColor,
@@ -84,11 +80,11 @@ class _InprogressPageState extends State<InprogressPage> {
                             itemCount: provider.allInprogressProjects!.length,
                             itemBuilder: ((context, index) {
 
-                              // InprogressModel inprogress =
-                              //     provider.allInprogressProjects![index];
+                              InprogressModel inprogress =
+                                  provider.allInprogressProjects![index];
 
-                                  Inprogress progress =
-                               provider.allInprogressProjects![index];
+                              //     Inprogress progress =
+                              //  provider.allInprogressProjects![index];
 
                               //     Files files =
                               //  provider.allInprogressProjects![index].projectfiles as Files;
@@ -96,11 +92,11 @@ class _InprogressPageState extends State<InprogressPage> {
 
                               return GestureDetector(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             ProgressDetails(inprogress)));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProgressDetails(inprogress)));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
@@ -125,7 +121,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: progress.projectImage,
+                                              imageUrl: inprogress.projectImage,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -149,7 +145,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
-                                                  progress.projectTitle,
+                                                  inprogress.projectTitle,
                                                   style: kNewsSubHeader,
                                                 ),
                                               ),
@@ -160,7 +156,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: progress.projectStartDate,
+                                                        text: inprogress.projectStartDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                               RichText(
@@ -170,7 +166,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: progress.projectEndDate,
+                                                        text: inprogress.projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

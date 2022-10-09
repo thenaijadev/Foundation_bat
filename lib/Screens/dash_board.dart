@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
 
-                  
+
                   //Ads
                   Container(
                     margin: EdgeInsets.only(left: 30, right: 30, top: 10),
@@ -217,10 +217,7 @@ class _HomePageState extends State<HomePage> {
                             ? Center(
                                 child: MaterialButton(
                                   onPressed: () {},
-                                  child: Text(
-                                    'No Recent Completed Project',
-                                    style: kBodyTextStyle,
-                                  ),
+                                  child: Image.asset('assets/noitem.png.gif'),
                                 ),
                               )
                             : ListView.builder(
@@ -318,10 +315,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         : eventProvider.allEvents!.isEmpty
                             ? Center(
-                                child: Text(
-                                  'No Recent Event',
-                                  style: kBodyTextStyle,
-                                ),
+                                child: Image.asset('assets/noitem.png.gif'),
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -450,10 +444,7 @@ class _HomePageState extends State<HomePage> {
                                 )
                               : newsProvider.allNews!.isEmpty
                                   ? Center(
-                                      child: Text(
-                                        'No Latest News',
-                                        style: kBodyTextStyle,
-                                      ),
+                                      child: Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
                                       itemCount: newsProvider.allNews!.length,

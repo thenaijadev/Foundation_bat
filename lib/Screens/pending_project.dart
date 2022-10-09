@@ -65,10 +65,7 @@ class _PendingPageState extends State<PendingPage> {
                     )
                   : provider.allPendingProjects!.isEmpty
                       ? Center(
-                          child: Text(
-                            'No Completed Project,',
-                            style: kBodyTextStyle,
-                          ),
+                          child: Image.asset('assets/noitem.png.gif'),
                         )
                       : RefreshIndicator(
                           color: kBackground,

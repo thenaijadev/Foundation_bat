@@ -7,7 +7,7 @@ class AppInprogressProjects {
   final String baseUrl = 'https://batnf.net/api/';
   // 'https://batnf.net/api/'
 
-  Future<List<Inprogress>> getInprogressProjects() async {
+  Future<List<InprogressModel>> getInprogressProjects() async {
     String url = 'getinprogressprojects';
 
     try {
@@ -16,10 +16,10 @@ class AppInprogressProjects {
       if (response.statusCode == 200) {
         List data = jsonDecode(response.body);
 
-        List<Inprogress> inprogressProjects = [];
+        List<InprogressModel> inprogressProjects = [];
 
         for (Map<String, dynamic> item in data) {
-          inprogressProjects.add(Inprogress.fromJson(item));
+          inprogressProjects.add(InprogressModel.fromJson(item));
         }
         return inprogressProjects;
       } else {

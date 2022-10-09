@@ -104,7 +104,7 @@ class _NewsState extends State<News> {
                     )
                   : provider.allNews!.isEmpty
                       ? Center(
-                          child: Text('No Latest News', style: kBodyTextStyle,),
+                          child: Image.asset('assets/noitem.png.gif'),
                         )
                       : RefreshIndicator(
                         color: kBackground,
