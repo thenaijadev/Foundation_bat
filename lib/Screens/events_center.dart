@@ -153,7 +153,8 @@ class _EventCenterState extends State<EventCenter> {
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
                                               imageUrl: event.eventFlier,
-                                              fit: BoxFit.cover),
+                                              fit: BoxFit.cover
+                                              ),
                                         ),
                                       ),
                                       Expanded(
