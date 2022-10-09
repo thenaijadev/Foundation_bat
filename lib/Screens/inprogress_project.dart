@@ -121,7 +121,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: inprogress.projectImage,
+                                              imageUrl:'https://www.batnf.net/${inprogress.projectImage}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),

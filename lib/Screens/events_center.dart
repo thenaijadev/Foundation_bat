@@ -3,7 +3,6 @@
 // import 'package:batnf/Models/events_model.dart';
 
 import 'package:batnf/Models/events_model.dart';
-import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
@@ -23,6 +22,7 @@ class EventCenter extends StatefulWidget {
 }
 
 class _EventCenterState extends State<EventCenter> {
+  final String uri = 'https://www.batnf.net/';
   @override
   void initState() {
     super.initState();
@@ -78,7 +78,8 @@ class _EventCenterState extends State<EventCenter> {
                     if (provider.allEvents != null &&
                         provider.allEvents!.isNotEmpty)
                       Container(
-                        margin: EdgeInsets.only(left: 30, right: 30, bottom: 21),
+                        margin:
+                            EdgeInsets.only(left: 30, right: 30, bottom: 21),
                         color: kBackground,
                         height: 45.0,
                         child: TextField(
@@ -148,13 +149,15 @@ class _EventCenterState extends State<EventCenter> {
                                         width: 110,
                                         margin: EdgeInsets.only(
                                             bottom: 7.0, top: 7.0, left: 9.0),
-                                            // Event Image
+
+                                        // Event Image
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(18),
+                                          borderRadius:
+                                              BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: event.eventFlier,
-                                              fit: BoxFit.cover
-                                              ),
+                                              imageUrl:
+                                                  'https://www.batnf.net/${event.eventFlier}',
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
                                       Expanded(
@@ -167,21 +170,23 @@ class _EventCenterState extends State<EventCenter> {
                                           color: kBackground,
                                           //Event Information
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             // ignore: prefer_const_literals_to_create_immutables
                                             children: [
                                               Text(
-                                                        event.eventStartDate,
-                                                        style: kEventDatestyle,
-                                                      ),
-                                                      Text(
-                                                        event.eventName,
-                                                        style: kPageHeader,
-                                                      ), //Event Location
+                                                event.eventStartDate,
+                                                style: kEventDatestyle,
+                                              ),
+                                              Text(
+                                                event.eventName,
+                                                style: kPageHeader,
+                                              ), //Event Location
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 // ignore: prefer_const_literals_to_create_immutables
@@ -191,31 +196,25 @@ class _EventCenterState extends State<EventCenter> {
                                                     FontAwesomeIcons
                                                         .mapMarkerAlt,
                                                     size: 16.67,
-                                                    color:
-                                                        kTextboxhintColor,
+                                                    color: kTextboxhintColor,
                                                   ),
-                                              
+
                                                   //Event Location
                                                   Text(
                                                     event.eventLocation,
-                                                    textAlign:
-                                                        TextAlign.left,
+                                                    textAlign: TextAlign.left,
                                                     style: TextStyle(
                                                         color:
                                                             kTextboxhintColor,
                                                         fontStyle:
-                                                            FontStyle
-                                                                .normal,
-                                                        fontFamily:
-                                                            'Inter',
+                                                            FontStyle.normal,
+                                                        fontFamily: 'Inter',
                                                         fontSize: 12,
                                                         fontWeight:
-                                                            FontWeight
-                                                                .w400),
+                                                            FontWeight.w400),
                                                   ),
                                                 ],
                                               )
-                                            
                                             ],
                                           ),
                                         ),

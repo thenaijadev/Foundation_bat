@@ -151,7 +151,7 @@ class _NewsState extends State<News> {
                                           borderRadius: BorderRadius.circular(18),
                                           child: CachedNetworkImage(
                                               imageUrl:
-                                                  news.newsImage,
+                                                 'https://www.batnf.net/${news.newsImage}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),

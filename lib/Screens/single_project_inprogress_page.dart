@@ -45,7 +45,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               SizedBox(
                 height: 265,
                 child: CachedNetworkImage(
-                  imageUrl: 'widget.singleProgress.projectImage',
+                  imageUrl: 'https://www.batnf.net/${widget.singleProgress.projectImage}',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -54,7 +54,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                 child: Text(
-                  'widget.singleProgress.projectTitle',
+                  widget.singleProgress.projectTitle,
                   style: kPageHeader,
                 ),
               ),
@@ -79,7 +79,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       ),
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
@@ -160,11 +160,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
               //Project Description
               Container(
-                alignment: AlignmentDirectional.center,
                 margin:
                     EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                 child: Text(
-                  'widget.singleProgress.projectDescription',
+                  widget.singleProgress.projectDescription,
                   textAlign: TextAlign.justify,
                   style: kBodyTextStyle,
                 ),

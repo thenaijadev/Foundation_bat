@@ -61,7 +61,7 @@ class _NewsDetailsState extends State<NewsDetails> {
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: CachedNetworkImage(
-                  imageUrl:widget.singleNews.newsImage,
+                  imageUrl: 'https://www.batnf.net/${widget.singleNews.newsImage}',
                   fit: BoxFit.cover,
                 ),
               ),

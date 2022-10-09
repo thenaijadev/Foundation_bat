@@ -103,7 +103,8 @@ class _CompletedPageState extends State<CompletedPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl:completed.projectImage,
+                                              imageUrl:
+                                                'https://www.batnf.net/${completed.projectImage}',
                                               fit: BoxFit.cover),
                                         ),
                           ),

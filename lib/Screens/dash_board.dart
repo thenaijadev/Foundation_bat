@@ -261,8 +261,7 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      completed.projectImage,
+                                                  imageUrl:'https://www.batnf.net/${completed.projectImage}',
                                                   fit: BoxFit.cover),
                                             ),
                                           ),
@@ -358,7 +357,7 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  imageUrl: event.eventFlier,
+                                                  imageUrl: 'https://www.batnf.net/${event.eventFlier}',
                                                   fit: BoxFit.cover),
                                             ),
                                           ),
@@ -485,8 +484,7 @@ class _HomePageState extends State<HomePage> {
                                                           BorderRadius.circular(
                                                               18),
                                                       child: CachedNetworkImage(
-                                                          imageUrl:
-                                                              news.newsImage,
+                                                          imageUrl:'https://www.batnf.net/${news.newsImage}',
                                                           fit: BoxFit.cover),
                                                     ),
                                                   ),

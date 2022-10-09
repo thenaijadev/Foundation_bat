@@ -112,7 +112,7 @@ class _PendingPageState extends State<PendingPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl: pending.projectImage,
+                                              imageUrl: 'https://www.batnf.net/${pending.projectImage}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),

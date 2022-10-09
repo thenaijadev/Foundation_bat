@@ -10,35 +10,36 @@ class EventModel {
   String eventStartTime = '';
   String eventFlier = '';
   String createdDate = '';
-  String adminId = '';
   String status = '';
 
+  // final String uri = 'https://www.batnf.net/api/';
 
-  EventModel({
-    required this.eventId,
-    required this.eventName,
-    required this.eventDesc,
-    required this.venue,
-    required this.eventStartDate,
-    required this.eventStartTime,
-    required this.eventFlier,
-    required this.createdDate,
-    required this.adminId,
-    required this.status,
-    required this.eventLocation
-  });
+  EventModel(
+      {required this.eventId,
+      required this.eventName,
+      required this.eventDesc,
+      required this.venue,
+      required this.eventStartDate,
+      required this.eventStartTime,
+      required this.eventFlier,
+      required this.createdDate,
+      required this.status,
+      required this.eventLocation});
 
   EventModel.fromJson(Map<String, dynamic> data) {
     eventName = data['eventName'] == null ? "unknown" : data['eventName'];
-    eventDesc = data['eventDesc'] == null ? "unknown" : data['eventDesc'];
+    eventDesc =
+        data['eventDesc'] == null ? "unknown" : data['eventDesc'];
     venue = data['venue'] == null ? "unknown" : data['venue'];
     eventFlier = data['eventFlier'] == null ? "unknown" : data['eventFlier'];
-    eventStartDate = data['eventStartDate'] == null ? "unknown" : data['eventStartDate'];
+    eventStartDate =
+        data['eventStartDate'] == null ? "unknown" : data['eventStartDate'];
     eventId = data['eventId'] == null ? "unknown" : data['eventId'];
-    eventStartTime = data['eventStartTime'] == null ? "unknown" : data['eventStartTime'];
+    eventStartTime =
+        data['eventStartTime'] == null ? "unknown" : data['eventStartTime'];
     createdDate = data['createdDate'] == null ? "unknown" : data['createdDate'];
     status = data['status'] == null ? "unknown" : data['status'];
-    adminId = data['adminId'] == null ? "unknown" : data['adminId'];
-    eventLocation = data['eventLocation'] == null ? "unknown" : data['eventLocation'];
+    eventLocation =
+        data['eventLocation'] == null ? "unknown" : data['eventLocation'];
   }
 }

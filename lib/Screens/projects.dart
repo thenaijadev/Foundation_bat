@@ -242,6 +242,8 @@ class _ProjectPageState extends State<ProjectPage> {
                           ],
                         ),
                       ),
+
+
                       // Inprogress Details
                       Expanded(
                         child: inprogressProvider.allInprogressProjects == null
@@ -305,7 +307,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: inprogress.projectImage,
+                                                      imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -441,8 +443,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                      imageUrl: completed
-                                                          .projectImage,
+                                                      imageUrl: 'https://www.batnf.net/${completed.projectImage}',
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
@@ -600,8 +601,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                         BorderRadius.circular(
                                                             10),
                                                     child: CachedNetworkImage(
-                                                        imageUrl: pending
-                                                            .projectImage,
+                                                        imageUrl: 'https://www.batnf.net/${pending.projectImage}',
                                                         fit: BoxFit.cover),
                                                   ),
                                                 ),

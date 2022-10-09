@@ -45,53 +45,6 @@ class _EventDetailsState extends State<EventDetails> {
       });
     }
 
-    // try {
-    //   if (response.statusCode == 201) {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Registration Successful, mail Delivered",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   } else if (response.statusCode == 202) {
-    //     print(Provider.of<EventProvider>(context, listen: false).userId);
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Registration Successful, mail not delivered",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   } else if (response.statusCode == 200) {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Registration Successful, mail sent",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   } else if (response.statusCode == 400) {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Already Registered",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   } else {
-    //     Fluttertoast.showToast(
-    //         fontSize: 18,
-    //         toastLength: Toast.LENGTH_LONG,
-    //         gravity: ToastGravity.CENTER,
-    //         msg: "Server Unavailable",
-    //         textColor: kBackground,
-    //         backgroundColor: kButtonColor);
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
-
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       if (data['status'] == 200) {
@@ -149,7 +102,7 @@ class _EventDetailsState extends State<EventDetails> {
                 height: 150,
                 width: 428,
                 child: CachedNetworkImage(
-                  imageUrl: widget.singleEvent.eventFlier,
+                  imageUrl: 'https://www.batnf.net/${widget.singleEvent.eventFlier}',
                   fit: BoxFit.fitWidth,
                 ),
               ),
