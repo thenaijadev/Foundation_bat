@@ -47,7 +47,6 @@ void main() async {
   bool autoLogin = exist ? sharedPreferences.getBool('autoLogin')! : false;
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // WidgetsFlutterBinding.ensureInitialized();
 
   HttpOverrides.global = MyHttpoverrides();
   runApp(MyApp(autoLogin));

@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getId();
+    FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)
