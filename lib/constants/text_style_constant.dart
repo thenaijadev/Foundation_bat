@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'color_constant.dart';
-
 
 
 const kBorderstyle = OutlineInputBorder(
@@ -131,18 +128,6 @@ const kNewsDateSTyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.w400);
-
-
-
-
-
-
-
-    
-
-
-
-
 
 const kLandsignup = TextStyle(
     color: kBackground,

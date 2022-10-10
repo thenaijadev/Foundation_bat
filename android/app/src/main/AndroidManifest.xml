@@ -2,7 +2,7 @@
     package="com.example.batnf">
    <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="batnf"
+        android:label="Batnf"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
