@@ -1,19 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
-import 'dart:io';
-
-import 'package:batnf/Models/files.dart';
-import 'package:batnf/Models/inprogress.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:batnf/Screens/completed_project.dart';
 import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/pending_project.dart';
-import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -41,7 +35,6 @@ class _ProjectPageState extends State<ProjectPage> {
   @override
   void initState() {
     super.initState();
-    FlutterNativeSplash.remove();
     Provider.of<PendingProvider>(context, listen: false).getPendingProjects();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();

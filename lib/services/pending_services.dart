@@ -5,7 +5,6 @@ import '../Models/pending_model.dart';
 
 class AppPendingProjects {
   final String baseUrl = 'https://batnf.net/api/';
-  // 'https://batnf.net/api/'
 
   Future<List<PendingModel>> getPendingProjects() async {
     String url = 'getpendingprojects';

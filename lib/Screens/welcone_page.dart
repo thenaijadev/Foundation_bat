@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 // My Own Imports
 
@@ -17,11 +16,6 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  @override
-  void initState() {
-    super.initState();
-    FlutterNativeSplash.remove();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

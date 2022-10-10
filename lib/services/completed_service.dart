@@ -5,8 +5,6 @@ import '../Models/completed_model.dart';
 
 class AppCompletedProjects {
   final String baseUrl = 'https://batnf.net/api/';
-  // 'https://batnf.net/api/'
-  
 
 
   Future<List<CompletedModel>> getCompletedProjects() async {

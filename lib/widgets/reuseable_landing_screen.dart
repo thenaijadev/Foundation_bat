@@ -86,23 +86,6 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   ),
                 ),
               ),
-              // Container(
-              //   margin: EdgeInsets.only(top: 5, left: 30, right: 30, bottom: 45),
-              //   height: 45,
-              //   child: MaterialButton(
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(45.0),
-              //     ),
-              //     color: kButtonColor,
-              //     onPressed: () {
-              //     },
-              //     child: Text(
-              //       'Next',
-              //       textAlign: TextAlign.center,
-              //       style: kButtontextstyle,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

@@ -1,14 +1,8 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_indicator/page_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:batnf/Screens/dash_board.dart';
-import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';

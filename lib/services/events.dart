@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 class AppEvents {
   final String baseUrl = 'https://www.batnf.net/api/';
-  // 'https://batnf.net/api/'
 
   Future<List<EventModel>> getAllEvents() async {
     String url = 'getallevents';

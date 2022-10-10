@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
-import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/Screens/single_news_page.dart';
@@ -40,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getId();
-    FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)

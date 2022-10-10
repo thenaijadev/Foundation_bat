@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
-import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
