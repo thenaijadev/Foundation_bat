@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,9 @@ import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
+import 'package:to_curl/to_curl.dart';
+import 'package:dio/dio.dart';
+import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -49,19 +53,26 @@ class _SignInState extends State<SignIn> {
 
   Future<void> login({required String email, required String password}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/foundation/api/login'),
-            // 'https://batnf.net/api/'
-            body: jsonEncode({
-              "identity": email,
-              "password": password,
-            }),
-            headers: {
+    // try {
+    var response = await http.post(Uri.parse('https://batnf.net/api/login'),
+        body: jsonEncode({
+          "identity": email,
+          "password": password,
+        }),
+        headers: {
           "Content-Type": "application/json",
         });
-    var data = jsonDecode(response.body);
-    print(data);
+
+    // String data = response.body.toString();
+    // var info = jsonDecode(data);
+    // print(info);
+    // print(response.statusCode);
+    // print(response.headers);
+    // } catch (e) {
+    //   print(e);
+    // }
+
+    // print(response.toString());
 
     try {
       if (response.statusCode == 200) {
@@ -80,7 +91,7 @@ class _SignInState extends State<SignIn> {
           sharedPreferences.setString('email', email);
           sharedPreferences.setBool('autoLogin', true);
           sharedPreferences.setString('username', username.toString());
-          
+
           Fluttertoast.showToast(
               fontSize: 18,
               toastLength: Toast.LENGTH_LONG,
@@ -116,6 +127,33 @@ class _SignInState extends State<SignIn> {
       setState(() {
         loading = false;
       });
+    }
+  }
+
+// Response response;
+
+  // dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
+  // dio.post('https://batnf.net/api/login', option: Options(headers: {
+  //           "Content-Type": "application/json",
+  //         }));
+
+  void getHttp() async {
+    final dio = Dio();
+
+    dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
+    dio.post('https://batnf.net/api/login',
+        options: Options(headers: {
+          "Content-Type": "application/json",
+        }));
+    try {
+      var response = await dio.post('https://batnf.net/api/login',
+          data: {'identity': 'admin@admin.com', 'password': 'password'});
+      print(response);
+
+      final req = Request('POST', Uri.parse('https://batnf.net/api/login'));
+      print(toCurl(req));
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -229,42 +267,10 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
-                    // Remember me
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          FlutterSwitch(
-                              height: 20,
-                              width: 40,
-                              toggleSize: 12,
-                              activeColor: kButtonColor,
-                              value: status,
-                              onToggle: (val) {
-                                setState(() {
-                                  status = val;
-                                });
-                              }),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Remember me',
-                            style: TextStyle(
-                                color: kButtonColor,
-                                fontStyle: FontStyle.normal,
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     //Sing In Button
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 36.0, left: 30, right: 30, bottom: 35.0),
+                          top: 6.0, left: 30, right: 30, bottom: 35.0),
                       child: MaterialButton(
                         splashColor: kBackground,
                         hoverColor: Colors.black,
@@ -285,6 +291,7 @@ class _SignInState extends State<SignIn> {
                             login(
                                 email: emailController.text,
                                 password: passwordController.text);
+                            getHttp();
                             activate();
                           }
                         },

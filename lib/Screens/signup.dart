@@ -104,22 +104,21 @@ class _SignUpState extends State<SignUp> {
       required String location,
       required String date}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await http
-        .post(Uri.parse('https://dalexintegrated.com/foundation/api/create'),
-        // 'https://batnf.net/api/'
-            body: jsonEncode({
-              "first_name": firstname,
-              "last_name": lastname,
-              "email": email,
-              "password": password,
-              "password_confirm": passwordconfirm,
-              "location": location,
-              "dob": date,
-            }),
-            headers: {"Content-Type": "application/json"});
+    var response = await http.post(Uri.parse('https://batnf.net/api/create'),
+        body: jsonEncode({
+          "first_name": firstname,
+          "last_name": lastname,
+          "email": email,
+          "password": password,
+          "password_confirm": passwordconfirm,
+          "location": location,
+          "dob": date,
+        }),
+        headers: {"Content-Type": "application/json"});
 
-    var data = jsonDecode(response.body);
-    print(data);
+    // var data = jsonDecode(response.body);
+    // print(data);
+    print(response.statusCode);
 
     if (mounted) {
       setState(() {
@@ -165,14 +164,14 @@ class _SignUpState extends State<SignUp> {
     } catch (e) {
       print(e);
     }
-    
+
     Future<void> activate() async {
       var response = await http.get(
         Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
         // http://geeteefarms.com/events/api/login
       );
       var data2 = jsonDecode(response.body);
-      print(data);
+      // print(data);
       if (mounted) {
         setState(() {
           loading = false;
@@ -193,13 +192,13 @@ class _SignUpState extends State<SignUp> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => SignIn()));
           } else {
-            Fluttertoast.showToast(
-                fontSize: 18,
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.CENTER,
-                msg: data['message'],
-                textColor: kBackground,
-                backgroundColor: kButtonColor);
+            // Fluttertoast.showToast(
+            //     fontSize: 18,
+            //     toastLength: Toast.LENGTH_LONG,
+            //     gravity: ToastGravity.CENTER,
+            //     // msg: data['message'],
+            //     textColor: kBackground,
+            //     backgroundColor: kButtonColor);
           }
         } else {
           Fluttertoast.showToast(
@@ -220,9 +219,7 @@ class _SignUpState extends State<SignUp> {
         });
       }
     }
-
-
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -497,12 +494,12 @@ class _SignUpState extends State<SignUp> {
                                 lastname: _lastnameTextController.text,
                                 email: _emailTextController.text,
                                 password: _passwordTextController.text,
-                                passwordconfirm: _passwordconfirmTextController.text,
+                                passwordconfirm:
+                                    _passwordconfirmTextController.text,
                                 location: _locationTextController.text,
                                 date: _date.text);
-                              activate();
+                            activate();
                           }
-                          
                         },
                         child: loading
                             ? CircularProgressIndicator(
