@@ -132,10 +132,7 @@ class _SignInState extends State<SignIn> {
 
 // Response response;
 
-  // dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
-  // dio.post('https://batnf.net/api/login', option: Options(headers: {
-  //           "Content-Type": "application/json",
-  //         }));
+
 
   void getHttp() async {
     final dio = Dio();
