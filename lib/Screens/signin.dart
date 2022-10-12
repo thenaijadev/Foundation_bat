@@ -63,11 +63,11 @@ class _SignInState extends State<SignIn> {
           "Content-Type": "application/json",
         });
 
-    // String data = response.body.toString();
-    // var info = jsonDecode(data);
-    // print(info);
-    // print(response.statusCode);
-    // print(response.headers);
+    String data = response.body.toString();
+    var info = jsonDecode(data);
+    print(info);
+    print(response.statusCode);
+    print(response.headers);
     // } catch (e) {
     //   print(e);
     // }
