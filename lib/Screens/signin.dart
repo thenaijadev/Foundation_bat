@@ -53,8 +53,8 @@ class _SignInState extends State<SignIn> {
 
   Future<void> login({required String email, required String password}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // try {
-    var response = await http.post(Uri.parse('https://batnf.net/api/login'),
+
+    var response = await http.post(Uri.parse('https://www.batnf.net/api/login'),
         body: jsonEncode({
           "identity": email,
           "password": password,
@@ -62,17 +62,10 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
+    // var data = jsonDecode(response.body);
+    // print(data);
+    print(response.body);
 
-    String data = response.body.toString();
-    var info = jsonDecode(data);
-    print(info);
-    print(response.statusCode);
-    print(response.headers);
-    // } catch (e) {
-    //   print(e);
-    // }
-
-    // print(response.toString());
 
     try {
       if (response.statusCode == 200) {
@@ -132,26 +125,38 @@ class _SignInState extends State<SignIn> {
 
 // Response response;
 
-
-
   void getHttp() async {
     final dio = Dio();
 
-    dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
-    dio.post('https://batnf.net/api/login',
-        options: Options(headers: {
-          "Content-Type": "application/json",
-        }));
-    try {
-      var response = await dio.post('https://batnf.net/api/login',
-          data: {'identity': 'admin@admin.com', 'password': 'password'});
-      print(response);
+  // dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
+  // dio.get('https://batnf.net/api/login',
+  //     // options: Options(headers: {
+  //     //   "Content-Type": "application/json",
+  //     // })
+  //     );
 
-      final req = Request('POST', Uri.parse('https://batnf.net/api/login'));
-      print(toCurl(req));
-    } catch (e) {
-      print(e);
-    }
+  // try {
+    var response = await dio.post('https://batnf.net/api/create',
+        data: jsonEncode({
+          "first_name": 'paul',
+            "last_name": 'udah',
+            "email": 'zak@gmail.com',
+            "password": 'password',
+            "password_confirm": 'password',
+            "location": 'abuja',
+            "dob": '1991-02-12',
+        }),
+         options: Options(headers: {
+        "Content-Type": "application/json",
+      })
+    );
+    print(response.data);
+
+  // //   final req = Request('POST', Uri.parse('https://batnf.net/api/getallevents'));
+  // //   print(toCurl(req));
+  // } catch (e) {
+  //   print(e);
+  // }
   }
 
   getEmail() async {

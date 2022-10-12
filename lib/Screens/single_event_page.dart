@@ -27,8 +27,7 @@ class _EventDetailsState extends State<EventDetails> {
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
     var response = await http.post(
-        Uri.parse('https://batnf.net/api/attendevent'),
-        // 'https://batnf.net/api/'
+        Uri.parse('https://www.batnf.net/api/attendevent'),
         body: jsonEncode({
           "userId": Provider.of<EventProvider>(context, listen: false).userId,
           "eventId": widget.singleEvent.eventId,

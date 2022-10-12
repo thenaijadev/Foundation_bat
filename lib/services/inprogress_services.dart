@@ -4,7 +4,7 @@ import '../Models/inprogress.dart';
 import '../Models/inprogress_model.dart';
 
 class AppInprogressProjects {
-  final String baseUrl = 'https://batnf.net/api/';
+  final String baseUrl = 'https://www.batnf.net/api/';
 
   Future<List<InprogressModel>> getInprogressProjects() async {
     String url = 'getinprogressprojects';

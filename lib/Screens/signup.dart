@@ -104,7 +104,7 @@ class _SignUpState extends State<SignUp> {
       required String location,
       required String date}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await http.post(Uri.parse('https://batnf.net/api/create'),
+    var response = await http.post(Uri.parse('https://www.batnf.net/api/create'),
         body: jsonEncode({
           "first_name": firstname,
           "last_name": lastname,
