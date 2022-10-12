@@ -52,6 +52,11 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> login({required String email, required String password}) async {
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var response = await http.post(Uri.parse('https://www.batnf.net/api/login'),
@@ -116,17 +121,13 @@ class _SignInState extends State<SignIn> {
       print(e);
     }
 
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
+    
   }
 
 // Response response;
 
-  void getHttp() async {
-    final dio = Dio();
+  // void getHttp() async {
+  //   final dio = Dio();
 
   // dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
   // dio.get('https://batnf.net/api/login',
@@ -136,28 +137,28 @@ class _SignInState extends State<SignIn> {
   //     );
 
   // try {
-    var response = await dio.post('https://batnf.net/api/create',
-        data: jsonEncode({
-          "first_name": 'paul',
-            "last_name": 'udah',
-            "email": 'zak@gmail.com',
-            "password": 'password',
-            "password_confirm": 'password',
-            "location": 'abuja',
-            "dob": '1991-02-12',
-        }),
-         options: Options(headers: {
-        "Content-Type": "application/json",
-      })
-    );
-    print(response.data);
+  //   var response = await dio.post('https://batnf.net/api/create',
+  //       data: jsonEncode({
+  //         "first_name": 'paul',
+  //           "last_name": 'udah',
+  //           "email": 'zak@gmail.com',
+  //           "password": 'password',
+  //           "password_confirm": 'password',
+  //           "location": 'abuja',
+  //           "dob": '1991-02-12',
+  //       }),
+  //        options: Options(headers: {
+  //       "Content-Type": "application/json",
+  //     })
+  //   );
+  //   print(response.data);
 
-  // //   final req = Request('POST', Uri.parse('https://batnf.net/api/getallevents'));
-  // //   print(toCurl(req));
-  // } catch (e) {
-  //   print(e);
+  // // //   final req = Request('POST', Uri.parse('https://batnf.net/api/getallevents'));
+  // // //   print(toCurl(req));
+  // // } catch (e) {
+  // //   print(e);
+  // // }
   // }
-  }
 
   getEmail() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -293,7 +294,6 @@ class _SignInState extends State<SignIn> {
                             login(
                                 email: emailController.text,
                                 password: passwordController.text);
-                            getHttp();
                             activate();
                           }
                         },
