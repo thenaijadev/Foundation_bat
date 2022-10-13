@@ -284,7 +284,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 BorderRadius.circular(18.0),
                                             boxShadow: [kBoxshadow],
                                           ),
-                                          height: 104,
+                                          // height: 104,
                                           child: Row(
                                             children: [
                                               // Inprogress Images
@@ -420,7 +420,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 BorderRadius.circular(18.0),
                                             boxShadow: [kBoxshadow],
                                           ),
-                                          height: 104,
+                                          // height: 104,
                                           child: Row(
                                             children: [
                                               // Completed Image
@@ -567,7 +567,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             pending)));
                                           },
                                           child: Container(
-                                            height: 104,
+                                            // height: 104,
                                             margin: EdgeInsets.only(
                                                 bottom: 15.0,
                                                 left: 30,
@@ -642,13 +642,19 @@ class _ProjectPageState extends State<ProjectPage> {
                                             ),
                                           ),
                                         );
-                                      })))),
+                                      })),
+                                      ),
+                                      ),
                     ],
                   ),
                 )
+              ,SizedBox(height: 15,)
               ],
-            )),
+            ),
+            ),
+
           ],
+        
         ),
         bottomNavigationBar: ReuseableBottomBar(),
       ),

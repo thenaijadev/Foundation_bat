@@ -118,7 +118,6 @@ class _SignUpState extends State<SignUp> {
 
     // var data = jsonDecode(response.body);
     // print(data);
-    print(response.statusCode);
 
     if (mounted) {
       setState(() {
@@ -165,8 +164,7 @@ class _SignUpState extends State<SignUp> {
 
     Future<void> activate() async {
       var response = await http.get(
-        Uri.parse('https://dalexintegrated.com/foundation/api/activatesuccess'),
-        // http://geeteefarms.com/events/api/login
+        Uri.parse('https://www.batnf.net/api/activatesuccess'),
       );
       var data2 = jsonDecode(response.body);
       // print(data);
@@ -190,13 +188,13 @@ class _SignUpState extends State<SignUp> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => SignIn()));
           } else {
-            // Fluttertoast.showToast(
-            //     fontSize: 18,
-            //     toastLength: Toast.LENGTH_LONG,
-            //     gravity: ToastGravity.CENTER,
-            //     // msg: data['message'],
-            //     textColor: kBackground,
-            //     backgroundColor: kButtonColor);
+            Fluttertoast.showToast(
+                fontSize: 18,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                msg: data2['message'],
+                textColor: kBackground,
+                backgroundColor: kButtonColor);
           }
         } else {
           Fluttertoast.showToast(

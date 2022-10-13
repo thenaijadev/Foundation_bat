@@ -23,19 +23,20 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
-    var response = await http.post(
-        Uri.parse('https://www.batnf.net/api/attendevent'),
-        body: jsonEncode({
-          "userId": Provider.of<EventProvider>(context, listen: false).userId,
-          "eventId": widget.singleEvent.eventId,
-        }),
-        headers: {"Content-Type": "application/json"});
-        
+    var response =
+        await http.post(Uri.parse('https://www.batnf.net/api/attendevent'),
+            body: jsonEncode({
+              "userId":
+                  Provider.of<EventProvider>(context, listen: false).userId,
+              "eventId": widget.singleEvent.eventId,
+            }),
+            headers: {"Content-Type": "application/json"});
+
     var data = jsonDecode(response.body);
     print(data);
+   
 
     if (mounted) {
       setState(() {
@@ -63,15 +64,15 @@ class _EventDetailsState extends State<EventDetails> {
             textColor: kBackground,
             backgroundColor: kButtonColor);
       }
-    }else{
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: 'Service Timeout',
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-        }
+    } else {
+      Fluttertoast.showToast(
+          fontSize: 18,
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          msg: 'Service Timeout',
+          textColor: kBackground,
+          backgroundColor: kButtonColor);
+    }
   }
 
   @override
@@ -81,7 +82,7 @@ class _EventDetailsState extends State<EventDetails> {
         backgroundColor: kBackground,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          // toolbarHeight: 50,
+          toolbarHeight: 50,
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: BackButton(color: kButtonColor),
@@ -100,7 +101,8 @@ class _EventDetailsState extends State<EventDetails> {
                 height: 150,
                 width: 428,
                 child: CachedNetworkImage(
-                  imageUrl: 'https://www.batnf.net/${widget.singleEvent.eventFlier}',
+                  imageUrl:
+                      'https://www.batnf.net/${widget.singleEvent.eventFlier}',
                   fit: BoxFit.fitWidth,
                 ),
               ),

@@ -158,7 +158,7 @@ class _NewsState extends State<News> {
                                       //News Details
                                       Expanded(
                                         child: Container(
-                                          height: 93,
+                                          // height: 93,
                                           margin: EdgeInsets.only(
                                               top: 5,
                                               bottom: 10,
@@ -173,27 +173,16 @@ class _NewsState extends State<News> {
                                             children: [
 
                                               //News Header
-                                              Expanded(
-                                                child: Container(
-                                                  color: kBackground,
-                                                  height: 20,
-                                                  child: Text(
-                                                    news.title,
-                                                    style: kNewsSubHeader,
-                                                  ),
-                                                ),
+                                              Text(
+                                                news.title,
+                                                style: kNewsSubHeader,
                                               ),
 
                                               //News Information
-                                              Expanded(
-                                                child: Container(
-                                                    color: kBackground,
-                                                    height: 10,
-                                                    child: Text(
-                                                      news.information,
-                                                      textAlign: TextAlign.left,
-                                                      style: kBodyTextStyle,
-                                                    )),
+                                              Text(
+                                                news.information,
+                                                textAlign: TextAlign.left,
+                                                style: kBodyTextStyle,
                                               ),
 
                                               // News Date

@@ -131,7 +131,7 @@ class _EventCenterState extends State<EventCenter> {
                                               EventDetails(event)));
                                 },
                                 child: Container(
-                                  height: 124,
+                                  // height: 124,
                                   margin: EdgeInsets.only(
                                     left: 30,
                                     right: 30,
@@ -149,7 +149,7 @@ class _EventCenterState extends State<EventCenter> {
                                         width: 110,
                                         margin: EdgeInsets.only(
                                             bottom: 7.0, top: 7.0, left: 9.0),
-
+                              
                                         // Event Image
                                         child: ClipRRect(
                                           borderRadius:
@@ -198,7 +198,7 @@ class _EventCenterState extends State<EventCenter> {
                                                     size: 16.67,
                                                     color: kTextboxhintColor,
                                                   ),
-
+                              
                                                   //Event Location
                                                   Text(
                                                     event.eventLocation,

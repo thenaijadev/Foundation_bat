@@ -106,7 +106,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
-                                  height: 104,
+                                  // height: 104,
                                   child: Row(
                                     children: [
                                       Container(

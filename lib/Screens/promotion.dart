@@ -97,7 +97,7 @@ class _PromotionState extends State<Promotion> {
               ],
             ),
             SizedBox(
-              height: 342,
+              height: 42,
             ),
           ],
         ),

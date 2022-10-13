@@ -4,10 +4,9 @@ import 'dart:convert';
 
 import 'package:batnf/providers/event_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+// import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,9 +17,11 @@ import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-import 'package:to_curl/to_curl.dart';
-import 'package:dio/dio.dart';
-import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
+// import 'package:to_curl/to_curl.dart';
+// import 'package:dio/dio.dart';
+// import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
+
+import '../services/completed_service.dart';
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -153,11 +154,6 @@ class _SignInState extends State<SignIn> {
   //   );
   //   print(response.data);
 
-  // // //   final req = Request('POST', Uri.parse('https://batnf.net/api/getallevents'));
-  // // //   print(toCurl(req));
-  // // } catch (e) {
-  // //   print(e);
-  // // }
   // }
 
   getEmail() async {
@@ -168,7 +164,7 @@ class _SignInState extends State<SignIn> {
       emailController.text = email;
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
