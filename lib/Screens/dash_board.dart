@@ -402,8 +402,8 @@ class _HomePageState extends State<HomePage> {
 
                   // News list header
 
-                  Container(
-                    color: kBackground,
+                  SizedBox(
+                    // color: kBackground,
                     height: 419,
                     width: 375,
                     child: Column(
@@ -467,7 +467,7 @@ class _HomePageState extends State<HomePage> {
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                               ),
-                                              height: 120,
+                                              // height: 120,
                                               width: 375,
                                               child: Row(
                                                 children: [
@@ -488,14 +488,14 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   Expanded(
                                                     child: Container(
-                                                      height: 120,
+                                                      height: 93,
                                                       margin: EdgeInsets.only(
-                                                          bottom: 15.0),
+                                                          bottom: 10.0),
                                                       color: kBackground,
                                                       child: Column(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .spaceBetween,
+                                                                .spaceEvenly,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .start,
@@ -506,19 +506,13 @@ class _HomePageState extends State<HomePage> {
                                                             style:
                                                                 kNewsSubHeader,
                                                           ),
-                                                          Expanded(
-                                                            child: Container(
-                                                                color:
-                                                                    kBackground,
-                                                                height: 7.0,
-                                                                child: Text(
-                                                                  news.information,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style:
-                                                                      kBodyTextStyle,
-                                                                )),
+                                                          Text(
+                                                            news.information,
+                                                            textAlign:
+                                                                TextAlign
+                                                                    .left,
+                                                            style:
+                                                                kBodyTextStyle,
                                                           ),
                                                           Text(
                                                             news.entryDate,
@@ -542,6 +536,8 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+ 
+
                   SizedBox(
                     height: 50.0,
                   ),

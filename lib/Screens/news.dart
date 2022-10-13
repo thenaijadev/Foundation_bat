@@ -126,7 +126,7 @@ class _NewsState extends State<News> {
                                               NewsDetails(news)));
                                 },
                                 child: Container(
-                                  height: 124,
+                                  // height: 124,
                                   width: 368,
                                   margin: EdgeInsets.only(
                                     left: 30,
@@ -158,7 +158,7 @@ class _NewsState extends State<News> {
                                       //News Details
                                       Expanded(
                                         child: Container(
-                                          // height: 93,
+                                          height: 93,
                                           margin: EdgeInsets.only(
                                               top: 5,
                                               bottom: 10,
