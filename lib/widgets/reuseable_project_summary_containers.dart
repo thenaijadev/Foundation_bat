@@ -26,7 +26,7 @@ class ProjectSummaryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      height: 250,
+      // height: 250,
       width: 198,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -49,19 +49,21 @@ class ProjectSummaryContainer extends StatelessWidget {
               child: childCard,
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(left: 15),
-              child: Text(
-                number.toString(),
-                style: kProjectsummarytextstyle,
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 15, bottom: 35),
-              child: Text(
-                label,
-                textAlign: TextAlign.justify,
-                style: kProjectsumdetailtextstyle,
-              )),
+          Padding(
+            padding: const EdgeInsets.only(left:15),
+            child: Text(
+              number.toString(),
+              style: kProjectsummarytextstyle,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, bottom:35),
+            child: Text(
+              label,
+              textAlign: TextAlign.justify,
+              style: kProjectsumdetailtextstyle,
+            ),
+          ),
         ],
       ),
     );

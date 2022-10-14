@@ -41,6 +41,7 @@ class _LandindPageState extends State<LandingPage> {
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
           
+          // ignore: sort_child_properties_last
           child: PageView(
             controller: controller,
             children: [
@@ -48,19 +49,19 @@ class _LandindPageState extends State<LandingPage> {
                 Imagename: 'assets/boarding1.png',
                 Headerlabel: "Explore the Foundation's \n Upcoming Events",
                 Bodylabel:
-                    'Lorem ipsum dolor sit amet, consectetur\n elit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                    'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
               ),
               ReuseableLandingScreen(
                 Imagename: 'assets/boarding2.png',
                 Headerlabel: "Play to win Vouchers and \n Tickets",
                 Bodylabel:
-                    'Lorem ipsum dolor sit amet, consectetur\n elit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                    'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
               ),
               ReuseableLandingScreen(
                 Imagename: 'assets/boarding3.png',
                 Headerlabel: "Read Latest News and \n Information",
                 Bodylabel:
-                    'Lorem ipsum dolor sit amet, consectetur\n elit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
+                    'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
               ),
               Stack(
                 alignment: AlignmentDirectional.bottomEnd,
@@ -100,15 +101,15 @@ class _LandindPageState extends State<LandingPage> {
                         Container(
                           margin:
                               EdgeInsets.only(left: 56, right: 56, bottom: 46),
-                          height: 95,
+                          // height: 95,
                           child: Text(
-                            'Lorem ipsum dolor sit amet, consectetur \nelit adipiscing elit. Venenatis pulvinar a \n amet in, suspendisse vitae, posuere eu\n tortor et. Und commodo, fermentum,\n mauris leo eget.',
-                             textAlign: TextAlign.center,
+                            'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+                             textAlign: TextAlign.justify,
                             style: kLandpagebodytextstyle,
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 30, left: 30, right: 30),
+                          margin: EdgeInsets.only(bottom: 30, left: 30, right: 30),
                           height: 45,
                           child: MaterialButton(
                             shape: RoundedRectangleBorder(

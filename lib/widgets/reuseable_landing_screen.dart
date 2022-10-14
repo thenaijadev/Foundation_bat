@@ -59,13 +59,15 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 56, right: 56, bottom: 46),
-                height: 95,
-                child: Text(
-                  widget.Bodylabel,
-                  textAlign: TextAlign.center,
-                  style: kLandpagebodytextstyle,
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 56, right: 56,),
+                  height: 75,
+                  child: Text(
+                    widget.Bodylabel,
+                    textAlign: TextAlign.justify,
+                    style: kLandpagebodytextstyle,
+                  ),
                 ),
               ),
               Container(
@@ -78,7 +80,8 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   ),
                   color: kButtonColor,
                   onPressed: () {
-                  Navigator.pushNamed(context, WelcomePage.id);},
+                    Navigator.pushNamed(context, WelcomePage.id);
+                  },
                   child: Text(
                     'skip',
                     textAlign: TextAlign.center,

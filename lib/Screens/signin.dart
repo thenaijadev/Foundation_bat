@@ -68,8 +68,8 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
     print(response.body);
 
 
