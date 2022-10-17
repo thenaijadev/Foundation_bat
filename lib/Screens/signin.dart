@@ -31,6 +31,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool loading = false;
+  bool loading1 = false;
   bool status = false;
   bool hidepassword = true;
 
@@ -53,11 +54,6 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
 
   Future<void> login({required String email, required String password}) async {
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
-    }
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     var response = await http.post(Uri.parse('https://www.batnf.net/api/login'),
@@ -68,10 +64,18 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
-    var data = jsonDecode(response.body);
-    print(data);
+    // List theList = [response.body, 'this is it'];
+    // print(theList);
+    // var data = jsonDecode(response.body);
+    // print(data);
+    // print('msg from server: ${response.body}');
     print(response.body);
 
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
 
     try {
       if (response.statusCode == 200) {
@@ -80,7 +84,7 @@ class _SignInState extends State<SignIn> {
         if (data['status'] == 200) {
           activate();
           var username = data['last_name'];
-          int userid = int.parse(data['userId']).toInt();
+          int userid = int.parse(data['userId'].toString());
 
           Provider.of<EventProvider>(context, listen: false).userId = userid;
           Provider.of<EventProvider>(context, listen: false).userName =
@@ -121,40 +125,58 @@ class _SignInState extends State<SignIn> {
     } catch (e) {
       print(e);
     }
-
-    
   }
 
-// Response response;
+  // Forget Password Api Function
+  Future<void> forgetpassword({required String email}) async {
+    var response =
+        await http.post(Uri.parse('https://www.batnf.net/api/forget_password'),
+            body: jsonEncode({
+              "identity": email,
+            }),
+            headers: {
+          "Content-Type": "application/json",
+        });
+    var data = jsonDecode(response.body);
+    print(data);
+    print(response.body);
 
-  // void getHttp() async {
-  //   final dio = Dio();
+    if (mounted) {
+      setState(() {
+        loading1 = false;
+      });
+    }
 
-  // dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
-  // dio.get('https://batnf.net/api/login',
-  //     // options: Options(headers: {
-  //     //   "Content-Type": "application/json",
-  //     // })
-  //     );
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
 
-  // try {
-  //   var response = await dio.post('https://batnf.net/api/create',
-  //       data: jsonEncode({
-  //         "first_name": 'paul',
-  //           "last_name": 'udah',
-  //           "email": 'zak@gmail.com',
-  //           "password": 'password',
-  //           "password_confirm": 'password',
-  //           "location": 'abuja',
-  //           "dob": '1991-02-12',
-  //       }),
-  //        options: Options(headers: {
-  //       "Content-Type": "application/json",
-  //     })
-  //   );
-  //   print(response.data);
-
-  // }
+        if (data['status'] == 200) {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: "Check Your Mail",
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => ForgetPassword()));
+        } else {
+          Fluttertoast.showToast(
+              fontSize: 18,
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              msg: data['message'],
+              textColor: kBackground,
+              backgroundColor: kButtonColor);
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => ForgetPassword()));
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   getEmail() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -164,7 +186,7 @@ class _SignInState extends State<SignIn> {
       emailController.text = email;
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -307,16 +329,24 @@ class _SignInState extends State<SignIn> {
 
                     //Forget Password Request
                     Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, ForgetPassword.id);
-                        },
-                        child: Text(
-                          'forgot password?',
-                          textAlign: TextAlign.right,
-                          style: kForgetpasswordstyle,
-                        ),
-                      ),
+                      child: TextButton(
+                          onPressed: () {
+                            if (!loading1) {
+                              setState(() {
+                                loading1 = true;
+                              });
+                              forgetpassword(email: emailController.text);
+                            }
+                          },
+                          child: loading1
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.blue))
+                              : Text(
+                                  'Forget Password?',
+                                  textAlign: TextAlign.right,
+                                  style: kForgetpasswordstyle,
+                                )),
                     ),
 
                     // Sign Up Redirection

@@ -47,7 +47,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           //Email cornfirmaion
           Center(
               child: Text(
-            'a Code has been sent to Your Mail',
+            'A Code has been sent to Your registered email',
             style: kTextboxhintstyle,
           )),
 
