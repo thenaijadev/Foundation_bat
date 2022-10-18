@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
-// import 'package:batnf/Models/files.dart';
+import 'package:batnf/Models/files.dart';
 // import 'package:batnf/Models/inprogress.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/projects.dart';
@@ -83,12 +83,6 @@ class _InprogressPageState extends State<InprogressPage> {
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
 
-                              //     Inprogress progress =
-                              //  provider.allInprogressProjects![index];
-
-                              //     Files files =
-                              //  provider.allInprogressProjects![index].projectfiles as Files;
-
 
                               return GestureDetector(
                                 onTap: () {
@@ -121,7 +115,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl:'https://www.batnf.net/${inprogress.projectImage}',
+                                              imageUrl:'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -145,6 +139,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                 color: kBackground,
                                                 height: 19,
                                                 child: Text(
+                                                  // inprogress.projectfiles![index].fileUrl,
                                                   inprogress.projectTitle,
                                                   style: kNewsSubHeader,
                                                 ),

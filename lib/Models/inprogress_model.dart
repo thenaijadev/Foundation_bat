@@ -2,29 +2,28 @@
 
 // import 'dart:convert';
 
-// import 'package:batnf/Models/files.dart';
+import 'package:batnf/Models/files.dart';
 // import 'package:batnf/Models/inprogress.dart';
 
 class InprogressModel {
-  // List<Files>? projectfiles;
+  List<Files>? files;
   // List<Inprogress>? progress;
 
-  String projectid ='';
-  String projectTitle ='';
-  String projectDescription ='';
-  String projectVenue ='';
-  String projectLocation ='';
-  String projectImage ='';
-  String projectStartDate ='';
-  String projectEndDate ='';
-  String projectStatus ='';
-  String adminId ='';
-  String dateCreated ='';
+  String projectid = '';
+  String projectTitle = '';
+  String projectDescription = '';
+  String projectVenue = '';
+  String projectLocation = '';
+  String projectImage = '';
+  String projectStartDate = '';
+  String projectEndDate = '';
+  String projectStatus = '';
+  // String adminId ='';
+  // String dateCreated ='';
 
   InprogressModel({
     // required this.progress,
-    //  required this.projectfiles,
-     
+    required this.files,
     required this.projectid,
     required this.projectTitle,
     required this.projectDescription,
@@ -33,13 +32,12 @@ class InprogressModel {
     required this.projectImage,
     required this.projectStartDate,
     required this.projectEndDate,
-    required this.adminId,
+    // required this.adminId,
     required this.projectStatus,
-    required this.dateCreated
-      });
+    // required this.dateCreated
+  });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-
     // if (data['projectfiles'] != null) {
     //     projectfiles = <Files>[];
     //   for (var item in (data['projectfiles'] as List)) {
@@ -72,5 +70,14 @@ class InprogressModel {
         data['projectVenue'] == null ? "unknown" : data['projectVenue'];
     projectLocation =
         data['projectLocation'] == null ? "unknown" : data['projectLocation'];
+
+    if (data['files'] != null) {
+      files = <Files>[];
+      for (var item in (data['files'])) {
+        files!.add(Files.fromJson(item));
+      }
+    } else {
+      return ;
+    }
   }
 }

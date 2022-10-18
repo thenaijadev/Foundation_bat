@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../Models/inprogress.dart';
 import '../Models/inprogress_model.dart';
 
 class AppInprogressProjects {
