@@ -77,6 +77,7 @@ class _EventDetailsState extends State<EventDetails> {
 
   @override
   Widget build(BuildContext context) {
+    EventProvider provider = Provider.of<EventProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -104,11 +105,25 @@ class _EventDetailsState extends State<EventDetails> {
                 SizedBox(
                   height: 265,
                   width: 428,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://www.batnf.net/${widget.singleEvent.eventFlier}',
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: provider.allEvents!.length,
+                        itemBuilder: ((context, index) {
+                          return CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                              placeholder: (context, url) => CachedNetworkImage(
+                                  imageUrl:
+                                      'https://www.batnf.net/${widget.singleEvent.eventFlier}'),
+                              imageUrl:
+                                  'https://www.batnf.net/${widget.singleEvent.files![index].fileUrl}',
+                              fit: BoxFit.cover);
+                        }))
+                  // CachedNetworkImage(
+                  //   imageUrl:
+                  //       'https://www.batnf.net/${widget.singleEvent.eventFlier}',
+                  //   fit: BoxFit.fitWidth,
+                  // ),
                 ),
           
                 //Event Name

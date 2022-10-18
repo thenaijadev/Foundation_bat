@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_if_null_operators, non_constant_identifier_names
 
+import 'package:batnf/Models/files.dart';
+
 class EventModel {
+  List<Files>? files;
   String eventId = '';
   String eventName = '';
   String eventDesc = '';
@@ -13,7 +16,8 @@ class EventModel {
   String status = '';
 
   EventModel(
-      {required this.eventId,
+      {required this.files,
+      required this.eventId,
       required this.eventName,
       required this.eventDesc,
       required this.venue,
@@ -39,5 +43,14 @@ class EventModel {
     status = data['status'] == null ? "unknown" : data['status'];
     eventLocation =
         data['eventLocation'] == null ? "unknown" : data['eventLocation'];
+
+    if (data['files'] != null) {
+      files = <Files>[];
+      for (var item in (data['files'])) {
+        files!.add(Files.fromJson(item));
+      }
+    } else {
+      return;
+    }
   }
 }

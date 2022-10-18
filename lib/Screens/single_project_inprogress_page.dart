@@ -43,6 +43,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 //Project Image
                 SizedBox(
@@ -51,8 +52,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       scrollDirection: Axis.horizontal,
                         itemCount: provider.allInprogressProjects!.length,
                         itemBuilder: ((context, index) {
-                          // InprogressModel inprogress =
-                          //     provider.allInprogressProjects![index];
           
                           return CachedNetworkImage(
                               errorWidget: (context, url, error) =>

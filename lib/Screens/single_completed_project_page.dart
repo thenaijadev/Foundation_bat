@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../constants/color_constant.dart';
 import '../providers/completed_provider.dart';
+import '../providers/event_provider.dart';
 
 class CompletedProjectDetails extends StatefulWidget {
   final CompletedModel singleCompleted;
@@ -32,6 +33,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
           leading: BackButton(color: kBackground),
         ),
         body: RefreshIndicator(
+          triggerMode: RefreshIndicatorTriggerMode.onEdge,
+          displacement: 78,
           color: kBackground,
           backgroundColor: kButtonColor,
           onRefresh: () async {
@@ -41,8 +44,9 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-          
+            
                 // Project Image
                 SizedBox(
                   height: 265,
@@ -51,7 +55,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     fit: BoxFit.cover,
                   ),
                 ),
-          
+            
                 //Project Title
                 Container(
                   margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
@@ -60,7 +64,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     style: kPageHeader,
                   ),
                 ),
-          
+            
                 //Project Timeline
                 Container(
                   margin: EdgeInsets.only(left: 30, bottom: 21),
@@ -110,7 +114,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     ],
                   ),
                 ),
-          
+            
                 //Project Location and Venue
                 Container(
                   margin: EdgeInsets.only(bottom: 30),
@@ -149,7 +153,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     ],
                   ),
                 ),
-          
+            
                 //Project Description Header
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
@@ -159,7 +163,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-          
+            
                 //Project Description
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
