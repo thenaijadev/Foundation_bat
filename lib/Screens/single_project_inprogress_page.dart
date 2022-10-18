@@ -64,20 +64,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}',
                               fit: BoxFit.cover);
                         }))
-                    // ListView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     children: [
-                    //       CachedNetworkImage(
-                    //           errorWidget: (context, url, error) =>
-                    //               Icon(Icons.error),
-                    //           placeholder: (context, url) => CachedNetworkImage(
-                    //               imageUrl:
-                    //                   'https://www.batnf.net/${widget.singleProgress.projectImage}'),
-                    //           imageUrl:
-                    //               'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}',
-                    //           fit: BoxFit.cover)
-                    //     ],
-                    //   ),
                     // CachedNetworkImage(
                     //   imageUrl: 'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}',
                     //   fit: BoxFit.cover,
