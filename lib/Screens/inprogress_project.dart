@@ -9,6 +9,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,12 @@ class InprogressPage extends StatefulWidget {
 }
 
 class _InprogressPageState extends State<InprogressPage> {
+  final List<Files> imgList = [
+    Files(
+      fileUrl: 'fileUrl',
+     fileExt: 'fileExt')
+     ];
+
   @override
   void initState() {
     super.initState();
@@ -66,8 +73,7 @@ class _InprogressPageState extends State<InprogressPage> {
                       child: CircularProgressIndicator(),
                     )
                   : provider.allInprogressProjects!.isEmpty
-                      ? Center(
-                          child: Image.asset('assets/noitem.png.gif')                        )
+                      ? Center(child: Image.asset('assets/noitem.png.gif'))
                       : RefreshIndicator(
                           color: kBackground,
                           backgroundColor: kButtonColor,
@@ -79,10 +85,8 @@ class _InprogressPageState extends State<InprogressPage> {
                           child: ListView.builder(
                             itemCount: provider.allInprogressProjects!.length,
                             itemBuilder: ((context, index) {
-
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
-
 
                               return GestureDetector(
                                 onTap: () {
@@ -115,7 +119,10 @@ class _InprogressPageState extends State<InprogressPage> {
                                           borderRadius:
                                               BorderRadius.circular(18),
                                           child: CachedNetworkImage(
-                                              imageUrl:'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                            placeholder: (context, url) =>  CachedNetworkImage(imageUrl: 'https://www.batnf.net/${inprogress.projectImage}'),
+                                              imageUrl:
+                                                  'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -151,7 +158,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress.projectStartDate,
+                                                        text: inprogress
+                                                            .projectStartDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                               RichText(
@@ -161,7 +169,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                                           kLandpageskiptextstyle,
                                                       children: [
                                                     TextSpan(
-                                                        text: inprogress.projectEndDate,
+                                                        text: inprogress
+                                                            .projectEndDate,
                                                         style: kNewsDateSTyle)
                                                   ])),
                                             ],

@@ -85,7 +85,7 @@ class _EventDetailsState extends State<EventDetails> {
           toolbarHeight: 50,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: BackButton(color: kButtonColor),
+          leading: BackButton(color: kBackground),
         ),
         body: RefreshIndicator(
           color: kBackground,
@@ -94,181 +94,188 @@ class _EventDetailsState extends State<EventDetails> {
             await Provider.of<EventProvider>(context, listen: false)
                 .getAllEvents();
           },
-          child: ListView(
-            children: [
-              //Event Image
-              SizedBox(
-                height: 150,
-                width: 428,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://www.batnf.net/${widget.singleEvent.eventFlier}',
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-
-              //Event Name
-              Container(
-                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
-                child: Text(
-                  widget.singleEvent.eventName,
-                  style: kPageHeader,
-                ),
-              ),
-
-              //Event Timeline and Dates
-              Container(
-                margin: EdgeInsets.only(left: 30, bottom: 21),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 15),
-                      padding: EdgeInsets.all(8),
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: kButtonColor.withOpacity(0.1),
-                      ),
-                      child: Icon(
-                        FontAwesomeIcons.calendarAlt,
-                        size: 25,
-                        color: kButtonColor,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Text(
-                          widget.singleEvent.eventStartDate,
-                          style: kBodyTextStyle,
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          widget.singleEvent.eventStartTime,
-                          style: kBodyTextStyle,
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-
-              //Event Location
-              Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 30, right: 15),
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: kButtonColor.withOpacity(0.1),
-                      ),
-                      child: Icon(
-                        FontAwesomeIcons.mapMarkerAlt,
-                        size: 25,
-                        color: kButtonColor,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Text(
-                          widget.singleEvent.venue,
-                          style: kBodyTextStyle,
-                        ),
-                        Text(
-                          widget.singleEvent.eventLocation,
-                          style: kBodyTextStyle,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-
-              //Description Header
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  'About Event',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-
-              //Event Description
-              Container(
-                margin:
-                    EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                child: Text(
-                  widget.singleEvent.eventDesc,
-                  textAlign: TextAlign.justify,
-                  style: kBodyTextStyle,
-                ),
-              ),
-
-              //Map Header
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text('Location'),
-              ),
-
-              // Location Map
-              Container(
-                height: 192,
-                margin:
-                    EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Image.asset('assets/map.png'),
-              ),
-
-              //Registration Button
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 30, right: 30, bottom: 20.0),
-                child: MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                
+                //Event Image
+                SizedBox(
+                  height: 265,
+                  width: 428,
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://www.batnf.net/${widget.singleEvent.eventFlier}',
+                    fit: BoxFit.fitWidth,
                   ),
-                  height: 45.0,
-                  color: kButtonColor,
-                  onPressed: () {
-                    print(widget.singleEvent.eventId);
-                    print(Provider.of<EventProvider>(context, listen: false)
-                        .userId);
-
-                    if (Provider.of<EventProvider>(context, listen: false)
-                            .userId !=
-                        null) {
-                      setState(() {
-                        loading = true;
-                      });
-                      register(
-                          userId:
-                              Provider.of<EventProvider>(context, listen: false)
-                                  .userId,
-                          eventId: widget.singleEvent.eventId);
-                    }
-                  },
-                  child: loading
-                      ? CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.white))
-                      : Text(
-                          'Register',
-                          textAlign: TextAlign.center,
-                          style: kButtontextstyle,
-                        ),
                 ),
-              ),
-            ],
+          
+                //Event Name
+                Container(
+                  margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                  child: Text(
+                    widget.singleEvent.eventName,
+                    style: kPageHeader,
+                  ),
+                ),
+          
+                //Event Timeline and Dates
+                Container(
+                  margin: EdgeInsets.only(left: 30, bottom: 21),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 15),
+                        padding: EdgeInsets.all(8),
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: kButtonColor.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          FontAwesomeIcons.calendarAlt,
+                          size: 25,
+                          color: kButtonColor,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            widget.singleEvent.eventStartDate,
+                            style: kBodyTextStyle,
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            widget.singleEvent.eventStartTime,
+                            style: kBodyTextStyle,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+          
+                //Event Location
+                Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 30, right: 15),
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: kButtonColor.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          size: 25,
+                          color: kButtonColor,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            widget.singleEvent.venue,
+                            style: kBodyTextStyle,
+                          ),
+                          Text(
+                            widget.singleEvent.eventLocation,
+                            style: kBodyTextStyle,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+          
+                //Description Header
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Text(
+                    'About Event',
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+          
+                //Event Description
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                  child: Text(
+                    widget.singleEvent.eventDesc,
+                    textAlign: TextAlign.justify,
+                    style: kBodyTextStyle,
+                  ),
+                ),
+          
+                //Map Header
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Text('Location'),
+                ),
+          
+                // Location Map
+                Container(
+                  height: 192,
+                  margin:
+                      EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Image.asset('assets/map.png'),
+                ),
+          
+                //Registration Button
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20.0),
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(45.0),
+                    ),
+                    height: 45.0,
+                    minWidth: MediaQuery.of(context).size.width,
+                    color: kButtonColor,
+                    onPressed: () {
+                      print(widget.singleEvent.eventId);
+                      print(Provider.of<EventProvider>(context, listen: false)
+                          .userId);
+          
+                      if (Provider.of<EventProvider>(context, listen: false)
+                              .userId !=
+                          null) {
+                        setState(() {
+                          loading = true;
+                        });
+                        register(
+                            userId:
+                                Provider.of<EventProvider>(context, listen: false)
+                                    .userId,
+                            eventId: widget.singleEvent.eventId);
+                      }
+                    },
+                    child: loading
+                        ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white))
+                        : Text(
+                            'Register',
+                            textAlign: TextAlign.center,
+                            style: kButtontextstyle,
+                          ),
+                  ),
+                ),
+              
+              ],
+            ),
           ),
         ),
       ),
