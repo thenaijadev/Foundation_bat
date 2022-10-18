@@ -1,13 +1,10 @@
 // ignore_for_file: prefer_if_null_operators, non_constant_identifier_names
 
-// import 'dart:convert';
 
 import 'package:batnf/Models/files.dart';
-// import 'package:batnf/Models/inprogress.dart';
 
 class InprogressModel {
   List<Files>? files;
-  // List<Inprogress>? progress;
 
   String projectid = '';
   String projectTitle = '';
@@ -18,11 +15,8 @@ class InprogressModel {
   String projectStartDate = '';
   String projectEndDate = '';
   String projectStatus = '';
-  // String adminId ='';
-  // String dateCreated ='';
 
   InprogressModel({
-    // required this.progress,
     required this.files,
     required this.projectid,
     required this.projectTitle,
@@ -32,26 +26,10 @@ class InprogressModel {
     required this.projectImage,
     required this.projectStartDate,
     required this.projectEndDate,
-    // required this.adminId,
     required this.projectStatus,
-    // required this.dateCreated
   });
 
   InprogressModel.fromJson(Map<String, dynamic> data) {
-    // if (data['projectfiles'] != null) {
-    //     projectfiles = <Files>[];
-    //   for (var item in (data['projectfiles'] as List)) {
-    //     projectfiles!.add(Files.fromJson(item));
-    //   }
-    // }
-
-    // if (data['progress'] != null) {
-    //   progress = <Inprogress>[];
-    //   for (var item in (data['progress'] as List)) {
-    //     progress!.add(Inprogress.fromJson(item));
-    //   }
-    // }
-
     projectid = data['projectId'] == null ? "unknown" : data['projectId'];
     projectTitle =
         data['projectTitle'] == null ? "unknown" : data['projectTitle'];
