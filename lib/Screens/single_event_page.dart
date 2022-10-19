@@ -3,9 +3,11 @@
 import 'dart:convert';
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Models/files.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,7 +38,6 @@ class _EventDetailsState extends State<EventDetails> {
 
     var data = jsonDecode(response.body);
     print(data);
-   
 
     if (mounted) {
       setState(() {
@@ -78,6 +79,23 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
     EventProvider provider = Provider.of<EventProvider>(context);
+
+    final List<String> imgList = [
+      'https://www.batnf.net/${widget.singleEvent.files![0].fileUrl}',];
+
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              width: MediaQuery.of(context).size.width,
+              child: widget.singleEvent.files![0].fileUrl.isEmpty 
+                                                ? CachedNetworkImage(
+                                                  placeholder: (context, url) => Center(child: Text('Loading')),
+                                                  imageUrl:
+                                        'https://www.batnf.net/${widget.singleEvent.eventFlier}',
+                                    fit: BoxFit.cover) 
+                                    : Image.network(item, fit: BoxFit.cover,width: 365,),
+            ))
+        .toList();
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -100,32 +118,18 @@ class _EventDetailsState extends State<EventDetails> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 //Event Image
                 SizedBox(
-                  height: 265,
-                  width: 428,
-                  child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: provider.allEvents!.length,
-                        itemBuilder: ((context, index) {
-                          return CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                              placeholder: (context, url) => CachedNetworkImage(
-                                  imageUrl:
-                                      'https://www.batnf.net/${widget.singleEvent.eventFlier}'),
-                              imageUrl:
-                                  'https://www.batnf.net/${widget.singleEvent.files![index].fileUrl}',
-                              fit: BoxFit.cover);
-                        }))
-                  // CachedNetworkImage(
-                  //   imageUrl:
-                  //       'https://www.batnf.net/${widget.singleEvent.eventFlier}',
-                  //   fit: BoxFit.fitWidth,
-                  // ),
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      height: 350,
+                      viewportFraction: 1.0,
+                        enableInfiniteScroll: false,
+                        autoPlay: true),
+                    items: imageSliders,
+                  ),
                 ),
-          
+
                 //Event Name
                 Container(
                   margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
@@ -134,7 +138,7 @@ class _EventDetailsState extends State<EventDetails> {
                     style: kPageHeader,
                   ),
                 ),
-          
+
                 //Event Timeline and Dates
                 Container(
                   margin: EdgeInsets.only(left: 30, bottom: 21),
@@ -173,7 +177,7 @@ class _EventDetailsState extends State<EventDetails> {
                     ],
                   ),
                 ),
-          
+
                 //Event Location
                 Container(
                   margin: EdgeInsets.only(bottom: 30),
@@ -211,7 +215,7 @@ class _EventDetailsState extends State<EventDetails> {
                     ],
                   ),
                 ),
-          
+
                 //Description Header
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
@@ -220,7 +224,7 @@ class _EventDetailsState extends State<EventDetails> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-          
+
                 //Event Description
                 Container(
                   margin:
@@ -231,13 +235,13 @@ class _EventDetailsState extends State<EventDetails> {
                     style: kBodyTextStyle,
                   ),
                 ),
-          
+
                 //Map Header
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: Text('Location'),
                 ),
-          
+
                 // Location Map
                 Container(
                   height: 192,
@@ -248,7 +252,7 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   child: Image.asset('assets/map.png'),
                 ),
-          
+
                 //Registration Button
                 Padding(
                   padding:
@@ -264,7 +268,7 @@ class _EventDetailsState extends State<EventDetails> {
                       print(widget.singleEvent.eventId);
                       print(Provider.of<EventProvider>(context, listen: false)
                           .userId);
-          
+
                       if (Provider.of<EventProvider>(context, listen: false)
                               .userId !=
                           null) {
@@ -272,9 +276,9 @@ class _EventDetailsState extends State<EventDetails> {
                           loading = true;
                         });
                         register(
-                            userId:
-                                Provider.of<EventProvider>(context, listen: false)
-                                    .userId,
+                            userId: Provider.of<EventProvider>(context,
+                                    listen: false)
+                                .userId,
                             eventId: widget.singleEvent.eventId);
                       }
                     },
@@ -288,7 +292,6 @@ class _EventDetailsState extends State<EventDetails> {
                           ),
                   ),
                 ),
-              
               ],
             ),
           ),

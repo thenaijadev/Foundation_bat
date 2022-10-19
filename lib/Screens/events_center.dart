@@ -154,7 +154,20 @@ class _EventCenterState extends State<EventCenter> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(18),
-                                          child: CachedNetworkImage(
+                                          child: provider
+                                                  .allEvents![index]
+                                                  .files![0]
+                                                  .fileExt
+                                                  .isEmpty
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(18),
+                                                  child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${event.eventFlier}',
+                                                      fit: BoxFit.cover),
+                                                )
+                                              : CachedNetworkImage(
                                               errorWidget:
                                                   (context, url, error) =>
                                                       Icon(Icons.error),

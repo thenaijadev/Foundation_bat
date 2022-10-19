@@ -23,6 +23,27 @@ class CompletedProjectDetails extends StatefulWidget {
 class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
   @override
   Widget build(BuildContext context) {
+    final List<String> imgList = [
+      'https://www.batnf.net/${widget.singleCompleted.files![0].fileUrl}',
+    ];
+
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              width: MediaQuery.of(context).size.width,
+              child: widget.singleCompleted.files![0].fileUrl.isEmpty
+                  ? CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          Center(child: Text('Loading')),
+                      imageUrl:
+                          'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                      fit: BoxFit.cover)
+                  : Image.network(
+                      item,
+                      fit: BoxFit.cover,
+                      width: 365,
+                    ),
+            ))
+        .toList();
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,

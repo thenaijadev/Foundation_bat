@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:batnf/Models/files.dart';
-// import 'package:batnf/Models/inprogress.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -9,10 +8,13 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_video_player/cached_video_player.dart';
+import 'package:chewie/chewie.dart';
+import 'package:video_player/video_player.dart';
 
 class InprogressPage extends StatefulWidget {
   static String id = 'inprogress';
@@ -23,18 +25,40 @@ class InprogressPage extends StatefulWidget {
 }
 
 class _InprogressPageState extends State<InprogressPage> {
-  final List<Files> imgList = [
-    Files(
-      fileUrl: 'fileUrl',
-     fileExt: 'fileExt')
-     ];
+  
+  // late CachedVideoPlayerController? controller;
+  // fileUrl = ;
+
+  VideoPlayerController? _videoPlayerController;
+  ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
+    // controller = CachedVideoPlayerController.network(
+    //     'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4');
+    // controller!.initialize().then((value) {
+    //   // controller.!play();
+    //   setState(() {});
+    // });
+
+    // _videoPlayerController = VideoPlayerController.network(
+    //     'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4');
+    // _videoPlayerController!.initialize().then((_) {
+    //   _chewieController =
+    //       ChewieController(videoPlayerController: _videoPlayerController!);
+    //   setState(() {});
+    // });
   }
+
+  // @override
+  // void dispose() {
+  //   _videoPlayerController!.dispose();
+  //   _chewieController!.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -115,17 +139,45 @@ class _InprogressPageState extends State<InprogressPage> {
                                             top: 15),
                                         height: 74,
                                         width: 74,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          child: CachedNetworkImage(
-                                            errorWidget: (context, url, error) => Icon(Icons.error),
-                                            placeholder: (context, url) =>  CachedNetworkImage(imageUrl: 'https://www.batnf.net/${inprogress.projectImage}'),
-                                              imageUrl:
-                                                  'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                              fit: BoxFit.cover),
-                                        ),
+                                        child: inprogress.files![0].fileUrl.isEmpty
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                        fit: BoxFit.cover),
+                                                  )
+                                        :
+                                        inprogress.files![0].fileExt ==
+                                                'video\/mp4'
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                        fit: BoxFit.cover),
+                                                // _chewieVideoPlayer()
+                                                // controller!
+                                                //         .value.isInitialized
+                                                //     ? CachedVideoPlayer(
+                                                //         controller!)
+                                                    // : CircularProgressIndicator(),
+                                              )
+                                            : ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                        fit: BoxFit.cover),
+                                                  ),
                                       ),
+
+                                      //Details
                                       Expanded(
                                         child: Container(
                                           height: 93,
@@ -190,4 +242,11 @@ class _InprogressPageState extends State<InprogressPage> {
       ),
     );
   }
+   Widget _chewieVideoPlayer(){
+    return _chewieController != null && _videoPlayerController != null ? 
+    Container(
+      child: Chewie(controller: _chewieController!),
+      ) : const CircularProgressIndicator();
+    
+   }
 }
