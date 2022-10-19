@@ -146,13 +146,49 @@ class _NewsState extends State<News> {
                                         width: 110,
                                         margin: EdgeInsets.only(
                                             bottom: 7.0, top: 7.0, left: 9.0),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(18),
-                                          child: CachedNetworkImage(
-                                              imageUrl:
-                                                 'https://www.batnf.net/${news.newsImage}',
-                                              fit: BoxFit.cover),
-                                        ),
+                                        child: news
+                                                  .files![0].fileUrl.isEmpty
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(18),
+                                                  child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${news.newsImage}',
+                                                      fit: BoxFit.cover),
+                                                )
+                                              : news.files![0].fileExt ==
+                                                      'video\/mp4'
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                      child: CachedNetworkImage(
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                          fit: BoxFit.cover),
+                                                      // _chewieVideoPlayer()
+                                                      // controller!
+                                                      //         .value.isInitialized
+                                                      //     ? CachedVideoPlayer(
+                                                      //         controller!)
+                                                      // : CircularProgressIndicator(),
+                                                    )
+                                                  : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                      child: CachedNetworkImage(
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                          fit: BoxFit.cover),
+                                                    ),
+                                        // ClipRRect(
+                                        //   borderRadius: BorderRadius.circular(18),
+                                        //   child: CachedNetworkImage(
+                                        //       imageUrl:
+                                        //          'https://www.batnf.net/${news.newsImage}',
+                                        //       fit: BoxFit.cover),
+                                        // ),
                                       ),
 
                                       //News Details
@@ -195,7 +231,7 @@ class _NewsState extends State<News> {
                                           ),
                                         ),
                                       ),
-                                    ],
+                                  ],
                                   ),
                                 ),
                               );

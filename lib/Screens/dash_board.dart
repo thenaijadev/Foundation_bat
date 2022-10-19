@@ -255,13 +255,51 @@ class _HomePageState extends State<HomePage> {
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(18),
-                                              child: CachedNetworkImage(
-                                                  imageUrl:'https://www.batnf.net/${completed.projectImage}',
-                                                  fit: BoxFit.cover),
-                                            ),
+                                            child:  completed.files![index]
+                                                    .fileUrl.isEmpty
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${completed.projectImage}',
+                                                        fit: BoxFit.cover),
+                                                  )
+                                                : completed.files![index]
+                                                            .fileExt ==
+                                                        'video\/mp4'
+                                                    ? ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        child: CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${completed.files![0].fileUrl}',
+                                                            fit: BoxFit.cover),
+                                                        // _chewieVideoPlayer()
+                                                        // controller!
+                                                        //         .value.isInitialized
+                                                        //     ? CachedVideoPlayer(
+                                                        //         controller!)
+                                                        // : CircularProgressIndicator(),
+                                                      )
+                                                    : ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(18),
+                                                        child: CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${completed.files![index].fileUrl}',
+                                                            fit: BoxFit.cover),
+                                                      ),
+                                            // ClipRRect(
+                                            //   borderRadius:
+                                            //       BorderRadius.circular(18),
+                                            //   child: CachedNetworkImage(
+                                            //       imageUrl:'https://www.batnf.net/${completed.projectImage}',
+                                            //       fit: BoxFit.cover),
+                                            // ),
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(
@@ -351,13 +389,36 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             height: 145,
                                             width: 218,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(18),
-                                              child: CachedNetworkImage(
-                                                  imageUrl: 'https://www.batnf.net/${event.eventFlier}',
-                                                  fit: BoxFit.cover),
-                                            ),
+                                            child:  provider.allEvents![index]
+                                                    .files![0].fileExt.isEmpty
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${event.eventFlier}',
+                                                        fit: BoxFit.cover),
+                                                  )
+                                                : CachedNetworkImage(
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Icon(Icons.error),
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${event.eventFlier}'),
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${event.files![0].fileUrl}',
+                                                    fit: BoxFit.cover),
+                                            // ClipRRect(
+                                            //   borderRadius:
+                                            //       BorderRadius.circular(18),
+                                            //   child: CachedNetworkImage(
+                                            //       imageUrl: 'https://www.batnf.net/${event.eventFlier}',
+                                            //       fit: BoxFit.cover),
+                                            // ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -477,14 +538,58 @@ class _HomePageState extends State<HomePage> {
                                                         right: 15.0),
                                                     height: 120,
                                                     width: 120,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              18),
-                                                      child: CachedNetworkImage(
-                                                          imageUrl:'https://www.batnf.net/${news.newsImage}',
-                                                          fit: BoxFit.cover),
-                                                    ),
+                                                    child: news.files![0]
+                                                            .fileUrl.isEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child: CachedNetworkImage(
+                                                                imageUrl:
+                                                                    'https://www.batnf.net/${news.newsImage}',
+                                                                fit: BoxFit
+                                                                    .cover),
+                                                          )
+                                                        : news.files![0]
+                                                                    .fileExt ==
+                                                                'video\/mp4'
+                                                            ? ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            18),
+                                                                child: CachedNetworkImage(
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                                // _chewieVideoPlayer()
+                                                                // controller!
+                                                                //         .value.isInitialized
+                                                                //     ? CachedVideoPlayer(
+                                                                //         controller!)
+                                                                // : CircularProgressIndicator(),
+                                                              )
+                                                            : ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            18),
+                                                                child: CachedNetworkImage(
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                              ),
+                                                    //  ClipRRect(
+                                                    //   borderRadius:
+                                                    //       BorderRadius.circular(
+                                                    //           18),
+                                                    //   child: CachedNetworkImage(
+                                                    //       imageUrl:'https://www.batnf.net/${news.newsImage}',
+                                                    //       fit: BoxFit.cover),
+                                                    // ),
                                                   ),
                                                   Expanded(
                                                     child: Container(

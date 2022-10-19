@@ -175,6 +175,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                             'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                                         fit: BoxFit.cover),
                                                   ),
+                                      
                                       ),
 
                                       //Details

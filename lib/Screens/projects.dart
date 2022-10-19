@@ -296,13 +296,56 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     right: 15.0),
                                                 height: 74,
                                                 width: 74,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                  child: CachedNetworkImage(
-                                                      imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
-                                                      fit: BoxFit.cover),
-                                                ),
+                                                child: inprogress.files![0]
+                                                          .fileUrl.isEmpty
+                                                      ? ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${inprogress.projectImage}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        )
+                                                      : inprogress.files![0]
+                                                                  .fileExt ==
+                                                              'video\/mp4'
+                                                          ? ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                              // _chewieVideoPlayer()
+                                                              // controller!
+                                                              //         .value.isInitialized
+                                                              //     ? CachedVideoPlayer(
+                                                              //         controller!)
+                                                              // : CircularProgressIndicator(),
+                                                            )
+                                                          : ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                            ),
+                                                // ClipRRect(
+                                                //   borderRadius:
+                                                //       BorderRadius.circular(18),
+                                                //   child: CachedNetworkImage(
+                                                //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
+                                                //       fit: BoxFit.cover),
+                                                // ),
                                               ),
 
                                               // Inprogress Information
@@ -432,13 +475,56 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     right: 15.0),
                                                 height: 74,
                                                 width: 74,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                  child: CachedNetworkImage(
-                                                      imageUrl: 'https://www.batnf.net/${completed.projectImage}',
-                                                      fit: BoxFit.cover),
-                                                ),
+                                                child: completed.files![index]
+                                                          .fileUrl.isEmpty
+                                                      ? ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${completed.projectImage}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        )
+                                                      : completed.files![index]
+                                                                  .fileExt ==
+                                                              'video\/mp4'
+                                                          ? ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${completed.files![0].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                              // _chewieVideoPlayer()
+                                                              // controller!
+                                                              //         .value.isInitialized
+                                                              //     ? CachedVideoPlayer(
+                                                              //         controller!)
+                                                              // : CircularProgressIndicator(),
+                                                            )
+                                                          : ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${completed.files![index].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                            ),
+                                                // ClipRRect(
+                                                //   borderRadius:
+                                                //       BorderRadius.circular(18),
+                                                //   child: CachedNetworkImage(
+                                                //       imageUrl: 'https://www.batnf.net/${completed.projectImage}',
+                                                //       fit: BoxFit.cover),
+                                                // ),
                                               ),
                                               // Completed Project Info
                                               Expanded(
@@ -589,14 +675,57 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       right: 15.0),
                                                   height: 74,
                                                   width: 74,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: CachedNetworkImage(
-                                                        imageUrl: 'https://www.batnf.net/${pending.projectImage}',
-                                                        fit: BoxFit.cover),
-                                                  ),
+                                                  child: pending.files![0]
+                                                          .fileUrl.isEmpty
+                                                      ? ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${pending.projectImage}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        )
+                                                      : pending.files![0]
+                                                                  .fileExt ==
+                                                              'video\/mp4'
+                                                          ? ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${pending.files![0].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                              // _chewieVideoPlayer()
+                                                              // controller!
+                                                              //         .value.isInitialized
+                                                              //     ? CachedVideoPlayer(
+                                                              //         controller!)
+                                                              // : CircularProgressIndicator(),
+                                                            )
+                                                          : ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child: CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${pending.files![index].fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                            ),
+                                                  // ClipRRect(
+                                                  //   borderRadius:
+                                                  //       BorderRadius.circular(
+                                                  //           10),
+                                                  //   child: CachedNetworkImage(
+                                                  //       imageUrl: 'https://www.batnf.net/${pending.projectImage}',
+                                                  //       fit: BoxFit.cover),
+                                                  // ),
                                                 ),
 
                                                 //Pending Project Details

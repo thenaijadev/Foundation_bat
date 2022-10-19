@@ -108,13 +108,49 @@ class _PendingPageState extends State<PendingPage> {
                                             top: 15),
                                         height: 74,
                                         width: 74,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          child: CachedNetworkImage(
-                                              imageUrl: 'https://www.batnf.net/${pending.projectImage}',
-                                              fit: BoxFit.cover),
-                                        ),
+                                        child: pending
+                                                .files![0].fileUrl.isEmpty
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${pending.projectImage}',
+                                                    fit: BoxFit.cover),
+                                              )
+                                            : pending.files![0].fileExt ==
+                                                    'video\/mp4'
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${pending.files![0].fileUrl}',
+                                                        fit: BoxFit.cover),
+                                                    // _chewieVideoPlayer()
+                                                    // controller!
+                                                    //         .value.isInitialized
+                                                    //     ? CachedVideoPlayer(
+                                                    //         controller!)
+                                                    // : CircularProgressIndicator(),
+                                                  )
+                                                : ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${pending.files![index].fileUrl}',
+                                                        fit: BoxFit.cover),
+                                                  ),
+                                        // ClipRRect(
+                                        //   borderRadius:
+                                        //       BorderRadius.circular(18),
+                                        //   child: CachedNetworkImage(
+                                        //       imageUrl: 'https://www.batnf.net/${pending.projectImage}',
+                                        //       fit: BoxFit.cover),
+                                        // ),
                                       ),
                                       Expanded(
                                         child: Container(
