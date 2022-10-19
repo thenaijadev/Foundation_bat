@@ -35,7 +35,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       placeholder: (context, url) =>
                           Center(child: Text('Loading')),
                       imageUrl:
-                          'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                          'https://www.batnf.net/${widget.singleCompleted.projectImage}',
                       fit: BoxFit.cover)
                   : Image.network(
                       item,

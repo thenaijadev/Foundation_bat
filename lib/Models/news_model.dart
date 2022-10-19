@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_if_null_operators, non_constant_identifier_names
 
+import 'files.dart';
+
 class NewsModel {
+  List<Files>? files;
   String newsImage = '';
   String information = '';
   String title = '';
@@ -10,6 +13,7 @@ class NewsModel {
   String status = '';
 
   NewsModel({
+    required this.files,
     required this.newsImage,
     required this.information,
     required this.title,
@@ -27,5 +31,13 @@ class NewsModel {
     entryDate = data['entryDate'] == null ? "unknown" : data['entryDate'];
     status = data['status'] == null ? "unknown" : data['status'];
     adminId = data['adminId'] == null ? "unknown" : data['adminId'];
+    if (data['files'] != null) {
+      files = <Files>[];
+      for (var item in (data['files'])) {
+        files!.add(Files.fromJson(item));
+      }
+    } else {
+      return;
+    }
   }
 }
