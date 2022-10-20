@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/inprogress_project.dart';
+import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/vidoe.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,7 +25,9 @@ import 'package:video_player/video_player.dart';
 
 import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
+import '../Models/inprogress_model.dart';
 import '../providers/completed_provider.dart';
+import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -74,11 +78,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     
-    EventProvider provider = Provider.of<EventProvider>(context, listen: false);
-    NewsProvider newsProvider = Provider.of<NewsProvider>(context);
-    EventProvider eventProvider = Provider.of<EventProvider>(context);
-    CompletedProvider completedProvider =
-        Provider.of<CompletedProvider>(context);
+    // EventProvider provider = Provider.of<EventProvider>(context, listen: false);
+    NewsProvider newsProvider = Provider.of<NewsProvider>(context, listen: false);
+    EventProvider eventProvider = Provider.of<EventProvider>(context, listen: false);
+    InprogressProvider inprogressProvider =
+        Provider.of<InprogressProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -217,32 +221,28 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 205,
                     width: 237,
-                    child: completedProvider.allCompletedProjects == null
+                    child: inprogressProvider.allInprogressProjects == null
                         ? Center(
                             child: CircularProgressIndicator(),
                           )
-                        : completedProvider.allCompletedProjects!.isEmpty
+                        : inprogressProvider.allInprogressProjects!.isEmpty
                             ? Center(
-                                child: MaterialButton(
-                                  onPressed: () {},
-                                  child: Image.asset('assets/noitem.png.gif'),
-                                ),
+                                child: Image.asset('assets/noitem.png.gif'),
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: completedProvider
-                                    .allCompletedProjects!.length,
+                                itemCount: inprogressProvider.allInprogressProjects!.length,
                                 itemBuilder: ((context, index) {
-                                  CompletedModel completed = completedProvider
-                                      .allCompletedProjects![index];
+                                  InprogressModel inprogress = inprogressProvider
+                                      .allInprogressProjects![index];
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  CompletedProjectDetails(
-                                                      completed)));
+                                                  ProgressDetails(
+                                                      inprogress)));
                                     },
                                     child: Container(
                                       height: 202,
@@ -265,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child:  completed.files![index]
+                                            child:  inprogress.files![index]
                                                     .fileUrl.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
@@ -278,10 +278,10 @@ class _HomePageState extends State<HomePage> {
                                                                 child: Text(
                                                                     'No Image Availaible')),
                                                         imageUrl:
-                                                            'https://www.batnf.net/${completed.projectImage}',
+                                                            'https://www.batnf.net/${inprogress.projectImage}',
                                                         fit: BoxFit.cover),
                                                   )
-                                                : completed.files![index]
+                                                : inprogress.files![index]
                                                             .fileExt ==
                                                         'video\/mp4'
                                                     ? ClipRRect(
@@ -290,14 +290,8 @@ class _HomePageState extends State<HomePage> {
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://www.batnf.net/${completed.files![0].fileUrl}',
+                                                                'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                                             fit: BoxFit.cover),
-                                                        // _chewieVideoPlayer()
-                                                        // controller!
-                                                        //         .value.isInitialized
-                                                        //     ? CachedVideoPlayer(
-                                                        //         controller!)
-                                                        // : CircularProgressIndicator(),
                                                       )
                                                     : ClipRRect(
                                                         borderRadius:
@@ -305,23 +299,16 @@ class _HomePageState extends State<HomePage> {
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://www.batnf.net/${completed.files![index].fileUrl}',
+                                                                'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                                             fit: BoxFit.cover),
                                                       ),
-                                            // ClipRRect(
-                                            //   borderRadius:
-                                            //       BorderRadius.circular(18),
-                                            //   child: CachedNetworkImage(
-                                            //       imageUrl:'https://www.batnf.net/${completed.projectImage}',
-                                            //       fit: BoxFit.cover),
-                                            // ),
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: 16, left: 39, bottom: 16),
                                             height: 19,
                                             child: Text(
-                                              completed.projectTitle,
+                                              inprogress.projectTitle,
                                               style: kPageHeader,
                                             ),
                                           ),
@@ -404,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             height: 145,
                                             width: 218,
-                                            child:  provider.allEvents![index]
+                                            child:  eventProvider.allEvents![index]
                                                     .files![0].fileExt.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:

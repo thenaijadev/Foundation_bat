@@ -129,13 +129,27 @@ class _EventDetailsState extends State<EventDetails> {
                 //Event Image
                 SizedBox(
                   child: CarouselSlider(
-                    options: CarouselOptions(
-                        height: 350,
-                        viewportFraction: 1.0,
-                        enableInfiniteScroll: false,
-                        autoPlay: true),
-                    items: imageSliders,
-                  ),
+                      options: CarouselOptions(
+                          height: 350,
+                          viewportFraction: 1.0,
+                          enableInfiniteScroll: false,
+                          autoPlay: true),
+                      items: widget.singleEvent.files!.map((eventFile) {
+                        print(eventFile.fileExt);
+                        if (eventFile.fileExt == 'image/jpeg') {
+                          CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  Center(child: Text('No Image Availaible')),
+                              placeholder: (context, url) =>
+                                  Center(child: Text('Loading')),
+                              imageUrl:
+                                  'https://www.batnf.net/${eventFile.fileUrl}',
+                              fit: BoxFit.cover);
+                        }
+                        return Container();
+                      }).toList()
+                      // imageSliders,
+                      ),
                 ),
 
                 //Event Name

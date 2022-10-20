@@ -38,15 +38,15 @@ class _NewsDetailsState extends State<NewsDetails> {
     ].toList();
     // var myList = imgList;
     // //  var index = 0;
-    if (index > 0) {
-     List<String> imgList = [
-        'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
-        'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
-        // ' https://www.batnf.net/news/blog-r-3.jpg',
-        // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
-      ].toList();
-       // You can safely access the element here.
-    }
+    // if (index > 0) {
+    //  List<String> imgList = [
+    //     'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
+    //     'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
+    //     // ' https://www.batnf.net/news/blog-r-3.jpg',
+    //     // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
+    //   ].toList();
+    //    // You can safely access the element here.
+    // }
     NewsModel news = provider.allNews![index];
 
     final List<Widget> imageSliders = imgList

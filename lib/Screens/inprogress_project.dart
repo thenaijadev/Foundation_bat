@@ -26,13 +26,9 @@ class InprogressPage extends StatefulWidget {
 }
 
 class _InprogressPageState extends State<InprogressPage> {
-  // InprogressProvider provider = Provider.of<InprogressProvider>(context);
-  // InprogressModel inprogress = inprogress![0].files!.length;
-  // final InprogressModel Progress;
   late CachedVideoPlayerController controller;
 
   // VideoPlayerController? _videoPlayerController;
-  // ChewieController? _chewieController;
 
   @override
   void initState() {
@@ -41,8 +37,8 @@ class _InprogressPageState extends State<InprogressPage> {
         .getInprogressProjects();
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         );
     controller.initialize().then((value) {
       // controller.play();
@@ -124,7 +120,6 @@ class _InprogressPageState extends State<InprogressPage> {
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
-                                  // height: 104,
                                   child: Row(
                                     children: [
                                       Container(
@@ -140,18 +135,10 @@ class _InprogressPageState extends State<InprogressPage> {
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
-                                                child: CachedNetworkImage(
-                                                  errorWidget: (context, url,
-                                                            error) =>
-                                                        Center(
-                                                            child: Text(
-                                                                'No Image Availaible')),
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${inprogress.projectImage}',
-                                                    fit: BoxFit.cover),
+                                                child: Center(child: Text('No Image/Video Available'),),
                                               )
                                             : inprogress.files![0].fileExt ==
-                                                    'video\/mp4'
+                                                    'video/mp4'
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(

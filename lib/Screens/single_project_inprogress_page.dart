@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
+import 'package:batnf/Models/files.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
@@ -23,27 +24,42 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
-  var index = 0;
-  late CachedVideoPlayerController controller;
+   List<CachedVideoPlayerController> playerController = [];
+
   @override
   void initState() {
-    controller = CachedVideoPlayerController.network(
-        'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}'
-        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        );
-
-    controller.initialize().then((value) {
-      controller.play();
-      controller.setLooping(true);
-      setState(() {});
-    });
+    video(widget.singleProgress.files!);
     super.initState();
+  }
+
+  void video(List<Files> file) async {
+    if (file.isEmpty) return;
+    List<Files> videoList =
+        file.where((element) => element.fileExt == 'video/mp4').toList();
+    int count =
+        videoList.fold(0, (previousValue, element) => previousValue + 1);
+    playerController = List.generate(
+        count,
+        (index) => CachedVideoPlayerController.network(
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
+
+    for (var element in playerController) {
+      element.initialize().then((value) async {
+        await Future.delayed(Duration(milliseconds: 500));
+        // element.play();
+          setState(() {
+            
+          });
+        
+      });
+    }
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    for (var element in playerController) {
+      element.dispose();
+    }
     super.dispose();
   }
 
@@ -51,73 +67,62 @@ class _ProgressDetailsState extends State<ProgressDetails> {
   Widget build(BuildContext context) {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
 
-    final List<String> imgList = [
-      'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}',
-      'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}',
-      // 'https://www.batnf.net/${widget.singleProgress.files![2].fileUrl}'
-    ];
-    var myList = imgList;
-    //  var index = 0;
-    if (myList.length > index) {
-      myList[index]; // You can safely access the element here.
-    }
-
-    final List<Widget> imageSliders = imgList
-        .map(
-          (item) => SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: widget.singleProgress.files![index].fileExt == 'video/mp4'
-                ? Container(
-                    child: Stack(
-                      children: [
-                        controller.value.isInitialized
-                            ? AspectRatio(
-                                aspectRatio: controller.value.aspectRatio,
-                                child: CachedVideoPlayer(controller))
-                            : Center(
-                                child: FloatingActionButton(
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      controller.value.isPlaying
-                                          ? controller.pause()
-                                          : controller.play();
-                                    },
-                                  );
-                                },
-                                child: Icon(
-                                  controller.value.isBuffering
-                                      ? Icons.play_arrow
-                                      : Icons.pause,
-                                ),
-                              )
-                                //  const CircularProgressIndicator()
-                                )
-                      ],
-                    ),
-                  )
-                : widget.singleProgress.files![index].fileUrl.isEmpty
-                    ? CachedNetworkImage(
-                        placeholder: (context, url) =>
-                            Center(child: Text('Loading')),
-                        imageUrl:
-                            'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                        fit: BoxFit.cover)
-                    : widget.singleProgress.files![index].fileUrl == 0
-                        ? CachedNetworkImage(
-                            placeholder: (context, url) =>
-                                Center(child: Text('Loading')),
-                            imageUrl:
-                                'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                            fit: BoxFit.cover)
-                        : CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            width: 365,
-                            imageUrl: item,
-                          ),
-          ),
-        )
-        .toList();
+    // final List<Widget> imageSliders = imgList
+    //     .map(
+    //       (item) => SizedBox(
+    //         width: MediaQuery.of(context).size.width,
+    //         child: widget.singleProgress.files![index].fileExt == 'video/mp4'
+    //             ? Container(
+    //                 child: Stack(
+    //                   children: [
+    //                     controller.value.isInitialized
+    //                         ? AspectRatio(
+    //                             aspectRatio: controller.value.aspectRatio,
+    //                             child: CachedVideoPlayer(controller))
+    //                         : Center(
+    //                             child: FloatingActionButton(
+    //                             onPressed: () {
+    //                               setState(
+    //                                 () {
+    //                                   controller.value.isPlaying
+    //                                       ? controller.pause()
+    //                                       : controller.play();
+    //                                 },
+    //                               );
+    //                             },
+    //                             child: Icon(
+    //                               controller.value.isBuffering
+    //                                   ? Icons.play_arrow
+    //                                   : Icons.pause,
+    //                             ),
+    //                           )
+    //                             //  const CircularProgressIndicator()
+    //                             )
+    //                   ],
+    //                 ),
+    //               )
+    //             : widget.singleProgress.files![index].fileUrl.isEmpty
+    //                 ? CachedNetworkImage(
+    //                     placeholder: (context, url) =>
+    //                         Center(child: Text('Loading')),
+    //                     imageUrl:
+    //                         'https://www.batnf.net/${widget.singleProgress.projectImage}',
+    //                     fit: BoxFit.cover)
+    //                 : widget.singleProgress.files![index].fileUrl == 0
+    //                     ? CachedNetworkImage(
+    //                         placeholder: (context, url) =>
+    //                             Center(child: Text('Loading')),
+    //                         imageUrl:
+    //                             'https://www.batnf.net/${widget.singleProgress.projectImage}',
+    //                         fit: BoxFit.cover)
+    //                     : CachedNetworkImage(
+    //                         fit: BoxFit.cover,
+    //                         width: 365,
+    //                         imageUrl: item,
+    //                       ),
+    //       ),
+    //     )
+    //     .toList();
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -130,152 +135,191 @@ class _ProgressDetailsState extends State<ProgressDetails> {
           elevation: 0.0,
           backgroundColor: Colors.transparent,
         ),
-        body: RefreshIndicator(
-          color: kBackground,
-          backgroundColor: kButtonColor,
-          onRefresh: () async {
-            await Provider.of<InprogressProvider>(context, listen: false)
-                .getInprogressProjects();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                //Project Image
-                SizedBox(
-                  child: CarouselSlider(
-                    options: CarouselOptions(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //Project Image
+              CarouselSlider(
+                  options: CarouselOptions(
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
                       viewportFraction: 1.0,
                       enableInfiniteScroll: false,
-                      // autoPlay: true
+                      autoPlay: true),
+                  items: widget.singleProgress.files!.map((eventFile) {
+                    print(eventFile.fileExt);
+                    print(eventFile.fileUrl);
+                    if (eventFile.fileExt == 'image/jpeg') {
+                      return CachedNetworkImage(
+                          errorWidget: (context, url, error) =>
+                              Center(child: Text('No Image Availaible')),
+                          placeholder: (context, url) => Center(
+                                  child: Text(
+                                'Loading',
+                                style: TextStyle(color: Colors.black),
+                              )),
+                          imageUrl:
+                              'https://www.batnf.net/${eventFile.fileUrl}',
+                          fit: BoxFit.cover);
+                    }
+                    CachedVideoPlayerController controller =
+                        playerController.firstWhere((element) =>
+                            element.dataSource == eventFile.fileUrl);
+                    return Container(
+                      child: controller.value.isInitialized
+                          ? Stack(
+                              children: [
+                                FittedBox(
+                                  child: AspectRatio(
+                                      aspectRatio: controller.value.aspectRatio,
+                                      child: CachedVideoPlayer(controller)),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!controller.value.isInitialized) return;
+                                    setState(
+                                      () {
+                                        controller.value.isPlaying
+                                            ? controller.pause()
+                                            : controller.play();
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    controller.value.isBuffering
+                                        ? Icons.play_arrow
+                                        : Icons.pause,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Center(child: CircularProgressIndicator()),
+                    );
+                  }).toList()
+                  // imageSliders,
+                  ),
+
+              //Project Title
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                child: Text(
+                  widget.singleProgress.projectTitle,
+                  style: kPageHeader,
+                ),
+              ),
+
+              //Project Timeline
+              Container(
+                margin: EdgeInsets.only(left: 30, bottom: 21),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 15),
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: kButtonColor.withOpacity(0.1),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.calendarAlt,
+                        size: 25,
+                        color: kButtonColor,
+                      ),
                     ),
-                    items: imageSliders,
-                  ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                text: 'Started: ',
+                                style: kLandpageskiptextstyle,
+                                children: [
+                              TextSpan(
+                                text: widget.singleProgress.projectStartDate,
+                                style: kPageHeader,
+                              )
+                            ])),
+                        RichText(
+                            text: TextSpan(
+                                text: 'To be Completed: ',
+                                style: kLandpageskiptextstyle,
+                                children: [
+                              TextSpan(
+                                text: widget.singleProgress.projectEndDate,
+                                style: kPageHeader,
+                              )
+                            ])),
+                      ],
+                    )
+                  ],
                 ),
+              ),
 
-                //Project Title
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
-                  child: Text(
-                    widget.singleProgress.projectTitle,
-                    style: kPageHeader,
-                  ),
-                ),
-
-                //Project Timeline
-                Container(
-                  margin: EdgeInsets.only(left: 30, bottom: 21),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 15),
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: kButtonColor.withOpacity(0.1),
-                        ),
-                        child: Icon(
-                          FontAwesomeIcons.calendarAlt,
-                          size: 25,
-                          color: kButtonColor,
-                        ),
+              //Project Location and venue
+              Container(
+                margin: EdgeInsets.only(bottom: 30),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30, right: 15),
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: kButtonColor.withOpacity(0.1),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          RichText(
-                              text: TextSpan(
-                                  text: 'Started: ',
-                                  style: kLandpageskiptextstyle,
-                                  children: [
-                                TextSpan(
-                                  text: widget.singleProgress.projectStartDate,
-                                  style: kPageHeader,
-                                )
-                              ])),
-                          RichText(
-                              text: TextSpan(
-                                  text: 'To be Completed: ',
-                                  style: kLandpageskiptextstyle,
-                                  children: [
-                                TextSpan(
-                                  text: widget.singleProgress.projectEndDate,
-                                  style: kPageHeader,
-                                )
-                              ])),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                //Project Location and venue
-                Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30, right: 15),
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: kButtonColor.withOpacity(0.1),
-                        ),
-                        child: Icon(
-                          FontAwesomeIcons.mapMarkerAlt,
-                          size: 22,
-                          color: kButtonColor,
-                        ),
+                      child: Icon(
+                        FontAwesomeIcons.mapMarkerAlt,
+                        size: 22,
+                        color: kButtonColor,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            widget.singleProgress.projectVenue,
-                            style: kPageHeader,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            widget.singleProgress.projectLocation,
-                            style: kBodyTextStyle,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Text(
+                          widget.singleProgress.projectVenue,
+                          style: kPageHeader,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          widget.singleProgress.projectLocation,
+                          style: kBodyTextStyle,
+                        )
+                      ],
+                    )
+                  ],
                 ),
+              ),
 
-                //Project Description Header
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Text(
-                    'About Project',
-                    style: kBodyTextStyle,
-                    textAlign: TextAlign.left,
-                  ),
+              //Project Description Header
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text(
+                  'About Project',
+                  style: kBodyTextStyle,
+                  textAlign: TextAlign.left,
                 ),
+              ),
 
-                //Project Description
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                  child: Text(
-                    widget.singleProgress.projectDescription,
-                    textAlign: TextAlign.justify,
-                    style: kBodyTextStyle,
-                  ),
+              //Project Description
+              Container(
+                margin:
+                    EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                child: Text(
+                  widget.singleProgress.projectDescription,
+                  textAlign: TextAlign.justify,
+                  style: kBodyTextStyle,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

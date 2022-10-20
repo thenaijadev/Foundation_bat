@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
           ResetCompleted.id: (context) => ResetCompleted(),
           EventCenter.id: (context) => EventCenter(),
           ProjectPage.id: (context) => ProjectPage(),
-          InprogressPage.id: (context) => InprogressPage(),
+          InprogressPage.id:(context) => InprogressPage(),
           CompletedPage.id: (context) => CompletedPage(),
           PendingPage.id: (context) => PendingPage(),
           News.id: (context) => News(),
