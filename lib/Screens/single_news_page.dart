@@ -20,24 +20,39 @@ class NewsDetails extends StatefulWidget {
 
 class _NewsDetailsState extends State<NewsDetails> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+  }
+
+  int index = 0;
+  int index2 = 1;
+  @override
   Widget build(BuildContext context) {
-    final List<String> imgList = [
-      'https://www.batnf.net/${widget.singleNews.files![0].fileUrl}',
-    ];
+    NewsProvider provider = Provider.of<NewsProvider>(context);
+    List<String> imgList = [
+      'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
+      // 'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
+      // ' https://www.batnf.net/news/blog-r-3.jpg',
+      // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
+    ].toList();
+    // var myList = imgList;
+    // //  var index = 0;
+    if (index > 0) {
+     List<String> imgList = [
+        'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
+        'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
+        // ' https://www.batnf.net/news/blog-r-3.jpg',
+        // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
+      ].toList();
+       // You can safely access the element here.
+    }
+    NewsModel news = provider.allNews![index];
 
     final List<Widget> imageSliders = imgList
-        .map((item) => Container(
+        .map((item) => SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: widget.singleNews.files![0].fileUrl.isEmpty
-                  ? CachedNetworkImage(
-                      errorWidget: (context, url, error) => CachedNetworkImage(
-                          imageUrl:
-                              'https://www.batnf.net/${widget.singleNews.newsImage}',
-                          fit: BoxFit.cover),
-                      imageUrl:
-                          'https://www.batnf.net/${widget.singleNews.newsImage}',
-                      fit: BoxFit.cover)
-                  : CachedNetworkImage(
+              child:CachedNetworkImage(
                       imageUrl: item,
                       fit: BoxFit.cover,
                       width: 365,
@@ -85,9 +100,36 @@ class _NewsDetailsState extends State<NewsDetails> {
 
                 //News Image
                 Container(
+                  height: 300,
+                  color: kButtonColor,
                   margin:
                       EdgeInsets.only(top: 20, left: 0, bottom: 20, right: 0),
-                  child: CarouselSlider(
+                  child:
+                      // ListView.builder(
+                      //     itemCount:
+                      //         widget.singleNews.files?[index].fileUrl.length,
+                      //     itemBuilder: ((context, index) {
+                      //       return CarouselSlider(
+                      //         options: CarouselOptions(
+                      //             autoPlayInterval: Duration(seconds: 10),
+                      //             height: 350,
+                      //             viewportFraction: 1.0,
+                      //             enableInfiniteScroll: false,
+                      //             autoPlay: true),
+                      //         items: imageSliders,
+                      //       );
+                      //     }))
+                       widget.singleNews.files![index = 0].fileUrl.isEmpty
+                          ? CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  CachedNetworkImage(
+                                      imageUrl:
+                                          'https://www.batnf.net/${widget.singleNews.newsImage}',
+                                      fit: BoxFit.cover),
+                              imageUrl:
+                                  'https://www.batnf.net/${widget.singleNews.newsImage}',
+                              fit: BoxFit.cover)
+                          : CarouselSlider(
                     options: CarouselOptions(
                         autoPlayInterval: Duration(seconds: 10),
                         height: 350,
