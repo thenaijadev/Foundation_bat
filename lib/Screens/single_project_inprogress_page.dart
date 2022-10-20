@@ -23,11 +23,13 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
+   var index = 0;
   late CachedVideoPlayerController controller;
   @override
   void initState() {
-   controller = CachedVideoPlayerController.network(
-    'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}'
+    controller = CachedVideoPlayerController.network(
+      // img
+        'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}'
         // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
         // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         );
@@ -44,38 +46,50 @@ class _ProgressDetailsState extends State<ProgressDetails> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
-    final List<String> imgList = [
-      'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}',
+   
+    
+    final  List<String> imgList = [
+      'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}',
+      // 'https://www.batnf.net/${widget.singleProgress.files![1].fileUrl}',
+      // 'https://www.batnf.net/${widget.singleProgress.files![2].fileUrl}'
     ];
+     var myList = imgList;
+    //  var index = 0;
+    if ( myList.length > index) {
+      myList[index]; // You can safely access the element here.
+    }
 
     final List<Widget> imageSliders = imgList
-        .map((item) => Container(
+        .map((item) => SizedBox(
             width: MediaQuery.of(context).size.width,
-            child:  widget.singleProgress.files![0].fileExt == 'video\/mp4'
+            child: widget.singleProgress.files![index].fileExt == 'video/mp4'
                 ? controller.value.isInitialized
                     ? AspectRatio(
                         aspectRatio: controller.value.aspectRatio,
                         child: CachedVideoPlayer(controller))
                     : Center(child: const CircularProgressIndicator())
-                :
-            widget.singleProgress.files![0].fileUrl.isEmpty
-                ? 
-                CachedNetworkImage(
-                    placeholder: (context, url) =>
-                        Center(child: Text('Loading')),
-                    imageUrl:
-                        'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                    fit: BoxFit.cover)
-                : Image.network(
-                    item,
-                    fit: BoxFit.cover,
-                    width: 365,
-                  )))
-        .toList();
+                : widget.singleProgress.files![index].fileUrl.isEmpty
+                    ? CachedNetworkImage(
+                        placeholder: (context, url) =>
+                            Center(child: Text('Loading')),
+                        imageUrl:
+                            'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                        fit: BoxFit.cover)
+                    : widget.singleProgress.files![index].fileUrl == 0 ? CachedNetworkImage(
+                        placeholder: (context, url) =>
+                            Center(child: Text('Loading')),
+                        imageUrl:
+                            'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                        fit: BoxFit.cover)
+                         : CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        width: 365, imageUrl: item,
+                      ),
+                      ),
+                      ).toList();
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -102,14 +116,14 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               children: [
                 //Project Image
                 SizedBox(
-                  child: 
-
-                  CarouselSlider(
+                  child: CarouselSlider(
                     options: CarouselOptions(
-                        height: 350,
-                        viewportFraction: 1.0,
-                        enableInfiniteScroll: false,
-                        autoPlay: true),
+                      autoPlayInterval: Duration(seconds: 10),
+                      height: 350,
+                      viewportFraction: 1.0,
+                      enableInfiniteScroll: false,
+                      // autoPlay: true
+                    ),
                     items: imageSliders,
                   ),
                 ),

@@ -38,8 +38,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       imageUrl:
                           'https://www.batnf.net/${widget.singleCompleted.projectImage}',
                       fit: BoxFit.cover)
-                  : Image.network(
-                      item,
+                  : CachedNetworkImage(
+                      imageUrl: item,
                       fit: BoxFit.cover,
                       width: 365,
                     ),

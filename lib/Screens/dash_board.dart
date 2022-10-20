@@ -103,10 +103,10 @@ class _HomePageState extends State<HomePage> {
                         height: 40.0,
                         child: GestureDetector(
                           onTap: () {
-                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Video()));
+                            //  Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => Video()));
                           },
                           child: Image.asset(
                             'assets/logo.png',

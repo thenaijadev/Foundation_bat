@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../providers/news_provider.dart';
 
 class NewsDetails extends StatefulWidget {
-  
   final NewsModel singleNews;
   NewsDetails(this.singleNews, {Key? key}) : super(key: key);
 
@@ -31,13 +30,15 @@ class _NewsDetailsState extends State<NewsDetails> {
               width: MediaQuery.of(context).size.width,
               child: widget.singleNews.files![0].fileUrl.isEmpty
                   ? CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          Center(child: Text('Loading')),
+                      errorWidget: (context, url, error) => CachedNetworkImage(
+                          imageUrl:
+                              'https://www.batnf.net/${widget.singleNews.newsImage}',
+                          fit: BoxFit.cover),
                       imageUrl:
                           'https://www.batnf.net/${widget.singleNews.newsImage}',
                       fit: BoxFit.cover)
-                  : Image.network(
-                      item,
+                  : CachedNetworkImage(
+                      imageUrl: item,
                       fit: BoxFit.cover,
                       width: 365,
                     ),
@@ -63,10 +64,11 @@ class _NewsDetailsState extends State<NewsDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-          
                 //News title
                 Container(
-                  margin: EdgeInsets.only(left: 30,),
+                  margin: EdgeInsets.only(
+                    left: 30,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,23 +82,26 @@ class _NewsDetailsState extends State<NewsDetails> {
                     ],
                   ),
                 ),
-          
+
                 //News Image
                 Container(
-                  margin: EdgeInsets.only(top: 20, left: 0, bottom: 20, right: 0),
+                  margin:
+                      EdgeInsets.only(top: 20, left: 0, bottom: 20, right: 0),
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      height: 350,
-                      viewportFraction: 1.0,
+                        autoPlayInterval: Duration(seconds: 10),
+                        height: 350,
+                        viewportFraction: 1.0,
                         enableInfiniteScroll: false,
                         autoPlay: true),
                     items: imageSliders,
                   ),
                 ),
-          
+
                 // New Details
                 Container(
-                  margin: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                  margin:
+                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
                   child: Text(
                     widget.singleNews.information,
                     textAlign: TextAlign.justify,
@@ -107,7 +112,6 @@ class _NewsDetailsState extends State<NewsDetails> {
             ),
           ),
         ),
-       
       ),
     );
   }

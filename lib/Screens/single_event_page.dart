@@ -81,20 +81,26 @@ class _EventDetailsState extends State<EventDetails> {
     EventProvider provider = Provider.of<EventProvider>(context);
 
     final List<String> imgList = [
-      'https://www.batnf.net/${widget.singleEvent.files![0].fileUrl}',];
+      'https://www.batnf.net/${widget.singleEvent.files![0].fileUrl}',
+    ];
 
     final List<Widget> imageSliders = imgList
         .map((item) => Container(
               width: MediaQuery.of(context).size.width,
-              child: widget.singleEvent.files![0].fileUrl.isEmpty 
-                                                ? CachedNetworkImage(
-                                                  errorWidget: (context, url, error) =>
+              child: widget.singleEvent.files![0].fileUrl.isEmpty
+                  ? CachedNetworkImage(
+                      errorWidget: (context, url, error) =>
                           Center(child: Text('No Image Availaible')),
-                                                  placeholder: (context, url) => Center(child: Text('Loading')),
-                                                  imageUrl:
-                                        'https://www.batnf.net/${widget.singleEvent.eventFlier}',
-                                    fit: BoxFit.cover) 
-                                    : Image.network(item, fit: BoxFit.cover,width: 365,),
+                      placeholder: (context, url) =>
+                          Center(child: Text('Loading')),
+                      imageUrl:
+                          'https://www.batnf.net/${widget.singleEvent.eventFlier}',
+                      fit: BoxFit.cover)
+                  : CachedNetworkImage(
+                      // item,
+                      fit: BoxFit.cover,
+                      width: 365, imageUrl: item,
+                    ),
             ))
         .toList();
 
@@ -124,8 +130,8 @@ class _EventDetailsState extends State<EventDetails> {
                 SizedBox(
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      height: 350,
-                      viewportFraction: 1.0,
+                        height: 350,
+                        viewportFraction: 1.0,
                         enableInfiniteScroll: false,
                         autoPlay: true),
                     items: imageSliders,

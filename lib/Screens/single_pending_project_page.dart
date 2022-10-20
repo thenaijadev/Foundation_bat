@@ -43,8 +43,8 @@ void initState() {
                       imageUrl:
                           'https://www.batnf.net/${widget.singlePending.projectImage}',
                       fit: BoxFit.cover)
-                  : Image.network(
-                      item,
+                  : CachedNetworkImage(
+                      imageUrl: item,
                       fit: BoxFit.cover,
                       width: 365,
                     ),

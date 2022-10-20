@@ -152,6 +152,13 @@ class _NewsState extends State<News> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
+                                                     errorWidget: (context,
+                                                              url, error) =>
+                                                          CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${news.newsImage}',
+                                                              fit:
+                                                                  BoxFit.cover),
                                                       imageUrl:
                                                           'https://www.batnf.net/${news.newsImage}',
                                                       fit: BoxFit.cover),
@@ -166,12 +173,6 @@ class _NewsState extends State<News> {
                                                           imageUrl:
                                                               'https://www.batnf.net/${news.files![0].fileUrl}',
                                                           fit: BoxFit.cover),
-                                                      // _chewieVideoPlayer()
-                                                      // controller!
-                                                      //         .value.isInitialized
-                                                      //     ? CachedVideoPlayer(
-                                                      //         controller!)
-                                                      // : CircularProgressIndicator(),
                                                     )
                                                   : ClipRRect(
                                                       borderRadius:
