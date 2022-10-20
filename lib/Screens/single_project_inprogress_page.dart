@@ -25,7 +25,6 @@ class ProgressDetails extends StatefulWidget {
 class _ProgressDetailsState extends State<ProgressDetails> {
   var index = 0;
   late CachedVideoPlayerController controller;
-  late VideoPlayerOptions videoPlayerOptions;
   @override
   void initState() {
     controller = CachedVideoPlayerController.network(
@@ -33,12 +32,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
         // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
         // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         );
-    videoPlayerOptions = VideoPlayerOptions(
-      allowBackgroundPlayback: true
-    );
-    videoPlayerOptions.allowBackgroundPlayback;
+
     controller.initialize().then((value) {
       controller.play();
+      controller.setLooping(true);
       setState(() {});
     });
     super.initState();
@@ -70,11 +67,35 @@ class _ProgressDetailsState extends State<ProgressDetails> {
           (item) => SizedBox(
             width: MediaQuery.of(context).size.width,
             child: widget.singleProgress.files![index].fileExt == 'video/mp4'
-                ? controller.value.isInitialized
-                    ? AspectRatio(
-                        aspectRatio: controller.value.aspectRatio,
-                        child: CachedVideoPlayer(controller))
-                    : Center(child: const CircularProgressIndicator())
+                ? Container(
+                    child: Stack(
+                      children: [
+                        controller.value.isInitialized
+                            ? AspectRatio(
+                                aspectRatio: controller.value.aspectRatio,
+                                child: CachedVideoPlayer(controller))
+                            : Center(
+                                child: FloatingActionButton(
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      controller.value.isPlaying
+                                          ? controller.pause()
+                                          : controller.play();
+                                    },
+                                  );
+                                },
+                                child: Icon(
+                                  controller.value.isBuffering
+                                      ? Icons.play_arrow
+                                      : Icons.pause,
+                                ),
+                              )
+                                //  const CircularProgressIndicator()
+                                )
+                      ],
+                    ),
+                  )
                 : widget.singleProgress.files![index].fileUrl.isEmpty
                     ? CachedNetworkImage(
                         placeholder: (context, url) =>

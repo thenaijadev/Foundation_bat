@@ -21,8 +21,7 @@ class _VideoState extends State<Video> {
         // 'assets/movie.mp4'
         // 'https://youtu.be/-LPe4tYckkg?t=3'
         // 'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
-        );
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4');
     _videoPlayerController!.initialize().then((_) {
       // _chewieController =
       //     ChewieController(videoPlayerController: _videoPlayerController!);
@@ -36,6 +35,7 @@ class _VideoState extends State<Video> {
         );
     controller.initialize().then((value) {
       controller.play();
+      controller.setLooping(true);
       setState(() {});
     });
     super.initState();
@@ -63,42 +63,37 @@ class _VideoState extends State<Video> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-       Center(
-          child: controller.value.isInitialized
-          // _videoPlayerController!.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio:controller.value.aspectRatio,
-                  // _videoPlayerController!.value.aspectRatio,
-                  child: CachedVideoPlayer(controller)
-                  // VideoPlayer(_videoPlayerController!),
+      body: Center(
+        child: controller.value.isInitialized
+            // _videoPlayerController!.value.isInitialized
+            ? AspectRatio(
+                aspectRatio: controller.value.aspectRatio,
+                // _videoPlayerController!.value.aspectRatio,
+                child: CachedVideoPlayer(controller)
+                // VideoPlayer(_videoPlayerController!),
                 )
-              : Container(),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              // _videoPlayerController!.value.isPlaying
-              //     ? _videoPlayerController!.pause()
-              //     : _videoPlayerController!.play();
+            : Container(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            // _videoPlayerController!.value.isPlaying
+            //     ? _videoPlayerController!.pause()
+            //     : _videoPlayerController!.play();
 
-              controller.value.isPlaying
-                ? controller.pause()
-                : controller.play();
-            });
-          },
-          child: Icon(
-            // _videoPlayerController!.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          controller.value.isPlaying
-              ? Icons.pause
-              : Icons.play_arrow,
-          ),
+            controller.value.isPlaying ? controller.pause() : controller.play();
+          });
+        },
+        child: Icon(
+          // _videoPlayerController!.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
         ),
-          // child: controller.value.isInitialized
-          //     ? AspectRatio(
-          //         aspectRatio: controller.value.aspectRatio,
-          //         child: CachedVideoPlayer(controller))
-          //     : const CircularProgressIndicator()),
+      ),
+      // child: controller.value.isInitialized
+      //     ? AspectRatio(
+      //         aspectRatio: controller.value.aspectRatio,
+      //         child: CachedVideoPlayer(controller))
+      //     : const CircularProgressIndicator()),
       // _chewieVideoPlayer(),
     );
   }
