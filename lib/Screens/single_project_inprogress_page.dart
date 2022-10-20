@@ -4,6 +4,7 @@ import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
@@ -22,54 +23,58 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
-  // VideoPlayerController? _videoPlayerController;
-  // ChewieController? _chewieController;
-  // @override
-  // void initState() {
-  //   _videoPlayerController = VideoPlayerController.asset(
-  //     // 'assets/movie.mp4'
-  //       'https://youtu.be/-LPe4tYckkg?t=3'
-  //       // 'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-  //       );
-  //   _videoPlayerController!.initialize().then((_) {
-  //     _chewieController =
-  //         ChewieController(videoPlayerController: _videoPlayerController!);
-  //     _videoPlayerController!.play();
-  //     setState(() {});
-  //   });
-  //   super.initState();
-  // }
+  late CachedVideoPlayerController controller;
+  @override
+  void initState() {
+   controller = CachedVideoPlayerController.network(
+    'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}'
+        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        );
+    controller.initialize().then((value) {
+      controller.play();
+      setState(() {});
+    });
+    super.initState();
+  }
 
-  // @override
-  // void dispose() {
-  //   _videoPlayerController!.dispose();
-  //   _chewieController!.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
-     final List<String> imgList = [
+    final List<String> imgList = [
       'https://www.batnf.net/${widget.singleProgress.files![0].fileUrl}',
     ];
 
     final List<Widget> imageSliders = imgList
         .map((item) => Container(
-              width: MediaQuery.of(context).size.width,
-              child: widget.singleProgress.files![0].fileUrl.isEmpty
-                  ? CachedNetworkImage(
-                      placeholder: (context, url) =>
-                          Center(child: Text('Loading')),
-                      imageUrl:
-                          'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                      fit: BoxFit.cover)
-                  : Image.network(
-                      item,
-                      fit: BoxFit.cover,
-                      width: 365,
-                    ),
-            ))
+            width: MediaQuery.of(context).size.width,
+            child:  widget.singleProgress.files![0].fileExt == 'video\/mp4'
+                ? controller.value.isInitialized
+                    ? AspectRatio(
+                        aspectRatio: controller.value.aspectRatio,
+                        child: CachedVideoPlayer(controller))
+                    : Center(child: const CircularProgressIndicator())
+                :
+            widget.singleProgress.files![0].fileUrl.isEmpty
+                ? 
+                CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        Center(child: Text('Loading')),
+                    imageUrl:
+                        'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                    fit: BoxFit.cover)
+                : Image.network(
+                    item,
+                    fit: BoxFit.cover,
+                    width: 365,
+                  )))
         .toList();
     return SafeArea(
       child: Scaffold(
@@ -97,73 +102,19 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               children: [
                 //Project Image
                 SizedBox(
-                    child: CarouselSlider(
+                  child: 
+
+                  CarouselSlider(
                     options: CarouselOptions(
-                      height: 350,
-                      viewportFraction: 1.0,
+                        height: 350,
+                        viewportFraction: 1.0,
                         enableInfiniteScroll: false,
                         autoPlay: true),
                     items: imageSliders,
                   ),
-                    // ListView.builder(
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount:
-                    //         provider.allInprogressProjects![0].files!.length,
-                    //     itemBuilder: ((context, index) {
-                    //       return Container(
-                    //           width: 335,
-                    //           // MediaQuery.of(context).size.width,
-                    //           color: kBackground,
-                    //           child: provider.allInprogressProjects![0]
-                    //                       .files![1].fileExt ==
-                    //                   'video/mp4'
-                    //               ? ClipRRect(
-                    //                   borderRadius: BorderRadius.circular(18),
-                    //                   child: _chewieVideoPlayer()
-                    //                   // controller!
-                    //                   //         .value.isInitialized
-                    //                   //     ? CachedVideoPlayer(
-                    //                   //         controller!)
-                    //                   // : CircularProgressIndicator(),
-                    //                   )
-                    //               :provider
-                    //                                 .allInprogressProjects![
-                    //                                     0]
-                    //                                 .files![index]
-                    //                                 .fileExt
-                    //                                 .isEmpty 
-                    //                             ? ClipRRect(
-                    //                                 borderRadius:
-                    //                                     BorderRadius.circular(
-                    //                                         18),
-                    //                                 child: CachedNetworkImage(
-                    //                                     imageUrl:
-                    //                                         'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                    //                                     fit: BoxFit.cover),
-                    //                               )
-                    //                             :
-                    //           // _videoPlayerController!.value.isInitialized
-                    //           // ? VideoPlayer(_videoPlayerController!) : Center(child: CircularProgressIndicator()));
-                    //           // _chewieVideoPlayer());
-                    //         CachedNetworkImage(
-                    //             errorWidget: (context, url, error) =>
-                    //                 CachedNetworkImage(
-                    //                     imageUrl:
-                    //                         'https://www.batnf.net/${widget.singleProgress.projectImage}',
-                    //                     fit: BoxFit.cover),
-                    //             // placeholder: (context, url) => CachedNetworkImage(
-                    //             //     imageUrl:
-                    //             //         'https://www.batnf.net/${widget.singleProgress.projectImage}'),
-                    //             imageUrl:
-                    //                 'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}',
-                    //             fit: BoxFit.cover),
-                    //       );
-                    //     }))
-                    
-                    // ),
-            ),
+                ),
 
-             //Project Title
+                //Project Title
                 Container(
                   margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
                   child: Text(
@@ -281,21 +232,11 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     style: kBodyTextStyle,
                   ),
                 ),
-            
-            ],
+              ],
             ),
           ),
         ),
       ),
     );
   }
-
-  // Widget _chewieVideoPlayer() {
-  //   return _chewieController != null && _videoPlayerController != null
-  //       ? Container(
-  //           width: 335,
-  //           child: Chewie(controller: _chewieController!),
-  //         )
-  //       : Center(child: const CircularProgressIndicator());
-  // }
 }

@@ -88,6 +88,8 @@ class _EventDetailsState extends State<EventDetails> {
               width: MediaQuery.of(context).size.width,
               child: widget.singleEvent.files![0].fileUrl.isEmpty 
                                                 ? CachedNetworkImage(
+                                                  errorWidget: (context, url, error) =>
+                          Center(child: Text('No Image Availaible')),
                                                   placeholder: (context, url) => Center(child: Text('Loading')),
                                                   imageUrl:
                                         'https://www.batnf.net/${widget.singleEvent.eventFlier}',

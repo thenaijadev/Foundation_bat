@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/vidoe.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
+import 'package:video_player/video_player.dart';
 
 import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
@@ -99,8 +101,16 @@ class _HomePageState extends State<HomePage> {
                             EdgeInsets.only(top: 45, bottom: 20, right: 195),
                         color: kBackground,
                         height: 40.0,
-                        child: Image.asset(
-                          'assets/logo.png',
+                        child: GestureDetector(
+                          onTap: () {
+                             Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Video()));
+                          },
+                          child: Image.asset(
+                            'assets/logo.png',
+                          ),
                         ),
                       ),
                       Container(
@@ -262,6 +272,11 @@ class _HomePageState extends State<HomePage> {
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
+                                                      errorWidget: (context,
+                                                                url, error) =>
+                                                            Center(
+                                                                child: Text(
+                                                                    'No Image Availaible')),
                                                         imageUrl:
                                                             'https://www.batnf.net/${completed.projectImage}',
                                                         fit: BoxFit.cover),
@@ -396,14 +411,19 @@ class _HomePageState extends State<HomePage> {
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
+                                                      errorWidget: (context,
+                                                                url, error) =>
+                                                            Center(
+                                                                child: Text(
+                                                                    'No Image Availaible')),
                                                         imageUrl:
                                                             'https://www.batnf.net/${event.eventFlier}',
                                                         fit: BoxFit.cover),
                                                   )
                                                 : CachedNetworkImage(
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Icon(Icons.error),
+                                                    errorWidget: (context,
+                                                              url, error) =>
+                                                          Center(child: Text('No Image Availaible')),
                                                     placeholder: (context,
                                                             url) =>
                                                         CachedNetworkImage(
@@ -546,6 +566,12 @@ class _HomePageState extends State<HomePage> {
                                                                     .circular(
                                                                         18),
                                                             child: CachedNetworkImage(
+                                                              errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Center(
+                                                                        child: Text(
+                                                                            'No Image Availaible')),
                                                                 imageUrl:
                                                                     'https://www.batnf.net/${news.newsImage}',
                                                                 fit: BoxFit
@@ -560,6 +586,12 @@ class _HomePageState extends State<HomePage> {
                                                                         .circular(
                                                                             18),
                                                                 child: CachedNetworkImage(
+                                                                  errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                            child: Text(
+                                                                                'No Image Availaible')),
                                                                     imageUrl:
                                                                         'https://www.batnf.net/${news.files![0].fileUrl}',
                                                                     fit: BoxFit

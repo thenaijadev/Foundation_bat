@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
+  late CachedVideoPlayerController controller;
   @override
   void initState() {
     super.initState();
@@ -40,6 +42,20 @@ class _ProjectPageState extends State<ProjectPage> {
         .getInprogressProjects();
     Provider.of<CompletedProvider>(context, listen: false)
         .getCompletedProjects();
+    controller = CachedVideoPlayerController.network(
+        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
+        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        );
+    controller.initialize().then((value) {
+      // controller.play();
+      setState(() {});
+    });
+  }
+   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -316,17 +332,22 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                              // _chewieVideoPlayer()
-                                                              // controller!
-                                                              //         .value.isInitialized
-                                                              //     ? CachedVideoPlayer(
-                                                              //         controller!)
-                                                              // : CircularProgressIndicator(),
+                                                              child: controller
+                                                                      .value
+                                                                      .isInitialized
+                                                                  ? AspectRatio(
+                                                                      aspectRatio: controller
+                                                                          .value
+                                                                          .aspectRatio,
+                                                                      child: CachedVideoPlayer(
+                                                                          controller))
+                                                                  : Center(
+                                                                      child:
+                                                                          const CircularProgressIndicator()),
+                                                              // CachedNetworkImage(
+                                                              //     imageUrl:
+                                                              //         'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                              //     fit: BoxFit.cover),
                                                             )
                                                           : ClipRRect(
                                                               borderRadius:

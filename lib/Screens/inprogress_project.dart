@@ -17,48 +17,44 @@ import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
 class InprogressPage extends StatefulWidget {
+  
   static String id = 'inprogress';
-  InprogressPage({Key? key}) : super(key: key);
+  InprogressPage( {Key? key}) : super(key: key);
 
   @override
   _InprogressPageState createState() => _InprogressPageState();
 }
 
 class _InprogressPageState extends State<InprogressPage> {
-  
-  // late CachedVideoPlayerController? controller;
-  // fileUrl = ;
+  // InprogressProvider provider = Provider.of<InprogressProvider>(context);
+  // InprogressModel inprogress = inprogress![0].files!.length;
+  // final InprogressModel Progress;
+  late CachedVideoPlayerController controller;
 
-  VideoPlayerController? _videoPlayerController;
-  ChewieController? _chewieController;
+  // VideoPlayerController? _videoPlayerController;
+  // ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
-    // controller = CachedVideoPlayerController.network(
-    //     'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4');
-    // controller!.initialize().then((value) {
-    //   // controller.!play();
-    //   setState(() {});
-    // });
-
-    // _videoPlayerController = VideoPlayerController.network(
-    //     'www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4');
-    // _videoPlayerController!.initialize().then((_) {
-    //   _chewieController =
-    //       ChewieController(videoPlayerController: _videoPlayerController!);
-    //   setState(() {});
-    // });
+    controller = CachedVideoPlayerController.network(
+        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
+        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        );
+    controller.initialize().then((value) {
+      // controller.play();
+      setState(() {});
+    });
   }
 
-  // @override
-  // void dispose() {
-  //   _videoPlayerController!.dispose();
-  //   _chewieController!.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,34 +135,43 @@ class _InprogressPageState extends State<InprogressPage> {
                                             top: 15),
                                         height: 74,
                                         width: 74,
-                                        child: inprogress.files![0].fileUrl.isEmpty
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.projectImage}',
-                                                        fit: BoxFit.cover),
-                                                  )
-                                        :
-                                        inprogress.files![0].fileExt ==
-                                                'video\/mp4'
+                                        child: inprogress
+                                                .files![0].fileUrl.isEmpty
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                                        fit: BoxFit.cover),
-                                                // _chewieVideoPlayer()
-                                                // controller!
-                                                //         .value.isInitialized
-                                                //     ? CachedVideoPlayer(
-                                                //         controller!)
-                                                    // : CircularProgressIndicator(),
+                                                  errorWidget: (context, url,
+                                                            error) =>
+                                                        Center(
+                                                            child: Text(
+                                                                'No Image Availaible')),
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${inprogress.projectImage}',
+                                                    fit: BoxFit.cover),
                                               )
-                                            : ClipRRect(
+                                            : inprogress.files![0].fileExt ==
+                                                    'video\/mp4'
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: controller.value
+                                                            .isInitialized
+                                                        ? AspectRatio(
+                                                            aspectRatio:
+                                                                controller
+                                                                    .value
+                                                                    .aspectRatio,
+                                                            child: CachedVideoPlayer(
+                                                                controller))
+                                                        : Center(child: const CircularProgressIndicator()),
+                                                    // CachedNetworkImage(
+                                                    //     imageUrl:
+                                                    //         'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                    //     fit: BoxFit.cover),
+                                                  )
+                                                : ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             18),
@@ -175,7 +180,6 @@ class _InprogressPageState extends State<InprogressPage> {
                                                             'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                                         fit: BoxFit.cover),
                                                   ),
-                                      
                                       ),
 
                                       //Details
@@ -243,11 +247,12 @@ class _InprogressPageState extends State<InprogressPage> {
       ),
     );
   }
-   Widget _chewieVideoPlayer(){
-    return _chewieController != null && _videoPlayerController != null ? 
-    Container(
-      child: Chewie(controller: _chewieController!),
-      ) : const CircularProgressIndicator();
-    
-   }
+
+  // Widget _chewieVideoPlayer() {
+  //   return _chewieController != null && _videoPlayerController != null
+  //       ? Container(
+  //           child: Chewie(controller: _chewieController!),
+  //         )
+  //       : const CircularProgressIndicator();
+  // }
 }

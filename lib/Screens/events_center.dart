@@ -163,6 +163,9 @@ class _EventCenterState extends State<EventCenter> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
+                                                    errorWidget: (context,
+                                                              url, error) =>
+                                                          Center(child: Text('No Image Availaible')),
                                                       imageUrl:
                                                           'https://www.batnf.net/${event.eventFlier}',
                                                       fit: BoxFit.cover),

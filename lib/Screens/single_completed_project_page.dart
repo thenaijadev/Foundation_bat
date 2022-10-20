@@ -3,6 +3,7 @@
 import 'package:batnf/Models/completed_model.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -70,10 +71,13 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
             
                 // Project Image
                 SizedBox(
-                  height: 265,
-                  child: CachedNetworkImage(
-                    imageUrl: 'https://www.batnf.net/${widget.singleCompleted.projectImage}',
-                    fit: BoxFit.cover,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        height: 350,
+                        viewportFraction: 1.0,
+                        enableInfiniteScroll: false,
+                        autoPlay: true),
+                    items: imageSliders,
                   ),
                 ),
             

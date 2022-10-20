@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,27 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> imgList = [
+      'https://www.batnf.net/${widget.singlePending.files![0].fileUrl}',
+    ];
+
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              width: MediaQuery.of(context).size.width,
+              child: widget.singlePending.files![0].fileUrl.isEmpty
+                  ? CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          Center(child: Text('Loading')),
+                      imageUrl:
+                          'https://www.batnf.net/${widget.singlePending.projectImage}',
+                      fit: BoxFit.cover)
+                  : Image.network(
+                      item,
+                      fit: BoxFit.cover,
+                      width: 365,
+                    ),
+            ))
+        .toList();
     return SafeArea(
       child: Scaffold(
       backgroundColor: kBackground,
@@ -52,10 +74,13 @@ void initState() {
         
               //Project Image
               SizedBox(
-                height: 265,
-                child: CachedNetworkImage(
-                  imageUrl: 'https://www.batnf.net/${widget.singlePending.projectImage}',
-                  fit: BoxFit.cover,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                      height: 350,
+                      viewportFraction: 1.0,
+                      enableInfiniteScroll: false,
+                      autoPlay: true),
+                  items: imageSliders,
                 ),
               ),
         

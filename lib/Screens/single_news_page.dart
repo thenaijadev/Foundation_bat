@@ -4,6 +4,7 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,27 @@ class NewsDetails extends StatefulWidget {
 class _NewsDetailsState extends State<NewsDetails> {
   @override
   Widget build(BuildContext context) {
+    final List<String> imgList = [
+      'https://www.batnf.net/${widget.singleNews.files![0].fileUrl}',
+    ];
+
+    final List<Widget> imageSliders = imgList
+        .map((item) => Container(
+              width: MediaQuery.of(context).size.width,
+              child: widget.singleNews.files![0].fileUrl.isEmpty
+                  ? CachedNetworkImage(
+                      placeholder: (context, url) =>
+                          Center(child: Text('Loading')),
+                      imageUrl:
+                          'https://www.batnf.net/${widget.singleNews.newsImage}',
+                      fit: BoxFit.cover)
+                  : Image.network(
+                      item,
+                      fit: BoxFit.cover,
+                      width: 365,
+                    ),
+            ))
+        .toList();
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -61,10 +83,14 @@ class _NewsDetailsState extends State<NewsDetails> {
           
                 //News Image
                 Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
-                  child: CachedNetworkImage(
-                    imageUrl: 'https://www.batnf.net/${widget.singleNews.newsImage}',
-                    fit: BoxFit.cover,
+                  margin: EdgeInsets.only(top: 20, left: 0, bottom: 20, right: 0),
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      height: 350,
+                      viewportFraction: 1.0,
+                        enableInfiniteScroll: false,
+                        autoPlay: true),
+                    items: imageSliders,
                   ),
                 ),
           
