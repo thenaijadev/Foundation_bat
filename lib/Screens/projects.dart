@@ -268,15 +268,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                     itemCount: inprogressProvider
                                         .allInprogressProjects!.length,
                                     itemBuilder: ((context, index) {
-
-
-                                      // Inprogress progress = inprogressProvider
-                                      //     .allInprogressProjects![index];
-
-                                      // Files files = inprogressProvider
-                                      //     .allInprogressProjects![index]
-                                      //     .projectfiles as Files;
-
                                       InprogressModel inprogress =
                                           inprogressProvider
                                               .allInprogressProjects![index];
@@ -300,7 +291,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 BorderRadius.circular(18.0),
                                             boxShadow: [kBoxshadow],
                                           ),
-                                          // height: 104,
                                           child: Row(
                                             children: [
                                               // Inprogress Images
@@ -326,7 +316,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                         )
                                                       : inprogress.files![0]
                                                                   .fileExt ==
-                                                              'video\/mp4'
+                                                              'video/mp4'
                                                           ? ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
@@ -344,11 +334,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   : Center(
                                                                       child:
                                                                           const CircularProgressIndicator()),
-                                                              // CachedNetworkImage(
-                                                              //     imageUrl:
-                                                              //         'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                                              //     fit: BoxFit.cover),
-                                                            )
+                                                                )
                                                           : ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
@@ -360,13 +346,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),
-                                                // ClipRRect(
-                                                //   borderRadius:
-                                                //       BorderRadius.circular(18),
-                                                //   child: CachedNetworkImage(
-                                                //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
-                                                //       fit: BoxFit.cover),
-                                                // ),
                                               ),
 
                                               // Inprogress Information

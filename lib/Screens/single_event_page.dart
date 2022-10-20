@@ -7,6 +7,7 @@ import 'package:batnf/Models/files.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -25,6 +26,7 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  List<CachedVideoPlayerController> playerController = [];
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
     var response =
@@ -75,35 +77,44 @@ class _EventDetailsState extends State<EventDetails> {
           backgroundColor: kButtonColor);
     }
   }
+@override
+  void initState() {
+    super.initState();
+    video(widget.singleEvent.files!);
+    // Provider.of<NewsProvider>(context, listen: false).getAllNews();
+  }
 
+  void video(List<Files> file) async {
+    if (file.isEmpty) return;
+    List<Files> videoList =
+        file.where((element) => element.fileExt == 'video/mp4').toList();
+    int count =
+        videoList.fold(0, (previousValue, element) => previousValue + 1);
+    playerController = List.generate(
+        count,
+        (index) => CachedVideoPlayerController.network(
+            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+            // widget.singleEvent.files![index].fileUrl
+            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            ));
+
+    for (var element in playerController) {
+      element.initialize().then((value) async {
+        await Future.delayed(Duration(milliseconds: 500));
+        // element.play();
+        setState(() {});
+      });
+    }
+  }
+  @override
+  void dispose() {
+    for (var element in playerController) {
+      element.dispose();
+    }
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    EventProvider provider = Provider.of<EventProvider>(context);
-
-    final List<String> imgList = [
-      'https://www.batnf.net/${widget.singleEvent.files![0].fileUrl}',
-    ];
-
-    final List<Widget> imageSliders = imgList
-        .map((item) => Container(
-              width: MediaQuery.of(context).size.width,
-              child: widget.singleEvent.files![0].fileUrl.isEmpty
-                  ? CachedNetworkImage(
-                      errorWidget: (context, url, error) =>
-                          Center(child: Text('No Image Availaible')),
-                      placeholder: (context, url) =>
-                          Center(child: Text('Loading')),
-                      imageUrl:
-                          'https://www.batnf.net/${widget.singleEvent.eventFlier}',
-                      fit: BoxFit.cover)
-                  : CachedNetworkImage(
-                      // item,
-                      fit: BoxFit.cover,
-                      width: 365, imageUrl: item,
-                    ),
-            ))
-        .toList();
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -114,208 +125,238 @@ class _EventDetailsState extends State<EventDetails> {
           elevation: 0,
           leading: BackButton(color: kBackground),
         ),
-        body: RefreshIndicator(
-          color: kBackground,
-          backgroundColor: kButtonColor,
-          onRefresh: () async {
-            await Provider.of<EventProvider>(context, listen: false)
-                .getAllEvents();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Event Image
-                SizedBox(
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                          height: 350,
-                          viewportFraction: 1.0,
-                          enableInfiniteScroll: false,
-                          autoPlay: true),
-                      items: widget.singleEvent.files!.map((eventFile) {
-                        print(eventFile.fileExt);
-                        if (eventFile.fileExt == 'image/jpeg') {
-                          CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  Center(child: Text('No Image Availaible')),
-                              placeholder: (context, url) =>
-                                  Center(child: Text('Loading')),
-                              imageUrl:
-                                  'https://www.batnf.net/${eventFile.fileUrl}',
-                              fit: BoxFit.cover);
-                        }
-                        return Container();
-                      }).toList()
-                      // imageSliders,
-                      ),
-                ),
-
-                //Event Name
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
-                  child: Text(
-                    widget.singleEvent.eventName,
-                    style: kPageHeader,
-                  ),
-                ),
-
-                //Event Timeline and Dates
-                Container(
-                  margin: EdgeInsets.only(left: 30, bottom: 21),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 15),
-                        padding: EdgeInsets.all(8),
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: kButtonColor.withOpacity(0.1),
-                        ),
-                        child: Icon(
-                          FontAwesomeIcons.calendarAlt,
-                          size: 25,
-                          color: kButtonColor,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            widget.singleEvent.eventStartDate,
-                            style: kBodyTextStyle,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            widget.singleEvent.eventStartTime,
-                            style: kBodyTextStyle,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                //Event Location
-                Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30, right: 15),
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: kButtonColor.withOpacity(0.1),
-                        ),
-                        child: Icon(
-                          FontAwesomeIcons.mapMarkerAlt,
-                          size: 25,
-                          color: kButtonColor,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            widget.singleEvent.venue,
-                            style: kBodyTextStyle,
-                          ),
-                          Text(
-                            widget.singleEvent.eventLocation,
-                            style: kBodyTextStyle,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                //Description Header
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Text(
-                    'About Event',
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-
-                //Event Description
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                  child: Text(
-                    widget.singleEvent.eventDesc,
-                    textAlign: TextAlign.justify,
-                    style: kBodyTextStyle,
-                  ),
-                ),
-
-                //Map Header
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: Text('Location'),
-                ),
-
-                // Location Map
-                Container(
-                  height: 192,
-                  margin:
-                      EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Image.asset('assets/map.png'),
-                ),
-
-                //Registration Button
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 30, right: 30, bottom: 20.0),
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(45.0),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //Event Image
+              SizedBox(
+                child: CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlayInterval: Duration(seconds: 10),
+                      height: 350,
+                      viewportFraction: 1.0,
+                      enableInfiniteScroll: false,
+                      // autoPlay: true
                     ),
-                    height: 45.0,
-                    minWidth: MediaQuery.of(context).size.width,
-                    color: kButtonColor,
-                    onPressed: () {
-                      print(widget.singleEvent.eventId);
-                      print(Provider.of<EventProvider>(context, listen: false)
-                          .userId);
-
-                      if (Provider.of<EventProvider>(context, listen: false)
-                              .userId !=
-                          null) {
-                        setState(() {
-                          loading = true;
-                        });
-                        register(
-                            userId: Provider.of<EventProvider>(context,
-                                    listen: false)
-                                .userId,
-                            eventId: widget.singleEvent.eventId);
+                    items: widget.singleEvent.files!.map((eventsFile) {
+                      if (eventsFile.fileExt == 'image/jpeg') {
+                        return CachedNetworkImage(
+                            errorWidget: (context, url, error) =>
+                                Center(child: Text('No Image/Video Available')),
+                            placeholder: (context, url) => Center(
+                                    child: Text(
+                                  'Loading',
+                                  style: TextStyle(color: Colors.black),
+                                )),
+                            imageUrl:
+                                'https://www.batnf.net/${eventsFile.fileUrl}',
+                            fit: BoxFit.cover);
                       }
-                    },
-                    child: loading
-                        ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white))
-                        : Text(
-                            'Register',
-                            textAlign: TextAlign.center,
-                            style: kButtontextstyle,
-                          ),
-                  ),
+                      CachedVideoPlayerController controller =
+                          playerController.firstWhere((element) =>
+                                  element.dataSource ==
+                                  'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                              // eventsFile.fileUrl
+                              );
+                      return controller.value.isInitialized
+                          ? Stack(
+                              alignment: AlignmentDirectional.bottomStart,
+                              children: [
+                                AspectRatio(
+                                    aspectRatio: 6 / 6,
+                                    // controller.value.aspectRatio,
+                                    child: CachedVideoPlayer(controller)),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!controller.value.isInitialized) return;
+                                    setState(
+                                      () {
+                                        controller.value.isPlaying
+                                            ? controller.pause()
+                                            : controller.play();
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    controller.value.isPlaying
+                                        ? Icons.pause
+                                        : Icons.play_arrow,
+                                    color: kButtonColor,
+                                    size: 30,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Center(child: CircularProgressIndicator());
+                    }).toList()),
+              ),
+
+              //Event Name
+              Container(
+                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                child: Text(
+                  widget.singleEvent.eventName,
+                  style: kPageHeader,
                 ),
-              ],
-            ),
+              ),
+
+              //Event Timeline and Dates
+              Container(
+                margin: EdgeInsets.only(left: 30, bottom: 21),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 15),
+                      padding: EdgeInsets.all(8),
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: kButtonColor.withOpacity(0.1),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.calendarAlt,
+                        size: 25,
+                        color: kButtonColor,
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Text(
+                          widget.singleEvent.eventStartDate,
+                          style: kBodyTextStyle,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          widget.singleEvent.eventStartTime,
+                          style: kBodyTextStyle,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+
+              //Event Location
+              Container(
+                margin: EdgeInsets.only(bottom: 30),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30, right: 15),
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: kButtonColor.withOpacity(0.1),
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.mapMarkerAlt,
+                        size: 25,
+                        color: kButtonColor,
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Text(
+                          widget.singleEvent.venue,
+                          style: kBodyTextStyle,
+                        ),
+                        Text(
+                          widget.singleEvent.eventLocation,
+                          style: kBodyTextStyle,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+
+              //Description Header
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text(
+                  'About Event',
+                  textAlign: TextAlign.left,
+                ),
+              ),
+
+              //Event Description
+              Container(
+                margin:
+                    EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                child: Text(
+                  widget.singleEvent.eventDesc,
+                  textAlign: TextAlign.justify,
+                  style: kBodyTextStyle,
+                ),
+              ),
+
+              //Map Header
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text('Location'),
+              ),
+
+              // Location Map
+              Container(
+                height: 192,
+                margin:
+                    EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Image.asset('assets/map.png'),
+              ),
+
+              //Registration Button
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 30, right: 30, bottom: 20.0),
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0),
+                  ),
+                  height: 45.0,
+                  minWidth: MediaQuery.of(context).size.width,
+                  color: kButtonColor,
+                  onPressed: () {
+                    print(widget.singleEvent.eventId);
+                    print(Provider.of<EventProvider>(context, listen: false)
+                        .userId);
+
+                    if (Provider.of<EventProvider>(context, listen: false)
+                            .userId !=
+                        null) {
+                      setState(() {
+                        loading = true;
+                      });
+                      register(
+                          userId: Provider.of<EventProvider>(context,
+                                  listen: false)
+                              .userId,
+                          eventId: widget.singleEvent.eventId);
+                    }
+                  },
+                  child: loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white))
+                      : Text(
+                          'Register',
+                          textAlign: TextAlign.center,
+                          style: kButtontextstyle,
+                        ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

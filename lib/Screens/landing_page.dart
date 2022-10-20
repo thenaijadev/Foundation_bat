@@ -38,6 +38,7 @@ class _LandindPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
           
@@ -67,12 +68,12 @@ class _LandindPageState extends State<LandingPage> {
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   Container(
-                    width: double.maxFinite,
-                    margin: EdgeInsets.only(bottom: 300),
+                    // width: double.maxFinite,
+                    // margin: EdgeInsets.only(bottom: 300),
+                    height: double.infinity,
                     child: Image.asset(
                       'assets/boarding4.png',
                       width: double.infinity,
-                      height: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -80,7 +81,7 @@ class _LandindPageState extends State<LandingPage> {
                     width: double.maxFinite,
                     height: 400,
                     decoration: BoxDecoration(
-                      color: kBackground,
+                      color: kBackground.withOpacity(0.95),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50),

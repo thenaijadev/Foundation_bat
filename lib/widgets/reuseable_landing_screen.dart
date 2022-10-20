@@ -27,12 +27,13 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
       alignment: AlignmentDirectional.bottomEnd,
       children: [
         Container(
+          height: double.infinity,
           color: kBackground,
-          margin: EdgeInsets.only(bottom: 350),
+          // margin: EdgeInsets.only(bottom: 350),
           child: Image.asset(
             widget.Imagename,
             width: double.infinity,
-            height: double.infinity,
+            // height: double.infinity,
             fit: BoxFit.cover,
           ),
         ),
@@ -40,7 +41,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
           width: double.maxFinite,
           height: 400,
           decoration: BoxDecoration(
-            color: kBackground,
+            color: kBackground.withOpacity(0.95),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50),
               topRight: Radius.circular(50),

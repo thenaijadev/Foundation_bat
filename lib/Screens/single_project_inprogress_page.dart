@@ -41,7 +41,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
+          'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+          // widget.singleProgress.files![index].fileUrl
+            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            ));
 
     for (var element in playerController) {
       element.initialize().then((value) async {
@@ -65,64 +68,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
   @override
   Widget build(BuildContext context) {
-    InprogressProvider provider = Provider.of<InprogressProvider>(context);
-
-    // final List<Widget> imageSliders = imgList
-    //     .map(
-    //       (item) => SizedBox(
-    //         width: MediaQuery.of(context).size.width,
-    //         child: widget.singleProgress.files![index].fileExt == 'video/mp4'
-    //             ? Container(
-    //                 child: Stack(
-    //                   children: [
-    //                     controller.value.isInitialized
-    //                         ? AspectRatio(
-    //                             aspectRatio: controller.value.aspectRatio,
-    //                             child: CachedVideoPlayer(controller))
-    //                         : Center(
-    //                             child: FloatingActionButton(
-    //                             onPressed: () {
-    //                               setState(
-    //                                 () {
-    //                                   controller.value.isPlaying
-    //                                       ? controller.pause()
-    //                                       : controller.play();
-    //                                 },
-    //                               );
-    //                             },
-    //                             child: Icon(
-    //                               controller.value.isBuffering
-    //                                   ? Icons.play_arrow
-    //                                   : Icons.pause,
-    //                             ),
-    //                           )
-    //                             //  const CircularProgressIndicator()
-    //                             )
-    //                   ],
-    //                 ),
-    //               )
-    //             : widget.singleProgress.files![index].fileUrl.isEmpty
-    //                 ? CachedNetworkImage(
-    //                     placeholder: (context, url) =>
-    //                         Center(child: Text('Loading')),
-    //                     imageUrl:
-    //                         'https://www.batnf.net/${widget.singleProgress.projectImage}',
-    //                     fit: BoxFit.cover)
-    //                 : widget.singleProgress.files![index].fileUrl == 0
-    //                     ? CachedNetworkImage(
-    //                         placeholder: (context, url) =>
-    //                             Center(child: Text('Loading')),
-    //                         imageUrl:
-    //                             'https://www.batnf.net/${widget.singleProgress.projectImage}',
-    //                         fit: BoxFit.cover)
-    //                     : CachedNetworkImage(
-    //                         fit: BoxFit.cover,
-    //                         width: 365,
-    //                         imageUrl: item,
-    //                       ),
-    //       ),
-    //     )
-    //     .toList();
+  
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -147,58 +93,62 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       height: 350,
                       viewportFraction: 1.0,
                       enableInfiniteScroll: false,
-                      autoPlay: true),
-                  items: widget.singleProgress.files!.map((eventFile) {
-                    print(eventFile.fileExt);
-                    print(eventFile.fileUrl);
-                    if (eventFile.fileExt == 'image/jpeg') {
+                      // autoPlay: true
+                      ),
+                  items: widget.singleProgress.files!.map((inprogressFile) {
+                    print(inprogressFile.fileExt);
+                    print(inprogressFile.fileUrl);
+                    if (inprogressFile.fileExt == 'image/jpeg') {
                       return CachedNetworkImage(
                           errorWidget: (context, url, error) =>
-                              Center(child: Text('No Image Availaible')),
+                              Center(child: Text('No Image Available')),
                           placeholder: (context, url) => Center(
                                   child: Text(
                                 'Loading',
                                 style: TextStyle(color: Colors.black),
                               )),
                           imageUrl:
-                              'https://www.batnf.net/${eventFile.fileUrl}',
+                              'https://www.batnf.net/${inprogressFile.fileUrl}',
                           fit: BoxFit.cover);
                     }
                     CachedVideoPlayerController controller =
                         playerController.firstWhere((element) =>
-                            element.dataSource == eventFile.fileUrl);
-                    return Container(
-                      child: controller.value.isInitialized
-                          ? Stack(
-                              children: [
-                                FittedBox(
-                                  child: AspectRatio(
-                                      aspectRatio: controller.value.aspectRatio,
-                                      child: CachedVideoPlayer(controller)),
+                            element.dataSource ==
+                            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                            // inprogressFile.fileUrl
+                            );
+                    return controller.value.isInitialized
+                        ? Stack(
+                          alignment: AlignmentDirectional.bottomStart,
+                            children: [
+                              AspectRatio(
+                                  aspectRatio: 6/6,
+                                  // controller.value.aspectRatio,
+                                  child: CachedVideoPlayer(controller)),
+                              GestureDetector(
+                                onTap: () {
+                                  if (!controller.value.isInitialized) return;
+                                  setState(
+                                    () {
+                                      controller.value.isPlaying
+                                          ? controller.pause()
+                                          : controller.play();
+                                    },
+                                  );
+                                },
+                                child: Icon(
+                                  controller.value.isPlaying
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                                      color: kButtonColor,
+                                      size: 30,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (!controller.value.isInitialized) return;
-                                    setState(
-                                      () {
-                                        controller.value.isPlaying
-                                            ? controller.pause()
-                                            : controller.play();
-                                      },
-                                    );
-                                  },
-                                  child: Icon(
-                                    controller.value.isBuffering
-                                        ? Icons.play_arrow
-                                        : Icons.pause,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Center(child: CircularProgressIndicator()),
-                    );
+                              ),
+                            ],
+                          )
+                        : Center(child: CircularProgressIndicator());
                   }).toList()
-                  // imageSliders,
                   ),
 
               //Project Title

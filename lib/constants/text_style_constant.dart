@@ -25,14 +25,14 @@ const kProjectsummarytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpageHeadertextstyle = TextStyle(
-    color: kButtonColor,
+    color: Colors.white,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 24.0,
     fontStyle: FontStyle.normal);
 
 const kLandpagebodytextstyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.white,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,

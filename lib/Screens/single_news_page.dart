@@ -4,10 +4,12 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Models/files.dart';
 import '../providers/news_provider.dart';
 
 class NewsDetails extends StatefulWidget {
@@ -19,47 +21,47 @@ class NewsDetails extends StatefulWidget {
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
+  List<CachedVideoPlayerController> playerController = [];
+  
   @override
   void initState() {
     super.initState();
-    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+    video(widget.singleNews.files!);
+    // Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
+  void video(List<Files> file) async {
+    if (file.isEmpty) return;
+    List<Files> videoList =
+        file.where((element) => element.fileExt == 'video/mp4').toList();
+    int count =
+        videoList.fold(0, (previousValue, element) => previousValue + 1);
+    playerController = List.generate(
+        count,
+        (index) => CachedVideoPlayerController.network(
+            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+            // widget.singlePending.files![index].fileUrl
+            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            ));
 
-  int index = 0;
-  int index2 = 1;
+    for (var element in playerController) {
+      element.initialize().then((value) async {
+        await Future.delayed(Duration(milliseconds: 500));
+        // element.play();
+        setState(() {});
+      });
+    }
+  }
+  
+  @override
+  void dispose() {
+    for (var element in playerController) {
+      element.dispose();
+    }
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    NewsProvider provider = Provider.of<NewsProvider>(context);
-    List<String> imgList = [
-      'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
-      // 'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
-      // ' https://www.batnf.net/news/blog-r-3.jpg',
-      // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
-    ].toList();
-    // var myList = imgList;
-    // //  var index = 0;
-    // if (index > 0) {
-    //  List<String> imgList = [
-    //     'https://www.batnf.net/${widget.singleNews.files?[0].fileUrl}',
-    //     'https://www.batnf.net/${widget.singleNews.files?[index2].fileUrl}',
-    //     // ' https://www.batnf.net/news/blog-r-3.jpg',
-    //     // 'https://www.batnf.net/${widget.singleNews.files?[1].fileUrl}',
-    //   ].toList();
-    //    // You can safely access the element here.
-    // }
-    NewsModel news = provider.allNews![index];
-
-    final List<Widget> imageSliders = imgList
-        .map((item) => SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child:CachedNetworkImage(
-                      imageUrl: item,
-                      fit: BoxFit.cover,
-                      width: 365,
-                    ),
-            ))
-        .toList();
-    return SafeArea(
+     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
         // extendBodyBehindAppBar: true,
@@ -68,90 +70,102 @@ class _NewsDetailsState extends State<NewsDetails> {
           elevation: 0,
           leading: BackButton(color: kButtonColor),
         ),
-        body: RefreshIndicator(
-          color: kBackground,
-          backgroundColor: kButtonColor,
-          onRefresh: () async {
-            await Provider.of<NewsProvider>(context, listen: false)
-                .getAllNews();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //News title
-                Container(
-                  margin: EdgeInsets.only(
-                    left: 30,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Text(
-                        widget.singleNews.title,
-                        style: kPageHeader,
-                      ),
-                      Text('Dec 21 2021')
-                    ],
-                  ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //News title
+              Container(
+                margin: EdgeInsets.only(
+                  left: 30,
                 ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Text(
+                      widget.singleNews.title,
+                      style: kPageHeader,
+                    ),
+                    Text('Dec 21 2021')
+                  ],
+                ),
+              ),
 
-                //News Image
-                Container(
-                  height: 300,
-                  color: kButtonColor,
-                  margin:
-                      EdgeInsets.only(top: 20, left: 0, bottom: 20, right: 0),
-                  child:
-                      // ListView.builder(
-                      //     itemCount:
-                      //         widget.singleNews.files?[index].fileUrl.length,
-                      //     itemBuilder: ((context, index) {
-                      //       return CarouselSlider(
-                      //         options: CarouselOptions(
-                      //             autoPlayInterval: Duration(seconds: 10),
-                      //             height: 350,
-                      //             viewportFraction: 1.0,
-                      //             enableInfiniteScroll: false,
-                      //             autoPlay: true),
-                      //         items: imageSliders,
-                      //       );
-                      //     }))
-                       widget.singleNews.files![index = 0].fileUrl.isEmpty
-                          ? CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  CachedNetworkImage(
-                                      imageUrl:
-                                          'https://www.batnf.net/${widget.singleNews.newsImage}',
-                                      fit: BoxFit.cover),
-                              imageUrl:
-                                  'https://www.batnf.net/${widget.singleNews.newsImage}',
-                              fit: BoxFit.cover)
-                          : CarouselSlider(
-                    options: CarouselOptions(
-                        autoPlayInterval: Duration(seconds: 10),
-                        height: 350,
-                        viewportFraction: 1.0,
-                        enableInfiniteScroll: false,
-                        autoPlay: true),
-                    items: imageSliders,
+              //News Image
+              CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlayInterval: Duration(seconds: 10),
+                    height: 350,
+                    viewportFraction: 1.0,
+                    enableInfiniteScroll: false,
+                    // autoPlay: true
                   ),
-                ),
+                  items: widget.singleNews.files!.map((newsFile) {
+                    if (newsFile.fileExt == 'image/jpeg') {
+                      return CachedNetworkImage(
+                          errorWidget: (context, url, error) =>
+                              Center(child: Text('No Image/Video Available')),
+                          placeholder: (context, url) => Center(
+                                  child: Text(
+                                'Loading',
+                                style: TextStyle(color: Colors.black),
+                              )),
+                          imageUrl:
+                              'https://www.batnf.net/${newsFile.fileUrl}',
+                          fit: BoxFit.cover);
+                    }
+                    CachedVideoPlayerController controller =
+                        playerController.firstWhere((element) =>
+                                element.dataSource ==
+                                'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                            // newsFile.fileUrl
+                            );
+                    return controller.value.isInitialized
+                        ? Stack(
+                            alignment: AlignmentDirectional.bottomStart,
+                            children: [
+                              AspectRatio(
+                                  aspectRatio: 6 / 6,
+                                  // controller.value.aspectRatio,
+                                  child: CachedVideoPlayer(controller)),
+                              GestureDetector(
+                                onTap: () {
+                                  if (!controller.value.isInitialized) return;
+                                  setState(
+                                    () {
+                                      controller.value.isPlaying
+                                          ? controller.pause()
+                                          : controller.play();
+                                    },
+                                  );
+                                },
+                                child: Icon(
+                                  controller.value.isPlaying
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                                  color: kButtonColor,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Center(child: CircularProgressIndicator());
+                  }).toList()),
 
-                // New Details
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                  child: Text(
-                    widget.singleNews.information,
-                    textAlign: TextAlign.justify,
-                    style: kBodyTextStyle,
-                  ),
+              // New Details
+              Container(
+                margin:
+                    EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                child: Text(
+                  widget.singleNews.information,
+                  textAlign: TextAlign.justify,
+                  style: kBodyTextStyle,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

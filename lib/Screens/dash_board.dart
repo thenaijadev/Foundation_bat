@@ -5,6 +5,7 @@ import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/vidoe.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ import 'package:video_player/video_player.dart';
 
 import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
+import '../Models/files.dart';
 import '../Models/inprogress_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
@@ -40,6 +42,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<CachedVideoPlayerController> playerController = [];
+  late CachedVideoPlayerController controller;
+  
   @override
   void initState() {
     super.initState();
@@ -49,6 +55,45 @@ class _HomePageState extends State<HomePage> {
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<CompletedProvider>(context, listen: false)
         .getCompletedProjects();
+    // video(inprogress![index].);
+    controller = CachedVideoPlayerController.network(
+        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
+        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+    controller.initialize().then((value) {
+      // controller.play();
+      setState(() {});
+    });
+  }
+
+  
+  void video(List<Files> file) async {
+    if (file.isEmpty) return;
+    List<Files> videoList =
+        file.where((element) => element.fileExt == 'video/mp4').toList();
+    int count =
+        videoList.fold(0, (previousValue, element) => previousValue + 1);
+    playerController = List.generate(
+        count,
+        (index) => CachedVideoPlayerController.network(
+            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+            // widget.singleProgress.files![index].fileUrl
+            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            ));
+
+    for (var element in playerController) {
+      element.initialize().then((value) async {
+        await Future.delayed(Duration(milliseconds: 500));
+        // element.play();
+        setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   getId() async {
@@ -77,12 +122,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    // EventProvider provider = Provider.of<EventProvider>(context, listen: false);
-    NewsProvider newsProvider = Provider.of<NewsProvider>(context, listen: false);
+     NewsProvider newsProvider = Provider.of<NewsProvider>(context, listen: false);
     EventProvider eventProvider = Provider.of<EventProvider>(context, listen: false);
     InprogressProvider inprogressProvider =
-        Provider.of<InprogressProvider>(context, listen: false);
+        Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -231,9 +274,11 @@ class _HomePageState extends State<HomePage> {
                               )
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: inprogressProvider.allInprogressProjects!.length,
+                                itemCount: inprogressProvider
+                                .allInprogressProjects!.length,
                                 itemBuilder: ((context, index) {
-                                  InprogressModel inprogress = inprogressProvider
+                                  InprogressModel inprogress = 
+                                  inprogressProvider
                                       .allInprogressProjects![index];
                                   return GestureDetector(
                                     onTap: () {
@@ -265,13 +310,17 @@ class _HomePageState extends State<HomePage> {
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child:  inprogress.files![index]
+                                            child:  inprogress.files![0]
                                                     .fileUrl.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
+                                                      placeholder: (context, url) => CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                        fit: BoxFit.cover),
                                                       errorWidget: (context,
                                                                 url, error) =>
                                                             Center(
@@ -281,17 +330,25 @@ class _HomePageState extends State<HomePage> {
                                                             'https://www.batnf.net/${inprogress.projectImage}',
                                                         fit: BoxFit.cover),
                                                   )
-                                                : inprogress.files![index]
+                                                : inprogress.files![0]
                                                             .fileExt ==
-                                                        'video\/mp4'
+                                                        'video/mp4'
                                                     ? ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(18),
-                                                        child: CachedNetworkImage(
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                                            fit: BoxFit.cover),
+                                                        child: controller.value
+                                                                .isInitialized
+                                                            ? AspectRatio(
+                                                                aspectRatio:
+                                                                    controller
+                                                                        .value
+                                                                        .aspectRatio,
+                                                                child: CachedVideoPlayer(
+                                                                    controller))
+                                                            : Center(
+                                                                child:
+                                                                    const CircularProgressIndicator()),
                                                       )
                                                     : ClipRRect(
                                                         borderRadius:
@@ -299,10 +356,11 @@ class _HomePageState extends State<HomePage> {
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
                                                             imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                                                'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                                             fit: BoxFit.cover),
                                                       ),
                                           ),
+                                          //Title
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: 16, left: 39, bottom: 16),
@@ -391,7 +449,7 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             height: 145,
                                             width: 218,
-                                            child:  eventProvider.allEvents![index]
+                                            child:  event
                                                     .files![0].fileExt.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
@@ -572,23 +630,18 @@ class _HomePageState extends State<HomePage> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             18),
-                                                                child: CachedNetworkImage(
-                                                                  errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                            child: Text(
-                                                                                'No Image Availaible')),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${news.files![0].fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                                // _chewieVideoPlayer()
-                                                                // controller!
-                                                                //         .value.isInitialized
-                                                                //     ? CachedVideoPlayer(
-                                                                //         controller!)
-                                                                // : CircularProgressIndicator(),
+                                                                child: controller
+                                                                        .value
+                                                                        .isInitialized
+                                                                    ? AspectRatio(
+                                                                        aspectRatio: controller
+                                                                            .value
+                                                                            .aspectRatio,
+                                                                        child: CachedVideoPlayer(
+                                                                            controller))
+                                                                    : Center(
+                                                                        child:
+                                                                            const CircularProgressIndicator()),
                                                               )
                                                             : ClipRRect(
                                                                 borderRadius:
