@@ -39,7 +39,7 @@ const kLandpagebodytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpageskiptextstyle = TextStyle(
-    color: kButtonColor,
+    color: kGeneralbodytextColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
@@ -109,10 +109,10 @@ const kPageHeader = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kNewsSubHeader = TextStyle(
-    color: kNewHeaderColor,
+    color: kSignupbuttonColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: FontWeight.w600);
 
 const kBodyTextStyle = TextStyle(
@@ -130,7 +130,7 @@ const kAboutTextStyle = TextStyle(
     fontWeight: FontWeight.bold);
 
 const kNewsDateSTyle = TextStyle(
-    color: kTextboxhintColor,
+    color: kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,

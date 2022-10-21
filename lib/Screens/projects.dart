@@ -334,7 +334,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   : Center(
                                                                       child:
                                                                           const CircularProgressIndicator()),
-                                                                )
+                                                                        )
                                                           : ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
@@ -346,6 +346,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),
+                                                // ClipRRect(
+                                                //   borderRadius:
+                                                //       BorderRadius.circular(18),
+                                                //   child: CachedNetworkImage(
+                                                //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
+                                                //       fit: BoxFit.cover),
+                                                // ),
                                               ),
 
                                               // Inprogress Information

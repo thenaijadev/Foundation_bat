@@ -13,7 +13,8 @@ class ProjectSummaryContainer extends StatelessWidget {
       required this.number,
       required this.childCard,
       required this.innercontainer,
-      required this.margin});
+      required this.margin
+      });
 
   String label;
   int number;

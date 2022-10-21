@@ -57,6 +57,7 @@ class _InprogressPageState extends State<InprogressPage> {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: kBackground,
         appBar: AppBar(
           toolbarHeight: 94,
           backgroundColor: kBackground,
@@ -113,29 +114,42 @@ class _InprogressPageState extends State<InprogressPage> {
                                               ProgressDetails(inprogress)));
                                 },
                                 child: Container(
+                                  // height: 202,
+                                  width: 237,
                                   margin: EdgeInsets.only(
-                                      bottom: 15.0, left: 30, right: 30),
+                                      left: 36.27, right: 15.0, bottom: 15.0, top: 10),
+                                  // margin: EdgeInsets.only(
+                                  //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: kBackground,
+                                    color: kTextboxhintColor.withOpacity(0.8),
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
-                                  child: Row(
+                                  child: Column(
+                                     crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
+                                        height: 145,
+                                        width: MediaQuery.of(context).size.width,
                                         margin: EdgeInsets.only(
-                                            left: 15,
-                                            bottom: 15.0,
-                                            right: 15.0,
-                                            top: 15),
-                                        height: 74,
-                                        width: 74,
+                                            left: 9.0, right: 9),
+                                        // margin: EdgeInsets.only(
+                                        //     left: 15,
+                                        //     bottom: 15.0,
+                                        //     right: 15.0,
+                                        //     top: 15),
+                                        // height: 74,
+                                        // width: 74,
                                         child: inprogress
                                                 .files![0].fileUrl.isEmpty
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
-                                                child: Center(child: Text('No Image/Video Available'),),
+                                                child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                        fit: BoxFit.cover),
                                               )
                                             : inprogress.files![0].fileExt ==
                                                     'video/mp4'
@@ -168,59 +182,45 @@ class _InprogressPageState extends State<InprogressPage> {
                                                         fit: BoxFit.cover),
                                                   ),
                                       ),
-
+                                      
+                                      SizedBox(
+                                        height: 8,
+                                      ),
                                       //Details
-                                      Expanded(
-                                        child: Container(
-                                          height: 93,
-                                          margin: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 10,
-                                              left: 10.0,
-                                              right: 6.0),
-                                          color: kBackground,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  // inprogress.projectfiles![index].fileUrl,
-                                                  inprogress.projectTitle,
-                                                  style: kNewsSubHeader,
-                                                ),
-                                              ),
-                                              RichText(
-                                                  text: TextSpan(
-                                                      text: 'Started: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      children: [
-                                                    TextSpan(
-                                                        text: inprogress
-                                                            .projectStartDate,
-                                                        style: kNewsDateSTyle)
-                                                  ])),
-                                              RichText(
-                                                  text: TextSpan(
-                                                      text: 'To End: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      children: [
-                                                    TextSpan(
-                                                        text: inprogress
-                                                            .projectEndDate,
-                                                        style: kNewsDateSTyle)
-                                                  ])),
-                                            ],
-                                          ),
-                                        ),
-                                      )
+                                      Text(
+                                        // inprogress.projectfiles![index].fileUrl,
+                                        inprogress.projectTitle,
+                                        style: kNewsSubHeader,
+                                      ),
+                                      SizedBox(height: 8,),
+                                      RichText(
+                                          text: TextSpan(
+                                              text: 'Started: ',
+                                              style:
+                                                  kLandpageskiptextstyle,
+                                              children: [
+                                            TextSpan(
+                                                text: inprogress
+                                                    .projectStartDate,
+                                                style: kNewsDateSTyle)
+                                          ])),
+
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      RichText(
+                                          text: TextSpan(
+                                              text: 'To End: ',
+                                              style:
+                                                  kLandpageskiptextstyle,
+                                              children: [
+                                            TextSpan(
+                                                text: inprogress
+                                                    .projectEndDate,
+                                                style: kNewsDateSTyle)
+                                          ]))
+                                    
+                                      ,SizedBox(height: 8,),
                                     ],
                                   ),
                                 ),

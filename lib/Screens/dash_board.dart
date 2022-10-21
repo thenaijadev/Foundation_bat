@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
-    Provider.of<CompletedProvider>(context, listen: false)
-        .getCompletedProjects();
+    Provider.of<InprogressProvider>(context, listen: false)
+        .getInprogressProjects();
     // video(inprogress![index].);
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Container for search box etc
             Container(
-              height: 200.0,
+              // height: 200.0,
               color: kBackground.withOpacity(0.95),
               child: Column(
                 children: [
@@ -194,34 +194,34 @@ class _HomePageState extends State<HomePage> {
                   //       TextSpan(text: Provider.of<EventProvider>(context,
                   //               listen: false).userName, style: kBodyTextStyle)
                   //     ])),
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: 30, right: 20, bottom: 21, top: 10),
-                    // color: kBackground,
-                    height: 45.0,
-                    child: TextField(
-                      style: TextStyle(color: kGeneralbodytextColor),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 2),
-                        hintText: 'Search',
-                        hintStyle: kTextboxhintstyle,
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.search,
-                          size: 13.0,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(45.0),
-                          ),
-                          borderSide: BorderSide(
-                            style: BorderStyle.solid,
-                            color: kGeneralbodytextColor,
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(
+                  //       left: 30, right: 20, bottom: 21, top: 10),
+                  //   // color: kBackground,
+                  //   height: 45.0,
+                  //   child: TextField(
+                  //     style: TextStyle(color: kGeneralbodytextColor),
+                  //     decoration: InputDecoration(
+                  //       contentPadding: EdgeInsets.only(top: 2),
+                  //       hintText: 'Search',
+                  //       hintStyle: kTextboxhintstyle,
+                  //       prefixIcon: Icon(
+                  //         FontAwesomeIcons.search,
+                  //         size: 13.0,
+                  //       ),
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.all(
+                  //           Radius.circular(45.0),
+                  //         ),
+                  //         borderSide: BorderSide(
+                  //           style: BorderStyle.solid,
+                  //           color: kGeneralbodytextColor,
+                  //           width: 2.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -230,24 +230,31 @@ class _HomePageState extends State<HomePage> {
                 children: [
 
 
-                  //Ads
-                  // Container(
-                  //   margin: EdgeInsets.only(left: 30, right: 30, top: 10),
-                  //   color: kBackground,
-                  //   child: Image.asset('assets/Ads.png'),
-                  // ),
-
-                  CarouselSlider(
-                    items: [Image.asset('assets/Ads.png'),
-                    Image.asset('assets/Ads1.png'),
-                    Image.asset('assets/Ads2.png'),
-                    Image.asset('assets/Ads3.png'),
-                    ],
-                     options: CarouselOptions(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      viewportFraction: 0.99,
-                      autoPlay: true
-                     )),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: CarouselSlider(
+                      items: [Image.asset('assets/Ads.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                      Image.asset('assets/Ads1.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, fit: BoxFit.fitWidth,),
+                      Image.asset('assets/Ads2.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                      Image.asset('assets/Ads3.png',
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                      ],
+                       options: CarouselOptions(
+                        scrollDirection: Axis.vertical,
+                        padEnds: false,
+                        autoPlayCurve: Curves.slowMiddle,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        viewportFraction: 0.99,
+                        autoPlay: true
+                       )),
+                  ),
 
                   // Project List Header
                   Padding(

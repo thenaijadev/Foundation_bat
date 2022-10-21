@@ -24,7 +24,7 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
-   List<CachedVideoPlayerController> playerController = [];
+  List<CachedVideoPlayerController> playerController = [];
 
   @override
   void initState() {
@@ -41,8 +41,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-          'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-          // widget.singleProgress.files![index].fileUrl
+            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+            'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}'
             // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ));
 
@@ -50,10 +50,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
       element.initialize().then((value) async {
         await Future.delayed(Duration(milliseconds: 500));
         // element.play();
-          setState(() {
-            
-          });
-        
+        setState(() {});
       });
     }
   }
@@ -68,7 +65,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
   @override
   Widget build(BuildContext context) {
-  
+    InprogressProvider provider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -89,12 +86,13 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               //Project Image
               CarouselSlider(
                   options: CarouselOptions(
-                      autoPlayInterval: Duration(seconds: 10),
-                      height: 350,
-                      viewportFraction: 1.0,
-                      enableInfiniteScroll: false,
-                      autoPlay: true
-                      ),
+                    padEnds: false,
+                    autoPlayInterval: Duration(seconds: 10),
+                    height: 350,
+                    viewportFraction: 0.98,
+                    enableInfiniteScroll: false,
+                    // autoPlay: true
+                  ),
                   items: widget.singleProgress.files!.map((inprogressFile) {
                     print(inprogressFile.fileExt);
                     print(inprogressFile.fileUrl);
@@ -103,28 +101,27 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                           errorWidget: (context, url, error) =>
                               Center(child: Text('No Image Available')),
                           placeholder: (context, url) => Center(
-                                  child: Text(
-                                'Loading',
-                                style: TextStyle(color: Colors.black),
-                              )),
+                                  child: CircularProgressIndicator()),
                           imageUrl:
                               'https://www.batnf.net/${inprogressFile.fileUrl}',
                           fit: BoxFit.cover);
+                    } else if (inprogressFile.fileExt == '') {
+                      Image.asset('assets/noitem.png.gif');
                     }
                     CachedVideoPlayerController controller =
                         playerController.firstWhere((element) =>
                             element.dataSource ==
-                            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
                             // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                            // inprogressFile.fileUrl
-                            );
+                            'https://www.batnf.net/${inprogressFile.fileUrl}');
                     return controller.value.isInitialized
                         ? Stack(
-                          alignment: AlignmentDirectional.bottomStart,
+                            alignment: AlignmentDirectional.center,
                             children: [
                               AspectRatio(
-                                  aspectRatio: 6/6,
-                                  // controller.value.aspectRatio,
+                                  aspectRatio: 
+                                  // 6 / 6,
+                                  controller.value.aspectRatio,
                                   child: CachedVideoPlayer(controller)),
                               GestureDetector(
                                 onTap: () {
@@ -141,15 +138,14 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   controller.value.isPlaying
                                       ? Icons.pause
                                       : Icons.play_arrow,
-                                      color: kButtonColor,
-                                      size: 30,
+                                  color: Colors.blue.withOpacity(0.5),
+                                  size: 30,
                                 ),
                               ),
                             ],
                           )
                         : Center(child: CircularProgressIndicator());
-                  }).toList()
-                  ),
+                  }).toList()),
 
               //Project Title
               Container(
