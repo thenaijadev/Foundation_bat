@@ -25,48 +25,38 @@ class ProjectSummaryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      // height: 250,
-      width: 198,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [kBoxshadow],
-        color: colour,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 15, left: 15, bottom: 35),
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: innercontainer,
-            ),
-            child: Center(
-              child: childCard,
-            ),
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 15, left: 30, bottom: 5),
+          height: 65,
+          width: 80,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(360),
+            color: innercontainer,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left:15),
-            child: Text(
-              number.toString(),
-              style: kProjectsummarytextstyle,
-            ),
+          child: Center(
+            child: childCard,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, bottom:35),
-            child: Text(
-              label,
-              textAlign: TextAlign.justify,
-              style: kProjectsumdetailtextstyle,
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 30),
+          child: Text(
+            number.toString(),
+            style: kProjectsummarytextstyle,
           ),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 30),
+          child: Text(
+            label,
+            textAlign: TextAlign.justify,
+            style: kProjectsumdetailtextstyle,
+          ),
+        ),
+      ],
     );
   }
 }

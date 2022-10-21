@@ -74,7 +74,7 @@ class _ProjectPageState extends State<ProjectPage> {
           children: [
             // Container for search box etc
             Container(
-              height: 171,
+              // height: 171,
               color: kBackground,
               child: Column(
                 children: [
@@ -96,31 +96,33 @@ class _ProjectPageState extends State<ProjectPage> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                    color: kBackground,
-                    height: 45.0,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 2),
-                        hintText: 'Search',
-                        hintStyle: kTextboxhintstyle,
-                        prefixIcon: Icon(
-                          FontAwesomeIcons.search,
-                          size: 13.0,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(45.0),
-                            ),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: kTextfieldborderColor,
-                              width: 2.0,
-                            )),
-                      ),
-                    ),
-                  ),
+
+                  // Container(
+                  //   margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                  //   color: kBackground,
+                  //   height: 45.0,
+                  //   child: TextField(
+                  //     decoration: InputDecoration(
+                  //       contentPadding: EdgeInsets.only(top: 2),
+                  //       hintText: 'Search',
+                  //       hintStyle: kTextboxhintstyle,
+                  //       prefixIcon: Icon(
+                  //         FontAwesomeIcons.search,
+                  //         size: 13.0,
+                  //       ),
+                  //       border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(
+                  //             Radius.circular(45.0),
+                  //           ),
+                  //           borderSide: BorderSide(
+                  //             style: BorderStyle.solid,
+                  //             color: kTextfieldborderColor,
+                  //             width: 2.0,
+                  //           )),
+                  //     ),
+                  //   ),
+                  // ),
+                
                 ],
               ),
             ),
@@ -146,8 +148,9 @@ class _ProjectPageState extends State<ProjectPage> {
 
                 //Project Summary List
 
-                SizedBox(
-                  height: 205,
+                Container(
+                  // color: kSignupbuttonColor,
+                  height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -157,8 +160,8 @@ class _ProjectPageState extends State<ProjectPage> {
                           Navigator.pushNamed(context, InprogressPage.id);
                         },
                         child: ProjectSummaryContainer(
-                          margin: EdgeInsets.only(left: 30, right: 41.5),
-                          innercontainer: kBackground.withOpacity(0.1),
+                          margin: EdgeInsets.only(left: 30, right: 60.5),
+                          innercontainer: Color.fromARGB(255, 3, 27, 73).withOpacity(0.1),
                           number: inprogressProvider
                                       .allInprogressProjects?.length ==
                                   null
@@ -169,8 +172,8 @@ class _ProjectPageState extends State<ProjectPage> {
                           label: 'Projects in \nProgress',
                           childCard: Icon(
                             Icons.pie_chart_rounded,
-                            size: 17.5,
-                            color: kBackground,
+                            size: 65,
+                            color: kGeneralbodytextColor,
                           ),
                         ),
                       ),
@@ -191,9 +194,9 @@ class _ProjectPageState extends State<ProjectPage> {
                           colour: Color(0xff50AF47),
                           label: 'Projects \nCompleted',
                           childCard: Icon(
-                            FontAwesomeIcons.checkSquare,
-                            size: 17.5,
-                            color: kBackground,
+                            FontAwesomeIcons.checkCircle,
+                            size: 65,
+                            color: Color(0xff50AF47),
                           ),
                         ),
                       ),
@@ -213,8 +216,9 @@ class _ProjectPageState extends State<ProjectPage> {
                           colour: Color(0xffEF7D00),
                           label: 'Pending \nProjects',
                           childCard: Icon(
-                            FontAwesomeIcons.commentDots,
-                            color: kBackground,
+                            FontAwesomeIcons.solidCommentDots,
+                            color: Color(0xffEF7D00),
+                            size: 65,
                           ),
                         ),
                       ),
@@ -229,7 +233,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     children: [
                       Container(
                         margin:
-                            EdgeInsets.only(top: 15.0, left: 30.0, right: 30),
+                            EdgeInsets.only(top: 5.0, left: 30.0, right: 30),
 
                         //Label
                         child: Row(

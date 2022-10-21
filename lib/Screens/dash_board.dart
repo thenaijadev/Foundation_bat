@@ -26,7 +26,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../Models/events_model.dart';
 import '../Models/files.dart';
 import '../Models/inprogress_model.dart';
-import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -247,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                       ],
                        options: CarouselOptions(
-                        scrollDirection: Axis.vertical,
+                        scrollDirection: Axis.horizontal,
                         padEnds: false,
                         autoPlayCurve: Curves.slowMiddle,
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -269,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, ProjectPage.id);
+                            Navigator.pushNamed(context, InprogressPage.id);
                           },
                           child: Text(
                             'See All',

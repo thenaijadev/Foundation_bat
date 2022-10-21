@@ -18,7 +18,7 @@ const kAppnametextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kProjectsummarytextstyle = TextStyle(
-    color: kBackground,
+    color: kGeneralbodytextColor,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 36.0,
@@ -43,7 +43,7 @@ const kLandpageskiptextstyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
-    fontStyle: FontStyle.normal);
+    fontStyle: FontStyle.italic);
 
 const kSigningtextstyle = TextStyle(
     color: kGeneralbodytextColor,
@@ -88,7 +88,7 @@ const kWelcomesubstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kProjectsumdetailtextstyle = TextStyle(
-    color: kBackground,
+    color: kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
