@@ -105,7 +105,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           }),
                           text: 'Sign Up',
                           style: TextStyle(
-                              color: kButtonColor,
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Inter',
                               fontSize: 16.0,

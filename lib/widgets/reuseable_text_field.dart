@@ -23,6 +23,7 @@ class ReuseableTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(color: kGeneralbodytextColor),
       // onChanged: (value) {},
       validator: (val) {
         return val!.isEmpty ? "This Field is Required" : null;
@@ -39,7 +40,7 @@ class ReuseableTextField extends StatelessWidget {
           ),
           borderSide: BorderSide(
             style: BorderStyle.solid,
-            color: kTextfieldborderColor,
+            color: kGeneralbodytextColor,
             width: 2.0,
           ),
         ),

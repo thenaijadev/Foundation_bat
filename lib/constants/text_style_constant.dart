@@ -74,7 +74,7 @@ const kButtontextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kForgetpasswordstyle = TextStyle(
-    color: kButtonColor,
+    color: kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -95,7 +95,7 @@ const kProjectsumdetailtextstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kWelcomeHeadstyle = TextStyle(
-    color: kButtonColor,
+    color: Colors.white,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 36,
@@ -117,10 +117,17 @@ const kNewsSubHeader = TextStyle(
 
 const kBodyTextStyle = TextStyle(
     color: kGeneralbodytextColor,
-    fontStyle: FontStyle.normal,
+    fontStyle: FontStyle.italic,
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: FontWeight.w400);
+
+const kAboutTextStyle = TextStyle(
+    color: kGeneralbodytextColor,
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Inter',
+    fontSize: 22,
+    fontWeight: FontWeight.bold);
 
 const kNewsDateSTyle = TextStyle(
     color: kTextboxhintColor,

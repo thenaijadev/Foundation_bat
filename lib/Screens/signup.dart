@@ -231,10 +231,13 @@ class _SignUpState extends State<SignUp> {
                 child: ListView(
                   children: [
                     // logo
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10.0, top: 70.0, left: 140.0, right: 140.0),
-                      child: Center(
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            bottom: 10.0,
+                            top: 50.0,
+                            left: 130.0,
+                            right: 130.0) ,
                         child: Image.asset(
                           'assets/logo.png',
                         ),
@@ -321,6 +324,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
+                          style: TextStyle(color: kGeneralbodytextColor),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -362,6 +366,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
+                          style: TextStyle(color: kGeneralbodytextColor),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -425,6 +430,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
+                          style: TextStyle(color: kGeneralbodytextColor),
                           onChanged: (value) {
                             userdob = value;
                           },
@@ -523,7 +529,7 @@ class _SignUpState extends State<SignUp> {
                               text: TextSpan(
                                   text: "Already have an account? ",
                                   style: TextStyle(
-                                      color: kGeneralbodytextColor,
+                                      color: kButtonColor,
                                       fontStyle: FontStyle.normal,
                                       fontFamily: 'Inter',
                                       fontSize: 14,

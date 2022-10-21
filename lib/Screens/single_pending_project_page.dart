@@ -237,7 +237,7 @@ void initState() {
               padding: const EdgeInsets.only(left: 30),
               child: Text(
                 'About Project',
-                style: kBodyTextStyle,
+                style: kAboutTextStyle,
                 textAlign: TextAlign.left,
               ),
             ),

@@ -93,7 +93,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       height: 350,
                       viewportFraction: 1.0,
                       enableInfiniteScroll: false,
-                      // autoPlay: true
+                      autoPlay: true
                       ),
                   items: widget.singleProgress.files!.map((inprogressFile) {
                     print(inprogressFile.fileExt);
@@ -254,7 +254,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
                   'About Project',
-                  style: kBodyTextStyle,
+                  style: kAboutTextStyle,
                   textAlign: TextAlign.left,
                 ),
               ),

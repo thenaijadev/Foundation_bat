@@ -100,7 +100,7 @@ class _SignInState extends State<SignIn> {
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
               msg: "Login Successful",
-              textColor: kBackground,
+              textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
@@ -110,7 +110,7 @@ class _SignInState extends State<SignIn> {
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
               msg: data['message'],
-              textColor: kBackground,
+              textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
         }
       } else {
@@ -119,7 +119,7 @@ class _SignInState extends State<SignIn> {
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER,
             msg: 'Service Timeout',
-            textColor: kBackground,
+            textColor: kGeneralbodytextColor,
             backgroundColor: kButtonColor);
       }
     } catch (e) {
@@ -157,7 +157,7 @@ class _SignInState extends State<SignIn> {
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
               msg: "Check Your Mail",
-              textColor: kBackground,
+              textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => ForgetPassword()));
@@ -167,7 +167,7 @@ class _SignInState extends State<SignIn> {
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.CENTER,
               msg: data['message'],
-              textColor: kBackground,
+              textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => ForgetPassword()));
@@ -201,10 +201,13 @@ class _SignInState extends State<SignIn> {
                 child: ListView(
                   children: [
                     // Logo
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 10.0, top: 70.0, left: 140.0, right: 140.0),
-                      child: Center(
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            bottom: 10.0,
+                            top: 60.0,
+                            left: 130.0,
+                            right: 130.0),
                         child: Image.asset(
                           'assets/logo.png',
                         ),
@@ -249,6 +252,7 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: TextFormField(
+                          style: TextStyle(color: kGeneralbodytextColor),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -364,7 +368,7 @@ class _SignInState extends State<SignIn> {
                               text: TextSpan(
                                   text: "Don't have an account? ",
                                   style: TextStyle(
-                                      color: kGeneralbodytextColor,
+                                      color: kButtonColor,
                                       fontStyle: FontStyle.normal,
                                       fontFamily: 'Inter',
                                       fontSize: 14,

@@ -286,6 +286,7 @@ class _EventDetailsState extends State<EventDetails> {
                 child: Text(
                   'About Event',
                   textAlign: TextAlign.left,
+                  style: kAboutTextStyle,
                 ),
               ),
 

@@ -15,16 +15,14 @@ import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
-import 'package:video_player/video_player.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-import '../Models/completed_model.dart';
 import '../Models/events_model.dart';
 import '../Models/files.dart';
 import '../Models/inprogress_model.dart';
@@ -125,7 +123,7 @@ class _HomePageState extends State<HomePage> {
      NewsProvider newsProvider = Provider.of<NewsProvider>(context, listen: false);
     EventProvider eventProvider = Provider.of<EventProvider>(context, listen: false);
     InprogressProvider inprogressProvider =
-        Provider.of<InprogressProvider>(context);
+        Provider.of<InprogressProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
@@ -137,7 +135,7 @@ class _HomePageState extends State<HomePage> {
             // Container for search box etc
             Container(
               height: 200.0,
-              color: kBackground,
+              color: kBackground.withOpacity(0.95),
               child: Column(
                 children: [
                   Row(
@@ -199,9 +197,10 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: EdgeInsets.only(
                         left: 30, right: 20, bottom: 21, top: 10),
-                    color: kBackground,
+                    // color: kBackground,
                     height: 45.0,
                     child: TextField(
+                      style: TextStyle(color: kGeneralbodytextColor),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(top: 2),
                         hintText: 'Search',
@@ -216,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           borderSide: BorderSide(
                             style: BorderStyle.solid,
-                            color: kTextfieldborderColor,
+                            color: kGeneralbodytextColor,
                             width: 2.0,
                           ),
                         ),
@@ -232,11 +231,23 @@ class _HomePageState extends State<HomePage> {
 
 
                   //Ads
-                  Container(
-                    margin: EdgeInsets.only(left: 30, right: 30, top: 10),
-                    color: kBackground,
-                    child: Image.asset('assets/Ads.png'),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.only(left: 30, right: 30, top: 10),
+                  //   color: kBackground,
+                  //   child: Image.asset('assets/Ads.png'),
+                  // ),
+
+                  CarouselSlider(
+                    items: [Image.asset('assets/Ads.png'),
+                    Image.asset('assets/Ads1.png'),
+                    Image.asset('assets/Ads2.png'),
+                    Image.asset('assets/Ads3.png'),
+                    ],
+                     options: CarouselOptions(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      viewportFraction: 0.99,
+                      autoPlay: true
+                     )),
 
                   // Project List Header
                   Padding(
@@ -312,24 +323,9 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             child:  inprogress.files![0]
                                                     .fileUrl.isEmpty
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    child: CachedNetworkImage(
-                                                      placeholder: (context, url) => CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.projectImage}',
-                                                        fit: BoxFit.cover),
-                                                      errorWidget: (context,
-                                                                url, error) =>
-                                                            Center(
-                                                                child: Text(
-                                                                    'No Image Availaible')),
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.projectImage}',
-                                                        fit: BoxFit.cover),
-                                                  )
+                                                ? Center(
+                                                    child: Text(
+                                                        'No Image Availaible'))
                                                 : inprogress.files![0]
                                                             .fileExt ==
                                                         'video/mp4'
@@ -355,6 +351,12 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
+                                                           errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                Center(
+                                                                    child: Text(
+                                                                        'No Image Availaible')),
                                                             imageUrl:
                                                                 'https://www.batnf.net/${inprogress.files![0].fileUrl}',
                                                             fit: BoxFit.cover),
