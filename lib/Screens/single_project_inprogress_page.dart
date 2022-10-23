@@ -34,8 +34,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
   void video(List<Files> file) async {
     if (file.isEmpty) return;
-    List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg').toList();
+    List<Files> videoList = file
+        .where((element) =>
+            element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg')
+        .toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
@@ -112,8 +114,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 'https://www.batnf.net/${widget.singleProgress.projectImage}',
                             fit: BoxFit.cover),
                       );
-                    }
-                    else if (inprogressFile.fileExt == 'image/jpeg') {
+                    } else if (inprogressFile.fileExt == 'image/jpeg') {
                       return CachedNetworkImage(
                           errorWidget: (context, url, error) =>
                               Center(child: Text('No Image Available')),
