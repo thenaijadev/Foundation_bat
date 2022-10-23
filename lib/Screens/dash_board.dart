@@ -108,13 +108,13 @@ class _HomePageState extends State<HomePage> {
         String username = sharedPreferences.getString('username')!;
         provider.userId = userID;
         provider.userName = username;
-        user = username;
+        // user = username;
       }
     }
     if (mounted) setState(() {});
   }
 
-  var user = '';
+  // var user = '';
 
   @override
   Widget build(BuildContext context) {
@@ -355,7 +355,7 @@ class _HomePageState extends State<HomePage> {
                                                     .files![0].fileUrl.isEmpty
                                                 ? Center(
                                                     child: Text(
-                                                        'No Image Availaible'))
+                                                        'No Image Available'))
                                                 : inprogress.files![0]
                                                             .fileExt ==
                                                         'video/mp4'

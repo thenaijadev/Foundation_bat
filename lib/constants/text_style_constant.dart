@@ -48,7 +48,8 @@ const kLandpageskiptextstyle = TextStyle(
     fontStyle: FontStyle.italic);
 
 const kSigningtextstyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.blue,
+    // kGeneralbodytextColor,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 24.0,
@@ -130,27 +131,31 @@ const kBodyTextStyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kAboutTextStyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.blue,
+    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 22,
     fontWeight: FontWeight.bold);
 
 const kNewsDateSTyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.blue,
+    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.w400);
 
 const kLandsignup = TextStyle(
-    color: kBackground,
+    color: Colors.blue,
+    // kBackground,
     fontWeight: FontWeight.w500,
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
 
 const kEventlist = TextStyle(
-    color: kBackground,
+    color: Colors.blue,
+    // kBackground,
     fontWeight: FontWeight.w500,
     fontSize: 16.0,
     fontStyle: FontStyle.normal);

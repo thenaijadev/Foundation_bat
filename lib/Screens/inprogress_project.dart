@@ -8,6 +8,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,9 +36,11 @@ class _InprogressPageState extends State<InprogressPage> {
   void initState() {
     super.initState();
 
-    // video(widget.singleProgress.files!);
+    // video(Files);
+
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
+
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
         // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
@@ -48,6 +51,7 @@ class _InprogressPageState extends State<InprogressPage> {
       setState(() {});
     });
   }
+
   // void video(List<Files> file) async {
   //   if (file.isEmpty) return;
   //   List<Files> videoList =
@@ -58,7 +62,7 @@ class _InprogressPageState extends State<InprogressPage> {
   //       count,
   //       (index) => CachedVideoPlayerController.network(
   //           'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-  //           // 'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}'
+  //           // 'https://www.batnf.net/${inprogress.files![index].fileUrl}'
   //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
   //           ));
 
@@ -85,10 +89,10 @@ class _InprogressPageState extends State<InprogressPage> {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           toolbarHeight: 94,
-          backgroundColor: kBackground,
+          backgroundColor: Theme.of(context).primaryColor,
           leading: Padding(
               padding: const EdgeInsets.all(5.0),
               child: IconButton(
@@ -121,7 +125,7 @@ class _InprogressPageState extends State<InprogressPage> {
                       ? Center(child: Image.asset('assets/noitem.png.gif'))
                       : RefreshIndicator(
                           color: kBackground,
-                          backgroundColor: kButtonColor,
+                          backgroundColor: Theme.of(context).primaryColor,
                           onRefresh: () async {
                             await Provider.of<InprogressProvider>(context,
                                     listen: false)
@@ -149,7 +153,9 @@ class _InprogressPageState extends State<InprogressPage> {
                                   // margin: EdgeInsets.only(
                                   //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: kTextboxhintColor.withOpacity(0.8),
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.8),
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
@@ -157,6 +163,87 @@ class _InprogressPageState extends State<InprogressPage> {
                                      crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+
+                  //                     CarouselSlider(
+                  // options: CarouselOptions(
+                  //   padEnds: false,
+                  //   autoPlayInterval: Duration(seconds: 10),
+                  //   // height: 350,
+                  //   height: 145,
+                  //  aspectRatio: MediaQuery.of(context).size.width,
+                  //   viewportFraction: 0.98,
+                  //   enableInfiniteScroll: false,
+                  //   // autoPlay: true
+                  // ),
+                  // items: inprogress.files!.map((inprogressFile) {
+                  //   print(inprogressFile.fileExt);
+                  //   print(inprogressFile.fileUrl);
+                  //   if (inprogressFile.fileExt == '') {
+                  //     return Container(
+                  //       color: kGeneralbodytextColor,
+                  //       child: CachedNetworkImage(
+                  //           errorWidget: (context, url, error) => Center(
+                  //                   child: Text(
+                  //                 'No Image Available',
+                  //                 style:
+                  //                     TextStyle(color: kGeneralbodytextColor),
+                  //               )),
+                  //           placeholder: (context, url) =>
+                  //               Center(child: CircularProgressIndicator()),
+                  //           imageUrl:
+                  //               'https://www.batnf.net/${inprogress.projectImage}',
+                  //           fit: BoxFit.cover),
+                  //     );
+                  //   }
+                  //   else if (inprogressFile.fileExt == 'image/jpeg') {
+                  //     return CachedNetworkImage(
+                  //         errorWidget: (context, url, error) =>
+                  //             Center(child: Text('No Image Available')),
+                  //         placeholder: (context, url) =>
+                  //             Center(child: CircularProgressIndicator()),
+                  //         imageUrl:
+                  //             'https://www.batnf.net/${inprogressFile.fileUrl}',
+                  //         fit: BoxFit.cover);
+                  //   }
+                  //   CachedVideoPlayerController controller =
+                  //       playerController.firstWhere((element) =>
+                  //           element.dataSource ==
+                  //           // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                  //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                  //           'https://www.batnf.net/${inprogressFile.fileUrl}');
+                  //   return controller.value.isInitialized
+                  //       ? Stack(
+                  //           alignment: AlignmentDirectional.center,
+                  //           children: [
+                  //             AspectRatio(
+                  //                 aspectRatio:
+                  //                     // 6 / 6,
+                  //                     controller.value.aspectRatio,
+                  //                 child: CachedVideoPlayer(controller)),
+                  //             GestureDetector(
+                  //               onTap: () {
+                  //                 if (!controller.value.isInitialized) return;
+                  //                 setState(
+                  //                   () {
+                  //                     controller.value.isPlaying
+                  //                         ? controller.pause()
+                  //                         : controller.play();
+                  //                   },
+                  //                 );
+                  //               },
+                  //               child: Icon(
+                  //                 controller.value.isPlaying
+                  //                     ? Icons.pause
+                  //                     : Icons.play_arrow,
+                  //                 color: Colors.blue.withOpacity(0.5),
+                  //                 size: 30,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         )
+                  //       : Center(child: CircularProgressIndicator());
+                  // }).toList()),
+
                                       Container(
                                         height: 145,
                                         width: MediaQuery.of(context).size.width,

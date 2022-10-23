@@ -35,7 +35,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
   void video(List<Files> file) async {
     if (file.isEmpty) return;
     List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
+        file.where((element) => element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg').toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(

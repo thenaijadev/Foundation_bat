@@ -18,9 +18,74 @@ class ReuseableBottomBar extends StatefulWidget {
 }
 
 class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return 
+    
+    // Container(
+    //   height: 100,
+    //   decoration: BoxDecoration(
+    //     boxShadow: [
+    //       BoxShadow(
+    //           color: kSignupbuttonColor.withOpacity(0.6),
+    //           offset: Offset(0, 7),
+    //           blurRadius: 15.0),
+    //     ],
+    //     color: kSignupbuttonColor,
+    //     // color: Theme.of(context).primaryColor,
+    //     borderRadius: BorderRadius.only(
+    //       topLeft: Radius.circular(25.0),
+    //       topRight: Radius.circular(25.0),
+    //     ),
+    //   ),
+    //   child: BottomNavigationBar(
+    //       type: BottomNavigationBarType.fixed,
+    //       // backgroundColor: Colors.white,
+    //       currentIndex: _currentIndex,
+    //       onTap: (index) {
+    //         setState(() {
+    //           _currentIndex = index;
+    //           Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //               builder: (context) => HomePage(),
+    //             ),
+    //           );
+    //         });
+    //       },
+
+    //       // ignore: prefer_const_literals_to_create_immutables
+    //       items: [
+    //         BottomNavigationBarItem(
+    //             activeIcon: Image.asset('assets/icons/home.png'),
+    //             icon: Icon(Icons.home),
+    //             label: 'Home',
+    //             backgroundColor: Colors.amber),
+    //         BottomNavigationBarItem(
+    //             activeIcon: Image.asset('assets/icons/Calendar.png'),
+    //             icon: Icon(Icons.calendar_today),
+    //             label: 'Event',
+    //             backgroundColor: Colors.yellow),
+    //         BottomNavigationBarItem(
+    //             activeIcon: Image.asset('assets/icons/game.png'),
+    //             icon: Icon(Icons.gamepad),
+    //             label: 'Games',
+    //             backgroundColor: Colors.orange),
+    //         BottomNavigationBarItem(
+    //             activeIcon: Image.asset('assets/icons/pro.png'),
+    //             icon: Icon(Icons.headphones),
+    //             label: 'Projects',
+    //             backgroundColor: Color.fromRGBO(33, 150, 243, 1)),
+    //         BottomNavigationBarItem(
+    //             activeIcon: Image.asset('assets/icons/news.svg'),
+    //             icon: Icon(Icons.newspaper),
+    //             label: 'News',
+    //             backgroundColor: Colors.green),
+    //       ]),
+    // );
+
+    Container(
       height: 100,
       decoration: BoxDecoration(
         boxShadow: [
@@ -40,6 +105,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           //Home
+
           GestureDetector(
             onTap: () => Navigator.push(
               context,
@@ -53,7 +119,10 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/icons/home.png', color: kButtonColor,),
+                  Image.asset(
+                    'assets/icons/home.png',
+                    color: kButtonColor,
+                  ),
                   SizedBox(
                     height: 10.1,
                   ),
@@ -64,6 +133,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           ),
 
           //Events
+
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, EventCenter.id),
             child: Container(

@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeProvider(),
         ),
       ],
-      child: Builder(builder: (context) {
+      child: Builder(builder: (context){
         final themeProvider = Provider.of<ThemeProvider>(context);
         return MaterialApp(
           title: 'BATNF',
