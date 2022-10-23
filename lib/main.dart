@@ -28,6 +28,7 @@ import 'package:batnf/providers/pending_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/pending_project.dart';
+import 'providers/theme_provider.dart';
 
 class MyHttpoverrides extends HttpOverrides {
   @override
@@ -53,6 +54,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static String mode = 'Mode';
   final bool autoLogin;
   const MyApp(this.autoLogin, {Key? key}) : super(key: key);
   @override
@@ -74,28 +76,37 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => PendingProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
       ],
-      child: MaterialApp(
-        title: 'BATNF',
-        debugShowCheckedModeBanner: false,
-        initialRoute: !autoLogin ? LandingPage.id : HomePage.id,
-        routes: {
-          LandingPage.id: (context) => const LandingPage(),
-          WelcomePage.id: (context) => WelcomePage(),
-          SignIn.id: (context) => SignIn(),
-          HomePage.id: (context) => HomePage(),
-          SignUp.id: (context) => SignUp(),
-          ForgetPassword.id: (context) => ForgetPassword(),
-          ResetPassword.id: (context) => ResetPassword(),
-          ResetCompleted.id: (context) => ResetCompleted(),
-          EventCenter.id: (context) => EventCenter(),
-          ProjectPage.id: (context) => ProjectPage(),
-          InprogressPage.id:(context) => InprogressPage(),
-          CompletedPage.id: (context) => CompletedPage(),
-          PendingPage.id: (context) => PendingPage(),
-          News.id: (context) => News(),
-        },
-      ),
+      child: Builder(builder: (context) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return MaterialApp(
+          title: 'BATNF',
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          debugShowCheckedModeBanner: false,
+          initialRoute: !autoLogin ? LandingPage.id : HomePage.id,
+          routes: {
+            LandingPage.id: (context) => const LandingPage(),
+            WelcomePage.id: (context) => WelcomePage(),
+            SignIn.id: (context) => SignIn(),
+            HomePage.id: (context) => HomePage(),
+            SignUp.id: (context) => SignUp(),
+            ForgetPassword.id: (context) => ForgetPassword(),
+            ResetPassword.id: (context) => ResetPassword(),
+            ResetCompleted.id: (context) => ResetCompleted(),
+            EventCenter.id: (context) => EventCenter(),
+            ProjectPage.id: (context) => ProjectPage(),
+            InprogressPage.id: (context) => InprogressPage(),
+            CompletedPage.id: (context) => CompletedPage(),
+            PendingPage.id: (context) => PendingPage(),
+            News.id: (context) => News(),
+          },
+        );
+      }),
     );
   }
 }

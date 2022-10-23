@@ -34,10 +34,10 @@ class _EventCenterState extends State<EventCenter> {
     EventProvider provider = Provider.of<EventProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         body: RefreshIndicator(
           color: kBackground,
-          backgroundColor: kButtonColor,
+          backgroundColor: Theme.of(context).primaryColor,
           onRefresh: () async {
             await Provider.of<EventProvider>(context, listen: false)
                 .getAllEvents();
@@ -48,7 +48,7 @@ class _EventCenterState extends State<EventCenter> {
             children: [
               // Container for search box etc
               Container(
-                color: kBackground,
+                color: Theme.of(context).primaryColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -57,7 +57,7 @@ class _EventCenterState extends State<EventCenter> {
                         Container(
                           margin:
                               EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                          color: kBackground,
+                          color: Theme.of(context).primaryColor,
                           height: 40.0,
                           child: Image.asset(
                             'assets/logo.png',
@@ -66,7 +66,7 @@ class _EventCenterState extends State<EventCenter> {
                         Container(
                           margin: EdgeInsets.only(
                               top: 50, left: 10, bottom: 26, right: 130),
-                          color: kBackground,
+                          color: Theme.of(context).primaryColor,
                           height: 29,
                           child: Text(
                             'Events',
@@ -138,7 +138,7 @@ class _EventCenterState extends State<EventCenter> {
                                     bottom: 30.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: kBackground,
+                                    color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
@@ -190,7 +190,7 @@ class _EventCenterState extends State<EventCenter> {
                                               // top: 5,
                                               left: 10.0,
                                               right: 6.0),
-                                          color: kBackground,
+                                          color: Theme.of(context).primaryColor,
                                           //Event Information
                                           child: Column(
                                             mainAxisAlignment:

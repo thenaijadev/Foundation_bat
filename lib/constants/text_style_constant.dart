@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'color_constant.dart';
 
-
 const kBorderstyle = OutlineInputBorder(
   borderRadius: BorderRadius.all(
     Radius.circular(45.0),
@@ -17,15 +16,17 @@ const kAppnametextstyle = TextStyle(
     fontSize: 36.0,
     fontStyle: FontStyle.normal);
 
-const kProjectsummarytextstyle = TextStyle(
-    color: kGeneralbodytextColor,
+var kProjectsummarytextstyle = TextStyle(
+    color: Colors.green,
+    // kGeneralbodytextColor,
+    // ThemeData.dark().primaryColor,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
-    fontSize: 36.0,
+    fontSize: 20.0,
     fontStyle: FontStyle.normal);
 
 const kLandpageHeadertextstyle = TextStyle(
-    color: Colors.white,
+    color: Color.fromARGB(255, 255, 255, 255),
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 24.0,
@@ -39,7 +40,8 @@ const kLandpagebodytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpageskiptextstyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.green,
+    // kGeneralbodytextColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
@@ -73,8 +75,9 @@ const kButtontextstyle = TextStyle(
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
 
-const kForgetpasswordstyle = TextStyle(
-    color: kGeneralbodytextColor,
+var kForgetpasswordstyle = TextStyle(
+    color: Colors.blue[900],
+    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -88,7 +91,8 @@ const kWelcomesubstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kProjectsumdetailtextstyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.blue,
+    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -102,7 +106,9 @@ const kWelcomeHeadstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kPageHeader = TextStyle(
-    color: kGeneralbodytextColor,
+    color: Colors.blue,
+    // kGeneralbodytextColor,
+    // ThemeData == Brightness.dark ? ThemeData.dark().primaryColor : ThemeData.light().primaryColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -116,7 +122,8 @@ const kNewsSubHeader = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kBodyTextStyle = TextStyle(
-    color: kGeneralbodytextColor,
+    color: kSignupbuttonColor,
+    // kGeneralbodytextColor,
     fontStyle: FontStyle.italic,
     fontFamily: 'Inter',
     fontSize: 16,

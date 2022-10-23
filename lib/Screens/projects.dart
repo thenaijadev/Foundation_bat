@@ -52,7 +52,8 @@ class _ProjectPageState extends State<ProjectPage> {
       setState(() {});
     });
   }
-   @override
+
+  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -67,7 +68,7 @@ class _ProjectPageState extends State<ProjectPage> {
         Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +76,7 @@ class _ProjectPageState extends State<ProjectPage> {
             // Container for search box etc
             Container(
               // height: 171,
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               child: Column(
                 children: [
                   Row(
@@ -83,14 +84,14 @@ class _ProjectPageState extends State<ProjectPage> {
                       Container(
                         margin:
                             EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                        color: kBackground,
+                        color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset('assets/logo.png'),
                       ),
                       Container(
                         margin: EdgeInsets.only(
                             top: 50, left: 10, bottom: 26, right: 130),
-                        color: kBackground,
+                        color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text('Projects', style: kPageHeader),
                       ),
@@ -122,191 +123,198 @@ class _ProjectPageState extends State<ProjectPage> {
                   //     ),
                   //   ),
                   // ),
-                
                 ],
               ),
             ),
 
             //Project Body
             Expanded(
-                child: ListView(
-              children: [
-                // Project Summary List Header
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 29.0, left: 30.0, bottom: 20),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Projects Summary',
-                        style: kPageHeader,
-                      )
-                    ],
+              child: ListView(
+                children: [
+                  // Project Summary List Header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 29.0, left: 30.0, bottom: 20),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Projects Summary',
+                          style: kPageHeader,
+                        )
+                      ],
+                    ),
                   ),
-                ),
 
-                //Project Summary List
+                  //Project Summary List
 
-                Container(
-                  // color: kSignupbuttonColor,
-                  height: 200,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      //Project in progress
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, InprogressPage.id);
-                        },
-                        child: ProjectSummaryContainer(
-                          margin: EdgeInsets.only(left: 30, right: 60.5),
-                          innercontainer: Color.fromARGB(255, 3, 27, 73).withOpacity(0.1),
-                          number: inprogressProvider
-                                      .allInprogressProjects?.length ==
-                                  null
-                              ? 0
-                              : inprogressProvider
-                                  .allInprogressProjects!.length,
-                          colour: Color(0xff0E2B63),
-                          label: 'Projects in \nProgress',
-                          childCard: Icon(
-                            Icons.pie_chart_rounded,
-                            size: 65,
-                            color: kGeneralbodytextColor,
-                          ),
-                        ),
-                      ),
-
-                      //Completed Project
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, CompletedPage.id);
-                        },
-                        child: ProjectSummaryContainer(
-                          margin: EdgeInsets.only(right: 41.5),
-                          innercontainer: kBackground.withOpacity(0.1),
-                          number: completedProvider
-                                      .allCompletedProjects?.length ==
-                                  null
-                              ? 0
-                              : completedProvider.allCompletedProjects!.length,
-                          colour: Color(0xff50AF47),
-                          label: 'Projects \nCompleted',
-                          childCard: Icon(
-                            FontAwesomeIcons.checkCircle,
-                            size: 65,
-                            color: Color(0xff50AF47),
-                          ),
-                        ),
-                      ),
-
-                      // Pending project
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, PendingPage.id);
-                        },
-                        child: ProjectSummaryContainer(
-                          margin: EdgeInsets.only(right: 30),
-                          innercontainer: kBackground.withOpacity(0.1),
-                          number:
-                              pendingProvider.allPendingProjects?.length == null
-                                  ? 0
-                                  : pendingProvider.allPendingProjects!.length,
-                          colour: Color(0xffEF7D00),
-                          label: 'Pending \nProjects',
-                          childCard: Icon(
-                            FontAwesomeIcons.solidCommentDots,
-                            color: Color(0xffEF7D00),
-                            size: 65,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                //Inprogress Project
-                SizedBox(
-                  height: 319,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 5.0, left: 30.0, right: 30),
-
-                        //Label
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Inprogress',
-                              style: kPageHeader,
+                  SizedBox(
+                    // color: kSignupbuttonColor,
+                    height: 150,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        //Project in progress
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, InprogressPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(left: 30, right: 60.5),
+                            innercontainer: Theme.of(context).primaryColor
+                                .withOpacity(0.1),
+                            number: inprogressProvider
+                                        .allInprogressProjects?.length ==
+                                    null
+                                ? 0
+                                : inprogressProvider
+                                    .allInprogressProjects!.length,
+                            colour: Theme.of(context).primaryColor,
+                            label: 'Projects in \nProgress',
+                            childCard: Icon(
+                              FontAwesomeIcons.spinner,
+                              // Icons.pie_chart,
+                              size: 65,
+                              color: Colors.yellow,
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, InprogressPage.id);
-                              },
-                              child: Text(
-                                'See All',
-                                style: kForgetpasswordstyle,
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
 
+                        //Completed Project
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, CompletedPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(right: 41.5),
+                            innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
+                            number: completedProvider
+                                        .allCompletedProjects?.length ==
+                                    null
+                                ? 0
+                                : completedProvider
+                                    .allCompletedProjects!.length,
+                            colour: Color(0xff50AF47),
+                            label: 'Projects \nCompleted',
+                            childCard: Icon(
+                              FontAwesomeIcons.checkCircle,
+                              size: 65,
+                              color: Color(0xff50AF47),
+                            ),
+                          ),
+                        ),
 
-                      // Inprogress Details
-                      Expanded(
-                        child: inprogressProvider.allInprogressProjects == null
-                            ? Center(
-                                child: CircularProgressIndicator(),
+                        // Pending project
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, PendingPage.id);
+                          },
+                          child: ProjectSummaryContainer(
+                            margin: EdgeInsets.only(right: 30),
+                            innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
+                            number: pendingProvider
+                                        .allPendingProjects?.length ==
+                                    null
+                                ? 0
+                                : pendingProvider.allPendingProjects!.length,
+                            colour: Color(0xffEF7D00),
+                            label: 'Pending \nProjects',
+                            childCard: Icon(
+                              FontAwesomeIcons.solidCommentDots,
+                              color: Color(0xffEF7D00),
+                              size: 65,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //Inprogress Project
+                  SizedBox(
+                    height: 319,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(top: 5.0, left: 30.0, right: 30),
+
+                          //Label
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Inprogress',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, InprogressPage.id);
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
+                                ),
                               )
-                            : inprogressProvider.allInprogressProjects!.isEmpty
-                                ? Center(
-                                    child: Image.asset('assets/noitem.png.gif'),
-                                  )
-                                : ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: inprogressProvider
-                                        .allInprogressProjects!.length,
-                                    itemBuilder: ((context, index) {
-                                      InprogressModel inprogress =
-                                          inprogressProvider
-                                              .allInprogressProjects![index];
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProgressDetails(
-                                                          inprogress)));
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              bottom: 15.0,
-                                              left: 30,
-                                              right: 30),
-                                          decoration: BoxDecoration(
-                                            color: kBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            boxShadow: [kBoxshadow],
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              // Inprogress Images
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    top: 15,
-                                                    left: 15,
-                                                    bottom: 15.0,
-                                                    right: 15.0),
-                                                height: 74,
-                                                width: 74,
-                                                child: inprogress.files![0]
+                            ],
+                          ),
+                        ),
+
+                        // Inprogress Details
+                        Expanded(
+                          child: inprogressProvider.allInprogressProjects ==
+                                  null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : inprogressProvider
+                                      .allInprogressProjects!.isEmpty
+                                  ? Center(
+                                      child:
+                                          Image.asset('assets/noitem.png.gif'),
+                                    )
+                                  : ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: inprogressProvider
+                                          .allInprogressProjects!.length,
+                                      itemBuilder: ((context, index) {
+                                        InprogressModel inprogress =
+                                            inprogressProvider
+                                                .allInprogressProjects![index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProgressDetails(
+                                                            inprogress)));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                bottom: 15.0,
+                                                left: 30,
+                                                right: 30),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                // Inprogress Images
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 15,
+                                                      left: 15,
+                                                      bottom: 15.0,
+                                                      right: 15.0),
+                                                  height: 74,
+                                                  width: 74,
+                                                  child: inprogress.files![0]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
@@ -338,7 +346,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   : Center(
                                                                       child:
                                                                           const CircularProgressIndicator()),
-                                                                        )
+                                                            )
                                                           : ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
@@ -350,143 +358,149 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),
-                                                // ClipRRect(
-                                                //   borderRadius:
-                                                //       BorderRadius.circular(18),
-                                                //   child: CachedNetworkImage(
-                                                //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
-                                                //       fit: BoxFit.cover),
-                                                // ),
-                                              ),
-
-                                              // Inprogress Information
-                                              Expanded(
-                                                child: Container(
-                                                  height: 93,
-                                                  margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 5,
-                                                      right: 6.0),
-                                                  color: kBackground,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [
-                                                      Text(
-                                                        inprogress.projectTitle,
-                                                        style: kPageHeader,
-                                                      ),
-                                                      RichText(
-                                                          text: TextSpan(
-                                                              text: 'Started: ',
-                                                              style:
-                                                                  kLandpageskiptextstyle,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                            TextSpan(
-                                                              text: inprogress
-                                                                  .projectStartDate,
-                                                              style:
-                                                                  kTextboxhintstyle,
-                                                            )
-                                                          ])),
-                                                    ],
-                                                  ),
+                                                  // ClipRRect(
+                                                  //   borderRadius:
+                                                  //       BorderRadius.circular(18),
+                                                  //   child: CachedNetworkImage(
+                                                  //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
+                                                  //       fit: BoxFit.cover),
+                                                  // ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                      ),
-                    ],
-                  ),
-                ),
 
-                //Completed Project
-                SizedBox(
-                  height: 319,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 15.0, left: 30.0, right: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Completed',
-                              style: kPageHeader,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, CompletedPage.id);
-                              },
-                              child: Text(
-                                'See All',
-                                style: kForgetpasswordstyle,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: completedProvider.allCompletedProjects == null
-                            ? Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : completedProvider.allCompletedProjects!.isEmpty
-                                ? Center(
-                                    child: Image.asset('assets/noitem.png.gif'),
-                                  )
-                                : ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: completedProvider
-                                        .allCompletedProjects!.length,
-                                    itemBuilder: ((context, index) {
-                                      CompletedModel completed =
-                                          completedProvider
-                                              .allCompletedProjects![index];
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CompletedProjectDetails(
-                                                          completed)));
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              bottom: 15.0,
-                                              left: 30,
-                                              right: 30),
-                                          decoration: BoxDecoration(
-                                            color: kBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            boxShadow: [kBoxshadow],
+                                                // Inprogress Information
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 93,
+                                                    margin: EdgeInsets.only(
+                                                        top: 10,
+                                                        bottom: 5,
+                                                        right: 6.0),
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        Text(
+                                                          inprogress
+                                                              .projectTitle,
+                                                          style: kPageHeader,
+                                                        ),
+                                                        RichText(
+                                                            text: TextSpan(
+                                                                text:
+                                                                    'Started: ',
+                                                                style:
+                                                                    kLandpageskiptextstyle,
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                              TextSpan(
+                                                                text: inprogress
+                                                                    .projectStartDate,
+                                                                style:
+                                                                    kTextboxhintstyle,
+                                                              )
+                                                            ])),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          // height: 104,
-                                          child: Row(
-                                            children: [
-                                              // Completed Image
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    top: 15,
-                                                    left: 15,
-                                                    bottom: 15.0,
-                                                    right: 15.0),
-                                                height: 74,
-                                                width: 74,
-                                                child: completed.files![index]
+                                        );
+                                      }),
+                                    ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //Completed Project
+                  SizedBox(
+                    height: 319,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin:
+                              EdgeInsets.only(top: 15.0, left: 30.0, right: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Completed',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, CompletedPage.id);
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: completedProvider.allCompletedProjects == null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : completedProvider.allCompletedProjects!.isEmpty
+                                  ? Center(
+                                      child:
+                                          Image.asset('assets/noitem.png.gif'),
+                                    )
+                                  : ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: completedProvider
+                                          .allCompletedProjects!.length,
+                                      itemBuilder: ((context, index) {
+                                        CompletedModel completed =
+                                            completedProvider
+                                                .allCompletedProjects![index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CompletedProjectDetails(
+                                                            completed)));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                bottom: 15.0,
+                                                left: 30,
+                                                right: 30),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            // height: 104,
+                                            child: Row(
+                                              children: [
+                                                // Completed Image
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 15,
+                                                      left: 15,
+                                                      bottom: 15.0,
+                                                      right: 15.0),
+                                                  height: 74,
+                                                  width: 74,
+                                                  child: completed.files![index]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
@@ -529,124 +543,128 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),
-                                                // ClipRRect(
-                                                //   borderRadius:
-                                                //       BorderRadius.circular(18),
-                                                //   child: CachedNetworkImage(
-                                                //       imageUrl: 'https://www.batnf.net/${completed.projectImage}',
-                                                //       fit: BoxFit.cover),
-                                                // ),
-                                              ),
-                                              // Completed Project Info
-                                              Expanded(
-                                                child: Container(
-                                                  height: 93,
-                                                  margin: EdgeInsets.only(
-                                                      top: 5,
-                                                      bottom: 10,
-                                                      right: 6.0),
-                                                  color: kBackground,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [
-                                                      // Project Title
-                                                      Text(
-                                                        completed.projectTitle,
-                                                        style: kPageHeader,
-                                                      ),
-                                                      // project Start Date
-                                                      RichText(
-                                                          text: TextSpan(
-                                                              text: 'Started: ',
-                                                              style:
-                                                                  kLandpageskiptextstyle,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                            TextSpan(
-                                                              text: completed
-                                                                  .projectStartDate,
-                                                              style:
-                                                                  kTextboxhintstyle,
-                                                            )
-                                                          ])),
-
-                                                      //Project Completed date
-                                                      RichText(
-                                                          text: TextSpan(
-                                                              text:
-                                                                  'Completed: ',
-                                                              style:
-                                                                  kLandpageskiptextstyle,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                            TextSpan(
-                                                              text: completed
-                                                                  .projectEndDate,
-                                                              style:
-                                                                  kTextboxhintstyle,
-                                                            )
-                                                          ])),
-                                                    ],
-                                                  ),
+                                                  // ClipRRect(
+                                                  //   borderRadius:
+                                                  //       BorderRadius.circular(18),
+                                                  //   child: CachedNetworkImage(
+                                                  //       imageUrl: 'https://www.batnf.net/${completed.projectImage}',
+                                                  //       fit: BoxFit.cover),
+                                                  // ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                      ),
-                    ],
-                  ),
-                ),
+                                                // Completed Project Info
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 93,
+                                                    margin: EdgeInsets.only(
+                                                        top: 5,
+                                                        bottom: 10,
+                                                        right: 6.0),
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        // Project Title
+                                                        Text(
+                                                          completed
+                                                              .projectTitle,
+                                                          style: kPageHeader,
+                                                        ),
+                                                        // project Start Date
+                                                        RichText(
+                                                            text: TextSpan(
+                                                                text:
+                                                                    'Started: ',
+                                                                style:
+                                                                    kLandpageskiptextstyle,
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                              TextSpan(
+                                                                text: completed
+                                                                    .projectStartDate,
+                                                                style:
+                                                                    kTextboxhintstyle,
+                                                              )
+                                                            ])),
 
-                // Pending Progress label
-                SizedBox(
-                  height: 319,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: 15.0, left: 30.0, right: 30, bottom: 15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Pending',
-                              style: kPageHeader,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PendingPage(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'See All',
-                                style: kForgetpasswordstyle,
-                              ),
-                            ),
-                          ],
+                                                        //Project Completed date
+                                                        RichText(
+                                                            text: TextSpan(
+                                                                text:
+                                                                    'Completed: ',
+                                                                style:
+                                                                    kLandpageskiptextstyle,
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                              TextSpan(
+                                                                text: completed
+                                                                    .projectEndDate,
+                                                                style:
+                                                                    kTextboxhintstyle,
+                                                              )
+                                                            ])),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
                         ),
-                      ),
-                      Expanded(
+                      ],
+                    ),
+                  ),
+
+                  // Pending Progress label
+                  SizedBox(
+                    height: 319,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: 15.0, left: 30.0, right: 30, bottom: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Pending',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PendingPage(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
                           child: pendingProvider.allPendingProjects == null
                               ? Center(
                                   child: CircularProgressIndicator(),
                                 )
                               : pendingProvider.allPendingProjects!.isEmpty
                                   ? Center(
-                                      child: Image.asset('assets/noitem.png.gif'),
+                                      child:
+                                          Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
                                       itemCount: pendingProvider
@@ -670,7 +688,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 left: 30,
                                                 right: 30),
                                             decoration: BoxDecoration(
-                                              color: kBackground,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                               borderRadius:
                                                   BorderRadius.circular(18.0),
                                               boxShadow: [kBoxshadow],
@@ -783,18 +802,18 @@ class _ProjectPageState extends State<ProjectPage> {
                                           ),
                                         );
                                       })),
-                                      ),
-                                      ),
-                    ],
+                                    ),
+                        ),
+                      ],
+                    ),
                   ),
-                )
-              ,SizedBox(height: 15,)
-              ],
+                  SizedBox(
+                    height: 15,
+                  )
+                ],
+              ),
             ),
-            ),
-
           ],
-        
         ),
         bottomNavigationBar: ReuseableBottomBar(),
       ),

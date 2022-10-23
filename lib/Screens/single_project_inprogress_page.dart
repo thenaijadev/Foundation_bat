@@ -96,17 +96,32 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   items: widget.singleProgress.files!.map((inprogressFile) {
                     print(inprogressFile.fileExt);
                     print(inprogressFile.fileUrl);
-                    if (inprogressFile.fileExt == 'image/jpeg') {
+                    if (inprogressFile.fileExt == '') {
+                      return Container(
+                        color: kGeneralbodytextColor,
+                        child: CachedNetworkImage(
+                            errorWidget: (context, url, error) => Center(
+                                    child: Text(
+                                  'No Image Available',
+                                  style:
+                                      TextStyle(color: kGeneralbodytextColor),
+                                )),
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
+                            imageUrl:
+                                'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                            fit: BoxFit.cover),
+                      );
+                    }
+                    else if (inprogressFile.fileExt == 'image/jpeg') {
                       return CachedNetworkImage(
                           errorWidget: (context, url, error) =>
                               Center(child: Text('No Image Available')),
-                          placeholder: (context, url) => Center(
-                                  child: CircularProgressIndicator()),
+                          placeholder: (context, url) =>
+                              Center(child: CircularProgressIndicator()),
                           imageUrl:
                               'https://www.batnf.net/${inprogressFile.fileUrl}',
                           fit: BoxFit.cover);
-                    } else if (inprogressFile.fileExt == '') {
-                      Image.asset('assets/noitem.png.gif');
                     }
                     CachedVideoPlayerController controller =
                         playerController.firstWhere((element) =>
@@ -119,9 +134,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                             alignment: AlignmentDirectional.center,
                             children: [
                               AspectRatio(
-                                  aspectRatio: 
-                                  // 6 / 6,
-                                  controller.value.aspectRatio,
+                                  aspectRatio:
+                                      // 6 / 6,
+                                      controller.value.aspectRatio,
                                   child: CachedVideoPlayer(controller)),
                               GestureDetector(
                                 onTap: () {

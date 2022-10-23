@@ -19,7 +19,7 @@ class _PromotionState extends State<Promotion> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         body: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +35,7 @@ class _PromotionState extends State<Promotion> {
                         Container(
                           margin:
                               EdgeInsets.only(left: 24.0, top: 45, bottom: 30, right: 20),
-                          color: kBackground,
+                          color: Theme.of(context).primaryColor,
                           height: 40.0,
                           child: Image.asset(
                             'assets/logo.png',
@@ -44,7 +44,7 @@ class _PromotionState extends State<Promotion> {
                         Container(
                           margin: EdgeInsets.only(
                               top: 50, bottom: 26, right: 140),
-                          color: kBackground,
+                          color: Theme.of(context).primaryColor,
                           height: 29,
                           child: Text(
                             'Games',

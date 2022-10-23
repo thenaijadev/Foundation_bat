@@ -27,12 +27,15 @@ class InprogressPage extends StatefulWidget {
 
 class _InprogressPageState extends State<InprogressPage> {
   late CachedVideoPlayerController controller;
+  //  List<CachedVideoPlayerController> playerController = [];
 
   // VideoPlayerController? _videoPlayerController;
 
   @override
   void initState() {
     super.initState();
+
+    // video(widget.singleProgress.files!);
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
     controller = CachedVideoPlayerController.network(
@@ -45,9 +48,34 @@ class _InprogressPageState extends State<InprogressPage> {
       setState(() {});
     });
   }
+  // void video(List<Files> file) async {
+  //   if (file.isEmpty) return;
+  //   List<Files> videoList =
+  //       file.where((element) => element.fileExt == 'video/mp4').toList();
+  //   int count =
+  //       videoList.fold(0, (previousValue, element) => previousValue + 1);
+  //   playerController = List.generate(
+  //       count,
+  //       (index) => CachedVideoPlayerController.network(
+  //           'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+  //           // 'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}'
+  //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  //           ));
+
+  //   for (var element in playerController) {
+  //     element.initialize().then((value) async {
+  //       await Future.delayed(Duration(milliseconds: 500));
+  //       // element.play();
+  //       setState(() {});
+  //     });
+  //   }
+  // }
 
   @override
   void dispose() {
+    // for (var element in playerController) {
+    //   element.dispose();
+    // }
     controller.dispose();
     super.dispose();
   }
@@ -142,7 +170,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                         // height: 74,
                                         // width: 74,
                                         child: inprogress
-                                                .files![0].fileUrl.isEmpty
+                                                .files![0].fileUrl.isEmpty 
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),

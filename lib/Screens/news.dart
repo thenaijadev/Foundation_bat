@@ -32,14 +32,14 @@ class _NewsState extends State<News> {
     NewsProvider provider = Provider.of<NewsProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Container for search box etc
             Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               child: Column(
                 children: [
                   Row(
@@ -47,7 +47,7 @@ class _NewsState extends State<News> {
                       Container(
                         margin:
                             EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
-                        color: kBackground,
+                        color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset(
                           'assets/logo.png',
@@ -56,7 +56,7 @@ class _NewsState extends State<News> {
                       Container(
                         margin: EdgeInsets.only(
                             top: 50, left: 10, bottom: 26, right: 140),
-                        color: kBackground,
+                        color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text(
                           'News',
@@ -134,7 +134,7 @@ class _NewsState extends State<News> {
                                     bottom: 30.0,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: kBackground,
+                                    color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
@@ -201,7 +201,7 @@ class _NewsState extends State<News> {
                                               bottom: 10,
                                               left: 10.0,
                                               right: 6.0),
-                                          color: kBackground,
+                                          color: Theme.of(context).primaryColor,
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             crossAxisAlignment:

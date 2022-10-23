@@ -22,7 +22,7 @@ class ReuseableGameContainer extends StatelessWidget {
           boxShadow: [
             kBoxshadow
           ],
-          color: kBackground,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(18.0),
         ),
         child: Column(

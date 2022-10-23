@@ -4,6 +4,7 @@ import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/vidoe.dart';
 import 'package:batnf/Screens/welcone_page.dart';
+import 'package:batnf/providers/theme_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import '../widgets/change_theme_button.dart';
+
 class HomePage extends StatefulWidget {
   static String id = 'home';
   HomePage({Key? key}) : super(key: key);
@@ -39,10 +42,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-  List<CachedVideoPlayerController> playerController = [];
+    List<CachedVideoPlayerController> playerController = [];
   late CachedVideoPlayerController controller;
-  
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +65,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  
   void video(List<Files> file) async {
     if (file.isEmpty) return;
     List<Files> videoList =
@@ -115,17 +116,20 @@ class _HomePageState extends State<HomePage> {
 
   var user = '';
 
- 
-
   @override
   Widget build(BuildContext context) {
-     NewsProvider newsProvider = Provider.of<NewsProvider>(context, listen: false);
-    EventProvider eventProvider = Provider.of<EventProvider>(context, listen: false);
+    final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
+        ? 'Dark Theme'
+        : 'Light Theme';
+    NewsProvider newsProvider =
+        Provider.of<NewsProvider>(context, listen: false);
+    EventProvider eventProvider =
+        Provider.of<EventProvider>(context, listen: false);
     InprogressProvider inprogressProvider =
         Provider.of<InprogressProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -134,7 +138,7 @@ class _HomePageState extends State<HomePage> {
             // Container for search box etc
             Container(
               // height: 200.0,
-              color: kBackground.withOpacity(0.95),
+              color: Theme.of(context).primaryColor.withOpacity(0.95),
               child: Column(
                 children: [
                   Row(
@@ -142,12 +146,12 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         margin:
-                            EdgeInsets.only(top: 45, bottom: 20, right: 195),
-                        color: kBackground,
+                            EdgeInsets.only(top: 45, bottom: 20, right: 135),
+                        color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: GestureDetector(
                           onTap: () {
-                             Navigator.push(
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Video()));
@@ -158,6 +162,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
+                          color: Theme.of(context).primaryColor,
+                          margin: EdgeInsets.only(top: 10),
+                          child: Column(
+                            children: [
+                              Text(
+                                text,
+                                style:
+                                    TextStyle( fontSize: 12, fontStyle: FontStyle.italic),
+                              ),
+                              ChangeThemeButtonWidget(),
+                            ],
+                          )),
+                      Container(
                         margin: EdgeInsets.only(
                           top: 47,
                           bottom: 22,
@@ -167,10 +184,8 @@ class _HomePageState extends State<HomePage> {
                             shape: BoxShape.circle),
                         height: 36,
                         child: IconButton(
-                          icon: Icon(
-                              FontAwesomeIcons.signOutAlt,
-                              size: 15,
-                              color: kButtonColor),
+                          icon: Icon(FontAwesomeIcons.signOutAlt,
+                              size: 15, color: Colors.blue),
                           onPressed: () async {
                             final SharedPreferences sharedPreferences =
                                 await SharedPreferences.getInstance();
@@ -227,32 +242,42 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: ListView(
                 children: [
-
-
                   ClipRRect(
                     borderRadius: BorderRadius.circular(18),
                     child: CarouselSlider(
-                      items: [Image.asset('assets/Ads.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fitWidth,
-                          ),
-                      Image.asset('assets/Ads1.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, fit: BoxFit.fitWidth,),
-                      Image.asset('assets/Ads2.png', height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fitWidth,
-                          ),
-                      Image.asset('assets/Ads3.png',
+                        items: [
+                          Image.asset(
+                            'assets/Ads.png',
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
                             fit: BoxFit.fitWidth,
                           ),
-                      ],
-                       options: CarouselOptions(
-                        scrollDirection: Axis.horizontal,
-                        padEnds: false,
-                        autoPlayCurve: Curves.slowMiddle,
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        viewportFraction: 0.99,
-                        autoPlay: true
-                       )),
+                          Image.asset(
+                            'assets/Ads1.png',
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          Image.asset(
+                            'assets/Ads2.png',
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          Image.asset(
+                            'assets/Ads3.png',
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ],
+                        options: CarouselOptions(
+                            scrollDirection: Axis.horizontal,
+                            padEnds: false,
+                            autoPlayCurve: Curves.slowMiddle,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            viewportFraction: 0.99,
+                            autoPlay: true)),
                   ),
 
                   // Project List Header
@@ -292,19 +317,18 @@ class _HomePageState extends State<HomePage> {
                             : ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: inprogressProvider
-                                .allInprogressProjects!.length,
+                                    .allInprogressProjects!.length,
                                 itemBuilder: ((context, index) {
-                                  InprogressModel inprogress = 
-                                  inprogressProvider
-                                      .allInprogressProjects![index];
+                                  InprogressModel inprogress =
+                                      inprogressProvider
+                                          .allInprogressProjects![index];
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProgressDetails(
-                                                      inprogress)));
+                                                  ProgressDetails(inprogress)));
                                     },
                                     child: Container(
                                       height: 202,
@@ -327,8 +351,8 @@ class _HomePageState extends State<HomePage> {
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child:  inprogress.files![0]
-                                                    .fileUrl.isEmpty
+                                            child: inprogress
+                                                    .files![0].fileUrl.isEmpty
                                                 ? Center(
                                                     child: Text(
                                                         'No Image Availaible'))
@@ -357,7 +381,7 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
-                                                           errorWidget: (context,
+                                                            errorWidget: (context,
                                                                     url,
                                                                     error) =>
                                                                 Center(
@@ -457,14 +481,14 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             height: 145,
                                             width: 218,
-                                            child:  event
+                                            child: event
                                                     .files![0].fileExt.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
-                                                      errorWidget: (context,
+                                                        errorWidget: (context,
                                                                 url, error) =>
                                                             Center(
                                                                 child: Text(
@@ -474,9 +498,11 @@ class _HomePageState extends State<HomePage> {
                                                         fit: BoxFit.cover),
                                                   )
                                                 : CachedNetworkImage(
-                                                    errorWidget: (context,
-                                                              url, error) =>
-                                                          Center(child: Text('No Image Availaible')),
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        Center(
+                                                            child: Text(
+                                                                'No Image Availaible')),
                                                     placeholder: (context,
                                                             url) =>
                                                         CachedNetworkImage(
@@ -575,7 +601,8 @@ class _HomePageState extends State<HomePage> {
                                 )
                               : newsProvider.allNews!.isEmpty
                                   ? Center(
-                                      child: Image.asset('assets/noitem.png.gif'),
+                                      child:
+                                          Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
                                       itemCount: newsProvider.allNews!.length,
@@ -619,7 +646,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .circular(
                                                                         18),
                                                             child: CachedNetworkImage(
-                                                              errorWidget: (context,
+                                                                errorWidget: (context,
                                                                         url,
                                                                         error) =>
                                                                     Center(
@@ -694,8 +721,7 @@ class _HomePageState extends State<HomePage> {
                                                           Text(
                                                             news.information,
                                                             textAlign:
-                                                                TextAlign
-                                                                    .left,
+                                                                TextAlign.left,
                                                             style:
                                                                 kBodyTextStyle,
                                                           ),
@@ -721,7 +747,6 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
- 
 
                   SizedBox(
                     height: 50.0,

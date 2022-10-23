@@ -29,7 +29,8 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               offset: Offset(0, 7),
               blurRadius: 15.0),
         ],
-        color: kBackground,
+        // color: kBackground,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25.0),
           topRight: Radius.circular(25.0),
@@ -47,7 +48,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               ),
             ),
             child: Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +67,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, EventCenter.id),
             child: Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +91,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               ),
             ),
             child: Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +112,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               Navigator.pushNamed(context, ProjectPage.id);
             },
             child: Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +133,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               Navigator.pushNamed(context, News.id);
             },
             child: Container(
-              color: kBackground,
+              color: Theme.of(context).primaryColor,
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
