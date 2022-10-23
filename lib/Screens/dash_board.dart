@@ -353,9 +353,15 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             child: inprogress
                                                     .files![0].fileUrl.isEmpty
-                                                ? Center(
-                                                    child: Text(
-                                                        'No Image Available'))
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                        fit: BoxFit.cover),
+                                                  )
                                                 : inprogress.files![0]
                                                             .fileExt ==
                                                         'video/mp4'
