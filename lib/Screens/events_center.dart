@@ -167,7 +167,7 @@ class _EventCenterState extends State<EventCenter> {
                                                               url, error) =>
                                                           Center(child: Text('No Image Availaible')),
                                                       imageUrl:
-                                                          'https://www.batnf.net/${event.eventFlier}',
+                                                          'https://www.batnf.net/${event.files![index].thumbnail}',
                                                       fit: BoxFit.cover),
                                                 )
                                               : CachedNetworkImage(

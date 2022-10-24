@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
-import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/single_completed_project_page.dart';
-import 'package:batnf/constants/color_constant.dart';
-import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/single_completed_project_page.dart';
+import 'package:batnf/constants/color_constant.dart';
+import 'package:batnf/constants/text_style_constant.dart';
 
 import '../Models/completed_model.dart';
 import '../providers/completed_provider.dart';
@@ -106,7 +107,7 @@ class _CompletedPageState extends State<CompletedPage> {
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
                                                   imageUrl:
-                                                      'https://www.batnf.net/${completed.projectImage}',
+                                                      'https://www.batnf.net/${completed.files![index].thumbnail}',
                                                   fit: BoxFit.cover),
                                             )
                                           : completed.files![index].fileExt ==

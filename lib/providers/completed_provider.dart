@@ -8,7 +8,7 @@ class CompletedProvider extends ChangeNotifier {
   [
     CompletedModel(files: [
       Files(fileUrl: 'fileUrl',
-       fileExt: 'fileExt')
+       fileExt: 'fileExt', thumbnail: 'thumbnail')
        ],
      projectId: 'projectId',
       projectTitle: 'projectTitle',

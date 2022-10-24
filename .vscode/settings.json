@@ -27,6 +27,9 @@
         "Projectsumdetailtextstyle",
         "signin",
         "textcontroller",
-        "userid"
+        "userdob",
+        "userid",
+        "userlastname",
+        "userlocation"
     ]
 }

@@ -16,11 +16,6 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-// @override
-// void initState() {
-//   super.initState();
-//   // Implement some initialization operations here.
-// }
 
   @override
   Widget build(BuildContext context) {

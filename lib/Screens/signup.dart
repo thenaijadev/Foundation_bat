@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   List<String> states = [
-    'Abia State',
+    'Abia State,', 
     'Abuja State',
     'Adamawa State',
     'Akwa Ibom State',
@@ -220,7 +220,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
@@ -324,7 +324,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
-                          style: TextStyle(color: kGeneralbodytextColor),
+                          style: TextStyle(color: Colors.blue),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -345,7 +345,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             prefixIcon: Icon(Icons.lock,
-                                size: 15, color: kTextboxhintColor),
+                                size: 15, color: Colors.blue),
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
@@ -366,7 +366,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
-                          style: TextStyle(color: kGeneralbodytextColor),
+                          style: TextStyle(color: Colors.blue),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },
@@ -387,7 +387,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             prefixIcon: Icon(Icons.lock,
-                                size: 15, color: kTextboxhintColor),
+                                size: 15, color: Colors.blue),
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
@@ -407,9 +407,6 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, bottom: 22.0),
                       child: DropDownField(
-                          // setter: (dynamic value) {
-                          //   selectedState = value;
-                          // },
                           onValueChanged: (value) {
                             setState(() {
                               selectedState = value;
@@ -419,6 +416,7 @@ class _SignUpState extends State<SignUp> {
                           controller: _locationTextController,
                           hintText: "Location",
                           textStyle: kBodyTextStyle,
+                          strict: false,
                           enabled: true,
                           items: states),
                     ),
@@ -430,7 +428,7 @@ class _SignUpState extends State<SignUp> {
                       child: SizedBox(
                         height: 65.0,
                         child: TextFormField(
-                          style: TextStyle(color: kGeneralbodytextColor),
+                          style: TextStyle(color: Colors.blue),
                           onChanged: (value) {
                             userdob = value;
                           },

@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 
 class ReuseableTextField extends StatelessWidget {
@@ -23,7 +22,7 @@ class ReuseableTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: kGeneralbodytextColor),
+      style: TextStyle(color: Color.fromARGB(255, 6, 134, 247)),
       // onChanged: (value) {},
       validator: (val) {
         return val!.isEmpty ? "This Field is Required" : null;
@@ -40,7 +39,7 @@ class ReuseableTextField extends StatelessWidget {
           ),
           borderSide: BorderSide(
             style: BorderStyle.solid,
-            color: kGeneralbodytextColor,
+            color: Theme.of(context).primaryColor,
             width: 2.0,
           ),
         ),

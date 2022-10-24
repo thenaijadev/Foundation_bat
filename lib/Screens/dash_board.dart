@@ -2,7 +2,6 @@
 
 import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
-import 'package:batnf/Screens/vidoe.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -15,7 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/events_center.dart';
 import 'package:batnf/Screens/news.dart';
-import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
@@ -57,8 +55,9 @@ class _HomePageState extends State<HomePage> {
     // video(inprogress![index].);
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        );
     controller.initialize().then((value) {
       // controller.play();
       setState(() {});
@@ -149,16 +148,8 @@ class _HomePageState extends State<HomePage> {
                             EdgeInsets.only(top: 45, bottom: 20, right: 135),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Video()));
-                          },
-                          child: Image.asset(
-                            'assets/logo.png',
-                          ),
+                        child: Image.asset(
+                          'assets/logo.png',
                         ),
                       ),
                       Container(
@@ -200,42 +191,6 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  // RichText(
-                  //     text: TextSpan(
-                  //         text: 'Welcome Back ',
-                  //         style: kBodyTextStyle,
-                  //         children: [
-                  //       TextSpan(text: Provider.of<EventProvider>(context,
-                  //               listen: false).userName, style: kBodyTextStyle)
-                  //     ])),
-                  // Container(
-                  //   margin: EdgeInsets.only(
-                  //       left: 30, right: 20, bottom: 21, top: 10),
-                  //   // color: kBackground,
-                  //   height: 45.0,
-                  //   child: TextField(
-                  //     style: TextStyle(color: kGeneralbodytextColor),
-                  //     decoration: InputDecoration(
-                  //       contentPadding: EdgeInsets.only(top: 2),
-                  //       hintText: 'Search',
-                  //       hintStyle: kTextboxhintstyle,
-                  //       prefixIcon: Icon(
-                  //         FontAwesomeIcons.search,
-                  //         size: 13.0,
-                  //       ),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.all(
-                  //           Radius.circular(45.0),
-                  //         ),
-                  //         borderSide: BorderSide(
-                  //           style: BorderStyle.solid,
-                  //           color: kGeneralbodytextColor,
-                  //           width: 2.0,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -359,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                                                             18),
                                                     child: CachedNetworkImage(
                                                         imageUrl:
-                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                            'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                         fit: BoxFit.cover),
                                                   )
                                                 : inprogress.files![0]
@@ -500,7 +455,7 @@ class _HomePageState extends State<HomePage> {
                                                                 child: Text(
                                                                     'No Image Availaible')),
                                                         imageUrl:
-                                                            'https://www.batnf.net/${event.eventFlier}',
+                                                            'https://www.batnf.net/${event.files![index].thumbnail}',
                                                         fit: BoxFit.cover),
                                                   )
                                                 : CachedNetworkImage(
@@ -517,13 +472,6 @@ class _HomePageState extends State<HomePage> {
                                                     imageUrl:
                                                         'https://www.batnf.net/${event.files![0].fileUrl}',
                                                     fit: BoxFit.cover),
-                                            // ClipRRect(
-                                            //   borderRadius:
-                                            //       BorderRadius.circular(18),
-                                            //   child: CachedNetworkImage(
-                                            //       imageUrl: 'https://www.batnf.net/${event.eventFlier}',
-                                            //       fit: BoxFit.cover),
-                                            // ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -659,7 +607,7 @@ class _HomePageState extends State<HomePage> {
                                                                         child: Text(
                                                                             'No Image Availaible')),
                                                                 imageUrl:
-                                                                    'https://www.batnf.net/${news.newsImage}',
+                                                                    'https://www.batnf.net/${news.files![index].thumbnail}',
                                                                 fit: BoxFit
                                                                     .cover),
                                                           )
@@ -695,14 +643,6 @@ class _HomePageState extends State<HomePage> {
                                                                     fit: BoxFit
                                                                         .cover),
                                                               ),
-                                                    //  ClipRRect(
-                                                    //   borderRadius:
-                                                    //       BorderRadius.circular(
-                                                    //           18),
-                                                    //   child: CachedNetworkImage(
-                                                    //       imageUrl:'https://www.batnf.net/${news.newsImage}',
-                                                    //       fit: BoxFit.cover),
-                                                    // ),
                                                   ),
                                                   Expanded(
                                                     child: Container(

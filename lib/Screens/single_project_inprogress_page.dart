@@ -7,11 +7,9 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 import '../providers/inprogress_provider.dart';
 
@@ -111,7 +109,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                             placeholder: (context, url) =>
                                 Center(child: CircularProgressIndicator()),
                             imageUrl:
-                                'https://www.batnf.net/${widget.singleProgress.projectImage}',
+                                'https://www.batnf.net/${inprogressFile.thumbnail}',
                             fit: BoxFit.cover),
                       );
                     } else if (inprogressFile.fileExt == 'image/jpeg') {

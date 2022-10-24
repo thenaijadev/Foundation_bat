@@ -19,7 +19,7 @@ class InprogressProvider extends ChangeNotifier {
                 files: [
                   Files(
      fileUrl: 'fileUrl',
-     fileExt: 'fileExt')
+     fileExt: 'fileExt', thumbnail: 'thumbnail')
                 ] 
      )
   ];

@@ -5,13 +5,11 @@ import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '../Models/files.dart';
 import '../Models/pending_model.dart';
 import '../constants/color_constant.dart';
 import '../constants/text_style_constant.dart';
-import '../providers/pending_provider.dart';
 
 class PendingDetails extends StatefulWidget {
   final PendingModel singlePending;

@@ -26,7 +26,7 @@ var kProjectsummarytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpageHeadertextstyle = TextStyle(
-    color: Color.fromARGB(255, 255, 255, 255),
+    color: Colors.blue,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 24.0,
@@ -100,7 +100,7 @@ const kProjectsumdetailtextstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kWelcomeHeadstyle = TextStyle(
-    color: Colors.white,
+    color: Colors.blue,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 36,

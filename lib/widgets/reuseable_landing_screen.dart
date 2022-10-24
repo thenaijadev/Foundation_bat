@@ -28,7 +28,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
       children: [
         Container(
           height: double.infinity,
-          color: kBackground,
+          color: Theme.of(context).primaryColor,
           // margin: EdgeInsets.only(bottom: 350),
           child: Image.asset(
             widget.Imagename,
@@ -41,7 +41,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
           width: double.maxFinite,
           height: 400,
           decoration: BoxDecoration(
-            color: kBackground.withOpacity(0.95),
+            color: Theme.of(context).primaryColor.withOpacity(0.95),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50),
               topRight: Radius.circular(50),

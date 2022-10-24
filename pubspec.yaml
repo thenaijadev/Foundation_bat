@@ -50,21 +50,11 @@ dependencies:
   intl: ^0.17.0
   hive_flutter: ^1.1.0
   fluttertoast: ^8.0.9
-  # flutter_session:
   shared_preferences:
-  jwt_decoder: ^2.0.1
-  dart_jsonwebtoken: ^2.4.2
-  api_cache_manager: ^1.0.2
-  flutter_vlc_player:
   dropdownfield2:
-  to_curl: ^2.0.0-nullsafety.0
-  dio: ^4.0.6
-  curl_logger_dio_interceptor: ^0.0.3
   carousel_slider:
   cached_video_player:
-  chewie:
   video_player:
-  fijkplayer:
 
 dev_dependencies:
   flutter_test:

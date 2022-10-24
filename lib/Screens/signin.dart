@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:batnf/providers/event_provider.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_switch/flutter_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,11 +16,6 @@ import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
-// import 'package:to_curl/to_curl.dart';
-// import 'package:dio/dio.dart';
-// import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
-
-import '../services/completed_service.dart';
 
 class SignIn extends StatefulWidget {
   static String id = 'signin';
@@ -64,11 +58,6 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
-    // List theList = [response.body, 'this is it'];
-    // print(theList);
-    // var data = jsonDecode(response.body);
-    // print(data);
-    // print('msg from server: ${response.body}');
     print(response.body);
 
     if (mounted) {
@@ -190,7 +179,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
@@ -252,7 +241,7 @@ class _SignInState extends State<SignIn> {
                       child: SizedBox(
                         height: 65,
                         child: TextFormField(
-                          style: TextStyle(color: kGeneralbodytextColor),
+                          style: TextStyle(color: Colors.blue),
                           validator: (val) {
                             return val!.isEmpty ? "Password is Required" : null;
                           },

@@ -8,7 +8,7 @@ class NewsProvider extends ChangeNotifier {
   [
     NewsModel(files: [
       Files(fileUrl: 'fileUrl',
-       fileExt: 'fileExt')],
+       fileExt: 'fileExt', thumbnail: 'thumbnail')],
       newsImage: 'newsImage', 
       information: 'information', 
       title: 'title', 

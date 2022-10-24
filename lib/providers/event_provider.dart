@@ -22,7 +22,7 @@ class EventProvider extends ChangeNotifier {
                 files: [
                   Files(
                     fileUrl: 'fileUrl',
-                     fileExt: 'fileExt')])
+                     fileExt: 'fileExt', thumbnail: 'thumbnail')])
   ];
 
   getAllEvents() async {

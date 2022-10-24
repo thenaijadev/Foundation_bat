@@ -8,7 +8,7 @@ class PendingProvider extends ChangeNotifier {
   = [
     PendingModel(files: [
       Files(fileUrl: 'fileUrl', 
-      fileExt: 'fileExt')], 
+      fileExt: 'fileExt', thumbnail: 'thumbnail')], 
       projectId: 'projectId', 
       projectTitle: 'projectTitle', 
       projectDescription: 'projectDescription', 

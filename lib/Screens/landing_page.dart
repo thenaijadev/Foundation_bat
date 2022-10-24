@@ -38,7 +38,7 @@ class _LandindPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
           
@@ -137,7 +137,7 @@ class _LandindPageState extends State<LandingPage> {
           ),
           align: IndicatorAlign.bottom,
           indicatorColor: Color(0xffBDBDBD),
-          indicatorSelectorColor: kButtonColor,
+          indicatorSelectorColor: Colors.blue,
           indicatorSpace: 10.0,
           shape: IndicatorShape.circle(size: 8),
           length: 4),

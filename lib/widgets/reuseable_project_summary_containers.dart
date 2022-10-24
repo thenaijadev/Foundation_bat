@@ -1,7 +1,6 @@
 
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors, non_constant_identifier_names, prefer_const_constructors
 
-import 'package:batnf/constants/color_constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants/text_style_constant.dart';

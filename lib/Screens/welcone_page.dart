@@ -19,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: ListView(children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -105,7 +105,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           }),
                           text: 'Sign Up',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.blue,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Inter',
                               fontSize: 16.0,

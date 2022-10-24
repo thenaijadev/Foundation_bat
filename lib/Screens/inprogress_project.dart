@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
-import 'package:batnf/Models/files.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -8,14 +7,10 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/inprogress_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_video_player/cached_video_player.dart';
-import 'package:chewie/chewie.dart';
-import 'package:video_player/video_player.dart';
 
 class InprogressPage extends StatefulWidget {
   
@@ -263,7 +258,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
                                                         imageUrl:
-                                                            'https://www.batnf.net/${inprogress.projectImage}',
+                                                            'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                         fit: BoxFit.cover),
                                               )
                                             : inprogress.files![0].fileExt ==
