@@ -86,6 +86,12 @@ class _InprogressPageState extends State<InprogressPage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          title: Center(
+            child: Text(
+                  'Projects InProgress',
+                  style: kSigningtextstyle,
+                ),
+          ),
           toolbarHeight: 94,
           backgroundColor: Theme.of(context).primaryColor,
           leading: Padding(
@@ -104,13 +110,7 @@ class _InprogressPageState extends State<InprogressPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 15, left: 30, bottom: 50),
-              child: Text(
-                'Projects InProgress',
-                style: kSigningtextstyle,
-              ),
-            ),
+
             Expanded(
               child: provider.allInprogressProjects == null
                   ? Center(
@@ -144,7 +144,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                   // height: 202,
                                   width: 237,
                                   margin: EdgeInsets.only(
-                                      left: 36.27, right: 15.0, bottom: 15.0, top: 10),
+                                      left: 36.27, right: 15.0, bottom: 15.0, top: 30),
                                   // margin: EdgeInsets.only(
                                   //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
