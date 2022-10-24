@@ -32,9 +32,10 @@ class _PendingPageState extends State<PendingPage> {
     PendingProvider provider = Provider.of<PendingProvider>(context);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           toolbarHeight: 94,
-          backgroundColor: kBackground,
+          backgroundColor: Theme.of(context).primaryColor,
           leading: Padding(
               padding: const EdgeInsets.all(5.0),
               child: IconButton(

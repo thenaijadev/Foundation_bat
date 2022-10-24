@@ -32,9 +32,10 @@ class _CompletedPageState extends State<CompletedPage> {
   Widget build(BuildContext context) {
     CompletedProvider provider = Provider.of<CompletedProvider>(context);
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         toolbarHeight: 94,
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         leading: Padding(
             padding: const EdgeInsets.all(5.0),
             child: IconButton(
