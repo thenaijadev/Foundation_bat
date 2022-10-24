@@ -13,9 +13,8 @@ import 'package:provider/provider.dart';
 import 'package:cached_video_player/cached_video_player.dart';
 
 class InprogressPage extends StatefulWidget {
-  
   static String id = 'inprogress';
-  InprogressPage( {Key? key}) : super(key: key);
+  InprogressPage({Key? key}) : super(key: key);
 
   @override
   _InprogressPageState createState() => _InprogressPageState();
@@ -39,8 +38,7 @@ class _InprogressPageState extends State<InprogressPage> {
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
         // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        );
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
     controller.initialize().then((value) {
       // controller.play();
       setState(() {});
@@ -88,9 +86,9 @@ class _InprogressPageState extends State<InprogressPage> {
         appBar: AppBar(
           title: Center(
             child: Text(
-                  'Projects InProgress',
-                  style: kSigningtextstyle,
-                ),
+              'Projects InProgress',
+              style: kSigningtextstyle,
+            ),
           ),
           toolbarHeight: 94,
           backgroundColor: Theme.of(context).primaryColor,
@@ -110,7 +108,6 @@ class _InprogressPageState extends State<InprogressPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Expanded(
               child: provider.allInprogressProjects == null
                   ? Center(
@@ -144,7 +141,10 @@ class _InprogressPageState extends State<InprogressPage> {
                                   // height: 202,
                                   width: 237,
                                   margin: EdgeInsets.only(
-                                      left: 36.27, right: 15.0, bottom: 15.0, top: 30),
+                                      left: 36.27,
+                                      right: 15.0,
+                                      bottom: 15.0,
+                                      top: 30),
                                   // margin: EdgeInsets.only(
                                   //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
@@ -155,93 +155,93 @@ class _InprogressPageState extends State<InprogressPage> {
                                     boxShadow: [kBoxshadow],
                                   ),
                                   child: Column(
-                                     crossAxisAlignment:
+                                    crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-
-                  //                     CarouselSlider(
-                  // options: CarouselOptions(
-                  //   padEnds: false,
-                  //   autoPlayInterval: Duration(seconds: 10),
-                  //   // height: 350,
-                  //   height: 145,
-                  //  aspectRatio: MediaQuery.of(context).size.width,
-                  //   viewportFraction: 0.98,
-                  //   enableInfiniteScroll: false,
-                  //   // autoPlay: true
-                  // ),
-                  // items: inprogress.files!.map((inprogressFile) {
-                  //   print(inprogressFile.fileExt);
-                  //   print(inprogressFile.fileUrl);
-                  //   if (inprogressFile.fileExt == '') {
-                  //     return Container(
-                  //       color: kGeneralbodytextColor,
-                  //       child: CachedNetworkImage(
-                  //           errorWidget: (context, url, error) => Center(
-                  //                   child: Text(
-                  //                 'No Image Available',
-                  //                 style:
-                  //                     TextStyle(color: kGeneralbodytextColor),
-                  //               )),
-                  //           placeholder: (context, url) =>
-                  //               Center(child: CircularProgressIndicator()),
-                  //           imageUrl:
-                  //               'https://www.batnf.net/${inprogress.projectImage}',
-                  //           fit: BoxFit.cover),
-                  //     );
-                  //   }
-                  //   else if (inprogressFile.fileExt == 'image/jpeg') {
-                  //     return CachedNetworkImage(
-                  //         errorWidget: (context, url, error) =>
-                  //             Center(child: Text('No Image Available')),
-                  //         placeholder: (context, url) =>
-                  //             Center(child: CircularProgressIndicator()),
-                  //         imageUrl:
-                  //             'https://www.batnf.net/${inprogressFile.fileUrl}',
-                  //         fit: BoxFit.cover);
-                  //   }
-                  //   CachedVideoPlayerController controller =
-                  //       playerController.firstWhere((element) =>
-                  //           element.dataSource ==
-                  //           // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                  //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  //           'https://www.batnf.net/${inprogressFile.fileUrl}');
-                  //   return controller.value.isInitialized
-                  //       ? Stack(
-                  //           alignment: AlignmentDirectional.center,
-                  //           children: [
-                  //             AspectRatio(
-                  //                 aspectRatio:
-                  //                     // 6 / 6,
-                  //                     controller.value.aspectRatio,
-                  //                 child: CachedVideoPlayer(controller)),
-                  //             GestureDetector(
-                  //               onTap: () {
-                  //                 if (!controller.value.isInitialized) return;
-                  //                 setState(
-                  //                   () {
-                  //                     controller.value.isPlaying
-                  //                         ? controller.pause()
-                  //                         : controller.play();
-                  //                   },
-                  //                 );
-                  //               },
-                  //               child: Icon(
-                  //                 controller.value.isPlaying
-                  //                     ? Icons.pause
-                  //                     : Icons.play_arrow,
-                  //                 color: Colors.blue.withOpacity(0.5),
-                  //                 size: 30,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         )
-                  //       : Center(child: CircularProgressIndicator());
-                  // }).toList()),
+                                      //                     CarouselSlider(
+                                      // options: CarouselOptions(
+                                      //   padEnds: false,
+                                      //   autoPlayInterval: Duration(seconds: 10),
+                                      //   // height: 350,
+                                      //   height: 145,
+                                      //  aspectRatio: MediaQuery.of(context).size.width,
+                                      //   viewportFraction: 0.98,
+                                      //   enableInfiniteScroll: false,
+                                      //   // autoPlay: true
+                                      // ),
+                                      // items: inprogress.files!.map((inprogressFile) {
+                                      //   print(inprogressFile.fileExt);
+                                      //   print(inprogressFile.fileUrl);
+                                      //   if (inprogressFile.fileExt == '') {
+                                      //     return Container(
+                                      //       color: kGeneralbodytextColor,
+                                      //       child: CachedNetworkImage(
+                                      //           errorWidget: (context, url, error) => Center(
+                                      //                   child: Text(
+                                      //                 'No Image Available',
+                                      //                 style:
+                                      //                     TextStyle(color: kGeneralbodytextColor),
+                                      //               )),
+                                      //           placeholder: (context, url) =>
+                                      //               Center(child: CircularProgressIndicator()),
+                                      //           imageUrl:
+                                      //               'https://www.batnf.net/${inprogress.projectImage}',
+                                      //           fit: BoxFit.cover),
+                                      //     );
+                                      //   }
+                                      //   else if (inprogressFile.fileExt == 'image/jpeg') {
+                                      //     return CachedNetworkImage(
+                                      //         errorWidget: (context, url, error) =>
+                                      //             Center(child: Text('No Image Available')),
+                                      //         placeholder: (context, url) =>
+                                      //             Center(child: CircularProgressIndicator()),
+                                      //         imageUrl:
+                                      //             'https://www.batnf.net/${inprogressFile.fileUrl}',
+                                      //         fit: BoxFit.cover);
+                                      //   }
+                                      //   CachedVideoPlayerController controller =
+                                      //       playerController.firstWhere((element) =>
+                                      //           element.dataSource ==
+                                      //           // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                                      //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                                      //           'https://www.batnf.net/${inprogressFile.fileUrl}');
+                                      //   return controller.value.isInitialized
+                                      //       ? Stack(
+                                      //           alignment: AlignmentDirectional.center,
+                                      //           children: [
+                                      //             AspectRatio(
+                                      //                 aspectRatio:
+                                      //                     // 6 / 6,
+                                      //                     controller.value.aspectRatio,
+                                      //                 child: CachedVideoPlayer(controller)),
+                                      //             GestureDetector(
+                                      //               onTap: () {
+                                      //                 if (!controller.value.isInitialized) return;
+                                      //                 setState(
+                                      //                   () {
+                                      //                     controller.value.isPlaying
+                                      //                         ? controller.pause()
+                                      //                         : controller.play();
+                                      //                   },
+                                      //                 );
+                                      //               },
+                                      //               child: Icon(
+                                      //                 controller.value.isPlaying
+                                      //                     ? Icons.pause
+                                      //                     : Icons.play_arrow,
+                                      //                 color: Colors.blue.withOpacity(0.5),
+                                      //                 size: 30,
+                                      //               ),
+                                      //             ),
+                                      //           ],
+                                      //         )
+                                      //       : Center(child: CircularProgressIndicator());
+                                      // }).toList()),
 
                                       Container(
                                         height: 145,
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         margin: EdgeInsets.only(
                                             left: 9.0, right: 9),
                                         // margin: EdgeInsets.only(
@@ -252,14 +252,14 @@ class _InprogressPageState extends State<InprogressPage> {
                                         // height: 74,
                                         // width: 74,
                                         child: inprogress
-                                                .files![0].fileUrl.isEmpty 
+                                                .files![0].fileUrl.isEmpty
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![index].thumbnail}',
-                                                        fit: BoxFit.cover),
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                    fit: BoxFit.cover),
                                               )
                                             : inprogress.files![0].fileExt ==
                                                     'video/mp4'
@@ -267,16 +267,18 @@ class _InprogressPageState extends State<InprogressPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             18),
-                                                    child: controller.value
-                                                            .isInitialized
+                                                    child: controller
+                                                            .value.isInitialized
                                                         ? AspectRatio(
                                                             aspectRatio:
-                                                                controller
-                                                                    .value
+                                                                controller.value
                                                                     .aspectRatio,
-                                                            child: CachedVideoPlayer(
-                                                                controller))
-                                                        : Center(child: const CircularProgressIndicator()),
+                                                            child:
+                                                                CachedVideoPlayer(
+                                                                    controller))
+                                                        : Center(
+                                                            child:
+                                                                const CircularProgressIndicator()),
                                                     // CachedNetworkImage(
                                                     //     imageUrl:
                                                     //         'https://www.batnf.net/${inprogress.files![0].fileUrl}',
@@ -292,7 +294,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                         fit: BoxFit.cover),
                                                   ),
                                       ),
-                                      
+
                                       SizedBox(
                                         height: 8,
                                       ),
@@ -302,16 +304,17 @@ class _InprogressPageState extends State<InprogressPage> {
                                         inprogress.projectTitle,
                                         style: kNewsSubHeader,
                                       ),
-                                      SizedBox(height: 8,),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
                                       RichText(
                                           text: TextSpan(
                                               text: 'Started: ',
-                                              style:
-                                                  kLandpageskiptextstyle,
+                                              style: kLandpageskiptextstyle,
                                               children: [
                                             TextSpan(
-                                                text: inprogress
-                                                    .projectStartDate,
+                                                text:
+                                                    inprogress.projectStartDate,
                                                 style: kNewsDateSTyle)
                                           ])),
 
@@ -321,16 +324,15 @@ class _InprogressPageState extends State<InprogressPage> {
                                       RichText(
                                           text: TextSpan(
                                               text: 'To End: ',
-                                              style:
-                                                  kLandpageskiptextstyle,
+                                              style: kLandpageskiptextstyle,
                                               children: [
                                             TextSpan(
-                                                text: inprogress
-                                                    .projectEndDate,
+                                                text: inprogress.projectEndDate,
                                                 style: kNewsDateSTyle)
-                                          ]))
-                                    
-                                      ,SizedBox(height: 8,),
+                                          ])),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
                                     ],
                                   ),
                                 ),
