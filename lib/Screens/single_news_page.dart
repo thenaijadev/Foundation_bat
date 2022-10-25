@@ -61,7 +61,7 @@ class _NewsDetailsState extends State<NewsDetails> {
   Widget build(BuildContext context) {
      return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         // extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,

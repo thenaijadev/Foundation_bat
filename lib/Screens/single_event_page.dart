@@ -117,7 +117,7 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           toolbarHeight: 50,

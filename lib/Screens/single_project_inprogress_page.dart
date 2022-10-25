@@ -68,7 +68,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(
