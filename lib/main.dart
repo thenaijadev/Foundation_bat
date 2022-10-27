@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:batnf/Screens/dash_board.dart';
+import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -28,6 +29,7 @@ import 'package:batnf/providers/pending_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/pending_project.dart';
+import 'Screens/promotion.dart';
 import 'providers/theme_provider.dart';
 
 class MyHttpoverrides extends HttpOverrides {
@@ -92,6 +94,7 @@ class MyApp extends StatelessWidget {
           routes: {
             LandingPage.id: (context) => const LandingPage(),
             WelcomePage.id: (context) => WelcomePage(),
+            Promotion.id: (context) => Promotion(),
             SignIn.id: (context) => SignIn(),
             HomePage.id: (context) => HomePage(),
             SignUp.id: (context) => SignUp(),

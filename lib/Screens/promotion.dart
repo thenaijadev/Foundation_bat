@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../widgets/reuseable_game.dart';
 
 class Promotion extends StatefulWidget {
+  static String id = 'games';
   Promotion({Key? key}) : super(key: key);
 
   @override

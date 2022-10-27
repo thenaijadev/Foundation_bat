@@ -100,14 +100,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       return Container(
                         color: kGeneralbodytextColor,
                         child: CachedNetworkImage(
-                            errorWidget: (context, url, error) => Center(
-                                    child: Text(
-                                  'No Image Available',
-                                  style:
-                                      TextStyle(color: kGeneralbodytextColor),
-                                )),
-                            placeholder: (context, url) =>
-                                Center(child: CircularProgressIndicator()),
                             imageUrl:
                                 'https://www.batnf.net/${inprogressFile.thumbnail}',
                             fit: BoxFit.cover),

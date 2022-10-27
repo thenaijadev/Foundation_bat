@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:batnf/Screens/inprogress_project.dart';
+import 'package:batnf/Screens/projects.dart';
+import 'package:batnf/Screens/promotion.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
@@ -40,7 +42,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    List<CachedVideoPlayerController> playerController = [];
+//  int index = 0;
+//   List screen = [
+//     // HomePage(),
+//     EventCenter(),
+//     Promotion(),
+//     ProjectPage(),
+//     News()
+//     ];
+  List<CachedVideoPlayerController> playerController = [];
   late CachedVideoPlayerController controller;
 
   @override
@@ -159,8 +169,8 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 text,
-                                style:
-                                    TextStyle( fontSize: 12, fontStyle: FontStyle.italic),
+                                style: TextStyle(
+                                    fontSize: 12, fontStyle: FontStyle.italic),
                               ),
                               ChangeThemeButtonWidget(),
                             ],
@@ -738,7 +748,48 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        bottomNavigationBar: ReuseableBottomBar(),
+        bottomNavigationBar: 
+        
+    //     NavigationBarTheme(
+    //   data: NavigationBarThemeData(
+    //       height: 100,
+    //       elevation: 5.0,
+    //       shadowColor: kSignupbuttonColor,
+    //       indicatorColor: Colors.blue),
+    //   // ignore: prefer_const_literals_to_create_immutables
+    //   child: NavigationBar(
+    //     animationDuration: Duration(seconds: 3),
+    //     labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+    //     selectedIndex: index,
+    //     onDestinationSelected: (index) {
+    //       setState(() {
+    //         this.index = index;
+    //       });
+    //     },
+    //     // ignore: prefer_const_literals_to_create_immutables
+    //     destinations: [
+    //       NavigationDestination(
+    //           icon: Icon(FontAwesomeIcons.home), label: 'Home'),
+    //       NavigationDestination(
+    //           icon: Icon(FontAwesomeIcons.calendarAlt), label: 'Events'),
+    //       NavigationDestination(
+    //           icon: Image.asset('assets/icons/game.png'), label: 'Games'),
+    //       NavigationDestination(
+    //           icon:Image.asset('assets/icons/pro.png'),
+    //           // Icon(FontAwesomeIcons.tasks),
+    //            label: 'projects'),
+    //       GestureDetector(
+    //         onTap: () {
+    //           Navigator.pushNamed(context, News.id);
+    //         },
+    //         child: NavigationDestination(
+    //             icon: Icon(FontAwesomeIcons.newspaper), label: 'News'),
+    //       ),
+    //     ],
+    //   ),
+    // ),
+        
+        ReuseableBottomBar(),
       ),
     );
   }
