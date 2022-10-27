@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:batnf/Screens/dash_board.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
+import 'package:batnf/providers/screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -81,6 +81,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => Screens(),
+        ),
       ],
       child: Builder(builder: (context){
         final themeProvider = Provider.of<ThemeProvider>(context);
@@ -107,9 +110,12 @@ class MyApp extends StatelessWidget {
             CompletedPage.id: (context) => CompletedPage(),
             PendingPage.id: (context) => PendingPage(),
             News.id: (context) => News(),
+            // ReuseableBottomBar.id: (context) => ReuseableBottomBar()
           },
+          
         );
       }),
+      
     );
   }
 }
