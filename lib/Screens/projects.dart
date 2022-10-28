@@ -274,7 +274,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                           Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemCount: inprogressProvider
                                           .allInprogressProjects!.length,
                                       itemBuilder: ((context, index) {
@@ -291,10 +291,17 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             inprogress)));
                                           },
                                           child: Container(
+                                             width: 237,
                                             margin: EdgeInsets.only(
+                                                left: 36.27,
+                                                right: 15.0,
                                                 bottom: 15.0,
-                                                left: 30,
-                                                right: 30),
+                                                top: 30),
+
+                                            // margin: EdgeInsets.only(
+                                            //     bottom: 15.0,
+                                            //     left: 30,
+                                            //     right: 30),
                                             decoration: BoxDecoration(
                                               color: Theme.of(context)
                                                   .primaryColor,
@@ -302,17 +309,25 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   BorderRadius.circular(18.0),
                                               boxShadow: [kBoxshadow],
                                             ),
-                                            child: Row(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 // Inprogress Images
                                                 Container(
+                                                   height: 145,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
                                                   margin: EdgeInsets.only(
-                                                      top: 15,
-                                                      left: 15,
-                                                      bottom: 15.0,
-                                                      right: 15.0),
-                                                  height: 74,
-                                                  width: 74,
+                                                      left: 9.0, right: 9),
+                                                  // margin: EdgeInsets.only(
+                                                  //     top: 15,
+                                                  //     left: 15,
+                                                  //     bottom: 15.0,
+                                                  //     right: 15.0),
+                                                  // // height: 74,
+                                                  // width: 74,
                                                   child: inprogress.files![0]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(
@@ -357,13 +372,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),
-                                                  // ClipRRect(
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(18),
-                                                  //   child: CachedNetworkImage(
-                                                  //       imageUrl: 'https://www.batnf.net/${inprogress.projectImage}',
-                                                  //       fit: BoxFit.cover),
-                                                  // ),
                                                 ),
 
                                                 // Inprogress Information
@@ -476,10 +484,16 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             completed)));
                                           },
                                           child: Container(
+                                             width: 237,
                                             margin: EdgeInsets.only(
+                                                left: 36.27,
+                                                right: 15.0,
                                                 bottom: 15.0,
-                                                left: 30,
-                                                right: 30),
+                                                top: 30),
+                                            // margin: EdgeInsets.only(
+                                            //     bottom: 15.0,
+                                            //     left: 30,
+                                            //     right: 30),
                                             decoration: BoxDecoration(
                                               color: Theme.of(context)
                                                   .primaryColor,
@@ -488,17 +502,26 @@ class _ProjectPageState extends State<ProjectPage> {
                                               boxShadow: [kBoxshadow],
                                             ),
                                             // height: 104,
-                                            child: Row(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 // Completed Image
                                                 Container(
+                                                  
+                                                  height: 145,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
                                                   margin: EdgeInsets.only(
-                                                      top: 15,
-                                                      left: 15,
-                                                      bottom: 15.0,
-                                                      right: 15.0),
-                                                  height: 74,
-                                                  width: 74,
+                                                      left: 9.0, right: 9),
+                                                  // margin: EdgeInsets.only(
+                                                  //     top: 15,
+                                                  //     left: 15,
+                                                  //     bottom: 15.0,
+                                                  //     right: 15.0),
+                                                  // height: 74,
+                                                  // width: 74,
                                                   child: completed.files![index]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(

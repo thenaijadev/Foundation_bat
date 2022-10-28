@@ -33,9 +33,17 @@ class _CompletedPageState extends State<CompletedPage> {
     CompletedProvider provider = Provider.of<CompletedProvider>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
-        toolbarHeight: 94,
-        backgroundColor: Theme.of(context).primaryColor,
+          toolbarHeight: 50,
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          title: Center(
+            child: Text(
+              'Completed Projects',
+              style: kSigningtextstyle,
+            ),),
         leading: Padding(
             padding: const EdgeInsets.all(5.0),
             child: IconButton(
@@ -52,13 +60,6 @@ class _CompletedPageState extends State<CompletedPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 15, left: 30, bottom: 50),
-            child: Text(
-              'Completed Projects',
-              style: kSigningtextstyle,
-            ),
-          ),
           Expanded(
             child:  provider.allCompletedProjects == null
                 ? Center(

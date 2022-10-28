@@ -108,50 +108,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
 //           color: Theme.of(context).primaryColor,
 //           borderRadius: BorderRadius.circular(360)
 //         ),
-//           child:  BottomNavigationBar(
-//             showSelectedLabels: true,
-//             showUnselectedLabels: false,
-//             selectedIconTheme: IconThemeData(color: Colors.blue),
-//             selectedItemColor: Colors.blue,
-//             type: BottomNavigationBarType.fixed,
-//             backgroundColor: Colors.transparent,
-//             currentIndex: index,
-//             onTap: (index) {
-//             setState(() {
-//               index = index;
-//             });
-//           },
-
-//           // ignore: prefer_const_literals_to_create_immutables
-//           items: [
-//             BottomNavigationBarItem(
-//                 // activeIcon: Image.asset('assets/icons/home.png'),
-//                 icon: Icon(Icons.home),
-//                 label: 'Home',
-//                 backgroundColor: Colors.amber),
-//             BottomNavigationBarItem(
-//                 // activeIcon: Image.asset('assets/icons/Calendar.png'),
-//                 icon: Icon(Icons.calendar_month),
-//                 label: 'Event',
-//                 backgroundColor: Colors.yellow),
-//             BottomNavigationBarItem(
-//                 // activeIcon: Image.asset('assets/icons/game.png'),
-//                 icon: Icon(FontAwesomeIcons.gamepad),
-//                 label: 'Games',
-//                 backgroundColor: Colors.orange),
-//             BottomNavigationBarItem(
-//                 // activeIcon: Image.asset('assets/icons/pro.png'),
-//                 icon: Icon(Icons.headphones),
-//                 label: 'Projects',
-//                 backgroundColor: Color.fromRGBO(33, 150, 243, 1)),
-//             BottomNavigationBarItem(
-//                 // activeIcon: Image.asset('assets/icons/news.svg'),
-//                 icon: Icon(Icons.newspaper),
-//                 label: 'News',
-//                 backgroundColor: Colors.green),
-//           ]
-//               ),
-
+//           child: 
 //           // NavigationBarTheme(
 //           //     data: NavigationBarThemeData(
 //           //   backgroundColor: Colors.transparent,
@@ -197,72 +154,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
 
 //     );
 
-    // Container(
-    //   height: 100,
-    //   decoration: BoxDecoration(
-    //     boxShadow: [
-    //       BoxShadow(
-    //           color: kSignupbuttonColor.withOpacity(0.6),
-    //           offset: Offset(0, 7),
-    //           blurRadius: 15.0),
-    //     ],
-    //     // color: kSignupbuttonColor,
-    //     color: Theme.of(context).primaryColor,
-    //     borderRadius: BorderRadius.only(
-    //       topLeft: Radius.circular(25.0),
-    //       topRight: Radius.circular(25.0),
-    //     ),
-    //   ),
-    //   child:
 
-    //   // BottomNavigationBar(
-    //   //   selectedIconTheme: IconThemeData(color: Colors.blue),
-    //   //   selectedItemColor: Colors.blue,
-    //   //     type: BottomNavigationBarType.fixed,
-    //   //     // backgroundColor: Theme.of(context).primaryColor,
-    //   //     currentIndex: _currentIndex,
-    //   //     onTap: (index) {
-    //   //       setState(() {
-    //   //         _currentIndex = index;
-    //   //         // Navigator.push(
-    //   //         //   context,
-    //   //         //   MaterialPageRoute(
-    //   //         //     builder: (context) => HomePage(),
-    //   //         //   ),
-    //   //         // );
-    //   //       });
-    //   //     },
-
-    //   //     // ignore: prefer_const_literals_to_create_immutables
-    //   //     items: [
-    //   //       BottomNavigationBarItem(
-    //   //           // activeIcon: Image.asset('assets/icons/home.png'),
-    //   //           icon: Icon(Icons.home),
-    //   //           label: 'Home',
-    //   //           backgroundColor: Colors.amber),
-    //   //       BottomNavigationBarItem(
-    //   //           // activeIcon: Image.asset('assets/icons/Calendar.png'),
-    //   //           icon: Icon(Icons.calendar_month),
-    //   //           label: 'Event',
-    //   //           backgroundColor: Colors.yellow),
-    //   //       BottomNavigationBarItem(
-    //   //           // activeIcon: Image.asset('assets/icons/game.png'),
-    //   //           icon: Icon(FontAwesomeIcons.gamepad),
-    //   //           label: 'Games',
-    //   //           backgroundColor: Colors.orange),
-    //   //       BottomNavigationBarItem(
-    //   //           // activeIcon: Image.asset('assets/icons/pro.png'),
-    //   //           icon: Icon(Icons.headphones),
-    //   //           label: 'Projects',
-    //   //           backgroundColor: Color.fromRGBO(33, 150, 243, 1)),
-    //   //       BottomNavigationBarItem(
-    //   //           // activeIcon: Image.asset('assets/icons/news.svg'),
-    //   //           icon: Icon(Icons.newspaper),
-    //   //           label: 'News',
-    //   //           backgroundColor: Colors.green),
-    //   //     ]),
-
-    // );
 
     //     Container(
     //   height: 100,
@@ -404,5 +296,6 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
     //     ],
     //   ),
     // );
-  }
+
+}
 }

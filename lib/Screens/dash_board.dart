@@ -124,7 +124,6 @@ class _HomePageState extends State<HomePage> {
         Provider.of<InprogressProvider>(context, listen: false);
     return  SafeArea(
       child: Scaffold(
-      //   backgroundColor: Theme.of(context).primaryColor,
         body:
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                             autoPlayCurve: Curves.easeInQuint,
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             viewportFraction: 0.99,
-                            // autoPlay: true
+                            autoPlay: true
                             )),
                   ),
 
