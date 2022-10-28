@@ -101,7 +101,7 @@ class _PromotionState extends State<Promotion> {
             ),
           ],
         ),
-        bottomNavigationBar: ReuseableBottomBar(),
+       
       ),
     );
   }

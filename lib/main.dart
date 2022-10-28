@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/providers/screen_provider.dart';
+import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -93,7 +94,7 @@ class MyApp extends StatelessWidget {
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: !autoLogin ? LandingPage.id : HomePage.id,
+          initialRoute: !autoLogin ? LandingPage.id : ReuseableBottomBar.id,
           routes: {
             LandingPage.id: (context) => const LandingPage(),
             WelcomePage.id: (context) => WelcomePage(),
@@ -109,8 +110,9 @@ class MyApp extends StatelessWidget {
             InprogressPage.id: (context) => InprogressPage(),
             CompletedPage.id: (context) => CompletedPage(),
             PendingPage.id: (context) => PendingPage(),
+            ReuseableBottomBar.id: (context) => ReuseableBottomBar(),
             News.id: (context) => News(),
-            // ReuseableBottomBar.id: (context) => ReuseableBottomBar()
+            
           },
           
         );

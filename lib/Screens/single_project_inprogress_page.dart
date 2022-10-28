@@ -84,74 +84,77 @@ class _ProgressDetailsState extends State<ProgressDetails> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Project Image
-              CarouselSlider(
-                  options: CarouselOptions(
-                    padEnds: false,
-                    autoPlayInterval: Duration(seconds: 10),
-                    height: 350,
-                    viewportFraction: 0.98,
-                    enableInfiniteScroll: false,
-                    // autoPlay: true
-                  ),
-                  items: widget.singleProgress.files!.map((inprogressFile) {
-                    print(inprogressFile.fileExt);
-                    print(inprogressFile.fileUrl);
-                    if (inprogressFile.fileExt == '') {
-                      return Container(
-                        color: kGeneralbodytextColor,
-                        child: CachedNetworkImage(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: CarouselSlider(
+                    options: CarouselOptions(
+                      padEnds: false,
+                      autoPlayInterval: Duration(seconds: 10),
+                      height: 350,
+                      viewportFraction: 0.98,
+                      enableInfiniteScroll: false,
+                      // autoPlay: true
+                    ),
+                    items: widget.singleProgress.files!.map((inprogressFile) {
+                      print(inprogressFile.fileExt);
+                      print(inprogressFile.fileUrl);
+                      if (inprogressFile.fileExt == '') {
+                        return Container(
+                          color: kGeneralbodytextColor,
+                          child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://www.batnf.net/${inprogressFile.thumbnail}',
+                              fit: BoxFit.cover),
+                        );
+                      } else if (inprogressFile.fileExt == 'image/jpeg') {
+                        return CachedNetworkImage(
+                            errorWidget: (context, url, error) =>
+                                Center(child: Text('No Image Available')),
+                            placeholder: (context, url) =>
+                                Center(child: CircularProgressIndicator()),
                             imageUrl:
-                                'https://www.batnf.net/${inprogressFile.thumbnail}',
-                            fit: BoxFit.cover),
-                      );
-                    } else if (inprogressFile.fileExt == 'image/jpeg') {
-                      return CachedNetworkImage(
-                          errorWidget: (context, url, error) =>
-                              Center(child: Text('No Image Available')),
-                          placeholder: (context, url) =>
-                              Center(child: CircularProgressIndicator()),
-                          imageUrl:
-                              'https://www.batnf.net/${inprogressFile.fileUrl}',
-                          fit: BoxFit.cover);
-                    }
-                    CachedVideoPlayerController controller =
-                        playerController.firstWhere((element) =>
-                            element.dataSource ==
-                            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                            'https://www.batnf.net/${inprogressFile.fileUrl}');
-                    return controller.value.isInitialized
-                        ? Stack(
-                            alignment: AlignmentDirectional.center,
-                            children: [
-                              AspectRatio(
-                                  aspectRatio:
-                                      // 6 / 6,
-                                      controller.value.aspectRatio,
-                                  child: CachedVideoPlayer(controller)),
-                              GestureDetector(
-                                onTap: () {
-                                  if (!controller.value.isInitialized) return;
-                                  setState(
-                                    () {
-                                      controller.value.isPlaying
-                                          ? controller.pause()
-                                          : controller.play();
-                                    },
-                                  );
-                                },
-                                child: Icon(
-                                  controller.value.isPlaying
-                                      ? Icons.pause
-                                      : Icons.play_arrow,
-                                  color: Colors.blue.withOpacity(0.5),
-                                  size: 30,
+                                'https://www.batnf.net/${inprogressFile.fileUrl}',
+                            fit: BoxFit.cover);
+                      }
+                      CachedVideoPlayerController controller =
+                          playerController.firstWhere((element) =>
+                              element.dataSource ==
+                              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                              'https://www.batnf.net/${inprogressFile.fileUrl}');
+                      return controller.value.isInitialized
+                          ? Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                AspectRatio(
+                                    aspectRatio:
+                                        // 6 / 6,
+                                        controller.value.aspectRatio,
+                                    child: CachedVideoPlayer(controller)),
+                                GestureDetector(
+                                  onTap: () {
+                                    if (!controller.value.isInitialized) return;
+                                    setState(
+                                      () {
+                                        controller.value.isPlaying
+                                            ? controller.pause()
+                                            : controller.play();
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    controller.value.isPlaying
+                                        ? Icons.pause
+                                        : Icons.play_arrow,
+                                    color: Colors.blue.withOpacity(0.5),
+                                    size: 30,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        : Center(child: CircularProgressIndicator());
-                  }).toList()),
+                              ],
+                            )
+                          : Center(child: CircularProgressIndicator());
+                    }).toList()),
+              ),
 
               //Project Title
               Container(

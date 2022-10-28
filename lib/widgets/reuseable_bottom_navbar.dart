@@ -26,26 +26,24 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
   @override
   void initState() {
     super.initState();
-
     FlutterNativeSplash.remove();
   }
-
-  List<Widget> screen = [
-    // HomePage(),
-    // EventCenter(),
-    // Promotion(),
-    // ProjectPage(),
-    // News()
+   List<Widget> screen = [
+    HomePage(),
+    EventCenter(),
+    Promotion(),
+    ProjectPage(),
+    News()
   ];
 
   @override
   Widget build(BuildContext context) {
     Screens screenProvider = Provider.of<Screens>(context);
     return  Scaffold(
-        // body: screen[screenProvider.currentTab],
+        body: screen[screenProvider.currentTab],
         bottomNavigationBar: Container(
           margin: EdgeInsets.only(bottom: 15, right: 10, left: 10),
-          height: 60,
+          height: 55,
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -70,31 +68,24 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
               // ignore: prefer_const_literals_to_create_immutables
               items: [
                 BottomNavigationBarItem(
-                    // activeIcon: Image.asset('assets/icons/home.png'),
-                    // icon: Icon(Icons.home),
-                    icon: Image.asset('assets/icons/home.png'),
+                    activeIcon: Image.asset('assets/icons/home.png', color: Colors.blue),
+                    icon: Icon(Icons.home),
                     label: 'Home',
                     backgroundColor: Colors.amber),
                 BottomNavigationBarItem(
-                    // activeIcon: Image.asset('assets/icons/Calendar.png'),
                     icon: Icon(Icons.calendar_month),
-                    label: 'Event',
-                    backgroundColor: Colors.yellow),
+                    label: 'Event',),
                 BottomNavigationBarItem(
-                    // activeIcon: Image.asset('assets/icons/game.png'),
+                    activeIcon: Image.asset('assets/icons/game.png', color: Colors.blue),
                     icon: Icon(FontAwesomeIcons.gamepad),
-                    label: 'Games',
-                    backgroundColor: Colors.orange),
+                    label: 'Games',),
                 BottomNavigationBarItem(
-                    // activeIcon: Image.asset('assets/icons/pro.png'),
-                    icon: Icon(Icons.headphones),
-                    label: 'Projects',
-                    backgroundColor: Color.fromRGBO(33, 150, 243, 1)),
+                    activeIcon: Image.asset('assets/icons/pro.png', color: Colors.blue),
+                    icon: Icon(FontAwesomeIcons.heart),
+                    label: 'Projects',),
                 BottomNavigationBarItem(
-                    // activeIcon: Image.asset('assets/icons/news.svg'),
                     icon: Icon(Icons.newspaper),
-                    label: 'News',
-                    backgroundColor: Colors.green),
+                    label: 'News',),
               ]),
         ),
       );

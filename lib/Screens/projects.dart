@@ -170,10 +170,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                 : inprogressProvider
                                     .allInprogressProjects!.length,
                             colour: Theme.of(context).primaryColor,
-                            label: 'Projects in \nProgress',
+                            label: 'InProgress',
                             childCard: Icon(
                               FontAwesomeIcons.spinner,
-                              // Icons.pie_chart,
                               size: 65,
                               color: Colors.yellow,
                             ),
@@ -815,7 +814,7 @@ class _ProjectPageState extends State<ProjectPage> {
             ),
           ],
         ),
-        bottomNavigationBar: ReuseableBottomBar(),
+       
       ),
     );
   }

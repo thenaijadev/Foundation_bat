@@ -347,11 +347,4 @@ class _InprogressPageState extends State<InprogressPage> {
     );
   }
 
-  // Widget _chewieVideoPlayer() {
-  //   return _chewieController != null && _videoPlayerController != null
-  //       ? Container(
-  //           child: Chewie(controller: _chewieController!),
-  //         )
-  //       : const CircularProgressIndicator();
-  // }
 }

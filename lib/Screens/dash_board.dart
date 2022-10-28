@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:batnf/Screens/inprogress_project.dart';
-import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/promotion.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
@@ -42,14 +40,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  int index = 0;
-//   List screen = [
-//     // HomePage(),
-//     EventCenter(),
-//     Promotion(),
-//     ProjectPage(),
-//     News()
-//     ];
   List<CachedVideoPlayerController> playerController = [];
   late CachedVideoPlayerController controller;
 
@@ -85,13 +75,11 @@ class _HomePageState extends State<HomePage> {
         (index) => CachedVideoPlayerController.network(
             'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
             // widget.singleProgress.files![index].fileUrl
-            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ));
 
     for (var element in playerController) {
       element.initialize().then((value) async {
         await Future.delayed(Duration(milliseconds: 500));
-        // element.play();
         setState(() {});
       });
     }
@@ -123,8 +111,6 @@ class _HomePageState extends State<HomePage> {
     if (mounted) setState(() {});
   }
 
-  // var user = '';
-
   @override
   Widget build(BuildContext context) {
     final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
@@ -136,10 +122,11 @@ class _HomePageState extends State<HomePage> {
         Provider.of<EventProvider>(context, listen: false);
     InprogressProvider inprogressProvider =
         Provider.of<InprogressProvider>(context, listen: false);
-    return SafeArea(
+    return  SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        body: Column(
+      //   backgroundColor: Theme.of(context).primaryColor,
+        body:
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           // ignore: prefer_const_literals_to_create_immutables
@@ -208,26 +195,95 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(10),
                     child: CarouselSlider(
                         items: [
+                          Container(
+                            // ignore: sort_child_properties_last
+                            child: Center(
+                              child: Text('Providing Support in the Agricultural Sector',
+                              textAlign: TextAlign.center,
+                               style: TextStyle(
+                                        color: kGeneralbodytextColor,
+                                        fontStyle: FontStyle.normal,
+                                        fontFamily: 'Inter',
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600))
+                            ),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage('assets/market.png',),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            // ignore: sort_child_properties_last
+                            child: Center(
+                                child: Text(
+                                    'Get Latest News on Batnf',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kGeneralbodytextColor,
+                                        fontStyle: FontStyle.normal,
+                                        fontFamily: 'Inter',
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600))),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/boarding3.png',
+                                ),
+                              ),
+                            ),
+                          ),
                           Image.asset(
                             'assets/Ads.png',
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
                             fit: BoxFit.fitWidth,
                           ),
-                          Image.asset(
-                            'assets/Ads1.png',
-                            height: MediaQuery.of(context).size.height,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fitWidth,
+                          Container(
+                            // ignore: sort_child_properties_last
+                            child: Center(
+                                child: Text('Follow-up on Projects Carried out by Batnf',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kGeneralbodytextColor,
+                                        fontStyle: FontStyle.normal,
+                                        fontFamily: 'Inter',
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600))),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/boarding4.png',
+                                ),
+                              ),
+                            ),
                           ),
-                          Image.asset(
-                            'assets/Ads2.png',
-                            height: MediaQuery.of(context).size.height,
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fitWidth,
+                          Container(
+                            // ignore: sort_child_properties_last
+                            child: Center(
+                                child: Text('Register and Attend Events Hosted by Batnf',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: kGeneralbodytextColor,
+                                        fontStyle: FontStyle.normal,
+                                        fontFamily: 'Inter',
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600))),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/boarding1.png',
+                                ),
+                              ),
+                            ),
                           ),
                           Image.asset(
                             'assets/Ads3.png',
@@ -237,12 +293,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         options: CarouselOptions(
+                          height: 150,
                             scrollDirection: Axis.horizontal,
-                            padEnds: false,
-                            autoPlayCurve: Curves.slowMiddle,
+                            padEnds: true,
+                            autoPlayCurve: Curves.easeInQuint,
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             viewportFraction: 0.99,
-                            autoPlay: true)),
+                            // autoPlay: true
+                            )),
                   ),
 
                   // Project List Header
@@ -317,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
                                             child: inprogress
-                                                    .files![0].fileUrl.isEmpty
+                                                    .files![index].fileUrl.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -327,7 +385,7 @@ class _HomePageState extends State<HomePage> {
                                                             'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                         fit: BoxFit.cover),
                                                   )
-                                                : inprogress.files![0]
+                                                : inprogress.files![index]
                                                             .fileExt ==
                                                         'video/mp4'
                                                     ? ClipRRect(
@@ -359,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                                                                     child: Text(
                                                                         'No Image Availaible')),
                                                             imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                                'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                                             fit: BoxFit.cover),
                                                       ),
                                           ),
@@ -535,7 +593,7 @@ class _HomePageState extends State<HomePage> {
                         // News label
                         Padding(
                           padding:
-                              const EdgeInsets.only(left: 30.0, right: 30.0),
+                              const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -704,14 +762,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  SizedBox(
-                    height: 50.0,
-                  ),
-
                   // Visit Market Link
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 30.0, right: 30.0, bottom: 150.0),
+                        left: 30.0, right: 30.0, bottom: 50.0),
                     child: Center(
                       child: Container(
                         height: 107,
@@ -739,7 +793,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage('assets/market.png'))),
+                                image: AssetImage('assets/market.png'),
+                                ),
+                                ),
                       ),
                     ),
                   ),
@@ -748,48 +804,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        bottomNavigationBar: 
-        
-    //     NavigationBarTheme(
-    //   data: NavigationBarThemeData(
-    //       height: 100,
-    //       elevation: 5.0,
-    //       shadowColor: kSignupbuttonColor,
-    //       indicatorColor: Colors.blue),
-    //   // ignore: prefer_const_literals_to_create_immutables
-    //   child: NavigationBar(
-    //     animationDuration: Duration(seconds: 3),
-    //     labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-    //     selectedIndex: index,
-    //     onDestinationSelected: (index) {
-    //       setState(() {
-    //         this.index = index;
-    //       });
-    //     },
-    //     // ignore: prefer_const_literals_to_create_immutables
-    //     destinations: [
-    //       NavigationDestination(
-    //           icon: Icon(FontAwesomeIcons.home), label: 'Home'),
-    //       NavigationDestination(
-    //           icon: Icon(FontAwesomeIcons.calendarAlt), label: 'Events'),
-    //       NavigationDestination(
-    //           icon: Image.asset('assets/icons/game.png'), label: 'Games'),
-    //       NavigationDestination(
-    //           icon:Image.asset('assets/icons/pro.png'),
-    //           // Icon(FontAwesomeIcons.tasks),
-    //            label: 'projects'),
-    //       GestureDetector(
-    //         onTap: () {
-    //           Navigator.pushNamed(context, News.id);
-    //         },
-    //         child: NavigationDestination(
-    //             icon: Icon(FontAwesomeIcons.newspaper), label: 'News'),
-    //       ),
-    //     ],
-    //   ),
-    // ),
-        
-        ReuseableBottomBar(),
       ),
     );
   }

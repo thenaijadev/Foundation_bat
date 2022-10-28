@@ -251,7 +251,7 @@ class _EventCenterState extends State<EventCenter> {
             ],
           ),
         ),
-        bottomNavigationBar: ReuseableBottomBar(),
+        
       ),
     );
   }
