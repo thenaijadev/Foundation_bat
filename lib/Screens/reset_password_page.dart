@@ -32,10 +32,14 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        title:  Text(
+                      'Reset Password',
+                      style: kSigningtextstyle,
+                    ),
         toolbarHeight: 94,
-        backgroundColor: kBackground,
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         leading: BackButton(color: kButtonColor),
       ),
@@ -47,14 +51,6 @@ class _ResetPasswordState extends State<ResetPassword> {
               key: _formKey,
               child: ListView(
                 children: [
-                  Container(
-                    height: 29,
-                    margin: EdgeInsets.only(top: 15.0, left: 30, bottom: 45),
-                    child: Text(
-                      'Reset Password',
-                      style: kSigningtextstyle,
-                    ),
-                  ),
                   Container(
                     height: 19,
                     margin: EdgeInsets.only(left: 30, bottom: 75),
@@ -161,7 +157,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   //Confirmation Button
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 303.0, left: 30, right: 30, bottom: 75.0),
+                        top: 105.0, left: 30, right: 30, bottom: 75.0),
                     child: MaterialButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(45.0),

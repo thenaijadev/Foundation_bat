@@ -32,8 +32,8 @@ class _InprogressPageState extends State<InprogressPage> {
 
     // video(Files);
 
-    Provider.of<InprogressProvider>(context, listen: false)
-        .getInprogressProjects();
+    // Provider.of<InprogressProvider>(context, listen: false)
+    //     .getInprogressProjects();
 
     controller = CachedVideoPlayerController.network(
         // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
@@ -152,8 +152,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                   //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
                                     color: Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.8),
+                                        .primaryColor,
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
@@ -175,7 +174,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                         // height: 74,
                                         // width: 74,
                                         child: inprogress
-                                                .files![0].fileUrl.isEmpty
+                                                .files![index].fileUrl.isEmpty
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
@@ -184,7 +183,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                         'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                     fit: BoxFit.cover),
                                               )
-                                            : inprogress.files![0].fileExt ==
+                                            : inprogress.files![index].fileExt ==
                                                     'video/mp4'
                                                 ? ClipRRect(
                                                     borderRadius:
@@ -209,7 +208,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                                             18),
                                                     child: CachedNetworkImage(
                                                         imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![0].fileUrl}',
+                                                            'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                                         fit: BoxFit.cover),
                                                   ),
                                       ),
@@ -226,6 +225,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                         height: 8,
                                       ),
                                       RichText(
+                                        selectionColor: Theme.of(context).primaryColor,
                                           text: TextSpan(
                                               text: 'Started: ',
                                               style: kLandpageskiptextstyle,
@@ -240,6 +240,8 @@ class _InprogressPageState extends State<InprogressPage> {
                                         height: 8,
                                       ),
                                       RichText(
+                                        selectionColor:
+                                              Theme.of(context).primaryColor,
                                           text: TextSpan(
                                               text: 'To End: ',
                                               style: kLandpageskiptextstyle,

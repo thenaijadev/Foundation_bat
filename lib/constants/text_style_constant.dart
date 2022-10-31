@@ -16,10 +16,7 @@ const kAppnametextstyle = TextStyle(
     fontSize: 36.0,
     fontStyle: FontStyle.normal);
 
-var kProjectsummarytextstyle = TextStyle(
-    color: Colors.green,
-    // kGeneralbodytextColor,
-    // ThemeData.dark().primaryColor,
+const kProjectsummarytextstyle = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 20.0,
@@ -33,15 +30,12 @@ const kLandpageHeadertextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpagebodytextstyle = TextStyle(
-    color: Colors.white,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
 
 const kLandpageskiptextstyle = TextStyle(
-    color: Colors.green,
-    // kGeneralbodytextColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
@@ -63,7 +57,6 @@ const kTextboxhintstyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kEventDatestyle = TextStyle(
-    color: kNewHeaderColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -107,9 +100,6 @@ const kWelcomeHeadstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kPageHeader = TextStyle(
-    color: Colors.blue,
-    // kGeneralbodytextColor,
-    // ThemeData == Brightness.dark ? ThemeData.dark().primaryColor : ThemeData.light().primaryColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -123,24 +113,18 @@ const kNewsSubHeader = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kBodyTextStyle = TextStyle(
-    color: kSignupbuttonColor,
-    // kGeneralbodytextColor,
     fontStyle: FontStyle.italic,
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: FontWeight.w400);
 
 const kAboutTextStyle = TextStyle(
-    color: Colors.blue,
-    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 22,
     fontWeight: FontWeight.bold);
 
 const kNewsDateSTyle = TextStyle(
-    color: Colors.blue,
-    // kGeneralbodytextColor,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,

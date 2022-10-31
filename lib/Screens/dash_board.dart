@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:batnf/Screens/inprogress_project.dart';
+import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
@@ -43,52 +44,57 @@ class _HomePageState extends State<HomePage> {
   List<CachedVideoPlayerController> playerController = [];
   late CachedVideoPlayerController controller;
 
+
+
   @override
   void initState() {
     super.initState();
+    // video(inprogressProvider.files!);
     getId();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
-    // video(inprogress![index].);
-    controller = CachedVideoPlayerController.network(
-        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        );
-    controller.initialize().then((value) {
-      // controller.play();
-      setState(() {});
-    });
+    // controller = CachedVideoPlayerController.network(
+    //     'https://www.batnf.net/${inprogress.files![0].fileUrl}'
+    //     // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+    //     // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    //     );
+    // controller.initialize().then((value) {
+    //   // controller.play();
+    //   setState(() {});
+    // });
   }
 
-  void video(List<Files> file) async {
-    if (file.isEmpty) return;
-    List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
-    int count =
-        videoList.fold(0, (previousValue, element) => previousValue + 1);
-    playerController = List.generate(
-        count,
-        (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-            // widget.singleProgress.files![index].fileUrl
-            ));
+  // void video(List<Files> file) async {
+  //   if (file.isEmpty) return;
+  //   List<Files> videoList =
+  //       file.where((element) => element.fileExt == 'video/mp4').toList();
+  //   int count =
+  //       videoList.fold(0, (previousValue, element) => previousValue + 1);
+  //   playerController = List.generate(
+  //       count,
+  //       (index) => CachedVideoPlayerController.network(
+  //           // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4',
+  //           Providerfiles!.[index].fileUrl
+  //           ));
 
-    for (var element in playerController) {
-      element.initialize().then((value) async {
-        await Future.delayed(Duration(milliseconds: 500));
-        setState(() {});
-      });
-    }
-  }
+  //   for (var element in playerController) {
+  //     element.initialize().then((value) async {
+  //       await Future.delayed(Duration(milliseconds: 500));
+  //       setState(() {});
+  //     });
+  //   }
+  // }
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     super.dispose();
+     for (var element in playerController) {
+      element.dispose();
+    }
   }
 
   getId() async {
@@ -122,74 +128,206 @@ class _HomePageState extends State<HomePage> {
         Provider.of<EventProvider>(context, listen: false);
     InprogressProvider inprogressProvider =
         Provider.of<InprogressProvider>(context, listen: false);
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
-        body:
-        Column(
+        appBar: AppBar(
+            elevation: 0.0,
+            toolbarHeight: 60,
+            backgroundColor: Theme.of(context).primaryColor,
+            // Colors.lightBlueAccent.withOpacity(0.98),
+            title: Center(
+                child: Text('Home', style: TextStyle( fontSize: 16,
+                      color: Colors.lightBlue,
+                    ))),
+            actions: [
+              Container(
+                margin: EdgeInsets.only(top: 5, bottom: 20, right: 45),
+                // color: Theme.of(context).primaryColor,
+                height: 40.0,
+                child: Image.asset(
+                  'assets/logo.png',
+                ),
+              ),
+            ],
+            leading: Builder(
+              builder: (context) {
+                return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: Icon(FontAwesomeIcons.bars, 
+                    color: Colors.blue, ));
+              }
+            )),
+        drawer: Drawer(
+          width: 250,
+          backgroundColor: Theme.of(context).primaryColor,
+          child: ListView(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              // UserAccountsDrawerHeader(
+              //   accountName: Text('paul'),
+              //   accountEmail: Text('admin@admin.com'),
+              //   decoration: BoxDecoration(color: Colors.lightBlue),
+              // ),
+               SizedBox(
+                height: 50,
+              ),
+
+
+              //Header
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20),
+                child: Row(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Text(
+                      'Settings',
+                      style: TextStyle(fontSize: 26, fontStyle: FontStyle.normal, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: 30,),
+                    Icon(FontAwesomeIcons.cogs, color: Colors.red, size: 24,)
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 50,),
+
+              // Change  Theme Option
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 20),
+                child: Text(
+                  'Change App Theme',
+                  style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+                ),
+              ),
+              InkWell(
+                child: ListTile(
+                    title: Text(
+                      text,
+                      style:
+                          TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                    ),
+                    leading: ChangeThemeButtonWidget()),
+              ),
+
+              // User Profile
+              InkWell(
+                onTap: () {},
+                child: ListTile(
+                    title: Text(
+                      'User Profile',
+                      style:
+                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    ),
+                    leading: Icon(FontAwesomeIcons.userAlt,
+                        color: Colors.lightBlue)),
+              ),
+
+              //Change User Password
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, ResetPassword.id);
+                },
+                child: ListTile(
+                    title: Text(
+                      'Change Password',
+                      style:
+                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    ),
+                    leading: Icon(FontAwesomeIcons.userLock,
+                        color: Colors.lightBlue)),
+              ),
+
+              //Logout option
+              InkWell(
+                onTap: () async {
+                  final SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.setBool('autoLogin', false);
+
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, WelcomePage.id, (Route<dynamic> route) => false);
+                },
+                child: ListTile(
+                    title: Text(
+                      'LogOut',
+                      style:
+                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    ),
+                    leading: Icon(FontAwesomeIcons.signOutAlt,
+                        color: Colors.lightBlue)),
+              ),
+            ],
+          ),
+        ),
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            // Container for search box etc
-            Container(
-              // height: 200.0,
-              color: Theme.of(context).primaryColor.withOpacity(0.95),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 45, bottom: 20, right: 135),
-                        color: Theme.of(context).primaryColor,
-                        height: 40.0,
-                        child: Image.asset(
-                          'assets/logo.png',
-                        ),
-                      ),
-                      Container(
-                          color: Theme.of(context).primaryColor,
-                          margin: EdgeInsets.only(top: 10),
-                          child: Column(
-                            children: [
-                              Text(
-                                text,
-                                style: TextStyle(
-                                    fontSize: 12, fontStyle: FontStyle.italic),
-                              ),
-                              ChangeThemeButtonWidget(),
-                            ],
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: 47,
-                          bottom: 22,
-                        ),
-                        decoration: BoxDecoration(
-                            color: kSignupbuttonColor.withOpacity(0.15),
-                            shape: BoxShape.circle),
-                        height: 36,
-                        child: IconButton(
-                          icon: Icon(FontAwesomeIcons.signOutAlt,
-                              size: 15, color: Colors.blue),
-                          onPressed: () async {
-                            final SharedPreferences sharedPreferences =
-                                await SharedPreferences.getInstance();
-                            sharedPreferences.setBool('autoLogin', false);
+            // // Container for search box etc
+            // Container(
+            //   // height: 200.0,
+            //   color: Theme.of(context).primaryColor.withOpacity(0.95),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           Container(
+            //             margin:
+            //                 EdgeInsets.only(top: 45, bottom: 20, right: 135),
+            //             color: Theme.of(context).primaryColor,
+            //             height: 40.0,
+            //             child: Image.asset(
+            //               'assets/logo.png',
+            //             ),
+            //           ),
 
-                            Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                WelcomePage.id,
-                                (Route<dynamic> route) => false);
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            //           Container(
+            //               color: Theme.of(context).primaryColor,
+            //               margin: EdgeInsets.only(top: 10),
+            //               child: Column(
+            //                 children: [
+            //                   Text(
+            //                     text,
+            //                     style: TextStyle(
+            //                         fontSize: 12, fontStyle: FontStyle.italic),
+            //                   ),
+            //                   ChangeThemeButtonWidget(),
+            //                 ],
+            //               )),
+            //           Container(
+            //             margin: EdgeInsets.only(
+            //               top: 47,
+            //               bottom: 22,
+            //             ),
+            //             decoration: BoxDecoration(
+            //                 color: kSignupbuttonColor.withOpacity(0.15),
+            //                 shape: BoxShape.circle),
+            //             height: 36,
+            //             child: IconButton(
+            //               icon: Icon(FontAwesomeIcons.signOutAlt,
+            //                   size: 15, color: Colors.blue),
+            //               onPressed: () async {
+            //                 final SharedPreferences sharedPreferences =
+            //                     await SharedPreferences.getInstance();
+            //                 sharedPreferences.setBool('autoLogin', false);
+
+            //                 Navigator.pushNamedAndRemoveUntil(
+            //                     context,
+            //                     WelcomePage.id,
+            //                     (Route<dynamic> route) => false);
+            //               },
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+
             Expanded(
               child: ListView(
                 children: [
@@ -200,27 +338,28 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             // ignore: sort_child_properties_last
                             child: Center(
-                              child: Text('Providing Support in the Agricultural Sector',
-                              textAlign: TextAlign.center,
-                               style: TextStyle(
+                                child: Text(
+                                    'Providing Support in the Agricultural Sector',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
                                         color: kGeneralbodytextColor,
                                         fontStyle: FontStyle.normal,
                                         fontFamily: 'Inter',
                                         fontSize: 25,
-                                        fontWeight: FontWeight.w600))
-                            ),
+                                        fontWeight: FontWeight.w600))),
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/market.png',),
+                                image: AssetImage(
+                                  'assets/market.png',
+                                ),
                               ),
                             ),
                           ),
                           Container(
                             // ignore: sort_child_properties_last
                             child: Center(
-                                child: Text(
-                                    'Get Latest News on Batnf',
+                                child: Text('Get Latest News on Batnf',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kGeneralbodytextColor,
@@ -246,7 +385,8 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             // ignore: sort_child_properties_last
                             child: Center(
-                                child: Text('Follow-up on Projects Carried out by Batnf',
+                                child: Text(
+                                    'Follow-up on Projects Carried out by Batnf',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kGeneralbodytextColor,
@@ -266,7 +406,8 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             // ignore: sort_child_properties_last
                             child: Center(
-                                child: Text('Register and Attend Events Hosted by Batnf',
+                                child: Text(
+                                    'Register and Attend Events Hosted by Batnf',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: kGeneralbodytextColor,
@@ -292,14 +433,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         options: CarouselOptions(
-                          height: 150,
+                            height: 150,
                             scrollDirection: Axis.horizontal,
                             padEnds: true,
                             autoPlayCurve: Curves.easeInQuint,
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             viewportFraction: 0.99,
-                            autoPlay: true
-                            )),
+                            autoPlay: true)),
                   ),
 
                   // Project List Header
@@ -361,7 +501,7 @@ class _HomePageState extends State<HomePage> {
                                           bottom: 9.0),
                                       decoration: BoxDecoration(
                                         boxShadow: [kBoxshadow],
-                                        color: kBackground,
+                                        color: Theme.of(context).primaryColor,
                                         borderRadius: BorderRadius.circular(18),
                                       ),
                                       child: Column(
@@ -373,8 +513,8 @@ class _HomePageState extends State<HomePage> {
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child: inprogress
-                                                    .files![index].fileUrl.isEmpty
+                                            child: inprogress.files![index]
+                                                    .fileUrl.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -409,14 +549,13 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
-                                                            errorWidget: (context,
-                                                                    url,
-                                                                    error) =>
-                                                                Center(
-                                                                    child: Text(
-                                                                        'No Image Availaible')),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                                            // errorWidget: (context,
+                                                            //         url,
+                                                            //         error) =>
+                                                            //     Center(
+                                                            //         child: Text(
+                                                            //             'No Image Availaible')),
+                                                            imageUrl: 'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                                             fit: BoxFit.cover),
                                                       ),
                                           ),
@@ -493,7 +632,7 @@ class _HomePageState extends State<HomePage> {
                                           bottom: 9.0),
                                       decoration: BoxDecoration(
                                         boxShadow: [kBoxshadow],
-                                        color: kBackground,
+                                        color: Theme.of(context).primaryColor,
                                         borderRadius: BorderRadius.circular(18),
                                       ),
                                       height: 255.0,
@@ -509,35 +648,35 @@ class _HomePageState extends State<HomePage> {
                                                 left: 9.0, right: 10.15),
                                             height: 145,
                                             width: 218,
-                                            child: event
-                                                    .files![0].fileExt.isEmpty
+                                            child: event.files![index].fileExt
+                                                    .isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Center(
-                                                                child: Text(
-                                                                    'No Image Availaible')),
+                                                        // errorWidget: (context,
+                                                        //         url, error) =>
+                                                        //     Center(
+                                                        //         child: Text(
+                                                        //             'No Image Availaible')),
                                                         imageUrl:
                                                             'https://www.batnf.net/${event.files![index].thumbnail}',
                                                         fit: BoxFit.cover),
                                                   )
                                                 : CachedNetworkImage(
-                                                    errorWidget: (context, url,
-                                                            error) =>
-                                                        Center(
-                                                            child: Text(
-                                                                'No Image Availaible')),
+                                                    // errorWidget: (context, url,
+                                                    //         error) =>
+                                                    //     Center(
+                                                    //         child: Text(
+                                                    //             'No Image Availaible')),
                                                     placeholder: (context,
                                                             url) =>
                                                         CachedNetworkImage(
                                                             imageUrl:
                                                                 'https://www.batnf.net/${event.eventFlier}'),
                                                     imageUrl:
-                                                        'https://www.batnf.net/${event.files![0].fileUrl}',
+                                                        'https://www.batnf.net/${event.files![index].fileUrl}',
                                                     fit: BoxFit.cover),
                                           ),
                                           Padding(
@@ -591,8 +730,8 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         // News label
                         Padding(
-                          padding:
-                              const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 50),
+                          padding: const EdgeInsets.only(
+                              left: 30.0, right: 30.0, bottom: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -645,7 +784,8 @@ class _HomePageState extends State<HomePage> {
                                               margin: EdgeInsets.only(top: 25),
                                               decoration: BoxDecoration(
                                                 boxShadow: [kBoxshadow],
-                                                color: kBackground,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                               ),
@@ -659,8 +799,8 @@ class _HomePageState extends State<HomePage> {
                                                         right: 15.0),
                                                     height: 120,
                                                     width: 120,
-                                                    child: news.files![0]
-                                                            .fileUrl.isEmpty
+                                                    child: news.files![index]
+                                                            .fileUrl.isEmpty && news.files![index].fileExt.isEmpty
                                                         ? ClipRRect(
                                                             borderRadius:
                                                                 BorderRadius
@@ -669,44 +809,48 @@ class _HomePageState extends State<HomePage> {
                                                             child: CachedNetworkImage(
                                                                 errorWidget: (context,
                                                                         url,
-                                                                        error) =>
-                                                                    Center(
-                                                                        child: Text(
-                                                                            'No Image Availaible')),
+                                                                        error) => Icon(Icons.error),
+                                                                    // CachedNetworkImage(
+                                                                    //     imageUrl:
+                                                                    //         'https://www.batnf.net/${news.files![index].thumbnail}',
+                                                                    //     fit: BoxFit
+                                                                    //         .cover),
                                                                 imageUrl:
                                                                     'https://www.batnf.net/${news.files![index].thumbnail}',
                                                                 fit: BoxFit
                                                                     .cover),
                                                           )
-                                                        : news.files![0]
-                                                                    .fileExt ==
-                                                                'video\/mp4'
-                                                            ? ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            18),
-                                                                child: controller
-                                                                        .value
-                                                                        .isInitialized
-                                                                    ? AspectRatio(
-                                                                        aspectRatio: controller
-                                                                            .value
-                                                                            .aspectRatio,
-                                                                        child: CachedVideoPlayer(
-                                                                            controller))
-                                                                    : Center(
-                                                                        child:
-                                                                            const CircularProgressIndicator()),
-                                                              )
-                                                            : ClipRRect(
+                                                        : 
+                                                        // news.files![index]
+                                                        //             .fileExt ==
+                                                        //         'video\/mp4'
+                                                        //     ? ClipRRect(
+                                                        //         borderRadius:
+                                                        //             BorderRadius
+                                                        //                 .circular(
+                                                        //                     18),
+                                                        //         child: controller
+                                                        //                 .value
+                                                        //                 .isInitialized
+                                                        //             ? AspectRatio(
+                                                        //                 aspectRatio: controller
+                                                        //                     .value
+                                                        //                     .aspectRatio,
+                                                        //                 child: CachedVideoPlayer(
+                                                        //                     controller))
+                                                        //             : Center(
+                                                        //                 child:
+                                                        //                     const CircularProgressIndicator()),
+                                                        //       )
+                                                        //     : 
+                                                            ClipRRect(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
                                                                             18),
                                                                 child: CachedNetworkImage(
                                                                     imageUrl:
-                                                                        'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                                        'https://www.batnf.net/${news.files![index].fileUrl}',
                                                                     fit: BoxFit
                                                                         .cover),
                                                               ),
@@ -791,10 +935,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/market.png'),
-                                ),
-                                ),
+                          image: DecorationImage(
+                            image: AssetImage('assets/market.png'),
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -33,14 +33,14 @@ void initState() {
   void video(List<Files> file) async {
     if (file.isEmpty) return;
     List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
+        file.where((element) => element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg').toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-            // widget.singlePending.files![index].fileUrl
+            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+            widget.singlePending.files![index].fileUrl
             // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ));
 
@@ -105,9 +105,9 @@ void initState() {
                   CachedVideoPlayerController controller = playerController.firstWhere(
                       (element) =>
                           element.dataSource ==
-                          'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                          // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
                       // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                      // pendingFile.fileUrl
+                      pendingFile.fileUrl
                       );
                   return controller.value.isInitialized
                       ? Stack(

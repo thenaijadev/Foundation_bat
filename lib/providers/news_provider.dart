@@ -6,16 +6,22 @@ import 'package:batnf/Models/files.dart';
 class NewsProvider extends ChangeNotifier {
   List<NewsModel>? allNews = 
   [
-    NewsModel(files: [
-      Files(fileUrl: 'fileUrl',
-       fileExt: 'fileExt', thumbnail: 'thumbnail')],
-      newsImage: 'newsImage', 
-      information: 'information', 
-      title: 'title', 
-      newsId: 'newsId', 
-      entryDate: 'entryDate', 
-      adminId: 'adminId', 
-      status: 'status')
+    NewsModel(
+      files: [
+      Files(
+        fileUrl: 'fileUrl',
+       fileExt: 'fileExt',
+        thumbnail: 'thumbnail'
+        )
+        ],
+      newsImage: 'newsImage',
+      information: 'information',
+      title: 'title',
+      newsId: 'newsId',
+      entryDate: 'entryDate',
+      adminId: 'adminId',
+      status: 'status'
+      )
   ];
 
   getAllNews() async {

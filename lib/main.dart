@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
       child: Builder(builder: (context){
         final themeProvider = Provider.of<ThemeProvider>(context);
         return MaterialApp(
-          title: 'BATNF',
+          title: 'Batnf',
           themeMode: themeProvider.themeMode,
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
@@ -112,9 +112,7 @@ class MyApp extends StatelessWidget {
             PendingPage.id: (context) => PendingPage(),
             ReuseableBottomBar.id: (context) => ReuseableBottomBar(),
             News.id: (context) => News(),
-            
           },
-          
         );
       }),
       

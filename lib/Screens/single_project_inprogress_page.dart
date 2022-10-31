@@ -181,7 +181,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(
@@ -190,19 +190,21 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         RichText(
+                          selectionColor: Theme.of(context).primaryColor,
                             text: TextSpan(
                                 text: 'Started: ',
-                                style: kLandpageskiptextstyle,
+                                style: kBodyTextStyle,
                                 children: [
-                              TextSpan(
+                              TextSpan(                      
                                 text: widget.singleProgress.projectStartDate,
                                 style: kPageHeader,
                               )
                             ])),
                         RichText(
+                          selectionColor: Theme.of(context).primaryColor,
                             text: TextSpan(
                                 text: 'To be Completed: ',
-                                style: kLandpageskiptextstyle,
+                                style: kBodyTextStyle,
                                 children: [
                               TextSpan(
                                 text: widget.singleProgress.projectEndDate,
@@ -231,7 +233,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 22,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(

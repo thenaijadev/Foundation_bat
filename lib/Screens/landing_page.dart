@@ -81,7 +81,7 @@ class _LandindPageState extends State<LandingPage> {
                     width: double.maxFinite,
                     height: 400,
                     decoration: BoxDecoration(
-                      color: kBackground.withOpacity(0.95),
+                      color: Theme.of(context).primaryColor.withOpacity(0.95),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50),
                         topRight: Radius.circular(50),
