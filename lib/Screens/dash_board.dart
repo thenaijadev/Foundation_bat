@@ -20,7 +20,6 @@ import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../Models/events_model.dart';
@@ -33,6 +32,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../widgets/change_theme_button.dart';
 
 class HomePage extends StatefulWidget {
+  
   static String id = 'home';
   HomePage({Key? key}) : super(key: key);
 
@@ -41,58 +41,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  InprogressModel? inprogress ;
   List<CachedVideoPlayerController> playerController = [];
-  late CachedVideoPlayerController controller;
-
-
+    CachedVideoPlayerController? controller ;
 
   @override
   void initState() {
     super.initState();
-    // video(inprogressProvider.files!);
+    // video(inprogress!.files![0].fileUrl as List<Files>);
     getId();
     FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<InprogressProvider>(context, listen: false)
         .getInprogressProjects();
-    // controller = CachedVideoPlayerController.network(
-    //     'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-    //     // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-    //     // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-    //     );
-    // controller.initialize().then((value) {
-    //   // controller.play();
-    //   setState(() {});
-    // });
+    controller = CachedVideoPlayerController.network(
+        // 'https://www.batnf.net/${ inprogress!.files![index].fileUrl
+        // //   //  inprogress.files![0].fileUrl
+        //  }'
+        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        );
+    controller!.initialize().then((value) {
+      // controller.play();
+      setState(() {});
+    });
   }
 
-  // void video(List<Files> file) async {
-  //   if (file.isEmpty) return;
-  //   List<Files> videoList =
-  //       file.where((element) => element.fileExt == 'video/mp4').toList();
-  //   int count =
-  //       videoList.fold(0, (previousValue, element) => previousValue + 1);
-  //   playerController = List.generate(
-  //       count,
-  //       (index) => CachedVideoPlayerController.network(
-  //           // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4',
-  //           Providerfiles!.[index].fileUrl
-  //           ));
+  void video(List<Files> file) async {
+    if (file.isEmpty) return;
+    List<Files> videoList =
+        file.where((element) => element.fileExt == 'video/mp4').toList();
+    int count =
+        videoList.fold(0, (previousValue, element) => previousValue + 1);
+    var inprogress;
+    playerController = List.generate(
+        count,
+        (index) => CachedVideoPlayerController.network(
+            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4',
+            'https://www.batnf.net/${inprogress.files![index].fileUrl}'
+            ));
 
-  //   for (var element in playerController) {
-  //     element.initialize().then((value) async {
-  //       await Future.delayed(Duration(milliseconds: 500));
-  //       setState(() {});
-  //     });
-  //   }
-  // }
+    for (var element in playerController) {
+      element.initialize().then((value) async {
+        await Future.delayed(Duration(milliseconds: 500));
+        setState(() {});
+      });
+    }
+  }
 
   @override
   void dispose() {
-    // controller.dispose();
+    controller!.dispose();
     super.dispose();
-     for (var element in playerController) {
+    for (var element in playerController) {
       element.dispose();
     }
   }
@@ -136,7 +138,9 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Theme.of(context).primaryColor,
             // Colors.lightBlueAccent.withOpacity(0.98),
             title: Center(
-                child: Text('Home', style: TextStyle( fontSize: 16,
+                child: Text('Home',
+                    style: TextStyle(
+                      fontSize: 16,
                       color: Colors.lightBlue,
                     ))),
             actions: [
@@ -149,16 +153,16 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ],
-            leading: Builder(
-              builder: (context) {
-                return IconButton(
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    icon: Icon(FontAwesomeIcons.bars, 
-                    color: Colors.blue, ));
-              }
-            )),
+            leading: Builder(builder: (context) {
+              return IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: Icon(
+                    FontAwesomeIcons.bars,
+                    color: Colors.blue,
+                  ));
+            })),
         drawer: Drawer(
           width: 250,
           backgroundColor: Theme.of(context).primaryColor,
@@ -167,13 +171,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               // UserAccountsDrawerHeader(
               //   accountName: Text('paul'),
-              //   accountEmail: Text('admin@admin.com'),
+              //   accountEmail: Text('$email'),
               //   decoration: BoxDecoration(color: Colors.lightBlue),
               // ),
-               SizedBox(
+              SizedBox(
                 height: 50,
               ),
-
 
               //Header
               Padding(
@@ -183,15 +186,26 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       'Settings',
-                      style: TextStyle(fontSize: 26, fontStyle: FontStyle.normal, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(width: 30,),
-                    Icon(FontAwesomeIcons.cogs, color: Colors.red, size: 24,)
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(
+                      FontAwesomeIcons.cogs,
+                      color: Colors.red,
+                      size: 24,
+                    )
                   ],
                 ),
               ),
 
-              SizedBox(height: 50,),
+              SizedBox(
+                height: 50,
+              ),
 
               // Change  Theme Option
               Padding(
@@ -508,12 +522,14 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                         
                                           Container(
                                             height: 145,
                                             width: 217,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 10.15),
-                                            child: inprogress.files![index]
+                                            child: 
+                                            inprogress.files![index]
                                                     .fileUrl.isEmpty
                                                 ? ClipRRect(
                                                     borderRadius:
@@ -531,15 +547,15 @@ class _HomePageState extends State<HomePage> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(18),
-                                                        child: controller.value
+                                                        child: controller!.value
                                                                 .isInitialized
                                                             ? AspectRatio(
                                                                 aspectRatio:
-                                                                    controller
+                                                                    controller!
                                                                         .value
                                                                         .aspectRatio,
                                                                 child: CachedVideoPlayer(
-                                                                    controller))
+                                                                    controller!))
                                                             : Center(
                                                                 child:
                                                                     const CircularProgressIndicator()),
@@ -549,17 +565,19 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
-                                                            // errorWidget: (context,
-                                                            //         url,
-                                                            //         error) =>
-                                                            //     Center(
-                                                            //         child: Text(
-                                                            //             'No Image Availaible')),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                Center(
+                                                                    child: Text(
+                                                                        'No Image Availaible')),
                                                             imageUrl: 'https://www.batnf.net/${inprogress.files![index].fileUrl}',
                                                             fit: BoxFit.cover),
                                                       ),
                                           ),
+
                                           //Title
+                                          
                                           Container(
                                             margin: EdgeInsets.only(
                                                 top: 16, left: 39, bottom: 16),
@@ -577,333 +595,338 @@ class _HomePageState extends State<HomePage> {
                               ),
                   ),
 
-                  //Upcoming events header
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Upcoming Events',
-                          style: kPageHeader,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, EventCenter.id);
-                          },
-                          child: Text(
-                            'See All',
-                            style: kForgetpasswordstyle,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 320,
-                    width: 237,
-                    child: eventProvider.allEvents == null
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : eventProvider.allEvents!.isEmpty
-                            ? Center(
-                                child: Image.asset('assets/noitem.png.gif'),
-                              )
-                            : ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: eventProvider.allEvents!.length,
-                                itemBuilder: ((context, index) {
-                                  EventModel event =
-                                      eventProvider.allEvents![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventDetails(event)));
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                          left: 36.27,
-                                          right: 15.0,
-                                          bottom: 9.0),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [kBoxshadow],
-                                        color: Theme.of(context).primaryColor,
-                                        borderRadius: BorderRadius.circular(18),
-                                      ),
-                                      height: 255.0,
-                                      width: 237.0,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            padding:
-                                                EdgeInsets.only(bottom: 6.0),
-                                            margin: EdgeInsets.only(
-                                                left: 9.0, right: 10.15),
-                                            height: 145,
-                                            width: 218,
-                                            child: event.files![index].fileExt
-                                                    .isEmpty
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    child: CachedNetworkImage(
-                                                        // errorWidget: (context,
-                                                        //         url, error) =>
-                                                        //     Center(
-                                                        //         child: Text(
-                                                        //             'No Image Availaible')),
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${event.files![index].thumbnail}',
-                                                        fit: BoxFit.cover),
-                                                  )
-                                                : CachedNetworkImage(
-                                                    // errorWidget: (context, url,
-                                                    //         error) =>
-                                                    //     Center(
-                                                    //         child: Text(
-                                                    //             'No Image Availaible')),
-                                                    placeholder: (context,
-                                                            url) =>
-                                                        CachedNetworkImage(
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${event.eventFlier}'),
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${event.files![index].fileUrl}',
-                                                    fit: BoxFit.cover),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 6.0,
-                                                left: 9.0,
-                                                bottom: 10.0),
-                                            child: Text(
-                                              event.eventName,
-                                              style: kPageHeader,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 9.0, bottom: 10.0),
-                                            child: Text(
-                                              event.eventStartDate,
-                                              style: kWelcomesubstyle,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 15.0, bottom: 27.0),
-                                            child: ListTile(
-                                              leading: Icon(
-                                                FontAwesomeIcons.mapMarkerAlt,
-                                                color: kTextboxhintColor,
-                                              ),
-                                              title: Text(
-                                                event.venue,
-                                                textAlign: TextAlign.left,
-                                                style: kWelcomesubstyle,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
-                              ),
-                  ),
+                  // //Upcoming events header
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text(
+                  //         'Upcoming Events',
+                  //         style: kPageHeader,
+                  //       ),
+                  //       TextButton(
+                  //         onPressed: () {
+                  //           Navigator.pushNamed(context, EventCenter.id);
+                  //         },
+                  //         child: Text(
+                  //           'See All',
+                  //           style: kForgetpasswordstyle,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 320,
+                  //   width: 237,
+                  //   child: eventProvider.allEvents == null
+                  //       ? Center(
+                  //           child: CircularProgressIndicator(),
+                  //         )
+                  //       : eventProvider.allEvents!.isEmpty
+                  //           ? Center(
+                  //               child: Image.asset('assets/noitem.png.gif'),
+                  //             )
+                  //           : ListView.builder(
+                  //               scrollDirection: Axis.horizontal,
+                  //               itemCount: eventProvider.allEvents!.length,
+                  //               itemBuilder: ((context, index) {
+                  //                 EventModel event =
+                  //                     eventProvider.allEvents![index];
+                  //                 return GestureDetector(
+                  //                   onTap: () {
+                  //                     Navigator.push(
+                  //                         context,
+                  //                         MaterialPageRoute(
+                  //                             builder: (context) =>
+                  //                                 EventDetails(event)));
+                  //                   },
+                  //                   child: Container(
+                  //                     margin: EdgeInsets.only(
+                  //                         left: 36.27,
+                  //                         right: 15.0,
+                  //                         bottom: 9.0),
+                  //                     decoration: BoxDecoration(
+                  //                       boxShadow: [kBoxshadow],
+                  //                       color: Theme.of(context).primaryColor,
+                  //                       borderRadius: BorderRadius.circular(18),
+                  //                     ),
+                  //                     height: 255.0,
+                  //                     width: 237.0,
+                  //                     child: Column(
+                  //                       crossAxisAlignment:
+                  //                           CrossAxisAlignment.start,
+                  //                       children: [
+                  //                         Container(
+                  //                           padding:
+                  //                               EdgeInsets.only(bottom: 6.0),
+                  //                           margin: EdgeInsets.only(
+                  //                               left: 9.0, right: 10.15),
+                  //                           height: 145,
+                  //                           width: 218,
+                  //                           child: event.files![index].fileExt
+                  //                                   .isEmpty
+                  //                               ? ClipRRect(
+                  //                                   borderRadius:
+                  //                                       BorderRadius.circular(
+                  //                                           18),
+                  //                                   child: CachedNetworkImage(
+                  //                                       // errorWidget: (context,
+                  //                                       //         url, error) =>
+                  //                                       //     Center(
+                  //                                       //         child: Text(
+                  //                                       //             'No Image Availaible')),
+                  //                                       imageUrl:
+                  //                                           'https://www.batnf.net/${event.files![index].thumbnail}',
+                  //                                       fit: BoxFit.cover),
+                  //                                 )
+                  //                               : CachedNetworkImage(
+                  //                                   // errorWidget: (context, url,
+                  //                                   //         error) =>
+                  //                                   //     Center(
+                  //                                   //         child: Text(
+                  //                                   //             'No Image Availaible')),
+                  //                                   placeholder: (context,
+                  //                                           url) =>
+                  //                                       CachedNetworkImage(
+                  //                                           imageUrl:
+                  //                                               'https://www.batnf.net/${event.eventFlier}'),
+                  //                                   imageUrl:
+                  //                                       'https://www.batnf.net/${event.files![index].fileUrl}',
+                  //                                   fit: BoxFit.cover),
+                  //                         ),
+                  //                         Padding(
+                  //                           padding: const EdgeInsets.only(
+                  //                               top: 6.0,
+                  //                               left: 9.0,
+                  //                               bottom: 10.0),
+                  //                           child: Text(
+                  //                             event.eventName,
+                  //                             style: kPageHeader,
+                  //                           ),
+                  //                         ),
+                  //                         Padding(
+                  //                           padding: const EdgeInsets.only(
+                  //                               left: 9.0, bottom: 10.0),
+                  //                           child: Text(
+                  //                             event.eventStartDate,
+                  //                             style: kWelcomesubstyle,
+                  //                           ),
+                  //                         ),
+                  //                         Padding(
+                  //                           padding: const EdgeInsets.only(
+                  //                               left: 15.0, bottom: 27.0),
+                  //                           child: ListTile(
+                  //                             leading: Icon(
+                  //                               FontAwesomeIcons.mapMarkerAlt,
+                  //                               color: kTextboxhintColor,
+                  //                             ),
+                  //                             title: Text(
+                  //                               event.venue,
+                  //                               textAlign: TextAlign.left,
+                  //                               style: kWelcomesubstyle,
+                  //                             ),
+                  //                           ),
+                  //                         ),
+                  //                       ],
+                  //                     ),
+                  //                   ),
+                  //                 );
+                  //               }),
+                  //             ),
+                  // ),
 
-                  // News list header
+                  // // News list header
 
-                  SizedBox(
-                    // color: kBackground,
-                    height: 419,
-                    width: 375,
-                    child: Column(
-                      children: [
-                        // News label
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 30.0, right: 30.0, bottom: 50),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'News',
-                                style: kPageHeader,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => News()));
-                                },
-                                child: Text(
-                                  'See All',
-                                  style: kForgetpasswordstyle,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: newsProvider.allNews == null
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : newsProvider.allNews!.isEmpty
-                                  ? Center(
-                                      child:
-                                          Image.asset('assets/noitem.png.gif'),
-                                    )
-                                  : ListView.builder(
-                                      itemCount: newsProvider.allNews!.length,
-                                      itemBuilder: ((context, index) {
-                                        NewsModel news =
-                                            newsProvider.allNews![index];
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 23.0, right: 23.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          NewsDetails(news)));
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.only(top: 25),
-                                              decoration: BoxDecoration(
-                                                boxShadow: [kBoxshadow],
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                              ),
-                                              // height: 120,
-                                              width: 375,
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 15.0,
-                                                        right: 15.0),
-                                                    height: 120,
-                                                    width: 120,
-                                                    child: news.files![index]
-                                                            .fileUrl.isEmpty && news.files![index].fileExt.isEmpty
-                                                        ? ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child: CachedNetworkImage(
-                                                                errorWidget: (context,
-                                                                        url,
-                                                                        error) => Icon(Icons.error),
-                                                                    // CachedNetworkImage(
-                                                                    //     imageUrl:
-                                                                    //         'https://www.batnf.net/${news.files![index].thumbnail}',
-                                                                    //     fit: BoxFit
-                                                                    //         .cover),
-                                                                imageUrl:
-                                                                    'https://www.batnf.net/${news.files![index].thumbnail}',
-                                                                fit: BoxFit
-                                                                    .cover),
-                                                          )
-                                                        : 
-                                                        // news.files![index]
-                                                        //             .fileExt ==
-                                                        //         'video\/mp4'
-                                                        //     ? ClipRRect(
-                                                        //         borderRadius:
-                                                        //             BorderRadius
-                                                        //                 .circular(
-                                                        //                     18),
-                                                        //         child: controller
-                                                        //                 .value
-                                                        //                 .isInitialized
-                                                        //             ? AspectRatio(
-                                                        //                 aspectRatio: controller
-                                                        //                     .value
-                                                        //                     .aspectRatio,
-                                                        //                 child: CachedVideoPlayer(
-                                                        //                     controller))
-                                                        //             : Center(
-                                                        //                 child:
-                                                        //                     const CircularProgressIndicator()),
-                                                        //       )
-                                                        //     : 
-                                                            ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            18),
-                                                                child: CachedNetworkImage(
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${news.files![index].fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                              ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      height: 93,
-                                                      margin: EdgeInsets.only(
-                                                          bottom: 10.0),
-                                                      color: kBackground,
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          Text(
-                                                            news.title,
-                                                            style:
-                                                                kNewsSubHeader,
-                                                          ),
-                                                          Text(
-                                                            news.information,
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style:
-                                                                kBodyTextStyle,
-                                                          ),
-                                                          Text(
-                                                            news.entryDate,
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style:
-                                                                kNewsDateSTyle,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                        )
-                      ],
-                    ),
-                  ),
+                  // SizedBox(
+                  //   // color: kBackground,
+                  //   height: 419,
+                  //   width: 375,
+                  //   child: Column(
+                  //     children: [
+                  //       // News label
+                  //       Padding(
+                  //         padding: const EdgeInsets.only(
+                  //             left: 30.0, right: 30.0, bottom: 50),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Text(
+                  //               'News',
+                  //               style: kPageHeader,
+                  //             ),
+                  //             TextButton(
+                  //               onPressed: () {
+                  //                 Navigator.push(
+                  //                     context,
+                  //                     MaterialPageRoute(
+                  //                         builder: (context) => News()));
+                  //               },
+                  //               child: Text(
+                  //                 'See All',
+                  //                 style: kForgetpasswordstyle,
+                  //               ),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       Expanded(
+                  //         child: newsProvider.allNews == null
+                  //             ? Center(
+                  //                 child: CircularProgressIndicator(),
+                  //               )
+                  //             : newsProvider.allNews!.isEmpty
+                  //                 ? Center(
+                  //                     child:
+                  //                         Image.asset('assets/noitem.png.gif'),
+                  //                   )
+                  //                 : ListView.builder(
+                  //                     itemCount: newsProvider.allNews!.length,
+                  //                     itemBuilder: ((context, index) {
+                  //                       NewsModel news =
+                  //                           newsProvider.allNews![index];
+                  //                       return Padding(
+                  //                         padding: const EdgeInsets.only(
+                  //                             left: 23.0, right: 23.0),
+                  //                         child: GestureDetector(
+                  //                           onTap: () {
+                  //                             Navigator.push(
+                  //                                 context,
+                  //                                 MaterialPageRoute(
+                  //                                     builder: (context) =>
+                  //                                         NewsDetails(news)));
+                  //                           },
+                  //                           child: Container(
+                  //                             margin: EdgeInsets.only(top: 25),
+                  //                             decoration: BoxDecoration(
+                  //                               boxShadow: [kBoxshadow],
+                  //                               color: Theme.of(context)
+                  //                                   .primaryColor,
+                  //                               borderRadius:
+                  //                                   BorderRadius.circular(18),
+                  //                             ),
+                  //                             // height: 120,
+                  //                             width: 375,
+                  //                             child: Row(
+                  //                               children: [
+                  //                                 Container(
+                  //                                   margin: EdgeInsets.only(
+                  //                                       bottom: 15.0,
+                  //                                       right: 15.0),
+                  //                                   height: 120,
+                  //                                   width: 120,
+                  //                                   child: news
+                  //                                               .files![0]
+                  //                                               .fileUrl
+                  //                                               .isEmpty 
+                  //                                       ? ClipRRect(
+                  //                                           borderRadius:
+                  //                                               BorderRadius
+                  //                                                   .circular(
+                  //                                                       18),
+                  //                                           child:
+                  //                                               CachedNetworkImage(
+                  //                                                   errorWidget: (context,
+                  //                                                           url,
+                  //                                                           error) =>
+                  //                                                       Icon(Icons
+                  //                                                           .error),
+                  //                                                   // CachedNetworkImage(
+                  //                                                   //     imageUrl:
+                  //                                                   //         'https://www.batnf.net/${news.files![index].thumbnail}',
+                  //                                                   //     fit: BoxFit
+                  //                                                   //         .cover),
+                  //                                                   imageUrl:
+                  //                                                       'https://www.batnf.net/${news.files![0].thumbnail}',
+                  //                                                   fit: BoxFit
+                  //                                                       .cover),
+                  //                                         )
+                  //                                       :
+                  //                                       news.files![0]
+                  //                                                   .fileExt ==
+                  //                                               'video\/mp4'
+                  //                                           ? ClipRRect(
+                  //                                               borderRadius:
+                  //                                                   BorderRadius
+                  //                                                       .circular(
+                  //                                                           18),
+                  //                                               child: controller
+                  //                                                       .value
+                  //                                                       .isInitialized
+                  //                                                   ? AspectRatio(
+                  //                                                       aspectRatio: controller
+                  //                                                           .value
+                  //                                                           .aspectRatio,
+                  //                                                       child: CachedVideoPlayer(
+                  //                                                           controller))
+                  //                                                   : Center(
+                  //                                                       child:
+                  //                                                           const CircularProgressIndicator()),
+                  //                                             )
+                  //                                           :
+                  //                                       ClipRRect(
+                  //                                           borderRadius:
+                  //                                               BorderRadius
+                  //                                                   .circular(
+                  //                                                       18),
+                  //                                           child: CachedNetworkImage(
+                  //                                               imageUrl:
+                  //                                                   'https://www.batnf.net/${news.files![0].fileUrl}',
+                  //                                               fit: BoxFit
+                  //                                                   .cover),
+                  //                                         ),
+                  //                                 ),
+                  //                                 Expanded(
+                  //                                   child: Container(
+                  //                                     margin: EdgeInsets.only(
+                  //                                         bottom: 10.0),
+                  //                                     color: Theme.of(context)
+                  //                                         .primaryColor,
+                  //                                     child: Column(
+                  //                                       mainAxisAlignment:
+                  //                                           MainAxisAlignment
+                  //                                               .spaceEvenly,
+                  //                                       crossAxisAlignment:
+                  //                                           CrossAxisAlignment
+                  //                                               .start,
+                  //                                       // ignore: prefer_const_literals_to_create_immutables
+                  //                                       children: [
+                  //                                         Text(
+                  //                                           news.title,
+                  //                                           style:
+                  //                                               kNewsSubHeader,
+                  //                                         ),
+                  //                                         Text(
+                  //                                           news.information,
+                  //                                           textAlign:
+                  //                                               TextAlign.left,
+                  //                                           style:
+                  //                                               kBodyTextStyle,
+                  //                                         ),
+                  //                                         Text(
+                  //                                           news.entryDate,
+                  //                                           textAlign:
+                  //                                               TextAlign.left,
+                  //                                           style:
+                  //                                               kNewsDateSTyle,
+                  //                                         )
+                  //                                       ],
+                  //                                     ),
+                  //                                   ),
+                  //                                 )
+                  //                               ],
+                  //                             ),
+                  //                           ),
+                  //                         ),
+                  //                       );
+                  //                     }),
+                  //                   ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
 
                   // Visit Market Link
                   Padding(

@@ -20,102 +20,90 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: ListView(children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 130.0,
-              ),
-              child: Center(
-                  child: Text(
-                'Welcome!',
-                style: kWelcomeHeadstyle,
-              )),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 79.0),
-              child: Center(
-                  child: Text(
-                'Sign in or create a new account',
-                style: kWelcomesubstyle,
-              )),
-            ),
-
-            Center(
-              child: Image.asset(
-                'assets/Frame.png',
-                height: 248.93,
-                width: 320.64,
-              ),
-            ),
-
-            //Sign In Button
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 151.0, left: 30, right: 30, bottom: 30.0),
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(45.0),
+      body: Stack(
+        children: [
+          Image.asset('assets/well.png',
+          fit: BoxFit.fill,
+          width: double.maxFinite,
+          height: double.maxFinite,
+          ),
+        ListView(
+          children: [Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 100.0,
                 ),
-                height: 45.0,
-                color: kButtonColor,
-                onPressed: () {
-                  Navigator.pushNamed(context, SignIn.id);
-                },
-                minWidth: MediaQuery.of(context).size.width,
-                child: Text(
-                  'Sign In',
-                  textAlign: TextAlign.center,
-                  style: kButtontextstyle,
-                ),
+                child: Center(
+                    child: Text(
+                  'Welcome!',
+                  style: kWelcomeHeadstyle,
+                )),
               ),
-            ),
-
-            // Sing Up Button
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 130.0),
-              child: MaterialButton(
-                height: 45.0,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    style: BorderStyle.solid,
-                    color: kButtonColor,
-                    width: 2.0,
+                
+              Container(
+                margin: EdgeInsets.only(top: 5.0, bottom: 79.0),
+                width: 230,
+                color: Color.fromARGB(255, 8, 51, 121),
+                child: Center(
+                    child: Text(
+                  'Sign in or create a new account',
+                  style: kWelcomesubstyle,
+                )),
+              ),
+              //Sign Up Button
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 151.0, left: 70, right: 70, bottom: 30.0),
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0),
                   ),
-                  borderRadius: BorderRadius.circular(45.0),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, SignUp.id);
-                },
-                minWidth: MediaQuery.of(context).size.width,
-                child: Text.rich(
-                  TextSpan(text: 'No account yet? ', style: kWelcomesubstyle,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        TextSpan(
-                          onEnter: ((event) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()));
-                          }),
-                          text: 'Sign Up',
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Inter',
-                              fontSize: 16.0,
-                              fontStyle: FontStyle.normal),
-                        ),
-                      ]),
+                  height: 45.0,
+                  color: Color.fromARGB(255, 8, 51, 121),
+                  onPressed: () {
+                    Navigator.pushNamed(context, SignUp.id);
+                  },
+                  minWidth: MediaQuery.of(context).size.width,
+                  child: Text(
+                    'Sign Up',
+                    textAlign: TextAlign.center,
+                    style: kButtontextstyle,
+                  ),
                 ),
               ),
-            ),
-          ],
+                
+              // Sing In Button
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 70.0, right: 70.0, bottom: 100.0),
+                child: MaterialButton(
+                  height: 45.0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      style: BorderStyle.solid,
+                      color: Colors.white,
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(45.0),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, SignIn.id);
+                  },
+                  minWidth: MediaQuery.of(context).size.width,
+                  child: Text('Sign In', style: TextStyle(
+                            color: Color.fromARGB(255, 8, 51, 121),
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Inter',
+                            fontSize: 16.0,
+                            fontStyle: FontStyle.normal),
+                      )
+                ),
+              ),
+            ],
+          )],
         ),
       ]),
     );

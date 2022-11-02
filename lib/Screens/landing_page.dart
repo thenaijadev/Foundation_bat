@@ -117,7 +117,7 @@ class _LandindPageState extends State<LandingPage> {
                               borderRadius: BorderRadius.circular(45.0),
                             ),
                             height: 45.0,
-                            color: kButtonColor,
+                            color: Color.fromARGB(255, 8, 51, 121),
                             onPressed: () {
                               Navigator.pushNamed(context, WelcomePage.id);
                             },

@@ -36,6 +36,7 @@ const kLandpagebodytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kLandpageskiptextstyle = TextStyle(
+  // color: ThemeData(c) .primaryColor,
     fontWeight: FontWeight.w400,
     fontFamily: 'Inter',
     fontSize: 16.0,
@@ -78,7 +79,7 @@ var kForgetpasswordstyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kWelcomesubstyle = TextStyle(
-    color: kTextboxhintColor,
+    color: Colors.white,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -93,7 +94,7 @@ const kProjectsumdetailtextstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kWelcomeHeadstyle = TextStyle(
-    color: Colors.blue,
+    color: Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 36,

@@ -22,11 +22,9 @@ class EventCenter extends StatefulWidget {
 }
 
 class _EventCenterState extends State<EventCenter> {
-  final String uri = 'https://www.batnf.net/';
   @override
   void initState() {
     super.initState();
-    Provider.of<EventProvider>(context, listen: false).getAllEvents();
   }
 
   @override
@@ -80,7 +78,7 @@ class _EventCenterState extends State<EventCenter> {
                       Container(
                         margin:
                             EdgeInsets.only(left: 30, right: 30, bottom: 21),
-                        color: kBackground,
+                        color: Theme.of(context).primaryColor,
                         height: 45.0,
                         child: TextField(
                           decoration: InputDecoration(
@@ -154,32 +152,40 @@ class _EventCenterState extends State<EventCenter> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(18),
-                                          child: provider
-                                                  .allEvents![index]
-                                                  .files![0]
-                                                  .fileExt
-                                                  .isEmpty
-                                              ? ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                  child: CachedNetworkImage(
-                                                    errorWidget: (context,
-                                                              url, error) =>
-                                                          Center(child: Text('No Image Availaible')),
-                                                      imageUrl:
-                                                          'https://www.batnf.net/${event.files![index].thumbnail}',
-                                                      fit: BoxFit.cover),
-                                                )
+                                          child: event.files![index].fileUrl.isEmpty && event.files![index].thumbnail.isNotEmpty
+                                              ?  CachedNetworkImage(
+                                                errorWidget: (context,
+                                                          url, error) => Container(color: Colors.pink,),
+                                                          // Center(child: Icon(Icons.error, color: Colors.black,)),
+                                                      // Center(child: Text('No Image Availaible')),
+                                                      placeholder: (context,
+                                                          url) =>
+                                                      Container(
+                                                        color: Colors.blue,
+                                                      ),
+                                                      // CachedNetworkImage(
+                                                      //     imageUrl:
+                                                      //         'https://www.batnf.net/${event.files![index].thumbnail}'),
+                                                  imageUrl:
+                                                      'https://www.batnf.net/${event.files![index].thumbnail}',
+                                                  fit: BoxFit.cover)
                                               : CachedNetworkImage(
                                               errorWidget:
                                                   (context, url, error) =>
-                                                      Icon(Icons.error),
-                                              placeholder: (context, url) =>
+                                                      CachedNetworkImage(
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${event.files![index].thumbnail}', fit: BoxFit.fill,),
+                                                  // Container(color: Colors.green,),
+                                                      // Icon(Icons.error, color: Colors.black),
+                                              placeholder: (context, url) => 
+                                              // Container(
+                                              //           color: Colors.black,
+                                              //         ),
                                                   CachedNetworkImage(
                                                       imageUrl:
-                                                          'https://www.batnf.net/${event.eventFlier}'),
+                                                          'https://www.batnf.net/${event.files![index].thumbnail}'),
                                               imageUrl:
-                                                  'https://www.batnf.net/${event.files![0].fileUrl}',
+                                                  'https://www.batnf.net/${event.files![index].fileUrl}',
                                               fit: BoxFit.cover),
                                         ),
                                       ),

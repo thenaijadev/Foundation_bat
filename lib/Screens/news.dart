@@ -5,6 +5,7 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:batnf/Models/news_model.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,28 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
+  late CachedVideoPlayerController controller;
   @override
   void initState() {
     super.initState();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
+     controller = CachedVideoPlayerController.network(
+        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
+        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+    controller.initialize().then((value) {
+      // controller.play();
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    // for (var element in playerController) {
+    //   element.dispose();
+    // }
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -68,7 +87,7 @@ class _NewsState extends State<News> {
                   if (provider.allNews != null && provider.allNews!.isNotEmpty)
                     Container(
                       margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                      color: kBackground,
+                      color: Theme.of(context).primaryColor,
                       height: 45.0,
                       child: TextField(
                         decoration: InputDecoration(
@@ -107,7 +126,7 @@ class _NewsState extends State<News> {
                         )
                       : RefreshIndicator(
                         color: kBackground,
-                        backgroundColor: kButtonColor,
+                        backgroundColor: Theme.of(context).primaryColor,
                         onRefresh: ()async{
                            await Provider.of<NewsProvider>(context, listen: false)
                                 .getAllNews();
@@ -126,7 +145,6 @@ class _NewsState extends State<News> {
                                               NewsDetails(news)));
                                 },
                                 child: Container(
-                                  // height: 124,
                                   width: 368,
                                   margin: EdgeInsets.only(
                                     left: 30,
@@ -147,7 +165,7 @@ class _NewsState extends State<News> {
                                         margin: EdgeInsets.only(
                                             bottom: 7.0, top: 7.0, left: 9.0),
                                         child: news
-                                                  .files![0].fileUrl.isEmpty
+                                                  .files![index].fileUrl.isEmpty
                                               ? ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(18),
@@ -156,31 +174,53 @@ class _NewsState extends State<News> {
                                                               url, error) =>
                                                           CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${news.newsImage}',
+                                                                  'https://www.batnf.net/${news.files![index].thumbnail}',
                                                               fit:
                                                                   BoxFit.cover),
                                                       imageUrl:
-                                                          'https://www.batnf.net/${news.newsImage}',
+                                                          'https://www.batnf.net/${news.files![index].thumbnail}',
                                                       fit: BoxFit.cover),
                                                 )
-                                              : news.files![0].fileExt ==
+                                              : news.files![index].fileExt ==
                                                       'video\/mp4'
                                                   ? ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               18),
-                                                      child: CachedNetworkImage(
-                                                          imageUrl:
-                                                              'https://www.batnf.net/${news.files![0].fileUrl}',
-                                                          fit: BoxFit.cover),
+                                                      child: controller.value
+                                                              .isInitialized
+                                                          ? AspectRatio(
+                                                              aspectRatio:
+                                                                  controller
+                                                                      .value
+                                                                      .aspectRatio,
+                                                              child:
+                                                                  CachedVideoPlayer(
+                                                                      controller))
+                                                          : Center(
+                                                              child:
+                                                                  const CircularProgressIndicator()),
                                                     )
                                                   : ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               18),
                                                       child: CachedNetworkImage(
+                                                        errorWidget:
+                                                  (context, url, error) =>
+                                                      CachedNetworkImage(
                                                           imageUrl:
-                                                              'https://www.batnf.net/${news.files![0].fileUrl}',
+                                                              'https://www.batnf.net/${news.files![index].thumbnail}', fit: BoxFit.fill,),
+                                                              placeholder: (context,
+                                                                  url) =>
+                                                              Container(
+                                                                        color: Colors.black,
+                                                                      ),
+                                                              // CachedNetworkImage(
+                                                              //     imageUrl:
+                                                              //         'https://www.batnf.net/${news.files![index].thumbnail}'),
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${news.files![index].fileUrl}',
                                                           fit: BoxFit.cover),
                                                     ),
                                         // ClipRRect(
@@ -195,7 +235,6 @@ class _NewsState extends State<News> {
                                       //News Details
                                       Expanded(
                                         child: Container(
-                                          height: 93,
                                           margin: EdgeInsets.only(
                                               top: 5,
                                               bottom: 10,

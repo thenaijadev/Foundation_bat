@@ -25,26 +25,22 @@ class _NewsDetailsState extends State<NewsDetails> {
   void initState() {
     super.initState();
     video(widget.singleNews.files!);
-    // Provider.of<NewsProvider>(context, listen: false).getAllNews();
   }
   void video(List<Files> file) async {
     if (file.isEmpty) return;
     List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
+        file.where((element) => element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg').toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-            // widget.singlePending.files![index].fileUrl
-            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            'https://www.batnf.net/${widget.singleNews.files![index].fileUrl}'
             ));
 
     for (var element in playerController) {
       element.initialize().then((value) async {
         await Future.delayed(Duration(milliseconds: 500));
-        // element.play();
         setState(() {});
       });
     }
@@ -92,7 +88,9 @@ class _NewsDetailsState extends State<NewsDetails> {
               ),
 
               //News Image
-              CarouselSlider(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+              child: CarouselSlider(
                   options: CarouselOptions(
                     autoPlayInterval: Duration(seconds: 10),
                     height: 350,
@@ -101,7 +99,15 @@ class _NewsDetailsState extends State<NewsDetails> {
                     // autoPlay: true
                   ),
                   items: widget.singleNews.files!.map((newsFile) {
-                    if (newsFile.fileExt == 'image/jpeg') {
+                    if (newsFile.fileExt == '') {
+                        return Container(
+                          color: kGeneralbodytextColor,
+                          child: CachedNetworkImage(
+                              imageUrl:
+                                  'https://www.batnf.net/${newsFile.thumbnail}',
+                              fit: BoxFit.cover),
+                        );
+                      } else if (newsFile.fileExt == 'image/jpeg') {
                       return CachedNetworkImage(
                           errorWidget: (context, url, error) =>
                               Center(child: Text('No Image/Video Available')),
@@ -117,17 +123,14 @@ class _NewsDetailsState extends State<NewsDetails> {
                     CachedVideoPlayerController controller =
                         playerController.firstWhere((element) =>
                                 element.dataSource ==
-                                'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                            // newsFile.fileUrl
+                            'https://www.batnf.net/${newsFile.fileUrl}'
                             );
                     return controller.value.isInitialized
                         ? Stack(
                             alignment: AlignmentDirectional.bottomStart,
                             children: [
                               AspectRatio(
-                                  aspectRatio: 6 / 6,
-                                  // controller.value.aspectRatio,
+                                  aspectRatio:controller.value.aspectRatio,
                                   child: CachedVideoPlayer(controller)),
                               GestureDetector(
                                 onTap: () {
@@ -151,7 +154,8 @@ class _NewsDetailsState extends State<NewsDetails> {
                             ],
                           )
                         : Center(child: CircularProgressIndicator());
-                  }).toList()),
+                  }).toList())
+              ),
 
               // New Details
               Container(

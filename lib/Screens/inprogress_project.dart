@@ -141,7 +141,6 @@ class _InprogressPageState extends State<InprogressPage> {
                                               ProgressDetails(inprogress)));
                                 },
                                 child: Container(
-                                  // height: 202,
                                   width: 237,
                                   margin: EdgeInsets.only(
                                       left: 36.27,

@@ -77,25 +77,28 @@ class _EventDetailsState extends State<EventDetails> {
           backgroundColor: kButtonColor);
     }
   }
-@override
+
+  @override
   void initState() {
-    super.initState();
     video(widget.singleEvent.files!);
-    // Provider.of<NewsProvider>(context, listen: false).getAllNews();
+
+    super.initState();
   }
 
   void video(List<Files> file) async {
     if (file.isEmpty) return;
-    List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
+    List<Files> videoList = file
+        .where((element) =>
+            element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg' || element.fileUrl == '' )
+        .toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-            // widget.singleEvent.files![index].fileUrl
-            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+              'https://www.batnf.net/${widget.singleEvent.files![index].fileUrl}',
+              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ));
 
     for (var element in playerController) {
@@ -106,6 +109,7 @@ class _EventDetailsState extends State<EventDetails> {
       });
     }
   }
+
   @override
   void dispose() {
     for (var element in playerController) {
@@ -113,6 +117,7 @@ class _EventDetailsState extends State<EventDetails> {
     }
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -131,36 +136,47 @@ class _EventDetailsState extends State<EventDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Event Image
-              SizedBox(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: CarouselSlider(
                     options: CarouselOptions(
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
-                      viewportFraction: 1.0,
+                      viewportFraction: 0.98,
                       enableInfiniteScroll: false,
                       // autoPlay: true
                     ),
                     items: widget.singleEvent.files!.map((eventsFile) {
-                      if (eventsFile.fileExt == 'image/jpeg') {
+                      print(eventsFile.fileExt);
+                      print(eventsFile.fileUrl);
+                      print(eventsFile.thumbnail);
+                      if (eventsFile.fileUrl == '' && eventsFile.thumbnail == 'image/jpg') {
+                        return CachedNetworkImage(
+                            imageUrl:
+                                'https://www.batnf.net/${eventsFile.thumbnail}',
+                            fit: BoxFit.cover);
+                      } else if (eventsFile.fileExt == 'image/jpeg') {
                         return CachedNetworkImage(
                             errorWidget: (context, url, error) =>
                                 Center(child: Text('No Image/Video Available')),
-                            placeholder: (context, url) => Center(
-                                    child: Text(
-                                  'Loading',
-                                  style: TextStyle(color: Colors.black),
-                                )),
+                            placeholder: (context, url) => CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${eventsFile.thumbnail}'),
+                            // Center(
+                            //         child: Text(
+                            //       'Loading',
+                            //       style: TextStyle(color: Colors.black),
+                            //     )),
                             imageUrl:
                                 'https://www.batnf.net/${eventsFile.fileUrl}',
                             fit: BoxFit.cover);
                       }
                       CachedVideoPlayerController controller =
                           playerController.firstWhere((element) =>
-                                  element.dataSource ==
-                                  'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
+                              element.dataSource ==
+                              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
                               // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                              // eventsFile.fileUrl
-                              );
+                              'https://www.batnf.net/${eventsFile.fileUrl}');
                       return controller.value.isInitialized
                           ? Stack(
                               alignment: AlignmentDirectional.bottomStart,
@@ -341,9 +357,9 @@ class _EventDetailsState extends State<EventDetails> {
                         loading = true;
                       });
                       register(
-                          userId: Provider.of<EventProvider>(context,
-                                  listen: false)
-                              .userId,
+                          userId:
+                              Provider.of<EventProvider>(context, listen: false)
+                                  .userId,
                           eventId: widget.singleEvent.eventId);
                     }
                   },

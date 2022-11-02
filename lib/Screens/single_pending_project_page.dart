@@ -39,9 +39,7 @@ void initState() {
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-            widget.singlePending.files![index].fileUrl
-            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            'https://www.batnf.net/${widget.singlePending.files![index].fileUrl}'
             ));
 
     for (var element in playerController) {
@@ -80,7 +78,9 @@ void initState() {
           children: [
       
             //Project Image
-            CarouselSlider(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+            child: CarouselSlider(
                 options: CarouselOptions(
                   autoPlayInterval: Duration(seconds: 10),
                   height: 350,
@@ -105,9 +105,7 @@ void initState() {
                   CachedVideoPlayerController controller = playerController.firstWhere(
                       (element) =>
                           element.dataSource ==
-                          // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                      // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                      pendingFile.fileUrl
+                      'https://www.batnf.net/${pendingFile.fileUrl}'
                       );
                   return controller.value.isInitialized
                       ? Stack(
@@ -139,7 +137,8 @@ void initState() {
                           ],
                         )
                       : Center(child: CircularProgressIndicator());
-                }).toList()),
+                }).toList())
+            ),
       
             //Project Title
             Container(

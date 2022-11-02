@@ -34,22 +34,20 @@ class _ProgressDetailsState extends State<ProgressDetails> {
     if (file.isEmpty) return;
     List<Files> videoList = file
         .where((element) =>
-            element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg')
+            element.fileExt == 'video/mp4' && element.fileExt == 'image/jpeg')
         .toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
         count,
         (index) => CachedVideoPlayerController.network(
-            // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
             'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}'
-            // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            //  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             ));
 
     for (var element in playerController) {
       element.initialize().then((value) async {
         await Future.delayed(Duration(milliseconds: 500));
-        // element.play();
         setState(() {});
       });
     }
@@ -65,7 +63,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
   @override
   Widget build(BuildContext context) {
-    InprogressProvider provider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
@@ -85,7 +82,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
             children: [
               //Project Image
               ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 child: CarouselSlider(
                     options: CarouselOptions(
                       padEnds: false,
@@ -106,7 +103,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   'https://www.batnf.net/${inprogressFile.thumbnail}',
                               fit: BoxFit.cover),
                         );
-                      } else if (inprogressFile.fileExt == 'image/jpeg') {
+                      } 
+                      else
+                       if (inprogressFile.fileExt == 'image/jpeg') {
                         return CachedNetworkImage(
                             errorWidget: (context, url, error) =>
                                 Center(child: Text('No Image Available')),
@@ -119,9 +118,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       CachedVideoPlayerController controller =
                           playerController.firstWhere((element) =>
                               element.dataSource ==
-                              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                              'https://www.batnf.net/${inprogressFile.fileUrl}');
+                              'https://www.batnf.net/${inprogressFile.fileUrl}'
+                              //  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                              );
                       return controller.value.isInitialized
                           ? Stack(
                               alignment: AlignmentDirectional.center,
@@ -152,7 +151,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 ),
                               ],
                             )
-                          : Center(child: CircularProgressIndicator());
+                          : Center(child: CircularProgressIndicator()
+                      );
                     }).toList()),
               ),
 
@@ -189,28 +189,32 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        RichText(
-                          selectionColor: Theme.of(context).primaryColor,
-                            text: TextSpan(
-                                text: 'Started: ',
-                                style: kBodyTextStyle,
-                                children: [
-                              TextSpan(                      
-                                text: widget.singleProgress.projectStartDate,
-                                style: kPageHeader,
-                              )
-                            ])),
-                        RichText(
-                          selectionColor: Theme.of(context).primaryColor,
-                            text: TextSpan(
-                                text: 'To be Completed: ',
-                                style: kBodyTextStyle,
-                                children: [
-                              TextSpan(
-                                text: widget.singleProgress.projectEndDate,
-                                style: kPageHeader,
-                              )
-                            ])),
+                        Container(
+                          child: RichText(
+                            selectionColor: Theme.of(context).primaryColor,
+                              text: TextSpan(
+                                  text: 'Started: ',
+                                  style: kBodyTextStyle,
+                                  children: [
+                                TextSpan(                      
+                                  text: widget.singleProgress.projectStartDate,
+                                  style: kPageHeader,
+                                )
+                              ])),
+                        ),
+                        Container(
+                          child: RichText(
+                            selectionColor: Theme.of(context).primaryColor,
+                              text: TextSpan(
+                                  text: 'To be Completed: ',
+                                  style: kBodyTextStyle,
+                                  children: [
+                                TextSpan(
+                                  text: widget.singleProgress.projectEndDate,
+                                  style: kPageHeader,
+                                )
+                              ])),
+                        ),
                       ],
                     )
                   ],

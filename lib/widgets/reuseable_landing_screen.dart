@@ -79,7 +79,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(45.0),
                   ),
-                  color: kButtonColor,
+                  color: Color.fromARGB(255, 8, 51, 121),
                   onPressed: () {
                     Navigator.pushNamed(context, WelcomePage.id);
                   },

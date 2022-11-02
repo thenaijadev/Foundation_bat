@@ -121,13 +121,13 @@ class _SignInState extends State<SignIn> {
     var response =
         await http.post(Uri.parse('https://www.batnf.net/api/forget_password'),
             body: jsonEncode({
-              "identity": email,
+              "identity": emailController.text,
             }),
             headers: {
           "Content-Type": "application/json",
         });
-    var data = jsonDecode(response.body);
-    print(data);
+    // var data = jsonDecode(response.body);
+    // print(data);
     print(response.body);
 
     if (mounted) {
@@ -326,7 +326,7 @@ class _SignInState extends State<SignIn> {
                           onPressed: () {
                             if (!loading1) {
                               setState(() {
-                                loading1 = true;
+                                loading1 = false;
                               });
                               forgetpassword(email: emailController.text);
                             }

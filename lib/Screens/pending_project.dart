@@ -24,7 +24,7 @@ class _PendingPageState extends State<PendingPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<PendingProvider>(context, listen: false).getPendingProjects();
+    // Provider.of<PendingProvider>(context, listen: false).getPendingProjects();
   }
 
   @override
@@ -93,24 +93,37 @@ class _PendingPageState extends State<PendingPage> {
                                                   pending)));
                                 },
                                 child: Container(
+                                  width: 237,
                                   margin: EdgeInsets.only(
-                                      bottom: 15.0, left: 30, right: 30),
+                                      left: 36.27,
+                                      right: 15.0,
+                                      bottom: 15.0,
+                                      top: 30),
+                                  // margin: EdgeInsets.only(
+                                  //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: kBackground,
+                                    color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
-                                  // height: 104,
-                                  child: Row(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
+                                        height: 145,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         margin: EdgeInsets.only(
-                                            left: 15,
-                                            bottom: 15.0,
-                                            right: 15.0,
-                                            top: 15),
-                                        height: 74,
-                                        width: 74,
+                                            left: 9.0, right: 9),
+                                        // margin: EdgeInsets.only(
+                                        //     left: 15,
+                                        //     bottom: 15.0,
+                                        //     right: 15.0,
+                                        //     top: 15),
+                                        // height: 74,
+                                        // width: 74,
                                         child: pending
                                                 .files![0].fileUrl.isEmpty
                                             ? ClipRRect(
@@ -118,7 +131,7 @@ class _PendingPageState extends State<PendingPage> {
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
                                                     imageUrl:
-                                                        'https://www.batnf.net/${pending.projectImage}',
+                                                        'https://www.batnf.net/${pending.files![index].thumbnail}',
                                                     fit: BoxFit.cover),
                                               )
                                             : pending.files![0].fileExt ==
@@ -155,62 +168,48 @@ class _PendingPageState extends State<PendingPage> {
                                         //       fit: BoxFit.cover),
                                         // ),
                                       ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 93,
-                                          margin: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 10,
-                                              left: 10.0,
-                                              right: 6.0),
-                                          color: kBackground,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-
-                                              //Project Timelines
-                                              Container(
-                                                color: kBackground,
-                                                height: 19,
-                                                child: Text(
-                                                  pending.projectTitle,
-                                                  style: kPageHeader,
-                                                ),
-                                              ),
-                                              RichText(
-                                                  text: TextSpan(
-                                                      text: 'To Begin: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                    TextSpan(
-                                                      text: pending
-                                                          .projectStartDate,
-                                                      style: kTextboxhintstyle,
-                                                    )
-                                                  ])),
-                                              RichText(
-                                                  text: TextSpan(
-                                                      text: 'To End: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                    TextSpan(
-                                                      text: pending
-                                                          .projectEndDate,
-                                                      style: kTextboxhintstyle,
-                                                    )
-                                                  ])),
-                                            ],
-                                          ),
-                                        ),
-                                      )
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        pending.projectTitle,
+                                        style: kPageHeader,
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      RichText(
+                                          text: TextSpan(
+                                              text: 'To Begin: ',
+                                              style:
+                                                  kLandpageskiptextstyle,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                            TextSpan(
+                                              text: pending
+                                                  .projectStartDate,
+                                              style: kTextboxhintstyle,
+                                            )
+                                          ])),
+                                          SizedBox(
+                                        height: 8,
+                                      ),
+                                      RichText(
+                                          text: TextSpan(
+                                              text: 'To End: ',
+                                              style:
+                                                  kLandpageskiptextstyle,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                            TextSpan(
+                                              text: pending
+                                                  .projectEndDate,
+                                              style: kTextboxhintstyle,
+                                            )
+                                          ])),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
                                     ],
                                   ),
                                 ),

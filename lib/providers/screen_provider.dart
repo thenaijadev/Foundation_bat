@@ -7,7 +7,7 @@ class Screens extends ChangeNotifier {
   
 
   void updateScreen(int tab) {
-    this.currentTab = tab;
+    currentTab = tab;
     notifyListeners();
   }
 

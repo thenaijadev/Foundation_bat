@@ -7,7 +7,7 @@ class AppEvents {
   final String baseUrl = 'https://www.batnf.net/api/';
 
   Future<List<EventModel>> getAllEvents() async {
-    String url = 'getallevents';
+    String url = 'getAllEvents';
 
     try {
       final response = await http.get(Uri.parse(baseUrl + url));
