@@ -132,6 +132,19 @@ class _CompletedPageState extends State<CompletedPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
+                                                    errorWidget: (context,
+                                                              url, error) =>
+                                                          CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${completed.files![index].thumbnail}',
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                                child: Text(
+                                                                    'Loading...'),
+                                                              ),
                                                       imageUrl:
                                                           'https://www.batnf.net/${completed.files![index].fileUrl}',
                                                       fit: BoxFit.cover),

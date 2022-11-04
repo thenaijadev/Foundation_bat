@@ -197,9 +197,10 @@ class _InprogressPageState extends State<InprogressPage> {
                                                             child:
                                                                 CachedVideoPlayer(
                                                                     controller))
-                                                        : Center(
-                                                            child:
-                                                                const CircularProgressIndicator()),
+                                                        : CachedNetworkImage(
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                            fit: BoxFit.cover),
                                                   )
                                                 : ClipRRect(
                                                     borderRadius:
@@ -223,32 +224,34 @@ class _InprogressPageState extends State<InprogressPage> {
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      RichText(
-                                        selectionColor: Theme.of(context).primaryColor,
-                                          text: TextSpan(
-                                              text: 'Started: ',
-                                              style: kLandpageskiptextstyle,
-                                              children: [
-                                            TextSpan(
-                                                text:
-                                                    inprogress.projectStartDate,
-                                                style: kNewsDateSTyle)
-                                          ])),
+
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('Started: ', 
+                                            style: kProjectsub,
+                                          ),
+                                          Text(inprogress.projectStartDate,
+                                              style: kNewsDateSTyle)
+                                        ],
+                                      ),
 
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      RichText(
-                                        selectionColor:
-                                              Theme.of(context).primaryColor,
-                                          text: TextSpan(
-                                              text: 'To End: ',
-                                              style: kLandpageskiptextstyle,
-                                              children: [
-                                            TextSpan(
-                                                text: inprogress.projectEndDate,
-                                                style: kNewsDateSTyle)
-                                          ])),
+                                      
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'To End: ',
+                                            style: kProjectsub,
+                                          ),
+                                          Text(inprogress.projectEndDate,
+                                              style: kNewsDateSTyle)
+                                        ],
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),

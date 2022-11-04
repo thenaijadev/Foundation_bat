@@ -151,8 +151,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 ),
                               ],
                             )
-                          : Center(child: CircularProgressIndicator()
-                      );
+                          : CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogressFile.thumbnail}',
+                                                        fit: BoxFit.cover);
                     }).toList()),
               ),
 

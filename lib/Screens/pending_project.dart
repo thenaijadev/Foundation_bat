@@ -111,6 +111,7 @@ class _PendingPageState extends State<PendingPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+                                      //Pending Images
                                       Container(
                                         height: 145,
                                         width:
@@ -156,6 +157,19 @@ class _PendingPageState extends State<PendingPage> {
                                                         BorderRadius.circular(
                                                             18),
                                                     child: CachedNetworkImage(
+                                                      errorWidget: (context,
+                                                                url, error) =>
+                                                            CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${pending.files![index].thumbnail}',
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                        placeholder:
+                                                            (context, url) =>
+                                                                Center(
+                                                                  child: Text(
+                                                                      'Loading...'),
+                                                                ),
                                                         imageUrl:
                                                             'https://www.batnf.net/${pending.files![index].fileUrl}',
                                                         fit: BoxFit.cover),
@@ -178,35 +192,35 @@ class _PendingPageState extends State<PendingPage> {
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      RichText(
-                                          text: TextSpan(
-                                              text: 'To Begin: ',
-                                              style:
-                                                  kLandpageskiptextstyle,
-                                              // ignore: prefer_const_literals_to_create_immutables
-                                              children: [
-                                            TextSpan(
-                                              text: pending
-                                                  .projectStartDate,
-                                              style: kTextboxhintstyle,
-                                            )
-                                          ])),
-                                          SizedBox(
+                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'To Begin: ',
+                                            style: kLandpageskiptextstyle,
+                                          ),
+                                          Text(pending.projectStartDate,
+                                              style: kTextboxhintstyle)
+                                        ],
+                                      ),
+
+                                      SizedBox(
                                         height: 8,
                                       ),
-                                      RichText(
-                                          text: TextSpan(
-                                              text: 'To End: ',
-                                              style:
-                                                  kLandpageskiptextstyle,
-                                              // ignore: prefer_const_literals_to_create_immutables
-                                              children: [
-                                            TextSpan(
-                                              text: pending
-                                                  .projectEndDate,
-                                              style: kTextboxhintstyle,
-                                            )
-                                          ])),
+
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'To End: ',
+                                            style: kLandpageskiptextstyle,
+                                          ),
+                                          Text(pending.projectEndDate,
+                                              style: kTextboxhintstyle)
+                                        ],
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),

@@ -9,8 +9,6 @@ import 'package:batnf/constants/text_style_constant.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
 
-
-
 class LandingPage extends StatefulWidget {
   static String id = 'landing_page';
 
@@ -26,10 +24,11 @@ class _LandindPageState extends State<LandingPage> {
     super.initState();
     FlutterNativeSplash.remove();
   }
+
   int currentPage = 0;
   PageController controller = PageController();
 
-  onChange(int index){
+  onChange(int index) {
     setState(() {
       currentPage = index;
     });
@@ -41,82 +40,88 @@ class _LandindPageState extends State<LandingPage> {
       backgroundColor: Theme.of(context).primaryColor,
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
-          
+
           // ignore: sort_child_properties_last
           child: PageView(
             controller: controller,
             children: [
               ReuseableLandingScreen(
                 Imagename: 'assets/boarding1.png',
-                Headerlabel: "Explore the Foundation's \n Upcoming Events",
+                Headerlabel: "Attend our Events",
                 Bodylabel:
                     'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
               ),
               ReuseableLandingScreen(
-                Imagename: 'assets/boarding2.png',
-                Headerlabel: "Play to win Vouchers and \n Tickets",
+                Imagename: 'assets/onboarding2.png',
+                Headerlabel: "Play and Learn",
                 Bodylabel:
-                    'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+                    'How well do you know the agricultural ecosystem in Nigeria? Give yourself a test to see how much knowledge you have about agriculture.',
               ),
               ReuseableLandingScreen(
-                Imagename: 'assets/boarding3.png',
-                Headerlabel: "Read Latest News and \n Information",
+                Imagename: 'assets/onboarding3.png',
+                Headerlabel: "News Update",
                 Bodylabel:
-                    'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
+                    'Get the updates on the foundation\'s activities, press statements, news articles, video, photos.',
               ),
               Stack(
-                alignment: AlignmentDirectional.bottomEnd,
+                // alignment: AlignmentDirectional.bottomEnd,
                 children: [
-                  Container(
-                    // width: double.maxFinite,
-                    // margin: EdgeInsets.only(bottom: 300),
-                    height: double.infinity,
-                    child: Image.asset(
-                      'assets/boarding4.png',
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  Image.asset(
+                    'assets/onboarding4.png',
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                    fit: BoxFit.cover,
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: 350),
                     width: double.maxFinite,
-                    height: 400,
+                    // height: double.maxFinite,
+                    // height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.95),
+                      color: Theme.of(context).primaryColor.withOpacity(0.8),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      // crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        // Header
                         Container(
-                          margin: EdgeInsets.fromLTRB(30, 45, 30, 30),
-                          height: 58,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 8, 51, 121),
+                            borderRadius: BorderRadius.circular(50)
+                          ),
+                          margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
+                          padding: EdgeInsets.only(left: 10, right: 10),
                           child: Text(
-                            "Explore the Foundation's \n Projects",
+                            "Explore Our Projects",
                             textAlign: TextAlign.center,
                             style: kLandpageHeadertextstyle,
                           ),
                         ),
+                        // Body
                         Container(
                           margin:
-                              EdgeInsets.only(left: 56, right: 56, bottom: 46),
-                          // height: 95,
+                              EdgeInsets.only(left: 56, right: 56,),
                           child: Text(
-                            'Lorem ipsum dolor sit amet, consectetur elit adipiscing elit. Venenatis pulvinar a amet in, suspendisse vitae, posuere eu tortor et. Und commodo, fermentum, mauris leo eget.',
-                             textAlign: TextAlign.justify,
+                            'Our agricultural initiatives are aimed at empowering smallholders farmers to improve their productivity and help build their capacity to establish viable agricultural enterprises.',
+                            textAlign: TextAlign.justify,
                             style: kLandpagebodytextstyle,
                           ),
                         ),
+                        // Button
                         Container(
-                          margin: EdgeInsets.only(bottom: 30, left: 30, right: 30),
+                          margin:
+                              EdgeInsets.only(top: 20, left: 30, right: 30),
                           height: 45,
                           child: MaterialButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(45.0),
                             ),
                             height: 45.0,
+                            minWidth: MediaQuery.of(context).size.width,
                             color: Color.fromARGB(255, 8, 51, 121),
                             onPressed: () {
                               Navigator.pushNamed(context, WelcomePage.id);
@@ -137,7 +142,7 @@ class _LandindPageState extends State<LandingPage> {
           ),
           align: IndicatorAlign.bottom,
           indicatorColor: Color(0xffBDBDBD),
-          indicatorSelectorColor: Colors.blue,
+          indicatorSelectorColor: Color.fromARGB(255, 8, 51, 121),
           indicatorSpace: 10.0,
           shape: IndicatorShape.circle(size: 8),
           length: 4),

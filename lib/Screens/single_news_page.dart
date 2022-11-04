@@ -29,7 +29,7 @@ class _NewsDetailsState extends State<NewsDetails> {
   void video(List<Files> file) async {
     if (file.isEmpty) return;
     List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg').toList();
+        file.where((element) => element.fileExt == 'video/mp4').toList();
     int count =
         videoList.fold(0, (previousValue, element) => previousValue + 1);
     playerController = List.generate(
@@ -103,6 +103,15 @@ class _NewsDetailsState extends State<NewsDetails> {
                         return Container(
                           color: kGeneralbodytextColor,
                           child: CachedNetworkImage(
+                            errorWidget: (context, url, error) =>
+                                    CachedNetworkImage(
+                                      imageUrl:
+                                          'https://www.batnf.net/${newsFile.thumbnail}',
+                                      fit: BoxFit.fill,
+                                    ),
+                                placeholder: (context, url) => Center(
+                                      child: Text('Loading...'),
+                                    ),
                               imageUrl:
                                   'https://www.batnf.net/${newsFile.thumbnail}',
                               fit: BoxFit.cover),

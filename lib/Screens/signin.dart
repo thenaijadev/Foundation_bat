@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:batnf/Screens/reset_Completed_page.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,7 +59,7 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
-    print(response.body);
+    // print(response.body);
 
     if (mounted) {
       setState(() {
@@ -119,7 +120,7 @@ class _SignInState extends State<SignIn> {
   // Forget Password Api Function
   Future<void> forgetpassword({required String email}) async {
     var response =
-        await http.post(Uri.parse('https://www.batnf.net/api/forget_password'),
+        await http.post(Uri.parse('https://www.batnf.net/api/forgot_password'),
             body: jsonEncode({
               "identity": emailController.text,
             }),
@@ -128,6 +129,7 @@ class _SignInState extends State<SignIn> {
         });
     // var data = jsonDecode(response.body);
     // print(data);
+    print(response.statusCode);
     print(response.body);
 
     if (mounted) {
@@ -193,10 +195,7 @@ class _SignInState extends State<SignIn> {
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(
-                            bottom: 10.0,
-                            top: 60.0,
-                            left: 130.0,
-                            right: 130.0),
+                            bottom: 10.0, top: 60.0, left: 130.0, right: 130.0),
                         child: Image.asset(
                           'assets/logo.png',
                         ),
@@ -326,7 +325,7 @@ class _SignInState extends State<SignIn> {
                           onPressed: () {
                             if (!loading1) {
                               setState(() {
-                                loading1 = false;
+                                loading1 = true;
                               });
                               forgetpassword(email: emailController.text);
                             }

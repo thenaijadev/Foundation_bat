@@ -175,15 +175,7 @@ class _EventCenterState extends State<EventCenter> {
                                                       CachedNetworkImage(
                                                           imageUrl:
                                                               'https://www.batnf.net/${event.files![index].thumbnail}', fit: BoxFit.fill,),
-                                                  // Container(color: Colors.green,),
-                                                      // Icon(Icons.error, color: Colors.black),
-                                              placeholder: (context, url) => 
-                                              // Container(
-                                              //           color: Colors.black,
-                                              //         ),
-                                                  CachedNetworkImage(
-                                                      imageUrl:
-                                                          'https://www.batnf.net/${event.files![index].thumbnail}'),
+                                              placeholder: (context, url) => Center(child: Text('Loading...'),),
                                               imageUrl:
                                                   'https://www.batnf.net/${event.files![index].fileUrl}',
                                               fit: BoxFit.cover),

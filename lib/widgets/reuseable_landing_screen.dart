@@ -24,7 +24,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional.bottomEnd,
+      // alignment: AlignmentDirectional.bottomEnd,
       children: [
         Container(
           height: double.infinity,
@@ -32,12 +32,13 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
           // margin: EdgeInsets.only(bottom: 350),
           child: Image.asset(
             widget.Imagename,
-            width: double.infinity,
-            // height: double.infinity,
+            width: double.maxFinite,
+            height: double.maxFinite,
             fit: BoxFit.cover,
           ),
         ),
         Container(
+          margin: EdgeInsets.only(top: 250),
           width: double.maxFinite,
           height: 400,
           decoration: BoxDecoration(
@@ -52,6 +53,9 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 8, 51, 121),
+                    borderRadius: BorderRadius.circular(50)),
                 margin: EdgeInsets.fromLTRB(30, 25, 30, 40),
                 height: 58,
                 child: Text(

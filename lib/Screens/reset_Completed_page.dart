@@ -13,11 +13,11 @@ class ResetCompleted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground,
+      backgroundColor: Theme.of(context).primaryColor,
       body: ListView(
         children: [
           Container(
-              margin: EdgeInsets.only(top: 275, bottom: 100),
+              margin: EdgeInsets.only(top: 150, bottom: 100),
               child: Center(
                   child: Image.asset(
                 'assets/logo.png',
@@ -40,7 +40,7 @@ class ResetCompleted extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 258, bottom: 75, left: 30, right: 30),
+            margin: EdgeInsets.only(top: 100, bottom: 75, left: 30, right: 30),
             child: MaterialButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(45.0),

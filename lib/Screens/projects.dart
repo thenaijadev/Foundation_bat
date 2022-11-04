@@ -149,7 +149,6 @@ class _ProjectPageState extends State<ProjectPage> {
                   //Project Summary List
 
                   SizedBox(
-                    // color: kSignupbuttonColor,
                     height: 150,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -194,7 +193,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                 : completedProvider
                                     .allCompletedProjects!.length,
                             colour: Color(0xff50AF47),
-                            label: 'Projects \nCompleted',
+                            label: 'Completed',
                             childCard: Icon(
                               FontAwesomeIcons.checkCircle,
                               size: 65,
@@ -217,7 +216,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                 ? 0
                                 : pendingProvider.allPendingProjects!.length,
                             colour: Color(0xffEF7D00),
-                            label: 'Pending \nProjects',
+                            label: 'Pending',
                             childCard: Icon(
                               FontAwesomeIcons.solidCommentDots,
                               color: Color(0xffEF7D00),
@@ -328,7 +327,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   //     right: 15.0),
                                                   // // height: 74,
                                                   // width: 74,
-                                                  child: inprogress.files![0]
+                                                  child: inprogress.files![index]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
@@ -336,11 +335,11 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${inprogress.projectImage}',
+                                                                  'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         )
-                                                      : inprogress.files![0]
+                                                      : inprogress.files![index]
                                                                   .fileExt ==
                                                               'video/mp4'
                                                           ? ClipRRect(
@@ -357,9 +356,11 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                           .aspectRatio,
                                                                       child: CachedVideoPlayer(
                                                                           controller))
-                                                                  : Center(
-                                                                      child:
-                                                                          const CircularProgressIndicator()),
+                                                                  : CachedNetworkImage(
+                                                                      imageUrl:
+                                                                          'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                                      fit: BoxFit
+                                                                          .cover),
                                                             )
                                                           : ClipRRect(
                                                               borderRadius:
@@ -388,9 +389,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      // crossAxisAlignment:
+                                                      //     CrossAxisAlignment
+                                                      //         .start,
                                                       // ignore: prefer_const_literals_to_create_immutables
                                                       children: [
                                                         Text(
@@ -398,21 +399,23 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               .projectTitle,
                                                           style: kPageHeader,
                                                         ),
-                                                        RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Started: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: inprogress
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              'Started: ',
+                                                              style:
+                                                                  kProjectsub,
+                                                            ),
+                                                            Text(
+                                                                inprogress
                                                                     .projectStartDate,
                                                                 style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
+                                                                    kNewsDateSTyle)
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -508,7 +511,6 @@ class _ProjectPageState extends State<ProjectPage> {
                                               children: [
                                                 // Completed Image
                                                 Container(
-                                                  
                                                   height: 145,
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -522,7 +524,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   //     right: 15.0),
                                                   // height: 74,
                                                   // width: 74,
-                                                  child: completed.files![index]
+                                                  child: completed.files![0]
                                                           .fileUrl.isEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
@@ -530,11 +532,11 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${completed.projectImage}',
+                                                                  'https://www.batnf.net/${completed.files![index].thumbnail}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         )
-                                                      : completed.files![index]
+                                                      : completed.files![0]
                                                                   .fileExt ==
                                                               'video\/mp4'
                                                           ? ClipRRect(
@@ -542,18 +544,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${completed.files![0].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                              // _chewieVideoPlayer()
-                                                              // controller!
-                                                              //         .value.isInitialized
-                                                              //     ? CachedVideoPlayer(
-                                                              //         controller!)
-                                                              // : CircularProgressIndicator(),
-                                                            )
+                                                              child: controller
+                                                                      .value
+                                                                      .isInitialized
+                                                                  ? AspectRatio(
+                                                                      aspectRatio: controller
+                                                                          .value
+                                                                          .aspectRatio,
+                                                                      child: CachedVideoPlayer(
+                                                                          controller))
+                                                                  : CachedNetworkImage(
+                                                                      imageUrl:
+                                                                          'https://www.batnf.net/${completed.files![index].thumbnail}',
+                                                                      fit: BoxFit
+                                                                          .cover),
+                                                             )
                                                           : ClipRRect(
                                                               borderRadius:
                                                                   BorderRadius
@@ -561,7 +566,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                           18),
                                                               child: CachedNetworkImage(
                                                                   imageUrl:
-                                                                      'https://www.batnf.net/${completed.files![index].fileUrl}',
+                                                                      'https://www.batnf.net/${completed.files![0].fileUrl}',
                                                                   fit: BoxFit
                                                                       .cover),
                                                             ),

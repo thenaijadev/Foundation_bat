@@ -212,13 +212,10 @@ class _NewsState extends State<News> {
                                                           imageUrl:
                                                               'https://www.batnf.net/${news.files![index].thumbnail}', fit: BoxFit.fill,),
                                                               placeholder: (context,
-                                                                  url) =>
-                                                              Container(
-                                                                        color: Colors.black,
-                                                                      ),
-                                                              // CachedNetworkImage(
-                                                              //     imageUrl:
-                                                              //         'https://www.batnf.net/${news.files![index].thumbnail}'),
+                                                                  url) => Center(
+                                                                    child: Text(
+                                                                        'Loading...'),
+                                                                  ),
                                                           imageUrl:
                                                               'https://www.batnf.net/${news.files![index].fileUrl}',
                                                           fit: BoxFit.cover),

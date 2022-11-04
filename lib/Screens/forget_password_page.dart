@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:batnf/Screens/reset_Completed_page.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:batnf/constants/color_constant.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -16,6 +18,11 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+   @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,64 +36,56 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       ),
       body: ListView(
         children: [
-          // Title
-          Container(
-            height: 29,
-            margin: EdgeInsets.only(top: 15.0, left: 30, bottom: 175),
-            child: Text(
-              'Forget Password',
-              style: kSigningtextstyle,
-            ),
-          ),
+          SizedBox(height: 150,),
 
           //Email cornfirmaion
           Center(
               child: Text(
-            'A Code has been sent to Your registered email',
+            'A Link has been sent to Your registered email',
             style: kTextboxhintstyle,
           )),
 
           // Code text Box
-          Container(
-            height: 47,
-            margin: EdgeInsets.only(top: 109, left: 30, bottom: 75, right: 30),
-            child: PinCodeTextField(
-                pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(13),
-                  fieldHeight: 45,
-                  fieldWidth: 50,
-                  activeFillColor: kBackground,
-                  activeColor: kBackground,
-                  inactiveFillColor: kBackground,
-                ),
-                boxShadows: [kBoxshadow],
-                cursorColor: kGeneralbodytextColor,
-                keyboardType: TextInputType.number,
-                animationDuration: const Duration(milliseconds: 300),
-                backgroundColor: kBackground,
-                blinkWhenObscuring: true,
-                animationType: AnimationType.fade,
-                appContext: context,
-                length: 6,
-                onChanged: ((value) {
-                  setState(() {
-                    // currentText = value;
-                  });
-                })),
-          ),
+          // Container(
+          //   height: 47,
+          //   margin: EdgeInsets.only(top: 109, left: 30, bottom: 75, right: 30),
+          //   child: PinCodeTextField(
+          //       pinTheme: PinTheme(
+          //         shape: PinCodeFieldShape.box,
+          //         borderRadius: BorderRadius.circular(13),
+          //         fieldHeight: 45,
+          //         fieldWidth: 50,
+          //         activeFillColor: kBackground,
+          //         activeColor: kBackground,
+          //         inactiveFillColor: kBackground,
+          //       ),
+          //       boxShadows: [kBoxshadow],
+          //       cursorColor: kGeneralbodytextColor,
+          //       keyboardType: TextInputType.number,
+          //       animationDuration: const Duration(milliseconds: 300),
+          //       backgroundColor: kBackground,
+          //       blinkWhenObscuring: true,
+          //       animationType: AnimationType.fade,
+          //       appContext: context,
+          //       length: 6,
+          //       onChanged: ((value) {
+          //         setState(() {
+          //           // currentText = value;
+          //         });
+          //       })),
+          // ),
 
-          // Resend Code Count Down
-          Center(
-            child: RichText(
-              text: TextSpan(
-                  text: 'Resend Code in ',
-                  style: kTextboxhintstyle,
-                  children: [
-                    TextSpan(text: '56s', style: kForgetpasswordstyle)
-                  ]),
-            ),
-          ),
+          // // Resend Code Count Down
+          // Center(
+          //   child: RichText(
+          //     text: TextSpan(
+          //         text: 'Resend Code in ',
+          //         style: kTextboxhintstyle,
+          //         children: [
+          //           TextSpan(text: '56s', style: kForgetpasswordstyle)
+          //         ]),
+          //   ),
+          // ),
 
           //Verify Button
           Padding(
@@ -99,10 +98,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               height: 45.0,
               color: kButtonColor,
               onPressed: () {
-                Navigator.pushNamed(context, ResetPassword.id);
+                Navigator.pushNamed(context, ResetCompleted.id);
               },
               child: Text(
-                'Verify',
+                'Reset Password ?',
                 textAlign: TextAlign.center,
                 style: kButtontextstyle,
               ),
