@@ -24,61 +24,53 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      // alignment: AlignmentDirectional.bottomEnd,
       children: [
-        Container(
-          height: double.infinity,
-          color: Theme.of(context).primaryColor,
-          // margin: EdgeInsets.only(bottom: 350),
-          child: Image.asset(
-            widget.Imagename,
-            width: double.maxFinite,
-            height: double.maxFinite,
-            fit: BoxFit.cover,
-          ),
+        Image.asset(
+          widget.Imagename,
+          width: double.maxFinite,
+          height: double.maxFinite,
+          fit: BoxFit.cover,
         ),
         Container(
-          margin: EdgeInsets.only(top: 250),
+          margin: EdgeInsets.only(top: 350),
           width: double.maxFinite,
-          height: 400,
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.95),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
             ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Header
               Container(
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 8, 51, 121),
                     borderRadius: BorderRadius.circular(50)),
-                margin: EdgeInsets.fromLTRB(30, 25, 30, 40),
-                height: 58,
+                margin: EdgeInsets.fromLTRB(30, 25, 30, 10),
+                padding: EdgeInsets.only(left: 35, right: 35),
                 child: Text(
                   widget.Headerlabel,
                   style: kLandpageHeadertextstyle,
                   textAlign: TextAlign.center,
                 ),
               ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(left: 56, right: 56,),
-                  height: 75,
-                  child: Text(
-                    widget.Bodylabel,
-                    textAlign: TextAlign.justify,
-                    style: kLandpagebodytextstyle,
-                  ),
+              // Body
+              Container(
+                margin: EdgeInsets.only(left: 56, right: 56,),
+                child: Text(
+                  widget.Bodylabel,
+                  textAlign: TextAlign.justify,
+                  style: kLandpagebodytextstyle,
                 ),
               ),
+              // Button
               Container(
-                margin: EdgeInsets.only(left: 30, right: 30, bottom: 65),
-                height: 45,
+                margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                 child: MaterialButton(
+                  height: 45,
+                  minWidth: MediaQuery.of(context).size.width,
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(45.0),

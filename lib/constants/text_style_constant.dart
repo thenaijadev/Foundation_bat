@@ -118,17 +118,23 @@ const kPageHeader = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kNewsSubHeader = TextStyle(
-    color: kSignupbuttonColor,
+    color: Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
-    fontSize: 20,
-    fontWeight: FontWeight.w600);
+    fontSize: 16,
+    fontWeight: FontWeight.w300);
 
 const kBodyTextStyle = TextStyle(
     fontStyle: FontStyle.italic,
     fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: FontWeight.w400);
+
+const kBodyTextStyle1 = TextStyle(
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Inter',
+    fontSize: 12,
+    fontWeight: FontWeight.w100);
 
 const kAboutTextStyle = TextStyle(
     fontStyle: FontStyle.normal,

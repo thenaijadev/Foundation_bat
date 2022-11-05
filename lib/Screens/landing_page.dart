@@ -104,7 +104,7 @@ class _LandindPageState extends State<LandingPage> {
                         // Body
                         Container(
                           margin:
-                              EdgeInsets.only(left: 56, right: 56,),
+                              EdgeInsets.only(top: 10, left: 56, right: 56,),
                           child: Text(
                             'Our agricultural initiatives are aimed at empowering smallholders farmers to improve their productivity and help build their capacity to establish viable agricultural enterprises.',
                             textAlign: TextAlign.justify,

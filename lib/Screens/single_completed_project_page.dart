@@ -102,6 +102,14 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                             imageUrl:
                                 'https://www.batnf.net/${completedFile.fileUrl}',
                             fit: BoxFit.cover);
+                      } else if (completedFile.thumbnail.isNotEmpty) {
+                        return CachedNetworkImage(
+                            placeholder: (context, url) => Center(
+                                  child: Text('Loading...'),
+                                ),
+                            imageUrl:
+                                'https://www.batnf.net/${completedFile.thumbnail}',
+                            fit: BoxFit.cover);
                       }
                       CachedVideoPlayerController controller =
                           playerController.firstWhere((element) =>

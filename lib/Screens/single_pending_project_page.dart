@@ -101,7 +101,15 @@ void initState() {
                         imageUrl:
                             'https://www.batnf.net/${pendingFile.fileUrl}',
                         fit: BoxFit.cover);
-                  }
+                  } else if (pendingFile.thumbnail.isNotEmpty) {
+                        return CachedNetworkImage(
+                            placeholder: (context, url) => Center(
+                                  child: Text('Loading...'),
+                                ),
+                            imageUrl:
+                                'https://www.batnf.net/${pendingFile.thumbnail}',
+                            fit: BoxFit.cover);
+                      }
                   CachedVideoPlayerController controller = playerController.firstWhere(
                       (element) =>
                           element.dataSource ==

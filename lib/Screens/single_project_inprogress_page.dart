@@ -2,6 +2,7 @@
 
 import 'package:batnf/Models/files.dart';
 import 'package:batnf/Models/inprogress_model.dart';
+import 'package:batnf/Screens/video_thumbnail.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -93,8 +94,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       // autoPlay: true
                     ),
                     items: widget.singleProgress.files!.map((inprogressFile) {
-                      print(inprogressFile.fileExt);
-                      print(inprogressFile.fileUrl);
                       if (inprogressFile.fileExt == '') {
                         return Container(
                           color: kGeneralbodytextColor,
@@ -103,9 +102,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   'https://www.batnf.net/${inprogressFile.thumbnail}',
                               fit: BoxFit.cover),
                         );
-                      } 
-                      else
-                       if (inprogressFile.fileExt == 'image/jpeg') {
+                      } else if (inprogressFile.fileExt == 'image/jpeg') {
                         return CachedNetworkImage(
                             errorWidget: (context, url, error) =>
                                 Center(child: Text('No Image Available')),
@@ -115,46 +112,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                 'https://www.batnf.net/${inprogressFile.fileUrl}',
                             fit: BoxFit.cover);
                       }
-                      CachedVideoPlayerController controller =
-                          playerController.firstWhere((element) =>
-                              element.dataSource ==
-                              'https://www.batnf.net/${inprogressFile.fileUrl}'
-                              //  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                              );
-                      return controller.value.isInitialized
-                          ? Stack(
-                              alignment: AlignmentDirectional.center,
-                              children: [
-                                AspectRatio(
-                                    aspectRatio:
-                                        // 6 / 6,
-                                        controller.value.aspectRatio,
-                                    child: CachedVideoPlayer(controller)),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (!controller.value.isInitialized) return;
-                                    setState(
-                                      () {
-                                        controller.value.isPlaying
-                                            ? controller.pause()
-                                            : controller.play();
-                                      },
-                                    );
-                                  },
-                                  child: Icon(
-                                    controller.value.isPlaying
-                                        ? Icons.pause
-                                        : Icons.play_arrow,
-                                    color: Colors.blue.withOpacity(0.5),
-                                    size: 30,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogressFile.thumbnail}',
-                                                        fit: BoxFit.cover);
+                      return Videos(
+                        thumbnailUrl: inprogressFile.thumbnail,
+                        videoUrl: inprogressFile.fileUrl,
+                      );
                     }).toList()),
               ),
 
@@ -164,6 +125,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                 child: Text(
                   widget.singleProgress.projectTitle,
                   style: kPageHeader,
+                  // overflow: TextOverflow.ellipsis,
+                  // maxLines: 1,
                 ),
               ),
 
@@ -193,29 +156,31 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       children: [
                         Container(
                           child: RichText(
-                            selectionColor: Theme.of(context).primaryColor,
+                              selectionColor: Theme.of(context).primaryColor,
                               text: TextSpan(
                                   text: 'Started: ',
                                   style: kBodyTextStyle,
                                   children: [
-                                TextSpan(                      
-                                  text: widget.singleProgress.projectStartDate,
-                                  style: kPageHeader,
-                                )
-                              ])),
+                                    TextSpan(
+                                      text: widget
+                                          .singleProgress.projectStartDate,
+                                      style: kPageHeader,
+                                    )
+                                  ])),
                         ),
                         Container(
                           child: RichText(
-                            selectionColor: Theme.of(context).primaryColor,
+                              selectionColor: Theme.of(context).primaryColor,
                               text: TextSpan(
                                   text: 'To be Completed: ',
                                   style: kBodyTextStyle,
                                   children: [
-                                TextSpan(
-                                  text: widget.singleProgress.projectEndDate,
-                                  style: kPageHeader,
-                                )
-                              ])),
+                                    TextSpan(
+                                      text:
+                                          widget.singleProgress.projectEndDate,
+                                      style: kPageHeader,
+                                    )
+                                  ])),
                         ),
                       ],
                     )

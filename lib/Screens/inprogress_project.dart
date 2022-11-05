@@ -21,62 +21,6 @@ class InprogressPage extends StatefulWidget {
 }
 
 class _InprogressPageState extends State<InprogressPage> {
-  late CachedVideoPlayerController controller;
-  //  List<CachedVideoPlayerController> playerController = [];
-
-  // VideoPlayerController? _videoPlayerController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // video(Files);
-
-    // Provider.of<InprogressProvider>(context, listen: false)
-    //     .getInprogressProjects();
-
-    controller = CachedVideoPlayerController.network(
-        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-        // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
-    controller.initialize().then((value) {
-      // controller.play();
-      setState(() {});
-    });
-  }
-
-  // void video(List<Files> file) async {
-  //   if (file.isEmpty) return;
-  //   List<Files> videoList =
-  //       file.where((element) => element.fileExt == 'video/mp4').toList();
-  //   int count =
-  //       videoList.fold(0, (previousValue, element) => previousValue + 1);
-  //   playerController = List.generate(
-  //       count,
-  //       (index) => CachedVideoPlayerController.network(
-  //           'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-  //           // 'https://www.batnf.net/${inprogress.files![index].fileUrl}'
-  //           // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-  //           ));
-
-  //   for (var element in playerController) {
-  //     element.initialize().then((value) async {
-  //       await Future.delayed(Duration(milliseconds: 500));
-  //       // element.play();
-  //       setState(() {});
-  //     });
-  //   }
-  // }
-
-  @override
-  void dispose() {
-    // for (var element in playerController) {
-    //   element.dispose();
-    // }
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     InprogressProvider provider = Provider.of<InprogressProvider>(context);
@@ -131,6 +75,7 @@ class _InprogressPageState extends State<InprogressPage> {
                             itemBuilder: ((context, index) {
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
+                              print(inprogress.files![index].thumbnail);
 
                               return GestureDetector(
                                 onTap: () {
@@ -150,8 +95,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                   // margin: EdgeInsets.only(
                                   //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context)
-                                        .primaryColor,
+                                    color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(18.0),
                                     boxShadow: [kBoxshadow],
                                   ),
@@ -159,58 +103,34 @@ class _InprogressPageState extends State<InprogressPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+                                      //Images and videos
                                       Container(
                                         height: 145,
                                         width:
                                             MediaQuery.of(context).size.width,
                                         margin: EdgeInsets.only(
                                             left: 9.0, right: 9),
-                                        // margin: EdgeInsets.only(
-                                        //     left: 15,
-                                        //     bottom: 15.0,
-                                        //     right: 15.0,
-                                        //     top: 15),
-                                        // height: 74,
-                                        // width: 74,
-                                        child: inprogress
-                                                .files![index].fileUrl.isEmpty
+                                        child: inprogress.files![index]
+                                                        .fileExt ==
+                                                    'image/jpeg' &&
+                                                inprogress.files![index].fileUrl
+                                                    .isNotEmpty
                                             ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                                    fit: BoxFit.cover),
+                                              )
+                                            : ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
                                                     imageUrl:
                                                         'https://www.batnf.net/${inprogress.files![index].thumbnail}',
                                                     fit: BoxFit.cover),
-                                              )
-                                            : inprogress.files![index].fileExt ==
-                                                    'video/mp4'
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    child: controller
-                                                            .value.isInitialized
-                                                        ? AspectRatio(
-                                                            aspectRatio:
-                                                                controller.value
-                                                                    .aspectRatio,
-                                                            child:
-                                                                CachedVideoPlayer(
-                                                                    controller))
-                                                        : CachedNetworkImage(
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files![index].thumbnail}',
-                                                            fit: BoxFit.cover),
-                                                  )
-                                                : ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![index].fileUrl}',
-                                                        fit: BoxFit.cover),
-                                                  ),
+                                              ),
                                       ),
 
                                       SizedBox(
@@ -226,9 +146,11 @@ class _InprogressPageState extends State<InprogressPage> {
                                       ),
 
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Text('Started: ', 
+                                          Text(
+                                            'Started: ',
                                             style: kProjectsub,
                                           ),
                                           Text(inprogress.projectStartDate,
@@ -239,7 +161,7 @@ class _InprogressPageState extends State<InprogressPage> {
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      
+
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -268,5 +190,4 @@ class _InprogressPageState extends State<InprogressPage> {
       ),
     );
   }
-
 }

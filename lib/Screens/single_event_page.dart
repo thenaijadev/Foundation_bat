@@ -170,6 +170,14 @@ class _EventDetailsState extends State<EventDetails> {
                             imageUrl:
                                 'https://www.batnf.net/${eventsFile.fileUrl}',
                             fit: BoxFit.cover);
+                      } else if (eventsFile.thumbnail.isNotEmpty) {
+                        return CachedNetworkImage(
+                            placeholder: (context, url) => Center(
+                                  child: Text('Loading...'),
+                                ),
+                            imageUrl:
+                                'https://www.batnf.net/${eventsFile.thumbnail}',
+                            fit: BoxFit.cover);
                       }
                       CachedVideoPlayerController controller =
                           playerController.firstWhere((element) =>
