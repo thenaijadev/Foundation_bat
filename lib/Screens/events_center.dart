@@ -158,16 +158,47 @@ class _EventCenterState extends State<EventCenter> {
                                                   BorderRadius.circular(18),
                                               child: event.files!.first.fileUrl.isNotEmpty && event.files!.first.fileExt == 'image/jpeg'
                                                   ?  CachedNetworkImage(
-                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                     errorWidget: (context, url,
+                                                              error) =>
+                                                          Center(
+                                                            child: Icon(
+                                                              Icons.error,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Center(
+                                                            child: Text(
+                                                              'Loading',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black),
+                                                            ),
+                                                          ),
                                                       imageUrl:
                                                           'https://www.batnf.net/${event.files!.first.fileUrl}',
                                                       fit: BoxFit.cover)
                                                   : CachedNetworkImage(
-                                                    placeholder:
+                                                     errorWidget: (context,
+                                                              url, error) =>
+                                                          Center(
+                                                            child: Icon(
+                                                              Icons.error,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                      placeholder:
                                                           (context, url) =>
                                                               Center(
-                                                                child:
-                                                                    CircularProgressIndicator(),
+                                                                child: Text(
+                                                                  'Loading',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
                                                               ),
                                                   imageUrl:
                                                       'https://www.batnf.net/${event.files!.first.thumbnail}',

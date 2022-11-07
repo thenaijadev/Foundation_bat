@@ -14,7 +14,6 @@ import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 
 import '../Models/completed_model.dart';
 import '../Models/inprogress_model.dart';
@@ -33,7 +32,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  late CachedVideoPlayerController controller;
+
   @override
   void initState() {
     super.initState();
@@ -42,21 +41,6 @@ class _ProjectPageState extends State<ProjectPage> {
         .getInprogressProjects();
     Provider.of<CompletedProvider>(context, listen: false)
         .getCompletedProjects();
-    controller = CachedVideoPlayerController.network(
-        // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-        'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-        // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        );
-    controller.initialize().then((value) {
-      // controller.play();
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -97,32 +81,6 @@ class _ProjectPageState extends State<ProjectPage> {
                       ),
                     ],
                   ),
-
-                  // Container(
-                  //   margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                  //   color: kBackground,
-                  //   height: 45.0,
-                  //   child: TextField(
-                  //     decoration: InputDecoration(
-                  //       contentPadding: EdgeInsets.only(top: 2),
-                  //       hintText: 'Search',
-                  //       hintStyle: kTextboxhintstyle,
-                  //       prefixIcon: Icon(
-                  //         FontAwesomeIcons.search,
-                  //         size: 13.0,
-                  //       ),
-                  //       border: OutlineInputBorder(
-                  //           borderRadius: BorderRadius.all(
-                  //             Radius.circular(45.0),
-                  //           ),
-                  //           borderSide: BorderSide(
-                  //             style: BorderStyle.solid,
-                  //             color: kTextfieldborderColor,
-                  //             width: 2.0,
-                  //           )),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -230,7 +188,8 @@ class _ProjectPageState extends State<ProjectPage> {
 
                   //Inprogress Project
                   SizedBox(
-                    height: 319,
+                    height: 150,
+                    width: 365,
                     child: Column(
                       children: [
                         Container(
@@ -290,134 +249,90 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             inprogress)));
                                           },
                                           child: Container(
-                                             width: 237,
-                                            margin: EdgeInsets.only(
-                                                left: 36.27,
-                                                right: 15.0,
-                                                bottom: 15.0,
-                                                top: 30),
-
-                                            // margin: EdgeInsets.only(
-                                            //     bottom: 15.0,
-                                            //     left: 30,
-                                            //     right: 30),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                             color: Colors.transparent,
+                                            width: 375,
+                                            child: Row(
                                               children: [
                                                 // Inprogress Images
                                                 Container(
-                                                   height: 145,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
                                                   margin: EdgeInsets.only(
-                                                      left: 9.0, right: 9),
-                                                  // margin: EdgeInsets.only(
-                                                  //     top: 15,
-                                                  //     left: 15,
-                                                  //     bottom: 15.0,
-                                                  //     right: 15.0),
-                                                  // // height: 74,
-                                                  // width: 74,
-                                                  child: inprogress.files![index]
-                                                          .fileUrl.isEmpty
+                                                      top: 10,
+                                                      bottom: 10.0,
+                                                      right: 15.0),
+                                                  height: 100,
+                                                  width: 180,
+                                                  child: inprogress.files!.first
+                                                                  .fileExt ==
+                                                              'image/jpeg' &&
+                                                          inprogress
+                                                              .files!
+                                                              .first
+                                                              .fileUrl
+                                                              .isNotEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                                  'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         )
-                                                      : inprogress.files![index]
-                                                                  .fileExt ==
-                                                              'video/mp4'
-                                                          ? ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: controller
-                                                                      .value
-                                                                      .isInitialized
-                                                                  ? AspectRatio(
-                                                                      aspectRatio: controller
-                                                                          .value
-                                                                          .aspectRatio,
-                                                                      child: CachedVideoPlayer(
-                                                                          controller))
-                                                                  : CachedNetworkImage(
-                                                                      imageUrl:
-                                                                          'https://www.batnf.net/${inprogress.files![index].thumbnail}',
-                                                                      fit: BoxFit
-                                                                          .cover),
-                                                            )
-                                                          : ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${inprogress.files![0].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                            ),
+                                                      : ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        ),
                                                 ),
 
                                                 // Inprogress Information
-                                                Expanded(
-                                                  child: Container(
-                                                    height: 93,
-                                                    margin: EdgeInsets.only(
-                                                        top: 10,
-                                                        bottom: 5,
-                                                        right: 6.0),
+                                                Container(
+                                                   width: 180,
+                                                  margin: EdgeInsets.only(
+                                                      top: 10, bottom: 10.0),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [kBoxshadow],
                                                     color: Theme.of(context)
                                                         .primaryColor,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      // crossAxisAlignment:
-                                                      //     CrossAxisAlignment
-                                                      //         .start,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                        Text(
-                                                          inprogress
-                                                              .projectTitle,
-                                                          style: kPageHeader,
-                                                        ),
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              'Started: ',
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                  ),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      Text(
+                                                        inprogress
+                                                            .projectTitle,
+                                                        style: kPageHeader,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'Started: ',
+                                                            style:
+                                                                kProjectsub,
+                                                          ),
+                                                          Text(
+                                                              inprogress
+                                                                  .projectStartDate,
                                                               style:
-                                                                  kProjectsub,
-                                                            ),
-                                                            Text(
-                                                                inprogress
-                                                                    .projectStartDate,
-                                                                style:
-                                                                    kNewsDateSTyle)
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
+                                                                  kNewsDateSTyle)
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
                                                 )
                                               ],
@@ -433,7 +348,8 @@ class _ProjectPageState extends State<ProjectPage> {
 
                   //Completed Project
                   SizedBox(
-                    height: 319,
+                    height: 150,
+                    width: 365,
                     child: Column(
                       children: [
                         Container(
@@ -487,157 +403,107 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             completed)));
                                           },
                                           child: Container(
-                                             width: 237,
-                                            margin: EdgeInsets.only(
-                                                left: 36.27,
-                                                right: 15.0,
-                                                bottom: 15.0,
-                                                top: 30),
-                                            // margin: EdgeInsets.only(
-                                            //     bottom: 15.0,
-                                            //     left: 30,
-                                            //     right: 30),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            // height: 104,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              color: Colors.transparent,
+                                            width: 375,
+                                            child: Row(
                                               children: [
                                                 // Completed Image
                                                 Container(
-                                                  height: 145,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
                                                   margin: EdgeInsets.only(
-                                                      left: 9.0, right: 9),
-                                                  // margin: EdgeInsets.only(
-                                                  //     top: 15,
-                                                  //     left: 15,
-                                                  //     bottom: 15.0,
-                                                  //     right: 15.0),
-                                                  // height: 74,
-                                                  // width: 74,
-                                                  child: completed.files![0]
-                                                          .fileUrl.isEmpty
+                                                      top: 10,
+                                                      bottom: 10.0,
+                                                      right: 15.0),
+                                                  height: 100,
+                                                  width: 180,
+                                                  child: completed.files!.first
+                                                                  .fileExt ==
+                                                              'image/jpeg' &&
+                                                          completed
+                                                              .files!
+                                                              .first
+                                                              .fileUrl
+                                                              .isNotEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${completed.files![index].thumbnail}',
+                                                                  'https://www.batnf.net/${completed.files!.first.fileUrl}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         )
-                                                      : completed.files![0]
-                                                                  .fileExt ==
-                                                              'video\/mp4'
-                                                          ? ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: controller
-                                                                      .value
-                                                                      .isInitialized
-                                                                  ? AspectRatio(
-                                                                      aspectRatio: controller
-                                                                          .value
-                                                                          .aspectRatio,
-                                                                      child: CachedVideoPlayer(
-                                                                          controller))
-                                                                  : CachedNetworkImage(
-                                                                      imageUrl:
-                                                                          'https://www.batnf.net/${completed.files![index].thumbnail}',
-                                                                      fit: BoxFit
-                                                                          .cover),
-                                                             )
-                                                          : ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${completed.files![0].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                            ),
-                                                  // ClipRRect(
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(18),
-                                                  //   child: CachedNetworkImage(
-                                                  //       imageUrl: 'https://www.batnf.net/${completed.projectImage}',
-                                                  //       fit: BoxFit.cover),
-                                                  // ),
+                                                      : ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${completed.files!.first.thumbnail}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        ),
                                                 ),
+                                                
                                                 // Completed Project Info
-                                                Expanded(
-                                                  child: Container(
-                                                    height: 93,
-                                                    margin: EdgeInsets.only(
-                                                        top: 5,
-                                                        bottom: 10,
-                                                        right: 6.0),
+                                                Container(
+                                                  width: 180,
+                                                  margin: EdgeInsets.only(
+                                                      top: 10, bottom: 10.0),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [kBoxshadow],
                                                     color: Theme.of(context)
                                                         .primaryColor,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                        // Project Title
-                                                        Text(
-                                                          completed
-                                                              .projectTitle,
-                                                          style: kPageHeader,
-                                                        ),
-                                                        // project Start Date
-                                                        RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Started: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: completed
-                                                                    .projectStartDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                  ),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      // Project Title
+                                                      Text(
+                                                        completed
+                                                            .projectTitle,
+                                                        style: kPageHeader,
+                                                      ),
+                                                      // project Start Date
+                                                      Text.rich(
+                                                           TextSpan(
+                                                              text:
+                                                                  'Started: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                            TextSpan(
+                                                              text: completed
+                                                                  .projectStartDate,
+                                                              style:
+                                                                  kTextboxhintstyle,
+                                                            )
+                                                          ])),
 
-                                                        //Project Completed date
-                                                        RichText(
-                                                            text: TextSpan(
-                                                                text:
-                                                                    'Completed: ',
-                                                                style:
-                                                                    kLandpageskiptextstyle,
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                              TextSpan(
-                                                                text: completed
-                                                                    .projectEndDate,
-                                                                style:
-                                                                    kTextboxhintstyle,
-                                                              )
-                                                            ])),
-                                                      ],
-                                                    ),
+                                                      //Project Completed date
+                                                      Text.rich(
+                                                          TextSpan(
+                                                              text:
+                                                                  'Completed: ',
+                                                              style:
+                                                                  kLandpageskiptextstyle,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                            TextSpan(
+                                                              text: completed
+                                                                  .projectEndDate,
+                                                              style:
+                                                                  kNewsDateSTyle,
+                                                            )
+                                                          ])),
+                                                    ],
                                                   ),
                                                 )
                                               ],
@@ -653,7 +519,8 @@ class _ProjectPageState extends State<ProjectPage> {
 
                   // Pending Progress label
                   SizedBox(
-                    height: 319,
+                    height: 150,
+                    width: 365,
                     child: Column(
                       children: [
                         Container(
@@ -709,121 +576,92 @@ class _ProjectPageState extends State<ProjectPage> {
                                                             pending)));
                                           },
                                           child: Container(
-                                            // height: 104,
-                                            margin: EdgeInsets.only(
-                                                bottom: 15.0,
-                                                left: 30,
-                                                right: 30),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
+                                              color: Colors.transparent,
+                                            width: 375,
                                             child: Row(
                                               children: [
                                                 //pending Project Image
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      top: 15,
-                                                      left: 15,
-                                                      bottom: 15.0,
+                                                      top: 10,
+                                                      bottom: 10.0,
                                                       right: 15.0),
-                                                  height: 74,
-                                                  width: 74,
-                                                  child: pending.files![0]
-                                                          .fileUrl.isEmpty
+                                                  height: 100,
+                                                  width: 180,
+                                                  child: pending.files!.first
+                                                                  .fileExt ==
+                                                              'image/jpeg' &&
+                                                          pending
+                                                              .files!
+                                                              .first
+                                                              .fileUrl
+                                                              .isNotEmpty
                                                       ? ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
                                                               imageUrl:
-                                                                  'https://www.batnf.net/${pending.projectImage}',
+                                                                  'https://www.batnf.net/${pending.files!.first.fileUrl}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         )
-                                                      : pending.files![0]
-                                                                  .fileExt ==
-                                                              'video\/mp4'
-                                                          ? ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${pending.files![0].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                              // _chewieVideoPlayer()
-                                                              // controller!
-                                                              //         .value.isInitialized
-                                                              //     ? CachedVideoPlayer(
-                                                              //         controller!)
-                                                              // : CircularProgressIndicator(),
-                                                            )
-                                                          : ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child: CachedNetworkImage(
-                                                                  imageUrl:
-                                                                      'https://www.batnf.net/${pending.files![index].fileUrl}',
-                                                                  fit: BoxFit
-                                                                      .cover),
-                                                            ),
-                                                  // ClipRRect(
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(
-                                                  //           10),
-                                                  //   child: CachedNetworkImage(
-                                                  //       imageUrl: 'https://www.batnf.net/${pending.projectImage}',
-                                                  //       fit: BoxFit.cover),
-                                                  // ),
+                                                      : ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  'https://www.batnf.net/${pending.files!.first.thumbnail}',
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                        ),
                                                 ),
 
                                                 //Pending Project Details
-                                                Expanded(
-                                                    child: Container(
-                                                  height: 93,
+                                                Container(
+                                                  width: 180,
                                                   margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 10,
-                                                      right: 6.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      //Project Title
-                                                      Text(pending.projectTitle,
-                                                          style:
-                                                              kNewsSubHeader),
-
-                                                      //Project Begin Date
-                                                      RichText(
-                                                          text: TextSpan(
-                                                              text:
-                                                                  'To Begin: ',
-                                                              style:
-                                                                  kLandpageskiptextstyle,
-                                                              children: [
-                                                            TextSpan(
-                                                              text: pending
-                                                                  .projectStartDate,
-                                                              style:
-                                                                  kTextboxhintstyle,
-                                                            ),
-                                                          ]))
-                                                    ],
+                                                      top: 10, bottom: 10.0),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [kBoxshadow],
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
                                                   ),
-                                                ))
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  //Project Title
+                                                  Text(pending.projectTitle,
+                                                      style:
+                                                          kNewsSubHeader),
+
+                                                  //Project Begin Date
+                                                  Text.rich(
+                                                       TextSpan(
+                                                          text:
+                                                              'To Begin: ',
+                                                          style:
+                                                              kLandpageskiptextstyle,
+                                                          children: [
+                                                        TextSpan(
+                                                          text: pending
+                                                              .projectStartDate,
+                                                          style:
+                                                              kTextboxhintstyle,
+                                                        ),
+                                                      ]))
+                                                ],
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           ),

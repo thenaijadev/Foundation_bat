@@ -48,6 +48,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
                       viewportFraction: 0.98,
+                      enableInfiniteScroll: false,
                       // autoPlay: true
                     ),
                     items: widget.singleProgress.files!.map((inprogressFile) {

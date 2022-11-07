@@ -432,6 +432,25 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
+                                                           errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
                                                             imageUrl:
                                                                 'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
                                                             fit: BoxFit.cover),
@@ -441,6 +460,29 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
+                                                           errorWidget:
+                                                                    (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                placeholder:
+                                                                    (context,
+                                                                            url) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Text(
+                                                                            'Loading',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
+                                                                          ),
+                                                                        ),
                                                             imageUrl:
                                                                 'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
                                                             fit: BoxFit.cover),
@@ -588,6 +630,25 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
+                                                           errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
                                                             imageUrl:
                                                                 'https://www.batnf.net/${events.files!.first.fileUrl}',
                                                             fit: BoxFit.cover),
@@ -597,6 +658,29 @@ class _HomePageState extends State<HomePage> {
                                                             BorderRadius
                                                                 .circular(18),
                                                         child: CachedNetworkImage(
+                                                           errorWidget:
+                                                                    (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                placeholder:
+                                                                    (context,
+                                                                            url) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Text(
+                                                                            'Loading',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
+                                                                          ),
+                                                                        ),
                                                             imageUrl:
                                                                 'https://www.batnf.net/${events.files!.first.thumbnail}',
                                                             fit: BoxFit.cover),
@@ -737,6 +821,26 @@ class _HomePageState extends State<HomePage> {
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
+                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
+
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.fileUrl}',
                                                     fit: BoxFit.cover),
@@ -745,6 +849,17 @@ class _HomePageState extends State<HomePage> {
                                                 borderRadius:
                                                     BorderRadius.circular(18),
                                                 child: CachedNetworkImage(
+                                                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error, color: Colors.black,),),
+                                                    placeholder:
+                                                                        (context,
+                                                                                url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
+
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.thumbnail}',
                                                     fit: BoxFit.cover),

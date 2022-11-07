@@ -102,7 +102,7 @@ class _EventDetailsState extends State<EventDetails> {
                       padEnds: false,
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
-                      viewportFraction: 0.88,
+                      viewportFraction: 0.98,
                       enableInfiniteScroll: false,
                       // autoPlay: true
                     ),

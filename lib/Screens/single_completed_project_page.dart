@@ -49,6 +49,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
                       viewportFraction: 1.0,
+                      enableInfiniteScroll: false,
                       // autoPlay: true
                     ),
                     items: widget.singleCompleted.files!.map((completedFile) {
