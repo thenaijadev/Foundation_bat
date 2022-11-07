@@ -93,131 +93,63 @@ class _CompletedPageState extends State<CompletedPage> {
                                                 completed)));
                               },
                               child: Container(
+                                width: 368,
                                 margin: EdgeInsets.only(
-                                    left: 5, right: 5.0, bottom: 15.0, top: 30),
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
+                                  left: 30,
+                                  right: 30,
+                                  bottom: 30.0,
                                 ),
+                                color: Colors.transparent,
                                 child: Column(
                                   children: [
-                                    Row(
-                                      children: [
-                                        //Images
-                                        Container(
-                                          height: 100,
-                                          width: 130,
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            boxShadow: [kBoxshadow],
-                                          ),
-                                          margin: EdgeInsets.only(
-                                              left: 9.0, right: 9),
-                                          child: completed.files!.first.fileUrl
-                                                      .isEmpty &&
-                                                  completed.files!.first
-                                                          .fileExt ==
-                                                      'image/jpeg'
-                                              ? ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                  child: CachedNetworkImage(
-                                                      placeholder:
-                                                          (context, url) =>
-                                                              Center(
-                                                                child:
-                                                                    CircularProgressIndicator(),
-                                                              ),
-                                                      imageUrl:
-                                                          'https://www.batnf.net/${completed.files!.first.fileUrl}',
-                                                      fit: BoxFit.cover),
-                                                )
-                                              : ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                  child: CachedNetworkImage(
-                                                      placeholder:
-                                                          (context, url) =>
-                                                              Center(
-                                                                child:
-                                                                    CircularProgressIndicator(),
-                                                              ),
-                                                      imageUrl:
-                                                          'https://www.batnf.net/${completed.files!.first.thumbnail}',
-                                                      fit: BoxFit.cover),
-                                                ),
-                                        ),
-                                        
-                                        //Details
-                                        Container(
-                                           height: 100,
-                                          margin: EdgeInsets.only(
-                                              right: 6.0),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            boxShadow: [kBoxshadow],
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                completed.projectTitle,
-                                                style: kNewsSubHeader,
-                                              ),
-                                              Text.rich(
-                                                TextSpan(
-                                                  text: 'Started: ',
-                                                style: kLandpageskiptextstyle,
-                                                children: [
-                                                    TextSpan(
-                                                      text: completed
-                                                          .projectStartDate,
-                                                      style: kTextboxhintstyle,
-                                                      
-                                                    )
-                                                  ]
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                                ),
-                                              
-                                              Text.rich(
-                                                  TextSpan(
-                                                      text: 'Completed: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                      // ignore: prefer_const_literals_to_create_immutables
-                                                      children: [
-                                                    TextSpan(
-                                                      text: completed
-                                                          .projectEndDate,
-                                                      style: kTextboxhintstyle,
-                                                    )
-                                                  ]),
-                                                   overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                    Container(
+                                      height: 150,
+                                      width: 310,
+                                      margin: EdgeInsets.only(
+                                          bottom: 7.0, top: 7.0, left: 9.0),
+                                      child: completed.files!.first.fileUrl
+                                                  .isEmpty &&
+                                              completed.files!.first
+                                                      .fileExt ==
+                                                  'image/jpeg'
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (context, url) =>
+                                                          Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                  imageUrl:
+                                                      'https://www.batnf.net/${completed.files!.first.fileUrl}',
+                                                  fit: BoxFit.cover),
+                                            )
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: CachedNetworkImage(
+                                                  placeholder:
+                                                      (context, url) =>
+                                                          Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                  imageUrl:
+                                                      'https://www.batnf.net/${completed.files!.first.thumbnail}',
+                                                  fit: BoxFit.cover),
+                                            ),
                                     ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      '.............................',
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 30),
-                                    )
                                     
+                                    //Details
+                                    Text(
+                                      completed.projectTitle,
+                                      style: kNewsSubHeader,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ],
                                 ),
                               ),

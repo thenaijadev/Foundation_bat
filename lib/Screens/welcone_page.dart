@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'signin.dart';
 import 'signup.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 
 class WelcomePage extends StatefulWidget {

@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
+import 'package:batnf/Screens/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:page_indicator/page_indicator.dart';
-import 'package:batnf/Screens/welcone_page.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 
 import '../widgets/reuseable_landing_screen.dart';
@@ -124,7 +123,7 @@ class _LandindPageState extends State<LandingPage> {
                             minWidth: MediaQuery.of(context).size.width,
                             color: Color.fromARGB(255, 8, 51, 121),
                             onPressed: () {
-                              Navigator.pushNamed(context, WelcomePage.id);
+                              Navigator.pushNamed(context, SignIn.id);
                             },
                             child: Text(
                               'Get Started',

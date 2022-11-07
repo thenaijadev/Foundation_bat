@@ -73,7 +73,6 @@ class _InprogressPageState extends State<InprogressPage> {
                             itemBuilder: ((context, index) {
                               InprogressModel inprogress =
                                   provider.allInprogressProjects![index];
-                              print(inprogress.files![index].thumbnail);
 
                               return GestureDetector(
                                 onTap: () {
@@ -84,123 +83,53 @@ class _InprogressPageState extends State<InprogressPage> {
                                               ProgressDetails(inprogress)));
                                 },
                                 child: Container(
-                                 margin: EdgeInsets.only(
-                                      left: 5,
-                                      right: 5.0,
-                                      bottom: 15.0,
-                                      top: 30),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
+                                  width: 368,
+                                  margin: EdgeInsets.only(
+                                    left: 30,
+                                    right: 30,
+                                    bottom: 30.0,
                                   ),
+                                  color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          //Images and videos
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            margin: EdgeInsets.only(
-                                                left: 9.0, right: 9),
-                                            child: inprogress.files![index]
-                                                            .fileExt ==
-                                                        'image/jpeg' &&
-                                                    inprogress.files![index].fileUrl
-                                                        .isNotEmpty
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(18),
-                                                    child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![index].fileUrl}',
-                                                        fit: BoxFit.cover),
-                                                  )
-                                                : ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(18),
-                                                    child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${inprogress.files![index].thumbnail}',
-                                                        fit: BoxFit.cover),
-                                                  ),
-                                          ),
+                                      Container(
+                                        height: 150,
+                                        width: 310,
+                                        margin: EdgeInsets.only(
+                                            bottom: 7.0,
+                                            top: 7.0,
+                                            left: 9.0),
+                                        child: inprogress.files![index]
+                                                        .fileExt ==
+                                                    'image/jpeg' &&
+                                                inprogress.files![index].fileUrl
+                                                    .isNotEmpty
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                                    fit: BoxFit.cover),
+                                              )
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                    fit: BoxFit.cover),
+                                              ),
+                                      ),
 
-                                          //Details
-                                          Container(
-                                            height: 100,
-                                            margin: EdgeInsets.only(
-                                                // top: 5,
-                                                left: 10.0,
-                                                right: 6.0),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                 Text(
-                                                  inprogress.projectTitle,
-                                                  style: kNewsSubHeader,
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Started: ',
-                                                      style: kNewsDateSTyle,
-                                                    ),
-                                                    Text(
-                                                        inprogress
-                                                            .projectStartDate,
-                                                        style: kNewsDateSTyle)
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'To End: ',
-                                                      style: kNewsDateSTyle,
-                                                    ),
-                                                    Text(
-                                                        inprogress
-                                                            .projectEndDate,
-                                                        style: kNewsDateSTyle)
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                         
-                                        ],
-                                      ),
-                                     SizedBox(
-                                        height: 15,
-                                      ),
+                                      //Details
                                       Text(
-                                        '.............................',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 30),
-                                      )
-                                    
+                                       inprogress.projectTitle,
+                                       style: kNewsSubHeader,
+                                       overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                          ),
                                     ],
                                   ),
                                 ),

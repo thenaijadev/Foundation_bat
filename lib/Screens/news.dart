@@ -5,12 +5,10 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:batnf/Models/news_model.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 class News extends StatefulWidget {
   static String id = 'new';
@@ -95,7 +93,7 @@ class _NewsState extends State<News> {
                 ],
               ),
             ),
-           
+
             Expanded(
               child: provider.allNews == null
                   ? Center(
@@ -106,53 +104,51 @@ class _NewsState extends State<News> {
                           child: Image.asset('assets/noitem.png.gif'),
                         )
                       : RefreshIndicator(
-                        color: kBackground,
-                        backgroundColor: Theme.of(context).primaryColor,
-                        onRefresh: ()async{
-                           await Provider.of<NewsProvider>(context, listen: false)
+                          color: kBackground,
+                          backgroundColor: Theme.of(context).primaryColor,
+                          onRefresh: () async {
+                            await Provider.of<NewsProvider>(context,
+                                    listen: false)
                                 .getAllNews();
                           },
-                        child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: provider.allNews!.length,
-                            itemBuilder: ((context, index) {
-                              NewsModel news = provider.allNews![index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              NewsDetails(news)));
-                                },
-                                child: Container(
-                                  width: 368,
-                                  margin: EdgeInsets.only(
-                                    left: 30,
-                                    right: 30,
-                                    bottom: 30.0,
-                                  ),
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: provider.allNews!.length,
+                              itemBuilder: ((context, index) {
+                                NewsModel news = provider.allNews![index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetails(news)));
+                                  },
+                                  child: Container(
+                                    width: 368,
+                                    margin: EdgeInsets.only(
+                                      left: 30,
+                                      right: 30,
+                                      bottom: 30.0,
+                                    ),
                                     color: Colors.transparent,
-                                  child: Column(
-                                    children: [
-
-                                      //Images
-                                      Container(
-                                        height: 150,
-                                        width: 310,
-                                        margin: EdgeInsets.only(
-                                            bottom: 7.0, top: 7.0, left: 9.0),
-                                        child: news.files!.first
-                                                          .fileExt ==
+                                    child: Column(
+                                      children: [
+                                        //Images
+                                        Container(
+                                          height: 150,
+                                          width: 310,
+                                          margin: EdgeInsets.only(
+                                              bottom: 7.0, top: 7.0, left: 9.0),
+                                          child: news.files!.first.fileExt ==
                                                       'image/jpeg' &&
-                                                  news.files!.first
-                                                      .fileUrl.isNotEmpty
+                                                  news.files!.first.fileUrl
+                                                      .isNotEmpty
                                               ? ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          18),
+                                                      BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                     errorWidget: (context,
+                                                      errorWidget: (context,
                                                               url, error) =>
                                                           Center(
                                                             child: Icon(
@@ -177,10 +173,9 @@ class _NewsState extends State<News> {
                                                 )
                                               : ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          18),
+                                                      BorderRadius.circular(18),
                                                   child: CachedNetworkImage(
-                                                     errorWidget: (context,
+                                                      errorWidget: (context,
                                                               url, error) =>
                                                           Center(
                                                             child: Icon(
@@ -203,26 +198,128 @@ class _NewsState extends State<News> {
                                                           'https://www.batnf.net/${news.files!.first.thumbnail}',
                                                       fit: BoxFit.cover),
                                                 ),
-                                    ),
+                                        ),
 
-                                      // News Details
-                                      Text(
-                                        news.title,
-                                        style: kNewsSubHeader,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
+                                        // News Details
+                                        Text(
+                                          news.title,
+                                          style: kNewsSubHeader,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            })),
-                      ),
+                                );
+                              })),
+                        ),
             ),
+
+            // ListView(
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => NewsDetails(news)));
+            //       },
+            //       child: Container(
+            //         color: Colors.transparent,
+            //         width: 375,
+            //         child: Row(
+            //           children: [
+            //             //Images
+            //             Container(
+            //               margin: EdgeInsets.only(
+            //                   top: 10, bottom: 10.0, right: 15.0),
+            //               height: 100,
+            //               width: 180,
+            //               child: news.files!.first.fileExt == 'image/jpeg' &&
+            //                       news.files!.first.fileUrl.isNotEmpty
+            //                   ? ClipRRect(
+            //                       borderRadius: BorderRadius.circular(18),
+            //                       child: CachedNetworkImage(
+            //                           errorWidget: (context, url, error) =>
+            //                               Center(
+            //                                 child: Icon(
+            //                                   Icons.error,
+            //                                   color: Colors.black,
+            //                                 ),
+            //                               ),
+            //                           placeholder: (context, url) => Center(
+            //                                 child: Text(
+            //                                   'Loading',
+            //                                   style: TextStyle(
+            //                                       color: Colors.black),
+            //                                 ),
+            //                               ),
+            //                           imageUrl:
+            //                               'https://www.batnf.net/${news.files!.first.fileUrl}',
+            //                           fit: BoxFit.cover),
+            //                     )
+            //                   : ClipRRect(
+            //                       borderRadius: BorderRadius.circular(18),
+            //                       child: CachedNetworkImage(
+            //                           errorWidget: (context, url, error) =>
+            //                               Center(
+            //                                 child: Icon(
+            //                                   Icons.error,
+            //                                   color: Colors.black,
+            //                                 ),
+            //                               ),
+            //                           placeholder: (context, url) => Center(
+            //                                 child: Text(
+            //                                   'Loading',
+            //                                   style: TextStyle(
+            //                                       color: Colors.black),
+            //                                 ),
+            //                               ),
+            //                           imageUrl:
+            //                               'https://www.batnf.net/${news.files!.first.thumbnail}',
+            //                           fit: BoxFit.cover),
+            //                     ),
+            //             ),
+
+            //             //Details
+            //             Container(
+            //               // height: 100,
+            //               width: 180,
+            //               margin: EdgeInsets.only(top: 10, bottom: 10.0),
+            //               decoration: BoxDecoration(
+            //                 boxShadow: [kBoxshadow],
+            //                 color: Theme.of(context).primaryColor,
+            //                 borderRadius: BorderRadius.circular(18),
+            //               ),
+            //               child: Column(
+            //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //                 // ignore: prefer_const_literals_to_create_immutables
+            //                 children: [
+            //                   Text(
+            //                     news.title,
+            //                     style: kNewsSubHeader,
+            //                     overflow: TextOverflow.ellipsis,
+            //                     maxLines: 1,
+            //                     // textAlign:
+            //                     //     TextAlign.justify,
+            //                   ),
+            //                   Text(
+            //                     news.entryDate,
+            //                     textAlign: TextAlign.left,
+            //                     style: kNewsDateSTyle,
+            //                   )
+            //                 ],
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     );
+            //   ],
+            // )
           ],
         ),
-        
       ),
     );
   }

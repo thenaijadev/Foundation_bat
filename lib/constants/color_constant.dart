@@ -11,10 +11,10 @@ const kTextfieldborderColor = Color(0xffFFFFFF);
 
 
 final kBoxshadow = BoxShadow(
-  spreadRadius: 0.5,
+  // spreadRadius: 0.5,
                 color: Colors.blue.withOpacity(0.9),
                 offset: Offset(4, 4),
-                blurRadius: 0.5);
+                blurRadius: 10.5);
 
 const kLoginbuttonColor = Color(0xffF9F9FA);
 const kSignupbuttonColor = Color(0xff119AE2);

@@ -112,10 +112,11 @@ const kWelcomeHeadstyle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const kPageHeader = TextStyle(
+  color: Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: FontWeight.w600);
+    fontSize: 14,
+    fontWeight: FontWeight.w700);
 
 const kNewsSubHeader = TextStyle(
     color: Color.fromARGB(255, 8, 51, 121),
@@ -145,7 +146,7 @@ const kAboutTextStyle = TextStyle(
 const kNewsDateSTyle = TextStyle(
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: FontWeight.w400);
 
 const kLandsignup = TextStyle(

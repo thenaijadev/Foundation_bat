@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api, non_constant_identifier_names
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -84,140 +83,114 @@ class _ProjectPageState extends State<ProjectPage> {
                 ],
               ),
             ),
-
+        
             //Project Body
             Expanded(
               child: ListView(
                 children: [
-                  // Project Summary List Header
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 29.0, left: 30.0, bottom: 20),
-                    child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Projects Summary',
-                          style: kPageHeader,
-                        )
-                      ],
-                    ),
-                  ),
-
+                  // // Project Summary List Header
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 29.0, left: 30.0, bottom: 20),
+                  //   child: Row(
+                  //     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text(
+                  //         'Projects Summary',
+                  //         style: kPageHeader,
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+        
                   //Project Summary List
-
-                  SizedBox(
-                    height: 150,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        //Project in progress
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, InprogressPage.id);
-                          },
-                          child: ProjectSummaryContainer(
-                            margin: EdgeInsets.only(left: 30, right: 60.5),
-                            innercontainer: Theme.of(context).primaryColor
-                                .withOpacity(0.1),
-                            number: inprogressProvider
-                                        .allInprogressProjects?.length ==
-                                    null
-                                ? 0
-                                : inprogressProvider
-                                    .allInprogressProjects!.length,
-                            colour: Theme.of(context).primaryColor,
-                            label: 'InProgress',
-                            childCard: Icon(
-                              FontAwesomeIcons.spinner,
-                              size: 65,
-                              color: Colors.yellow,
-                            ),
-                          ),
-                        ),
-
-                        //Completed Project
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, CompletedPage.id);
-                          },
-                          child: ProjectSummaryContainer(
-                            margin: EdgeInsets.only(right: 41.5),
-                            innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
-                            number: completedProvider
-                                        .allCompletedProjects?.length ==
-                                    null
-                                ? 0
-                                : completedProvider
-                                    .allCompletedProjects!.length,
-                            colour: Color(0xff50AF47),
-                            label: 'Completed',
-                            childCard: Icon(
-                              FontAwesomeIcons.checkCircle,
-                              size: 65,
-                              color: Color(0xff50AF47),
-                            ),
-                          ),
-                        ),
-
-                        // Pending project
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, PendingPage.id);
-                          },
-                          child: ProjectSummaryContainer(
-                            margin: EdgeInsets.only(right: 30),
-                            innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
-                            number: pendingProvider
-                                        .allPendingProjects?.length ==
-                                    null
-                                ? 0
-                                : pendingProvider.allPendingProjects!.length,
-                            colour: Color(0xffEF7D00),
-                            label: 'Pending',
-                            childCard: Icon(
-                              FontAwesomeIcons.solidCommentDots,
-                              color: Color(0xffEF7D00),
-                              size: 65,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
+        
+                  // SizedBox(
+                  //   height: 150,
+                  //   child: ListView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     children: [
+                  //       //Project in progress
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Navigator.pushNamed(context, InprogressPage.id);
+                  //         },
+                  //         child: ProjectSummaryContainer(
+                  //           margin: EdgeInsets.only(left: 30, right: 60.5),
+                  //           innercontainer: Theme.of(context).primaryColor
+                  //               .withOpacity(0.1),
+                  //           number: inprogressProvider
+                  //                       .allInprogressProjects?.length ==
+                  //                   null
+                  //               ? 0
+                  //               : inprogressProvider
+                  //                   .allInprogressProjects!.length,
+                  //           colour: Theme.of(context).primaryColor,
+                  //           label: 'InProgress',
+                  //           childCard: Icon(
+                  //             FontAwesomeIcons.spinner,
+                  //             size: 65,
+                  //             color: Colors.yellow,
+                  //           ),
+                  //         ),
+                  //       ),
+        
+                  //       //Completed Project
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Navigator.pushNamed(context, CompletedPage.id);
+                  //         },
+                  //         child: ProjectSummaryContainer(
+                  //           margin: EdgeInsets.only(right: 41.5),
+                  //           innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
+                  //           number: completedProvider
+                  //                       .allCompletedProjects?.length ==
+                  //                   null
+                  //               ? 0
+                  //               : completedProvider
+                  //                   .allCompletedProjects!.length,
+                  //           colour: Color(0xff50AF47),
+                  //           label: 'Completed',
+                  //           childCard: Icon(
+                  //             FontAwesomeIcons.checkCircle,
+                  //             size: 65,
+                  //             color: Color(0xff50AF47),
+                  //           ),
+                  //         ),
+                  //       ),
+        
+                  //       // Pending project
+                  //       GestureDetector(
+                  //         onTap: () {
+                  //           Navigator.pushNamed(context, PendingPage.id);
+                  //         },
+                  //         child: ProjectSummaryContainer(
+                  //           margin: EdgeInsets.only(right: 30),
+                  //           innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
+                  //           number: pendingProvider
+                  //                       .allPendingProjects?.length ==
+                  //                   null
+                  //               ? 0
+                  //               : pendingProvider.allPendingProjects!.length,
+                  //           colour: Color(0xffEF7D00),
+                  //           label: 'Pending',
+                  //           childCard: Icon(
+                  //             FontAwesomeIcons.solidCommentDots,
+                  //             color: Color(0xffEF7D00),
+                  //             size: 65,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+        
                   //Inprogress Project
                   SizedBox(
                     height: 150,
                     width: 365,
                     child: Column(
                       children: [
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: 5.0, left: 30.0, right: 30),
-
-                          //Label
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Inprogress',
-                                style: kPageHeader,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, InprogressPage.id);
-                                },
-                                child: Text(
-                                  'See All',
-                                  style: kForgetpasswordstyle,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-
                         // Inprogress Details
                         Expanded(
                           child: inprogressProvider.allInprogressProjects ==
@@ -250,14 +223,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                              color: Colors.transparent,
-                                            width: 375,
+                                            // width: 375,
                                             child: Row(
                                               children: [
                                                 // Inprogress Images
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 10.0,
+                                                      left: 10,
                                                       right: 15.0),
                                                   height: 100,
                                                   width: 180,
@@ -274,6 +246,19 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget: (context, url, error) => Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
+                                                            placeholder: (context, url) => Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
                                                               fit:
@@ -284,26 +269,40 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
                                                               fit:
                                                                   BoxFit.cover),
                                                         ),
                                                 ),
-
+        
                                                 // Inprogress Information
                                                 Container(
-                                                   width: 180,
+                                                  width: 180,
+                                                  height: 100,
                                                   margin: EdgeInsets.only(
-                                                      top: 10, bottom: 10.0),
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [kBoxshadow],
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                  ),
+                                                      right: 10),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -313,23 +312,46 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       Text(
                                                         inprogress
                                                             .projectTitle,
-                                                        style: kPageHeader,
+                                                        style: kNewsSubHeader,
                                                       ),
+                                                      Text.rich(
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 4,
+                                                          TextSpan(
+                                                              text: 'Title: ',
+                                                              style:
+                                                                  kNewsSubHeader,
+                                                              // ignore: prefer_const_literals_to_create_immutables
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: inprogress
+                                                                      .projectDescription,
+                                                                  style:
+                                                                      kNewsDateSTyle,
+                                                                )
+                                                              ])),
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            'Started: ',
-                                                            style:
-                                                                kProjectsub,
+                                                            'Status: ',
+                                                            style: kNewsSubHeader,
                                                           ),
                                                           Text(
-                                                              inprogress
-                                                                  .projectStartDate,
-                                                              style:
-                                                                  kNewsDateSTyle)
+                                                            inprogress
+                                                                .projectStatus,
+                                                            style:
+                                                                kNewsSubHeader,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            maxLines: 1,
+                                                          )
                                                         ],
                                                       ),
                                                     ],
@@ -345,37 +367,14 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-
+        
                   //Completed Project
                   SizedBox(
                     height: 150,
                     width: 365,
                     child: Column(
                       children: [
-                        Container(
-                          margin:
-                              EdgeInsets.only(top: 15.0, left: 30.0, right: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Completed',
-                                style: kPageHeader,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, CompletedPage.id);
-                                },
-                                child: Text(
-                                  'See All',
-                                  style: kForgetpasswordstyle,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
+                           Expanded(
                           child: completedProvider.allCompletedProjects == null
                               ? Center(
                                   child: CircularProgressIndicator(),
@@ -386,7 +385,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                           Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemCount: completedProvider
                                           .allCompletedProjects!.length,
                                       itemBuilder: ((context, index) {
@@ -404,14 +403,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                               color: Colors.transparent,
-                                            width: 375,
+                                            // width: 375,
                                             child: Row(
                                               children: [
                                                 // Completed Image
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 10.0,
+                                                      left: 10,
                                                       right: 15.0),
                                                   height: 100,
                                                   width: 180,
@@ -428,6 +426,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${completed.files!.first.fileUrl}',
                                                               fit:
@@ -438,6 +457,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${completed.files!.first.thumbnail}',
                                                               fit:
@@ -448,16 +488,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 // Completed Project Info
                                                 Container(
                                                   width: 180,
+                                                  height: 100,
                                                   margin: EdgeInsets.only(
-                                                      top: 10, bottom: 10.0),
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [kBoxshadow],
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                  ),
+                                                      right: 10),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -468,37 +501,42 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       Text(
                                                         completed
                                                             .projectTitle,
-                                                        style: kPageHeader,
+                                                        style: kNewsSubHeader,
                                                       ),
                                                       // project Start Date
                                                       Text.rich(
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 4,
                                                            TextSpan(
                                                               text:
-                                                                  'Started: ',
+                                                                  'Title: ',
                                                               style:
-                                                                  kLandpageskiptextstyle,
+                                                                  kNewsSubHeader,
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                             TextSpan(
                                                               text: completed
-                                                                  .projectStartDate,
+                                                                  .projectDescription,
                                                               style:
-                                                                  kTextboxhintstyle,
+                                                                  kNewsDateSTyle,
                                                             )
                                                           ])),
-
-                                                      //Project Completed date
+        
+                                                      //Project Status
                                                       Text.rich(
                                                           TextSpan(
                                                               text:
-                                                                  'Completed: ',
+                                                                  'Status: ',
                                                               style:
-                                                                  kLandpageskiptextstyle,
+                                                                  kNewsSubHeader,
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                             TextSpan(
                                                               text: completed
-                                                                  .projectEndDate,
+                                                                  .projectStatus,
                                                               style:
                                                                   kNewsDateSTyle,
                                                             )
@@ -516,41 +554,14 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-
+        
                   // Pending Progress label
                   SizedBox(
                     height: 150,
                     width: 365,
                     child: Column(
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: 15.0, left: 30.0, right: 30, bottom: 15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Pending',
-                                style: kPageHeader,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PendingPage(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  'See All',
-                                  style: kForgetpasswordstyle,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
+                         Expanded(
                           child: pendingProvider.allPendingProjects == null
                               ? Center(
                                   child: CircularProgressIndicator(),
@@ -561,6 +572,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                           Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
+                                    scrollDirection: Axis.horizontal,
                                       itemCount: pendingProvider
                                           .allPendingProjects!.length,
                                       itemBuilder: (((context, index) {
@@ -577,14 +589,12 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                               color: Colors.transparent,
-                                            width: 375,
                                             child: Row(
                                               children: [
                                                 //pending Project Image
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 10.0,
+                                                      left: 10,
                                                       right: 15.0),
                                                   height: 100,
                                                   width: 180,
@@ -601,6 +611,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${pending.files!.first.fileUrl}',
                                                               fit:
@@ -611,6 +642,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               BorderRadius
                                                                   .circular(18),
                                                           child: CachedNetworkImage(
+                                                            errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
                                                               imageUrl:
                                                                   'https://www.batnf.net/${pending.files!.first.thumbnail}',
                                                               fit:
@@ -620,21 +672,10 @@ class _ProjectPageState extends State<ProjectPage> {
 
                                                 //Pending Project Details
                                                 Container(
+                                                  margin: EdgeInsets.only(right: 10),
                                                   width: 180,
-                                                  margin: EdgeInsets.only(
-                                                      top: 10, bottom: 10.0),
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [kBoxshadow],
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                  ),
+                                                  height: 100,
                                                   child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceEvenly,
@@ -643,22 +684,37 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   Text(pending.projectTitle,
                                                       style:
                                                           kNewsSubHeader),
-
+        
                                                   //Project Begin Date
                                                   Text.rich(
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    maxLines: 4,
                                                        TextSpan(
                                                           text:
-                                                              'To Begin: ',
+                                                              'Title: ',
                                                           style:
-                                                              kLandpageskiptextstyle,
+                                                              kNewsSubHeader,
                                                           children: [
                                                         TextSpan(
                                                           text: pending
-                                                              .projectStartDate,
+                                                              .projectDescription,
                                                           style:
-                                                              kTextboxhintstyle,
+                                                              kNewsSubHeader,
                                                         ),
-                                                      ]))
+                                                      ])),
+                                                      Text.rich(TextSpan(
+                                                          text: 'Status: ',
+                                                          style: kNewsSubHeader,
+                                                          children: [
+                                                            TextSpan(
+                                                              text: pending
+                                                                  .projectStatus,
+                                                              style:
+                                                                  kNewsSubHeader,
+                                                            ),
+                                                          ])),
                                                 ],
                                                   ),
                                                 )

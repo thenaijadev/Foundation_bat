@@ -12,6 +12,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/event_provider.dart';
+import '../providers/inprogress_provider.dart';
+import '../providers/news_provider.dart';
+
 class ReuseableBottomBar extends StatefulWidget {
   static String id = 'navbar';
   const ReuseableBottomBar({
@@ -26,6 +30,10 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
   @override
   void initState() {
     super.initState();
+    Provider.of<NewsProvider>(context, listen: false).getAllNews();
+    Provider.of<EventProvider>(context, listen: false).getAllEvents();
+    Provider.of<InprogressProvider>(context, listen: false)
+        .getInprogressProjects();
     FlutterNativeSplash.remove();
   }
    List<Widget> screen = [

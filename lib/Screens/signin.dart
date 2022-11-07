@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:batnf/Screens/reset_Completed_page.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

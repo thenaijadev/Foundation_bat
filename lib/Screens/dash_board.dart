@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
-import 'package:batnf/Screens/inprogress_project.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
+import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,6 @@ import 'package:batnf/providers/event_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../Models/events_model.dart';
-import '../Models/files.dart';
 import '../Models/inprogress_model.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
@@ -216,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                   sharedPreferences.setBool('autoLogin', false);
 
                   Navigator.pushNamedAndRemoveUntil(
-                      context, WelcomePage.id, (Route<dynamic> route) => false);
+                      context, SignIn.id, (Route<dynamic> route) => false);
                 },
                 child: ListTile(
                     title: Text(
@@ -346,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // Project List Header
+              // InProject
              SizedBox(
                 height: 150,
                 width: 365,
@@ -411,14 +409,12 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Container(
                                             color:Colors.transparent,
-                                          width: 375,
+                                          // width: 375,
                                           child: Row(
                                             children: [
                                               //Images and Videos for Inprogress Projects
                                               Container(
                                                 margin: EdgeInsets.only(
-                                                    top: 10,
-                                                    bottom: 10.0,
                                                     right: 15.0),
                                                 height: 100,
                                                 width: 180,
@@ -437,10 +433,10 @@ class _HomePageState extends State<HomePage> {
                                                                             error) =>
                                                                         Center(
                                                                           child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
+                                                                              Text(
+                                                                            'Loading',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
                                                                           ),
                                                                         ),
                                                                     placeholder:
@@ -466,10 +462,10 @@ class _HomePageState extends State<HomePage> {
                                                                             error) =>
                                                                         Center(
                                                                           child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
+                                                                              Text(
+                                                                            'Loading',
+                                                                            style:
+                                                                                TextStyle(color: Colors.black),
                                                                           ),
                                                                         ),
                                                                 placeholder:
@@ -491,17 +487,8 @@ class _HomePageState extends State<HomePage> {
 
                                               //Details
                                               Container(
-                                                height: 100,
+                                                // height: 100,
                                                 width: 180,
-                                                margin: EdgeInsets.only(
-                                                    top: 10, bottom: 10.0),
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [kBoxshadow],
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                ),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -518,11 +505,11 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       inprogress
                                                           .projectDescription,
-                                                      textAlign: TextAlign.left,
-                                                      style: kBodyTextStyle,
+                                                      textAlign: TextAlign.justify,
+                                                      style: kNewsSubHeader,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      maxLines: 2,
+                                                      maxLines: 4,
                                                     ),
                                                     Text(
                                                       inprogress
@@ -607,15 +594,11 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Container(
                                             color:Colors.transparent,
-                                          // height: 120,
-                                          width: 375,
                                           child: Row(
                                             children: [
                                               //Images
                                               Container(
                                                 margin: EdgeInsets.only(
-                                                    top: 10,
-                                                    bottom: 10.0,
                                                     right: 15.0),
                                                 height: 100,
                                                 width: 180,
@@ -690,8 +673,6 @@ class _HomePageState extends State<HomePage> {
                                               Container(
                                                 height: 100,
                                                 width: 180,
-                                                margin: EdgeInsets.only(
-                                                    top: 10, bottom: 10.0),
                                                 decoration: BoxDecoration(
                                                   boxShadow: [kBoxshadow],
                                                   color: Theme.of(context)
@@ -802,14 +783,12 @@ class _HomePageState extends State<HomePage> {
                                         },
                                         child: Container(
                                             color:Colors.transparent,
-                                          width: 375,
+                                          // width: 375,
                                           child: Row(
                                             children: [
                                               //Images
                                               Container(
                                                   margin: EdgeInsets.only(
-                                                      top: 10,
-                                                      bottom: 10.0,
                                                       right: 15.0),
                                                   height: 100,
                                                   width: 180,
@@ -870,8 +849,6 @@ class _HomePageState extends State<HomePage> {
                                               Container(
                                                 // height: 100,
                                                 width: 180,
-                                                margin: EdgeInsets.only(
-                                                    top: 10, bottom: 10.0),
                                                 decoration: BoxDecoration(
                                                   boxShadow: [kBoxshadow],
                                                   color: Theme.of(context)
@@ -916,6 +893,8 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 30,
               ),
+
+              
             ],
           ),
         ),

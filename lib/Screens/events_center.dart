@@ -32,14 +32,7 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        body: RefreshIndicator(
-          color: kBackground,
-          backgroundColor: Theme.of(context).primaryColor,
-          onRefresh: () async {
-            await Provider.of<EventProvider>(context, listen: false)
-                .getAllEvents();
-          },
-          child: Column(
+        body:  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -114,7 +107,14 @@ class _EventCenterState extends State<EventCenter> {
                         ? Center(
                             child: Image.asset('assets/noitem.png.gif'),
                           )
-                        : ListView.builder(
+                        : RefreshIndicator(
+                          color: kBackground,
+          backgroundColor: Theme.of(context).primaryColor,
+          onRefresh: () async {
+            await Provider.of<EventProvider>(context, listen: false)
+                .getAllEvents();
+          },
+                          child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             itemCount: provider.allEvents!.length,
                             itemBuilder: ((context, index) {
@@ -128,43 +128,37 @@ class _EventCenterState extends State<EventCenter> {
                                               EventDetails(event)));
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 10,
-                                    // right: 30,
-                                    bottom: 30.0,
-                                  ),
+                                  width: 368,
+                                    margin: EdgeInsets.only(
+                                      left: 30,
+                                      right: 30,
+                                      bottom: 30.0,
+                                    ),
                                     color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Row(
+                                      Column(
                                         children: [
 
                                           //Images
                                           Container(
-                                             decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                               borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            height: 100,
-                                            // width: 110,
-                                            margin: EdgeInsets.only(
-                                                bottom: 7.0, top: 7.0, left: 9.0),
-                              
-                                            // Event Image
-                                            child: ClipRRect(
-                                              borderRadius:
+                                              height: 150,
+                                          width: 310,
+                                          margin: EdgeInsets.only(
+                                              bottom: 7.0, top: 7.0, left: 9.0),
+                                         child: event.files!.first.fileUrl.isNotEmpty && event.files!.first.fileExt == 'image/jpeg'
+                                                ?  ClipRRect(
+                                                  borderRadius:
                                                   BorderRadius.circular(18),
-                                              child: event.files!.first.fileUrl.isNotEmpty && event.files!.first.fileExt == 'image/jpeg'
-                                                  ?  CachedNetworkImage(
+                                                  child: CachedNetworkImage(
                                                      errorWidget: (context, url,
                                                               error) =>
                                                           Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color:
-                                                                  Colors.black,
+                                                            child: Text(
+                                                              'Loading',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black),
                                                             ),
                                                           ),
                                                       placeholder: (context,
@@ -179,112 +173,45 @@ class _EventCenterState extends State<EventCenter> {
                                                           ),
                                                       imageUrl:
                                                           'https://www.batnf.net/${event.files!.first.fileUrl}',
-                                                      fit: BoxFit.cover)
-                                                  : CachedNetworkImage(
-                                                     errorWidget: (context,
-                                                              url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ),
-                                                      placeholder:
-                                                          (context, url) =>
-                                                              Center(
-                                                                child: Text(
-                                                                  'Loading',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black),
-                                                                ),
+                                                      fit: BoxFit.cover),
+                                                )
+                                                : CachedNetworkImage(
+                                                   errorWidget: (context,
+                                                            url, error) =>
+                                                        Center(
+                                                              child: Text(
+                                                                'Loading',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
                                                               ),
-                                                  imageUrl:
-                                                      'https://www.batnf.net/${event.files!.first.thumbnail}',
-                                                  fit: BoxFit.cover),
-                                            ),
+                                                            ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child: Text(
+                                                                'Loading',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                              ),
+                                                            ),
+                                                imageUrl:
+                                                    'https://www.batnf.net/${event.files!.first.thumbnail}',
+                                                fit: BoxFit.cover),
                                           ),
                                          
                                           // Details
-                                          Container(
-                                            height: 100,
-                                            margin: EdgeInsets.only(
-                                                // top: 5,
-                                                left: 10.0,
-                                                right: 6.0),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            //Event Information
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              // ignore: prefer_const_literals_to_create_immutables
-                                              children: [
-                                                //Event Title
-                                                Text(
-                                                  event.eventName,
-                                                  style: kNewsSubHeader,
-                                                  textAlign: TextAlign.left,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                ),
-                                                // Events date
-                                                Text(
-                                                  event.eventStartDate,
-                                                  style: kNewsDateSTyle,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                ),
-                                                //Event Location
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    //Event Location Icon
-                                                    Icon(
-                                                      FontAwesomeIcons
-                                                          .mapMarkerAlt,
-                                                      size: 16.67,
-                                                      color: kSignupbuttonColor,
-                                                    ),
-                              
-                                                    //Event Location
-                                                    Text(
-                                                      event.eventLocation,
-                                                      // textAlign: TextAlign.left,
-                                                      style: TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
+                                          Text(
+                                            event.eventName,
+                                            style: kNewsSubHeader,
+                                           overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              textAlign: TextAlign.center,
                                           ),
+                                         
                                         ],
                                       ),
-                                       SizedBox(
-                                        height: 15,
-                                      ),
-                                      Text(
-                                        '.............................',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 30),
-                                      )
                                     
                                     ],
                                   ),
@@ -292,9 +219,9 @@ class _EventCenterState extends State<EventCenter> {
                               );
                             })),
               ),
+              ),
             ],
           ),
-        ),
         
       ),
     );

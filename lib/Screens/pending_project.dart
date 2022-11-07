@@ -88,142 +88,61 @@ class _PendingPageState extends State<PendingPage> {
                                                   pending)));
                                 },
                                 child: Container(
+                                  width: 368,
                                   margin: EdgeInsets.only(
-                                      left: 5,
-                                      right: 5.0,
-                                      bottom: 15.0,
-                                      top: 30),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
+                                    left: 30,
+                                    right: 30,
+                                    bottom: 30.0,
                                   ),
+                                  color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          
-                                          //Images
-                                          Container(
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            margin: EdgeInsets.only(
-                                                left: 9.0, right: 9),
-                                            child: pending
-                                                    .files!.first.fileUrl.isEmpty && pending.files!.first.fileExt =='image/jpeg'
-                                                ? ClipRRect(
+                                      Container(
+                                        height: 150,
+                                        width: 310,
+                                        margin: EdgeInsets.only(
+                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                        child: pending
+                                                .files!.first.fileUrl.isEmpty && pending.files!.first.fileExt =='image/jpeg'
+                                            ? ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(18),
+                                                child: CachedNetworkImage(
+                                                   placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
+                                                    imageUrl:
+                                                        'https://www.batnf.net/${pending.files!.first.fileUrl}',
+                                                    fit: BoxFit.cover),
+                                              )
+                                             : ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(18),
+                                                        BorderRadius.circular(
+                                                            18),
                                                     child: CachedNetworkImage(
-                                                       placeholder:
-                                                            (context, url) =>
-                                                                Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                ),
+                                                         placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
                                                         imageUrl:
-                                                            'https://www.batnf.net/${pending.files!.first.fileUrl}',
+                                                            'https://www.batnf.net/${pending.files!.first.thumbnail}',
                                                         fit: BoxFit.cover),
-                                                  )
-                                                 : ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                18),
-                                                        child: CachedNetworkImage(
-                                                             placeholder:
-                                                            (context, url) =>
-                                                                Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                ),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${pending.files!.first.thumbnail}',
-                                                            fit: BoxFit.cover),
-                                                      ),
-                                          ),
-                                          
-                                          //Details
-                                          Container(
-                                             height: 100,
-                                            margin: EdgeInsets.only(
-                                                // top: 5,
-                                                left: 10.0,
-                                                right: 6.0),
-                                            decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(18.0),
-                                              boxShadow: [kBoxshadow],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    Text(
-                                                  pending.projectTitle,
-                                                  style: kPageHeader,
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'To Begin: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                    ),
-                                                    Text(
-                                                        pending
-                                                            .projectStartDate,
-                                                        style:
-                                                            kTextboxhintstyle,
-                                                            overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 1,
-                                                            )
-                                                  ],
-                                                ),
-                                               // To End Date
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'To End: ',
-                                                      style:
-                                                          kLandpageskiptextstyle,
-                                                    ),
-                                                    Text(pending.projectEndDate,
-                                                        style:
-                                                            kTextboxhintstyle,
-                                                            overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 1,
-                                                    )
-                                                  ],
-                                                ),
-                                                  ],
-                                            ),
-                                          ),
-
-                                        ],
+                                                  ),
                                       ),
-                                       SizedBox(
-                                        height: 15,
-                                      ),
+                                      
+                                      //Details
                                       Text(
-                                        '.............................',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 30),
-                                      )
-                                    
+                                            pending.projectTitle,
+                                            style: kPageHeader,
+                                            overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                          ),
                                       ]
                                     ,
                                   ),
