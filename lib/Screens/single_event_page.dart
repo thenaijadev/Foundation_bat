@@ -95,37 +95,39 @@ class _EventDetailsState extends State<EventDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Event Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CarouselSlider(
-                    options: CarouselOptions(
-                      padEnds: false,
-                      autoPlayInterval: Duration(seconds: 10),
-                      height: 350,
-                      viewportFraction: 0.98,
-                      enableInfiniteScroll: false,
-                      // autoPlay: true
-                    ),
-                    items: widget.singleEvent.files!.map((eventsFile) {
-                      if (eventsFile.fileExt == '') {
-                        return CachedNetworkImage(
-                            imageUrl:
-                                'https://www.batnf.net/${eventsFile.thumbnail}',
-                            fit: BoxFit.cover);
-                      } else if (eventsFile.fileExt == 'image/jpeg') {
-                        return CachedNetworkImage(
-                            errorWidget: (context, url, error) =>
-                                Center(child: Text('No Image/Video Available')),
-                            placeholder: (context, url) => Center(
-                                    child: Text(
-                                  'Loading',
-                                  style: TextStyle(color: Colors.black),
-                                )),
-                            imageUrl:
-                                'https://www.batnf.net/${eventsFile.fileUrl}',
-                            fit: BoxFit.cover);
-                      } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
-                    }).toList()),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: ClipRRect(
+                  child: CarouselSlider(
+                      options: CarouselOptions(
+                        padEnds: false,
+                        autoPlayInterval: Duration(seconds: 10),
+                        height: 350,
+                        viewportFraction: 0.98,
+                        enableInfiniteScroll: false,
+                        // autoPlay: true
+                      ),
+                      items: widget.singleEvent.files!.map((eventsFile) {
+                        if (eventsFile.fileExt == '') {
+                          return CachedNetworkImage(
+                              imageUrl:
+                                  'https://www.batnf.net/${eventsFile.thumbnail}',
+                              fit: BoxFit.cover);
+                        } else if (eventsFile.fileExt == 'image/jpeg') {
+                          return CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  Center(child: Text('No Image/Video Available')),
+                              placeholder: (context, url) => Center(
+                                      child: Text(
+                                    'Loading',
+                                    style: TextStyle(color: Colors.black),
+                                  )),
+                              imageUrl:
+                                  'https://www.batnf.net/${eventsFile.fileUrl}',
+                              fit: BoxFit.cover);
+                        } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
+                      }).toList()),
+                ),
               ),
 
               //Event Name

@@ -32,7 +32,7 @@ class _PendingDetailsState extends State<PendingDetails> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(color: kBackground),
+        leading: BackButton(color: Colors.blue),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -40,42 +40,45 @@ class _PendingDetailsState extends State<PendingDetails> {
           children: [
       
             //Project Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-            child: CarouselSlider(
-                options: CarouselOptions(
-                  autoPlayInterval: Duration(seconds: 10),
-                  height: 350,
-                  viewportFraction: 1.0,
-                   enableInfiniteScroll: false,
-                      padEnds: false,
-                  // autoPlay: true
-                ),
-                items: widget.singlePending.files!.map((pendingFile) {
-                if (pendingFile.fileExt == ' ') {
-                    return CachedNetworkImage(
-                        placeholder: (context, url) => Center(
-                                child: Text(
-                              'Loading',
-                              style: TextStyle(color: Colors.black),
-                            )),
-                        imageUrl:
-                            'https://www.batnf.net/${pendingFile.thumbnail}',
-                        fit: BoxFit.cover);
-                  } else if (pendingFile.fileExt == 'image/jpeg') {
-                        return CachedNetworkImage(
-                            placeholder: (context, url) => Center(
-                                  child: Text('Loading...', style: TextStyle(color: Colors.black),
+            Container(
+              margin: EdgeInsets.only(left: 25, right: 25),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+              child: CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlayInterval: Duration(seconds: 10),
+                    height: 350,
+                    viewportFraction: 1.0,
+                     enableInfiniteScroll: false,
+                        padEnds: false,
+                    // autoPlay: true
+                  ),
+                  items: widget.singlePending.files!.map((pendingFile) {
+                  if (pendingFile.fileExt == ' ') {
+                      return CachedNetworkImage(
+                          placeholder: (context, url) => Center(
+                                  child: Text(
+                                'Loading',
+                                style: TextStyle(color: Colors.black),
+                              )),
+                          imageUrl:
+                              'https://www.batnf.net/${pendingFile.thumbnail}',
+                          fit: BoxFit.cover);
+                    } else if (pendingFile.fileExt == 'image/jpeg') {
+                          return CachedNetworkImage(
+                              placeholder: (context, url) => Center(
+                                    child: Text('Loading...', style: TextStyle(color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                            imageUrl:
-                                'https://www.batnf.net/${pendingFile.fileUrl}',
-                            fit: BoxFit.cover);
-                      } return Videos(
-                        thumbnailUrl: pendingFile.thumbnail,
-                        videoUrl: pendingFile.fileUrl,
-                      );
-                }).toList())
+                              imageUrl:
+                                  'https://www.batnf.net/${pendingFile.fileUrl}',
+                              fit: BoxFit.cover);
+                        } return Videos(
+                          thumbnailUrl: pendingFile.thumbnail,
+                          videoUrl: pendingFile.fileUrl,
+                        );
+                  }).toList())
+              ),
             ),
       
             //Project Title

@@ -701,7 +701,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           text: pending
                                                               .projectDescription,
                                                           style:
-                                                              kNewsSubHeader,
+                                                              kNewsDateSTyle,
                                                         ),
                                                       ])),
                                                       Text.rich(TextSpan(
@@ -712,7 +712,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               text: pending
                                                                   .projectStatus,
                                                               style:
-                                                                  kNewsSubHeader,
+                                                                  kNewsDateSTyle,
                                                             ),
                                                           ])),
                                                 ],

@@ -40,38 +40,41 @@ class _ProgressDetailsState extends State<ProgressDetails> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //Project Image
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CarouselSlider(
-                    options: CarouselOptions(
-                      padEnds: false,
-                      autoPlayInterval: Duration(seconds: 10),
-                      height: 350,
-                      viewportFraction: 0.98,
-                      enableInfiniteScroll: false,
-                      // autoPlay: true
-                    ),
-                    items: widget.singleProgress.files!.map((inprogressFile) {
-                      if (inprogressFile.fileExt == '') {
-                        return CachedNetworkImage(
-                            imageUrl:
-                                'https://www.batnf.net/${inprogressFile.thumbnail}',
-                            fit: BoxFit.cover);
-                      } else if (inprogressFile.fileExt == 'image/jpeg') {
-                        return CachedNetworkImage(
-                            errorWidget: (context, url, error) =>
-                                Center(child: Text('No Image Available')),
-                            placeholder: (context, url) =>
-                                Center(child: CircularProgressIndicator()),
-                            imageUrl:
-                                'https://www.batnf.net/${inprogressFile.fileUrl}',
-                            fit: BoxFit.cover);
-                      }
-                      return Videos(
-                        thumbnailUrl: inprogressFile.thumbnail,
-                        videoUrl: inprogressFile.fileUrl,
-                      );
-                    }).toList()),
+              Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CarouselSlider(
+                      options: CarouselOptions(
+                        padEnds: false,
+                        autoPlayInterval: Duration(seconds: 10),
+                        height: 350,
+                        viewportFraction: 0.98,
+                        enableInfiniteScroll: false,
+                        // autoPlay: true
+                      ),
+                      items: widget.singleProgress.files!.map((inprogressFile) {
+                        if (inprogressFile.fileExt == '') {
+                          return CachedNetworkImage(
+                              imageUrl:
+                                  'https://www.batnf.net/${inprogressFile.thumbnail}',
+                              fit: BoxFit.cover);
+                        } else if (inprogressFile.fileExt == 'image/jpeg') {
+                          return CachedNetworkImage(
+                              errorWidget: (context, url, error) =>
+                                  Center(child: Text('No Image Available')),
+                              placeholder: (context, url) =>
+                                  Center(child: CircularProgressIndicator()),
+                              imageUrl:
+                                  'https://www.batnf.net/${inprogressFile.fileUrl}',
+                              fit: BoxFit.cover);
+                        }
+                        return Videos(
+                          thumbnailUrl: inprogressFile.thumbnail,
+                          videoUrl: inprogressFile.fileUrl,
+                        );
+                      }).toList()),
+                ),
               ),
 
               //Project Title

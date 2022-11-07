@@ -34,38 +34,41 @@ class _NewsDetailsState extends State<NewsDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //News Image
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                        autoPlayInterval: Duration(seconds: 10),
-                        height: 350,
-                        viewportFraction: 1.0,
-                          enableInfiniteScroll: false,
-                          padEnds: false,
-                        autoPlay: true
-                      ),
-                      items: widget.singleNews.files!.map((newsFile) {
-                        if (newsFile.fileExt == '') {
-                          return CachedNetworkImage(
-                              imageUrl:
-                                  'https://www.batnf.net/${newsFile.thumbnail}',
-                              fit: BoxFit.cover);
-                        } else if (newsFile.fileExt == 'image/jpeg') {
-                          return CachedNetworkImage(
-                              errorWidget: (context, url, error) => Center(
-                                  child: Text('No Image/Video Available')),
-                              placeholder: (context, url) => Center(
-                                      child: Text(
-                                    'Loading',
-                                    style: TextStyle(color: Colors.black),
-                                  )),
-                              imageUrl:
-                                  'https://www.batnf.net/${newsFile.fileUrl}',
-                              fit: BoxFit.cover);
-                        }
-                        return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
-                      }).toList())),
+              Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CarouselSlider(
+                        options: CarouselOptions(
+                          autoPlayInterval: Duration(seconds: 10),
+                          height: 350,
+                          viewportFraction: 1.0,
+                            enableInfiniteScroll: false,
+                            padEnds: false,
+                          // autoPlay: true
+                        ),
+                        items: widget.singleNews.files!.map((newsFile) {
+                          if (newsFile.fileExt == '') {
+                            return CachedNetworkImage(
+                                imageUrl:
+                                    'https://www.batnf.net/${newsFile.thumbnail}',
+                                fit: BoxFit.cover);
+                          } else if (newsFile.fileExt == 'image/jpeg') {
+                            return CachedNetworkImage(
+                                errorWidget: (context, url, error) => Center(
+                                    child: Text('No Image/Video Available')),
+                                placeholder: (context, url) => Center(
+                                        child: Text(
+                                      'Loading',
+                                      style: TextStyle(color: Colors.black),
+                                    )),
+                                imageUrl:
+                                    'https://www.batnf.net/${newsFile.fileUrl}',
+                                fit: BoxFit.cover);
+                          }
+                          return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
+                        }).toList())),
+              ),
 
               //News title
               Container(

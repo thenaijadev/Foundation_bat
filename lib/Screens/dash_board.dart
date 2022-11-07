@@ -506,7 +506,7 @@ class _HomePageState extends State<HomePage> {
                                                       inprogress
                                                           .projectDescription,
                                                       textAlign: TextAlign.justify,
-                                                      style: kNewsSubHeader,
+                                                      style: kNewsDateSTyle,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       maxLines: 4,
@@ -673,13 +673,6 @@ class _HomePageState extends State<HomePage> {
                                               Container(
                                                 height: 100,
                                                 width: 180,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [kBoxshadow],
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                ),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -689,21 +682,23 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       events.eventName,
                                                       style: kNewsSubHeader,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 1,
-                                                    ),
-                                                    Text(
-                                                      events.eventDesc,
-                                                      textAlign: TextAlign.left,
-                                                      style: kBodyTextStyle,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       maxLines: 2,
                                                     ),
                                                     Text(
+                                                      events.eventDesc,
+                                                      textAlign: TextAlign.justify,
+                                                      style: kNewsDateSTyle,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 4,
+                                                    ),
+                                                    Text(
                                                       events.eventStartDate,
-                                                      textAlign: TextAlign.left,
+                                                      textAlign: TextAlign.center,
                                                       style: kNewsDateSTyle,
                                                     )
                                                   ],
@@ -849,13 +844,6 @@ class _HomePageState extends State<HomePage> {
                                               Container(
                                                 // height: 100,
                                                 width: 180,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [kBoxshadow],
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(18),
-                                                ),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
@@ -866,9 +854,18 @@ class _HomePageState extends State<HomePage> {
                                                       news.title,
                                                       style: kNewsSubHeader,
                                                       overflow: TextOverflow.ellipsis,
-                                                      maxLines: 1,
-                                                      // textAlign:
-                                                      //     TextAlign.justify,
+                                                      maxLines: 2,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                    Text(
+                                                      news.information,
+                                                      style: kNewsDateSTyle,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 4,
+                                                      textAlign:
+                                                          TextAlign.justify,
                                                     ),
                                                     Text(
                                                       news.entryDate,

@@ -42,7 +42,8 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
             children: [
           
               // Project Image
-              SizedBox(
+              Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
                 child: CarouselSlider(
                     options: CarouselOptions(
                       padEnds: false,
