@@ -10,8 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_video_player/cached_video_player.dart';
-
 class InprogressPage extends StatefulWidget {
   static String id = 'inprogress';
   InprogressPage({Key? key}) : super(key: key);
@@ -86,97 +84,123 @@ class _InprogressPageState extends State<InprogressPage> {
                                               ProgressDetails(inprogress)));
                                 },
                                 child: Container(
-                                  width: 237,
-                                  margin: EdgeInsets.only(
-                                      left: 36.27,
-                                      right: 15.0,
+                                 margin: EdgeInsets.only(
+                                      left: 5,
+                                      right: 5.0,
                                       bottom: 15.0,
                                       top: 30),
-                                  // margin: EdgeInsets.only(
-                                  //     bottom: 15.0, left: 30, right: 30),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    boxShadow: [kBoxshadow],
+                                    color: Colors.transparent,
                                   ),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
                                     children: [
-                                      //Images and videos
-                                      Container(
-                                        height: 145,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        margin: EdgeInsets.only(
-                                            left: 9.0, right: 9),
-                                        child: inprogress.files![index]
-                                                        .fileExt ==
-                                                    'image/jpeg' &&
-                                                inprogress.files![index].fileUrl
-                                                    .isNotEmpty
-                                            ? ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                                child: CachedNetworkImage(
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${inprogress.files![index].fileUrl}',
-                                                    fit: BoxFit.cover),
-                                              )
-                                            : ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                                child: CachedNetworkImage(
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${inprogress.files![index].thumbnail}',
-                                                    fit: BoxFit.cover),
-                                              ),
-                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          //Images and videos
+                                          Container(
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            margin: EdgeInsets.only(
+                                                left: 9.0, right: 9),
+                                            child: inprogress.files![index]
+                                                            .fileExt ==
+                                                        'image/jpeg' &&
+                                                    inprogress.files![index].fileUrl
+                                                        .isNotEmpty
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.files![index].fileUrl}',
+                                                        fit: BoxFit.cover),
+                                                  )
+                                                : ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(18),
+                                                    child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            'https://www.batnf.net/${inprogress.files![index].thumbnail}',
+                                                        fit: BoxFit.cover),
+                                                  ),
+                                          ),
 
-                                      SizedBox(
-                                        height: 8,
+                                          //Details
+                                          Container(
+                                            height: 100,
+                                            margin: EdgeInsets.only(
+                                                // top: 5,
+                                                left: 10.0,
+                                                right: 6.0),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                 Text(
+                                                  inprogress.projectTitle,
+                                                  style: kNewsSubHeader,
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'Started: ',
+                                                      style: kNewsDateSTyle,
+                                                    ),
+                                                    Text(
+                                                        inprogress
+                                                            .projectStartDate,
+                                                        style: kNewsDateSTyle)
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      'To End: ',
+                                                      style: kNewsDateSTyle,
+                                                    ),
+                                                    Text(
+                                                        inprogress
+                                                            .projectEndDate,
+                                                        style: kNewsDateSTyle)
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                         
+                                        ],
                                       ),
-                                      //Details
+                                     SizedBox(
+                                        height: 15,
+                                      ),
                                       Text(
-                                        inprogress.projectTitle,
-                                        style: kNewsSubHeader,
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Started: ',
-                                            style: kProjectsub,
-                                          ),
-                                          Text(inprogress.projectStartDate,
-                                              style: kNewsDateSTyle)
-                                        ],
-                                      ),
-
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'To End: ',
-                                            style: kProjectsub,
-                                          ),
-                                          Text(inprogress.projectEndDate,
-                                              style: kNewsDateSTyle)
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
+                                        '.............................',
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 30),
+                                      )
+                                    
                                     ],
                                   ),
                                 ),

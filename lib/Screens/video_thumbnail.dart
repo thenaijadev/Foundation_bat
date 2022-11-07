@@ -69,14 +69,14 @@ class _VideosState extends State<Videos> {
                   _playerController.play();
                 }
               },
-              // child: Container(
-              //   color: Colors.transparent,
-              //   child: Icon(
-              //     Icons.play_arrow,
-              //     color: Colors.blue.withOpacity(0.99),
-              //     size: 30,
-              //   ),
-              // ),
+              child: Container(
+                color: Colors.transparent,
+                child: Icon(
+                  Icons.play_arrow,
+                  color: Colors.blue.withOpacity(0.99),
+                  size: 30,
+                ),
+              ),
             ),
           ),
         ],

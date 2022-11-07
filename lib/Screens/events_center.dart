@@ -6,7 +6,6 @@ import 'package:batnf/Models/events_model.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -199,7 +198,7 @@ class _EventCenterState extends State<EventCenter> {
                                                 //Event Title
                                                 Text(
                                                   event.eventName,
-                                                  style: kPageHeader,
+                                                  style: kNewsSubHeader,
                                                   textAlign: TextAlign.left,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -208,7 +207,7 @@ class _EventCenterState extends State<EventCenter> {
                                                 // Events date
                                                 Text(
                                                   event.eventStartDate,
-                                                  style: kEventDatestyle,
+                                                  style: kNewsDateSTyle,
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),

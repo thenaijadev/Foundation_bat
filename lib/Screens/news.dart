@@ -135,6 +135,8 @@ class _NewsState extends State<News> {
                                     color: Colors.transparent,
                                   child: Column(
                                     children: [
+
+                                      //Images
                                       Container(
                                         height: 150,
                                         width: 310,
@@ -164,8 +166,8 @@ class _NewsState extends State<News> {
                                                       fit: BoxFit.cover),
                                                 ),
                                     ),
+
                                       // News Details
-                                         
                                       Text(
                                         news.title,
                                         style: kNewsSubHeader,

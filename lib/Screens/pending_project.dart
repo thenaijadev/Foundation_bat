@@ -110,7 +110,6 @@ class _PendingPageState extends State<PendingPage> {
                                                   BorderRadius.circular(18.0),
                                               boxShadow: [kBoxshadow],
                                             ),
-                                            // width:150,
                                             margin: EdgeInsets.only(
                                                 left: 9.0, right: 9),
                                             child: pending

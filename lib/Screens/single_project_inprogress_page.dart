@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:readmore/readmore.dart';
 
 class ProgressDetails extends StatefulWidget {
   final InprogressModel singleProgress;
@@ -47,7 +48,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
                       viewportFraction: 0.98,
-                      enableInfiniteScroll: false,
                       // autoPlay: true
                     ),
                     items: widget.singleProgress.files!.map((inprogressFile) {
@@ -108,9 +108,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Container(
-                          child: RichText(
+                          child: Text.rich(
                               selectionColor: Theme.of(context).primaryColor,
-                              text: TextSpan(
+                              TextSpan(
                                   text: 'Started: ',
                                   style: kBodyTextStyle,
                                   children: [
@@ -122,9 +122,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   ])),
                         ),
                         Container(
-                          child: RichText(
+                          child: Text.rich(
                               selectionColor: Theme.of(context).primaryColor,
-                              text: TextSpan(
+                              TextSpan(
                                   text: 'To be Completed: ',
                                   style: kBodyTextStyle,
                                   children: [
@@ -194,10 +194,23 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               Container(
                 margin:
                     EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                child: Text(
+                child: ReadMoreText(
                   widget.singleProgress.projectDescription,
                   textAlign: TextAlign.justify,
                   style: kBodyTextStyle,
+                  trimLength: 150,
+                  trimMode: TrimMode.Line,
+                  trimLines: 15,
+                  trimCollapsedText: 'Read More',
+                  trimExpandedText: 'Show Less',
+                  lessStyle: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
+                  moreStyle: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
                 ),
               ),
             ],

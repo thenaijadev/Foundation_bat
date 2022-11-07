@@ -45,14 +45,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getId();
-    FlutterNativeSplash.remove();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
-    Provider.of<InprogressProvider>(context, listen: false)
-        .getInprogressProjects();
-   
-  }
+    Provider.of<InprogressProvider>(context, listen: false).getInprogressProjects();
+    getId();
+    FlutterNativeSplash.remove();
+     }
 
 
   getId() async {
@@ -92,23 +90,23 @@ class _HomePageState extends State<HomePage> {
             elevation: 0.0,
             toolbarHeight: 60,
             backgroundColor: Theme.of(context).primaryColor,
-            // Colors.lightBlueAccent.withOpacity(0.98),
             title: Center(
                 child: Text('Home',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.lightBlue,
                     ))),
+            // App Logo
             actions: [
               Container(
                 margin: EdgeInsets.only(top: 5, bottom: 20, right: 45),
-                // color: Theme.of(context).primaryColor,
                 height: 40.0,
                 child: Image.asset(
                   'assets/logo.png',
                 ),
               ),
             ],
+            // Drawer Builder
             leading: Builder(builder: (context) {
               return IconButton(
                   onPressed: () {
@@ -119,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blue,
                   ));
             })),
+            // Drawer
         drawer: Drawer(
           width: 250,
           backgroundColor: Theme.of(context).primaryColor,
@@ -182,17 +181,17 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // User Profile
-              InkWell(
-                onTap: () {},
-                child: ListTile(
-                    title: Text(
-                      'User Profile',
-                      style:
-                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-                    ),
-                    leading: Icon(FontAwesomeIcons.userAlt,
-                        color: Colors.lightBlue)),
-              ),
+              // InkWell(
+              //   onTap: () {},
+              //   child: ListTile(
+              //       title: Text(
+              //         'User Profile',
+              //         style:
+              //             TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+              //       ),
+              //       leading: Icon(FontAwesomeIcons.userAlt,
+              //           color: Colors.lightBlue)),
+              // ),
 
               //Change User Password
               InkWell(
@@ -447,6 +446,7 @@ class _HomePageState extends State<HomePage> {
                                                             fit: BoxFit.cover),
                                                       ),
                                               ),
+
                                               //Details
                                               Container(
                                                 height: 100,
@@ -657,7 +657,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // News list header
-
               SizedBox(
                 height: 150,
                 width: 365,

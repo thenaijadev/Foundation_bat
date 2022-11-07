@@ -99,9 +99,10 @@ class _EventDetailsState extends State<EventDetails> {
                 borderRadius: BorderRadius.circular(10),
                 child: CarouselSlider(
                     options: CarouselOptions(
+                      padEnds: false,
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
-                      viewportFraction: 0.98,
+                      viewportFraction: 0.88,
                       enableInfiniteScroll: false,
                       // autoPlay: true
                     ),

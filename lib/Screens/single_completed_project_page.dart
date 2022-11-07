@@ -45,10 +45,10 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
               SizedBox(
                 child: CarouselSlider(
                     options: CarouselOptions(
+                      padEnds: false,
                       autoPlayInterval: Duration(seconds: 10),
                       height: 350,
                       viewportFraction: 1.0,
-                      enableInfiniteScroll: false,
                       // autoPlay: true
                     ),
                     items: widget.singleCompleted.files!.map((completedFile) {

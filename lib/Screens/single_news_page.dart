@@ -41,7 +41,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                         autoPlayInterval: Duration(seconds: 10),
                         height: 350,
                         viewportFraction: 1.0,
-                        enableInfiniteScroll: false,
+                          padEnds: false,
                         autoPlay: true
                       ),
                       items: widget.singleNews.files!.map((newsFile) {
