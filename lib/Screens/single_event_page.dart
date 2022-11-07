@@ -3,17 +3,17 @@
 import 'dart:convert';
 
 import 'package:batnf/Models/events_model.dart';
-import 'package:batnf/Models/files.dart';
+import 'package:batnf/Screens/video_thumbnail.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:readmore/readmore.dart';
 
 import '../providers/event_provider.dart';
 
@@ -26,7 +26,6 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  List<CachedVideoPlayerController> playerController = [];
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
     var response =
@@ -79,46 +78,6 @@ class _EventDetailsState extends State<EventDetails> {
   }
 
   @override
-  void initState() {
-    video(widget.singleEvent.files!);
-
-    super.initState();
-  }
-
-  void video(List<Files> file) async {
-    if (file.isEmpty) return;
-    List<Files> videoList = file
-        .where((element) =>
-            element.fileExt == 'video/mp4' || element.fileExt == 'image/jpeg' || element.fileUrl == '' )
-        .toList();
-    int count =
-        videoList.fold(0, (previousValue, element) => previousValue + 1);
-    playerController = List.generate(
-        count,
-        (index) => CachedVideoPlayerController.network(
-              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-              'https://www.batnf.net/${widget.singleEvent.files![index].fileUrl}',
-              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            ));
-
-    for (var element in playerController) {
-      element.initialize().then((value) async {
-        await Future.delayed(Duration(milliseconds: 500));
-        // element.play();
-        setState(() {});
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    for (var element in playerController) {
-      element.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -147,10 +106,7 @@ class _EventDetailsState extends State<EventDetails> {
                       // autoPlay: true
                     ),
                     items: widget.singleEvent.files!.map((eventsFile) {
-                      print(eventsFile.fileExt);
-                      print(eventsFile.fileUrl);
-                      print(eventsFile.thumbnail);
-                      if (eventsFile.fileUrl == '' && eventsFile.thumbnail == 'image/jpg') {
+                      if (eventsFile.fileExt == '') {
                         return CachedNetworkImage(
                             imageUrl:
                                 'https://www.batnf.net/${eventsFile.thumbnail}',
@@ -159,62 +115,15 @@ class _EventDetailsState extends State<EventDetails> {
                         return CachedNetworkImage(
                             errorWidget: (context, url, error) =>
                                 Center(child: Text('No Image/Video Available')),
-                            placeholder: (context, url) => CachedNetworkImage(
-                                                      imageUrl:
-                                                          'https://www.batnf.net/${eventsFile.thumbnail}'),
-                            // Center(
-                            //         child: Text(
-                            //       'Loading',
-                            //       style: TextStyle(color: Colors.black),
-                            //     )),
+                            placeholder: (context, url) => Center(
+                                    child: Text(
+                                  'Loading',
+                                  style: TextStyle(color: Colors.black),
+                                )),
                             imageUrl:
                                 'https://www.batnf.net/${eventsFile.fileUrl}',
                             fit: BoxFit.cover);
-                      } else if (eventsFile.thumbnail.isNotEmpty) {
-                        return CachedNetworkImage(
-                            placeholder: (context, url) => Center(
-                                  child: Text('Loading...'),
-                                ),
-                            imageUrl:
-                                'https://www.batnf.net/${eventsFile.thumbnail}',
-                            fit: BoxFit.cover);
-                      }
-                      CachedVideoPlayerController controller =
-                          playerController.firstWhere((element) =>
-                              element.dataSource ==
-                              // 'https://www.batnf.net/projects/Aquaculture_Video_compressed.mp4'
-                              // "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                              'https://www.batnf.net/${eventsFile.fileUrl}');
-                      return controller.value.isInitialized
-                          ? Stack(
-                              alignment: AlignmentDirectional.bottomStart,
-                              children: [
-                                AspectRatio(
-                                    aspectRatio: 6 / 6,
-                                    // controller.value.aspectRatio,
-                                    child: CachedVideoPlayer(controller)),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (!controller.value.isInitialized) return;
-                                    setState(
-                                      () {
-                                        controller.value.isPlaying
-                                            ? controller.pause()
-                                            : controller.play();
-                                      },
-                                    );
-                                  },
-                                  child: Icon(
-                                    controller.value.isPlaying
-                                        ? Icons.pause
-                                        : Icons.play_arrow,
-                                    color: kButtonColor,
-                                    size: 30,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Center(child: CircularProgressIndicator());
+                      } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
                     }).toList()),
               ),
 
@@ -318,10 +227,23 @@ class _EventDetailsState extends State<EventDetails> {
               Container(
                 margin:
                     EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                child: Text(
+                child: ReadMoreText(
                   widget.singleEvent.eventDesc,
                   textAlign: TextAlign.justify,
                   style: kBodyTextStyle,
+                  trimLength: 150,
+                  trimMode: TrimMode.Line,
+                  trimLines: 15,
+                  trimCollapsedText: 'Read More',
+                  trimExpandedText: 'Show Less',
+                  lessStyle: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
+                  moreStyle: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal),
                 ),
               ),
 
@@ -354,13 +276,9 @@ class _EventDetailsState extends State<EventDetails> {
                   minWidth: MediaQuery.of(context).size.width,
                   color: kButtonColor,
                   onPressed: () {
-                    print(widget.singleEvent.eventId);
-                    print(Provider.of<EventProvider>(context, listen: false)
-                        .userId);
-
-                    if (Provider.of<EventProvider>(context, listen: false)
-                            .userId !=
-                        null) {
+                    // print(widget.singleEvent.eventId);
+                    // print(Provider.of<EventProvider>(context, listen: false)
+                        // .userId);
                       setState(() {
                         loading = true;
                       });
@@ -369,7 +287,7 @@ class _EventDetailsState extends State<EventDetails> {
                               Provider.of<EventProvider>(context, listen: false)
                                   .userId,
                           eventId: widget.singleEvent.eventId);
-                    }
+                    
                   },
                   child: loading
                       ? CircularProgressIndicator(

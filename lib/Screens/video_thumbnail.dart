@@ -48,6 +48,14 @@ class _VideosState extends State<Videos> {
         alignment: AlignmentDirectional.center,
         children: [
           CachedNetworkImage(
+            errorWidget: (context, url, error) => Container(),
+            // ignore: prefer_const_constructors
+            placeholder: (context, url) => Center(
+              child: const Text(
+                'Loading...',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
             imageUrl: 'https://www.batnf.net/${widget.thumbnailUrl}',
             fit: BoxFit.cover,
           ),
@@ -61,14 +69,14 @@ class _VideosState extends State<Videos> {
                   _playerController.play();
                 }
               },
-              child: Container(
-                color: Colors.transparent,
-                child: Icon(
-                  Icons.play_arrow,
-                  color: Colors.red.withOpacity(0.99),
-                  size: 30,
-                ),
-              ),
+              // child: Container(
+              //   color: Colors.transparent,
+              //   child: Icon(
+              //     Icons.play_arrow,
+              //     color: Colors.blue.withOpacity(0.99),
+              //     size: 30,
+              //   ),
+              // ),
             ),
           ),
         ],

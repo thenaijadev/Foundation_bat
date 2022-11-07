@@ -129,117 +129,133 @@ class _EventCenterState extends State<EventCenter> {
                                               EventDetails(event)));
                                 },
                                 child: Container(
-                                  // height: 124,
                                   margin: EdgeInsets.only(
-                                    left: 30,
-                                    right: 30,
+                                    left: 10,
+                                    // right: 30,
                                     bottom: 30.0,
                                   ),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    boxShadow: [kBoxshadow],
-                                  ),
-                                  child: Row(
+                                    color: Colors.transparent,
+                                  child: Column(
                                     children: [
-                                      Container(
-                                        height: 110,
-                                        width: 110,
-                                        margin: EdgeInsets.only(
-                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                      Row(
+                                        children: [
+
+                                          //Images
+                                          Container(
+                                             decoration: BoxDecoration(
+                                              color: Colors.transparent,
+                                               borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            height: 100,
+                                            // width: 110,
+                                            margin: EdgeInsets.only(
+                                                bottom: 7.0, top: 7.0, left: 9.0),
                               
-                                        // Event Image
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          child: event.files![index].fileUrl.isEmpty && event.files![index].thumbnail.isNotEmpty
-                                              ?  CachedNetworkImage(
-                                                errorWidget: (context,
-                                                          url, error) => Container(color: Colors.pink,),
-                                                          // Center(child: Icon(Icons.error, color: Colors.black,)),
-                                                      // Center(child: Text('No Image Availaible')),
-                                                      placeholder: (context,
-                                                          url) =>
-                                                      Container(
-                                                        color: Colors.blue,
-                                                      ),
-                                                      // CachedNetworkImage(
-                                                      //     imageUrl:
-                                                      //         'https://www.batnf.net/${event.files![index].thumbnail}'),
+                                            // Event Image
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              child: event.files!.first.fileUrl.isNotEmpty && event.files!.first.fileExt == 'image/jpeg'
+                                                  ?  CachedNetworkImage(
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${event.files!.first.fileUrl}',
+                                                      fit: BoxFit.cover)
+                                                  : CachedNetworkImage(
+                                                    placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                                child:
+                                                                    CircularProgressIndicator(),
+                                                              ),
                                                   imageUrl:
-                                                      'https://www.batnf.net/${event.files![index].thumbnail}',
-                                                  fit: BoxFit.cover)
-                                              : CachedNetworkImage(
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      CachedNetworkImage(
-                                                          imageUrl:
-                                                              'https://www.batnf.net/${event.files![index].thumbnail}', fit: BoxFit.fill,),
-                                              placeholder: (context, url) => Center(child: Text('Loading...'),),
-                                              imageUrl:
-                                                  'https://www.batnf.net/${event.files![index].fileUrl}',
-                                              fit: BoxFit.cover),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 93,
-                                          margin: EdgeInsets.only(
-                                              // top: 5,
-                                              left: 10.0,
-                                              right: 6.0),
-                                          color: Theme.of(context).primaryColor,
-                                          //Event Information
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                event.eventStartDate,
-                                                style: kEventDatestyle,
-                                              ),
-                                              Text(
-                                                event.eventName,
-                                                style: kPageHeader,
-                                              ), //Event Location
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-                                                  //Event Location Icon
-                                                  Icon(
-                                                    FontAwesomeIcons
-                                                        .mapMarkerAlt,
-                                                    size: 16.67,
-                                                    color: kTextboxhintColor,
-                                                  ),
-                              
-                                                  //Event Location
-                                                  Text(
-                                                    event.eventLocation,
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        color:
-                                                            kTextboxhintColor,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
+                                                      'https://www.batnf.net/${event.files!.first.thumbnail}',
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                        ),
+                                         
+                                          // Details
+                                          Container(
+                                            height: 100,
+                                            margin: EdgeInsets.only(
+                                                // top: 5,
+                                                left: 10.0,
+                                                right: 6.0),
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              boxShadow: [kBoxshadow],
+                                            ),
+                                            //Event Information
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                //Event Title
+                                                Text(
+                                                  event.eventName,
+                                                  style: kPageHeader,
+                                                  textAlign: TextAlign.left,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                                // Events date
+                                                Text(
+                                                  event.eventStartDate,
+                                                  style: kEventDatestyle,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                                //Event Location
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    //Event Location Icon
+                                                    Icon(
+                                                      FontAwesomeIcons
+                                                          .mapMarkerAlt,
+                                                      size: 16.67,
+                                                      color: kSignupbuttonColor,
+                                                    ),
+                              
+                                                    //Event Location
+                                                    Text(
+                                                      event.eventLocation,
+                                                      // textAlign: TextAlign.left,
+                                                      style: TextStyle(
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                          fontFamily: 'Inter',
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
+                                       SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        '.............................',
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 30),
+                                      )
+                                    
                                     ],
                                   ),
                                 ),

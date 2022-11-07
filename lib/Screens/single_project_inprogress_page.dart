@@ -1,18 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
-
-import 'package:batnf/Models/files.dart';
 import 'package:batnf/Models/inprogress_model.dart';
 import 'package:batnf/Screens/video_thumbnail.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/inprogress_provider.dart';
 
 class ProgressDetails extends StatefulWidget {
   final InprogressModel singleProgress;
@@ -23,44 +17,7 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
-  List<CachedVideoPlayerController> playerController = [];
-
-  @override
-  void initState() {
-    video(widget.singleProgress.files!);
-    super.initState();
-  }
-
-  void video(List<Files> file) async {
-    if (file.isEmpty) return;
-    List<Files> videoList = file
-        .where((element) =>
-            element.fileExt == 'video/mp4' && element.fileExt == 'image/jpeg')
-        .toList();
-    int count =
-        videoList.fold(0, (previousValue, element) => previousValue + 1);
-    playerController = List.generate(
-        count,
-        (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/${widget.singleProgress.files![index].fileUrl}'
-            //  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            ));
-
-    for (var element in playerController) {
-      element.initialize().then((value) async {
-        await Future.delayed(Duration(milliseconds: 500));
-        setState(() {});
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    for (var element in playerController) {
-      element.dispose();
-    }
-    super.dispose();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +52,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     ),
                     items: widget.singleProgress.files!.map((inprogressFile) {
                       if (inprogressFile.fileExt == '') {
-                        return Container(
-                          color: kGeneralbodytextColor,
-                          child: CachedNetworkImage(
-                              imageUrl:
-                                  'https://www.batnf.net/${inprogressFile.thumbnail}',
-                              fit: BoxFit.cover),
-                        );
+                        return CachedNetworkImage(
+                            imageUrl:
+                                'https://www.batnf.net/${inprogressFile.thumbnail}',
+                            fit: BoxFit.cover);
                       } else if (inprogressFile.fileExt == 'image/jpeg') {
                         return CachedNetworkImage(
                             errorWidget: (context, url, error) =>
@@ -125,8 +79,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                 child: Text(
                   widget.singleProgress.projectTitle,
                   style: kPageHeader,
-                  // overflow: TextOverflow.ellipsis,
-                  // maxLines: 1,
+                  
                 ),
               ),
 

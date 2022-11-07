@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:batnf/Models/news_model.dart';
+import 'package:batnf/Screens/video_thumbnail.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cached_video_player/cached_video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
-import '../Models/files.dart';
 
 class NewsDetails extends StatefulWidget {
   final NewsModel singleNews;
@@ -19,41 +18,6 @@ class NewsDetails extends StatefulWidget {
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
-  List<CachedVideoPlayerController> playerController = [];
-
-  @override
-  void initState() {
-    super.initState();
-    video(widget.singleNews.files!);
-  }
-
-  void video(List<Files> file) async {
-    if (file.isEmpty) return;
-    List<Files> videoList =
-        file.where((element) => element.fileExt == 'video/mp4').toList();
-    int count =
-        videoList.fold(0, (previousValue, element) => previousValue + 1);
-    playerController = List.generate(
-        count,
-        (index) => CachedVideoPlayerController.network(
-            'https://www.batnf.net/${widget.singleNews.files![index].fileUrl}'));
-
-    for (var element in playerController) {
-      element.initialize().then((value) async {
-        await Future.delayed(Duration(milliseconds: 500));
-        setState(() {});
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    for (var element in playerController) {
-      element.dispose();
-    }
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,8 +33,6 @@ class _NewsDetailsState extends State<NewsDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-
               //News Image
               ClipRRect(
                   borderRadius: BorderRadius.circular(10),
@@ -80,21 +42,11 @@ class _NewsDetailsState extends State<NewsDetails> {
                         height: 350,
                         viewportFraction: 1.0,
                         enableInfiniteScroll: false,
-                        // autoPlay: true
+                        autoPlay: true
                       ),
                       items: widget.singleNews.files!.map((newsFile) {
-                        if (newsFile.fileUrl.isEmpty) {
+                        if (newsFile.fileExt == '') {
                           return CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  CachedNetworkImage(
-                                    imageUrl:
-                                        'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-                                    // 'https://www.batnf.net/${newsFile.thumbnail}',
-                                    fit: BoxFit.fill,
-                                  ),
-                              placeholder: (context, url) => Center(
-                                    child: Text('Loading...'),
-                                  ),
                               imageUrl:
                                   'https://www.batnf.net/${newsFile.thumbnail}',
                               fit: BoxFit.cover);
@@ -110,54 +62,14 @@ class _NewsDetailsState extends State<NewsDetails> {
                               imageUrl:
                                   'https://www.batnf.net/${newsFile.fileUrl}',
                               fit: BoxFit.cover);
-                        } else if (newsFile.thumbnail.isNotEmpty) {
-                          return CachedNetworkImage(
-                              placeholder: (context, url) => Center(
-                                    child: Text('Loading...'),
-                                  ),
-                              imageUrl:
-                                  'https://www.batnf.net/${newsFile.thumbnail}',
-                              fit: BoxFit.cover);
                         }
-                        CachedVideoPlayerController controller =
-                            playerController.firstWhere((element) =>
-                                element.dataSource ==
-                                'https://www.batnf.net/${newsFile.fileUrl}');
-                        return controller.value.isInitialized
-                            ? Stack(
-                                alignment: AlignmentDirectional.bottomStart,
-                                children: [
-                                  AspectRatio(
-                                      aspectRatio: controller.value.aspectRatio,
-                                      child: CachedVideoPlayer(controller)),
-                                  GestureDetector(
-                                    onTap: () {
-                                      if (!controller.value.isInitialized)
-                                        return;
-                                      setState(
-                                        () {
-                                          controller.value.isPlaying
-                                              ? controller.pause()
-                                              : controller.play();
-                                        },
-                                      );
-                                    },
-                                    child: Icon(
-                                      controller.value.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
-                                      color: kButtonColor,
-                                      size: 30,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Center(child: CircularProgressIndicator());
+                        return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
                       }).toList())),
 
               //News title
               Container(
-                margin: EdgeInsets.only(top: 15,
+                margin: EdgeInsets.only(
+                  top: 15,
                   left: 30,
                 ),
                 child: Column(

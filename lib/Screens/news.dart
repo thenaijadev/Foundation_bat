@@ -21,28 +21,10 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
-  late CachedVideoPlayerController controller;
   @override
   void initState() {
     super.initState();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
-    //  controller = CachedVideoPlayerController.network(
-    //     // 'https://www.batnf.net/${inprogress.files![0].fileUrl}'
-    //     // 'https://www.batnf.net/projects/y2mate_com_-_Django_django_auth_ldap_v144P.mp4'
-    //     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
-    // controller.initialize().then((value) {
-    //   // controller.play();
-    //   setState(() {});
-    // });
-  }
-
-  @override
-  void dispose() {
-    // for (var element in playerController) {
-    //   element.dispose();
-    // }
-    // controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -150,139 +132,47 @@ class _NewsState extends State<News> {
                                     right: 30,
                                     bottom: 30.0,
                                   ),
-                                  decoration: BoxDecoration(
-                                    // color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    // boxShadow: [kBoxshadow],
-                                  ),
+                                    color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          //News Image
-                                          Container(
-                                            height: 110,
-                                            width: 110,
-                                            margin: EdgeInsets.only(
-                                                bottom: 7.0, top: 7.0, left: 9.0),
-                                            child: 
-                                            news.files == null
-                                                  ? ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(18),
-                                                      child: CachedNetworkImage(
-                                                          imageUrl: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-                                                              // 'https://www.batnf.net/${news.files![index].thumbnail}',
-                                                          fit: BoxFit.cover),
-                                                    )
-                                                  : news.files![index].fileExt ==
-                                                          'video/mp4'
-                                                      ? ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  18),
-                                                          child: controller.value
-                                                                  .isInitialized
-                                                              ? AspectRatio(
-                                                                  aspectRatio:
-                                                                      controller
-                                                                          .value
-                                                                          .aspectRatio,
-                                                                  child:
-                                                                      CachedVideoPlayer(
-                                                                          controller))
-                                                              : Center(
-                                                                  child:
-                                                                      const CircularProgressIndicator()),
-                                                        )
-                                                      : news.files![index].fileExt ==
-                                                          'image/jpeg'
-                                                          ? ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  18),
-                                                          child: CachedNetworkImage(
-                                                      //       errorWidget:
-                                                      // (context, url, error) =>
-                                                          // CachedNetworkImage(
-                                                          //     imageUrl:
-                                                          //         'https://www.batnf.net/${news.files![index].thumbnail}', fit: BoxFit.fill,),
-                                                                  placeholder: (context,
-                                                                      url) => Center(
-                                                                        child: Text(
-                                                                            'Loading...'),
-                                                                      ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${news.files![index].fileUrl}',
-                                                              fit: BoxFit.cover),
-                                                        ) : ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                      imageUrl:
-                                                                          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
-                                                                          // 'https://www.batnf.net/${news.files![index].thumbnail}',
-                                                                      fit: BoxFit
-                                                                          .cover),
-                                                            ),
-                                            
-                                    ),
-                                          // Container(
-                                          //       height: 110,
-                                          //       width: 110,
-                                          //   color: Colors.amber
-                                          // ),
-                                          // News Details
-                                         
-                                          Expanded(
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  top: 5,
-                                                  bottom: 10,
-                                                  left: 10.0,
-                                                  right: 6.0),
-                                              decoration: BoxDecoration(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
+                                      Container(
+                                        height: 150,
+                                        width: 310,
+                                        margin: EdgeInsets.only(
+                                            bottom: 7.0, top: 7.0, left: 9.0),
+                                        child: news.files!.first
+                                                          .fileExt ==
+                                                      'image/jpeg' &&
+                                                  news.files!.first
+                                                      .fileUrl.isNotEmpty
+                                              ? ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(18.0),
-                                                  boxShadow: [kBoxshadow],
+                                                      BorderRadius.circular(
+                                                          18),
+                                                  child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                      fit: BoxFit.cover),
+                                                )
+                                              : ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18),
+                                                  child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          'https://www.batnf.net/${news.files!.first.thumbnail}',
+                                                      fit: BoxFit.cover),
                                                 ),
-                                              child: Column(
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-
-                                                  //News Header
-                                                  Text(
-                                                    news.title,
-                                                    style: kNewsSubHeader,
-                                                    
-                                                  ),
-
-                                                  //News Information
-                                                  // Text(
-                                                  //   news.information,
-                                                  //   textAlign: TextAlign.left,
-                                                  //   style: kBodyTextStyle,
-                                                  // ),
-
-                                                  // News Date
-                                                  Text(
-                                                      news.entryDate,
-                                                    textAlign: TextAlign.left,
-                                                    style: kNewsDateSTyle,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                      ],
+                                    ),
+                                      // News Details
+                                         
+                                      Text(
+                                        news.title,
+                                        style: kNewsSubHeader,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
                                       ),
-                                      SizedBox(height: 25,),
-                                      Text('.............................', style: TextStyle(color: Colors.grey, fontSize: 30),)
                                     ],
                                   ),
                                 ),

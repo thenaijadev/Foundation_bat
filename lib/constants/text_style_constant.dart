@@ -121,8 +121,8 @@ const kNewsSubHeader = TextStyle(
     color: Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: FontWeight.w300);
+    fontSize: 10,
+    fontWeight: FontWeight.bold);
 
 const kBodyTextStyle = TextStyle(
     fontStyle: FontStyle.italic,
