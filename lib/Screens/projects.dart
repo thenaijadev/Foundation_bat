@@ -31,7 +31,6 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-
   @override
   void initState() {
     super.initState();
@@ -83,7 +82,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 ],
               ),
             ),
-        
+
             //Project Body
             Expanded(
               child: ListView(
@@ -102,9 +101,9 @@ class _ProjectPageState extends State<ProjectPage> {
                   //     ],
                   //   ),
                   // ),
-        
+
                   //Project Summary List
-        
+
                   // SizedBox(
                   //   height: 150,
                   //   child: ListView(
@@ -134,7 +133,7 @@ class _ProjectPageState extends State<ProjectPage> {
                   //           ),
                   //         ),
                   //       ),
-        
+
                   //       //Completed Project
                   //       GestureDetector(
                   //         onTap: () {
@@ -158,7 +157,7 @@ class _ProjectPageState extends State<ProjectPage> {
                   //           ),
                   //         ),
                   //       ),
-        
+
                   //       // Pending project
                   //       GestureDetector(
                   //         onTap: () {
@@ -184,7 +183,7 @@ class _ProjectPageState extends State<ProjectPage> {
                   //     ],
                   //   ),
                   // ),
-        
+
                   //Inprogress Project
                   SizedBox(
                     height: 150,
@@ -214,23 +213,24 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 .allInprogressProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProgressDetails(
-                                                            inprogress)));
+                                            Navigator.pushNamed(
+                                                context, InprogressPage.id);
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             ProgressDetails(
+                                            //                 inprogress)));
                                           },
                                           child: Container(
-                                             color: Colors.transparent,
+                                            color: Colors.transparent,
                                             // width: 375,
                                             child: Row(
                                               children: [
                                                 // Inprogress Images
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      left: 10,
-                                                      right: 15.0),
+                                                      left: 10, right: 15.0),
                                                   height: 100,
                                                   width: 180,
                                                   child: inprogress.files!.first
@@ -245,31 +245,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget: (context, url, error) => Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                            placeholder: (context, url) => Center(
-                                                                            child:
-                                                                                Text(
-                                                                              'Loading',
-                                                                              style: TextStyle(color: Colors.black),
-                                                                            ),
-                                                                          ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
-                                                              fit:
-                                                                  BoxFit.cover),
-                                                        )
-                                                      : ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget:
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
                                                                       (context,
                                                                               url,
                                                                               error) =>
@@ -290,13 +268,45 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
-                                                              fit:
-                                                                  BoxFit.cover),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
+                                                        )
+                                                      : ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
+                                                                      (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  placeholder:
+                                                                      (context,
+                                                                              url) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style: TextStyle(color: Colors.black),
+                                                                            ),
+                                                                          ),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
+                                                                  fit: BoxFit
+                                                                      .cover),
                                                         ),
                                                 ),
-        
+
                                                 // Inprogress Information
                                                 Container(
                                                   width: 180,
@@ -310,8 +320,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [
                                                       Text(
-                                                        inprogress
-                                                            .projectTitle,
+                                                        inprogress.projectTitle,
                                                         style: kNewsSubHeader,
                                                       ),
                                                       Text.rich(
@@ -340,7 +349,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                         children: [
                                                           Text(
                                                             'Status: ',
-                                                            style: kNewsSubHeader,
+                                                            style:
+                                                                kNewsSubHeader,
                                                           ),
                                                           Text(
                                                             inprogress
@@ -367,14 +377,14 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-        
+
                   //Completed Project
                   SizedBox(
                     height: 150,
                     width: 365,
                     child: Column(
                       children: [
-                           Expanded(
+                        Expanded(
                           child: completedProvider.allCompletedProjects == null
                               ? Center(
                                   child: CircularProgressIndicator(),
@@ -394,23 +404,24 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 .allCompletedProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CompletedProjectDetails(
-                                                            completed)));
+                                            Navigator.pushNamed(
+                                                context, CompletedPage.id);
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             CompletedProjectDetails(
+                                            //                 completed)));
                                           },
                                           child: Container(
-                                              color: Colors.transparent,
+                                            color: Colors.transparent,
                                             // width: 375,
                                             child: Row(
                                               children: [
                                                 // Completed Image
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      left: 10,
-                                                      right: 15.0),
+                                                      left: 10, right: 15.0),
                                                   height: 100,
                                                   width: 180,
                                                   child: completed.files!.first
@@ -425,8 +436,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget:
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
                                                                       (context,
                                                                               url,
                                                                               error) =>
@@ -447,17 +459,18 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${completed.files!.first.fileUrl}',
-                                                              fit:
-                                                                  BoxFit.cover),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${completed.files!.first.fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
                                                         )
                                                       : ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget:
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
                                                                       (context,
                                                                               url,
                                                                               error) =>
@@ -478,13 +491,13 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${completed.files!.first.thumbnail}',
-                                                              fit:
-                                                                  BoxFit.cover),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${completed.files!.first.thumbnail}',
+                                                                  fit: BoxFit
+                                                                      .cover),
                                                         ),
                                                 ),
-                                                
+
                                                 // Completed Project Info
                                                 Container(
                                                   width: 180,
@@ -499,8 +512,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                     children: [
                                                       // Project Title
                                                       Text(
-                                                        completed
-                                                            .projectTitle,
+                                                        completed.projectTitle,
                                                         style: kNewsSubHeader,
                                                       ),
                                                       // project Start Date
@@ -510,30 +522,26 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           maxLines: 4,
-                                                           TextSpan(
-                                                              text:
-                                                                  'Title: ',
-                                                              style:
-                                                                  kNewsSubHeader,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                            TextSpan(
-                                                              text: completed
-                                                                  .projectDescription,
-                                                              style:
-                                                                  kNewsDateSTyle,
-                                                            )
-                                                          ])),
-        
-                                                      //Project Status
-                                                      Text.rich(
                                                           TextSpan(
-                                                              text:
-                                                                  'Status: ',
+                                                              text: 'Title: ',
                                                               style:
                                                                   kNewsSubHeader,
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
+                                                                TextSpan(
+                                                                  text: completed
+                                                                      .projectDescription,
+                                                                  style:
+                                                                      kNewsDateSTyle,
+                                                                )
+                                                              ])),
+
+                                                      //Project Status
+                                                      Text.rich(TextSpan(
+                                                          text: 'Status: ',
+                                                          style: kNewsSubHeader,
+                                                          // ignore: prefer_const_literals_to_create_immutables
+                                                          children: [
                                                             TextSpan(
                                                               text: completed
                                                                   .projectStatus,
@@ -554,14 +562,14 @@ class _ProjectPageState extends State<ProjectPage> {
                       ],
                     ),
                   ),
-        
+
                   // Pending Progress label
                   SizedBox(
                     height: 150,
                     width: 365,
                     child: Column(
                       children: [
-                         Expanded(
+                        Expanded(
                           child: pendingProvider.allPendingProjects == null
                               ? Center(
                                   child: CircularProgressIndicator(),
@@ -572,7 +580,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                           Image.asset('assets/noitem.png.gif'),
                                     )
                                   : ListView.builder(
-                                    scrollDirection: Axis.horizontal,
+                                      scrollDirection: Axis.horizontal,
                                       itemCount: pendingProvider
                                           .allPendingProjects!.length,
                                       itemBuilder: (((context, index) {
@@ -580,22 +588,23 @@ class _ProjectPageState extends State<ProjectPage> {
                                             .allPendingProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        PendingDetails(
-                                                            pending)));
+                                            Navigator.pushNamed(
+                                                context, PendingPage.id);
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             PendingDetails(
+                                            //                 pending)));
                                           },
                                           child: Container(
-                                              color: Colors.transparent,
+                                            color: Colors.transparent,
                                             child: Row(
                                               children: [
                                                 //pending Project Image
                                                 Container(
                                                   margin: EdgeInsets.only(
-                                                      left: 10,
-                                                      right: 15.0),
+                                                      left: 10, right: 15.0),
                                                   height: 100,
                                                   width: 180,
                                                   child: pending.files!.first
@@ -610,8 +619,9 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget:
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
                                                                       (context,
                                                                               url,
                                                                               error) =>
@@ -632,17 +642,18 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${pending.files!.first.fileUrl}',
-                                                              fit:
-                                                                  BoxFit.cover),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${pending.files!.first.fileUrl}',
+                                                                  fit: BoxFit
+                                                                      .cover),
                                                         )
                                                       : ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(18),
-                                                          child: CachedNetworkImage(
-                                                            errorWidget:
+                                                          child:
+                                                              CachedNetworkImage(
+                                                                  errorWidget:
                                                                       (context,
                                                                               url,
                                                                               error) =>
@@ -663,47 +674,48 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                               style: TextStyle(color: Colors.black),
                                                                             ),
                                                                           ),
-                                                              imageUrl:
-                                                                  'https://www.batnf.net/${pending.files!.first.thumbnail}',
-                                                              fit:
-                                                                  BoxFit.cover),
+                                                                  imageUrl:
+                                                                      'https://www.batnf.net/${pending.files!.first.thumbnail}',
+                                                                  fit: BoxFit
+                                                                      .cover),
                                                         ),
                                                 ),
 
                                                 //Pending Project Details
                                                 Container(
-                                                  margin: EdgeInsets.only(right: 10),
+                                                  margin: EdgeInsets.only(
+                                                      right: 10),
                                                   width: 180,
                                                   height: 100,
                                                   child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  //Project Title
-                                                  Text(pending.projectTitle,
-                                                      style:
-                                                          kNewsSubHeader),
-        
-                                                  //Project Begin Date
-                                                  Text.rich(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      //Project Title
+                                                      Text(pending.projectTitle,
+                                                          style:
+                                                              kNewsSubHeader),
+
+                                                      //Project Begin Date
+                                                      Text.rich(
                                                           textAlign:
                                                               TextAlign.justify,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    maxLines: 4,
-                                                       TextSpan(
-                                                          text:
-                                                              'Title: ',
-                                                          style:
-                                                              kNewsSubHeader,
-                                                          children: [
-                                                        TextSpan(
-                                                          text: pending
-                                                              .projectDescription,
-                                                          style:
-                                                              kNewsDateSTyle,
-                                                        ),
-                                                      ])),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          maxLines: 4,
+                                                          TextSpan(
+                                                              text: 'Title: ',
+                                                              style:
+                                                                  kNewsSubHeader,
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: pending
+                                                                      .projectDescription,
+                                                                  style:
+                                                                      kNewsDateSTyle,
+                                                                ),
+                                                              ])),
                                                       Text.rich(TextSpan(
                                                           text: 'Status: ',
                                                           style: kNewsSubHeader,
@@ -715,7 +727,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                   kNewsDateSTyle,
                                                             ),
                                                           ])),
-                                                ],
+                                                    ],
                                                   ),
                                                 )
                                               ],
@@ -736,7 +748,6 @@ class _ProjectPageState extends State<ProjectPage> {
             ),
           ],
         ),
-       
       ),
     );
   }
