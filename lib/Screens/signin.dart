@@ -17,6 +17,8 @@ import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/widgets/reuseable_text_field.dart';
 
+import '../widgets/reuseable_bottom_navbar.dart';
+
 class SignIn extends StatefulWidget {
   static String id = 'signin';
   @override
@@ -92,7 +94,7 @@ class _SignInState extends State<SignIn> {
               textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+              context, MaterialPageRoute(builder: (context) => ReuseableBottomBar()));
         } else {
           Fluttertoast.showToast(
               fontSize: 18,

@@ -4,7 +4,6 @@ import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
-import 'package:batnf/Screens/welcone_page.dart';
 import 'package:batnf/providers/theme_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -76,12 +75,9 @@ class _HomePageState extends State<HomePage> {
     final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? 'Dark Theme'
         : 'Light Theme';
-    NewsProvider newsProvider =
-        Provider.of<NewsProvider>(context, listen: false);
-    EventProvider eventProvider =
-        Provider.of<EventProvider>(context, listen: false);
-    InprogressProvider inprogressProvider =
-        Provider.of<InprogressProvider>(context, listen: false);
+    NewsProvider newsProvider = Provider.of<NewsProvider>(context);
+    EventProvider eventProvider = Provider.of<EventProvider>(context);
+    InprogressProvider inprogressProvider = Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -379,11 +375,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Expanded(
-                      child: inprogressProvider.allInprogressProjects == null
+                      child:
+                      inprogressProvider.allInprogressProjects == null
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
-                          : inprogressProvider.allInprogressProjects!.isEmpty
+                          :
+                           inprogressProvider.allInprogressProjects!.isEmpty
                               ? Center(
                                   child: Image.asset('assets/noitem.png.gif'),
                                 )
@@ -751,15 +749,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Expanded(
-                      child: newsProvider.allNews == null
+                      child: newsProvider.allNews!.isEmpty
                           ? Center(
-                              child: CircularProgressIndicator(),
+                              child: Image.asset('assets/noitem.png.gif'),
                             )
-                          : newsProvider.allNews!.isEmpty
+                          :
+                          newsProvider.allNews  == null
                               ? Center(
-                                  child: Image.asset('assets/noitem.png.gif'),
+                                  child: CircularProgressIndicator(),
                                 )
-                              : ListView.builder(
+                              :
+                               ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: newsProvider.allNews!.length,
                                   itemBuilder: ((context, index) {
@@ -788,7 +788,7 @@ class _HomePageState extends State<HomePage> {
                                                   height: 100,
                                                   width: 180,
                                                   child: news.files!.first.fileExt ==
-                                                    'image/jpeg' &&
+                                                    'image/png' &&
                                                 news.files!.first.fileUrl
                                                     .isNotEmpty
                                             ? ClipRRect(
@@ -797,8 +797,7 @@ class _HomePageState extends State<HomePage> {
                                                 child: CachedNetworkImage(
                                                     errorWidget: (context,
                                                                             url,
-                                                                            error) =>
-                                                                        Center(
+                                                                            error) =>  Center(
                                                                           child:
                                                                               Icon(
                                                                             Icons.error,
