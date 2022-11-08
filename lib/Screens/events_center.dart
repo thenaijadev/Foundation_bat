@@ -175,30 +175,35 @@ class _EventCenterState extends State<EventCenter> {
                                                           'https://www.batnf.net/${event.files!.first.fileUrl}',
                                                       fit: BoxFit.cover),
                                                 )
-                                                : CachedNetworkImage(
-                                                   errorWidget: (context,
-                                                            url, error) =>
-                                                        Center(
-                                                              child: Text(
-                                                                'Loading',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
+                                                : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                  child: CachedNetworkImage(
+                                                     errorWidget: (context,
+                                                              url, error) =>
+                                                          Center(
+                                                                child: Text(
+                                                                  'Loading',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
                                                               ),
-                                                            ),
-                                                    placeholder:
-                                                        (context, url) =>
-                                                            Center(
-                                                              child: Text(
-                                                                'Loading',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
+                                                      placeholder:
+                                                          (context, url) =>
+                                                              Center(
+                                                                child: Text(
+                                                                  'Loading',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
                                                               ),
-                                                            ),
-                                                imageUrl:
-                                                    'https://www.batnf.net/${event.files!.first.thumbnail}',
-                                                fit: BoxFit.cover),
+                                                  imageUrl:
+                                                      'https://www.batnf.net/${event.files!.first.thumbnail}',
+                                                  fit: BoxFit.cover),
+                                                ),
                                           ),
                                          
                                           // Details

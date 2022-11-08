@@ -27,7 +27,7 @@ class _NewsState extends State<News> {
 
   @override
   Widget build(BuildContext context) {
-    NewsProvider provider = Provider.of<NewsProvider>(context, listen: false);
+    NewsProvider provider = Provider.of<NewsProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
