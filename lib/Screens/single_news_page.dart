@@ -53,7 +53,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                                 imageUrl:
                                     'https://www.batnf.net/${newsFile.thumbnail}',
                                 fit: BoxFit.cover);
-                          } else if (newsFile.fileExt == 'image/jpeg') {
+                          } else if (newsFile.fileExt == 'image') {
                             return CachedNetworkImage(
                                 errorWidget: (context, url, error) => Center(
                                     child: Text('No Image/Video Available')),

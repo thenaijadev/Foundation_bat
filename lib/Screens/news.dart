@@ -71,7 +71,7 @@ class _NewsState extends State<News> {
                       child: TextField(
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(top: 2),
-                          hintText: 'Search',
+                          hintText: 'e.g: New Title',
                           hintStyle: kTextboxhintstyle,
                           prefixIcon: Icon(
                             FontAwesomeIcons.search,

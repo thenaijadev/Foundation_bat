@@ -79,6 +79,33 @@ class _ProjectPageState extends State<ProjectPage> {
                       ),
                     ],
                   ),
+                  if (inprogressProvider.allInprogressProjects != null && inprogressProvider.allInprogressProjects!.isNotEmpty)
+                    Container(
+                      margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                      color: Theme.of(context).primaryColor,
+                      height: 45.0,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 2),
+                          hintText: 'e.g: Project Title',
+                          hintStyle: kTextboxhintstyle,
+                          prefixIcon: Icon(
+                            FontAwesomeIcons.search,
+                            size: 13.0,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
+                            ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -87,103 +114,7 @@ class _ProjectPageState extends State<ProjectPage> {
             Expanded(
               child: ListView(
                 children: [
-                  // // Project Summary List Header
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 29.0, left: 30.0, bottom: 20),
-                  //   child: Row(
-                  //     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Text(
-                  //         'Projects Summary',
-                  //         style: kPageHeader,
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-
-                  //Project Summary List
-
-                  // SizedBox(
-                  //   height: 150,
-                  //   child: ListView(
-                  //     scrollDirection: Axis.horizontal,
-                  //     children: [
-                  //       //Project in progress
-                  //       GestureDetector(
-                  //         onTap: () {
-                  //           Navigator.pushNamed(context, InprogressPage.id);
-                  //         },
-                  //         child: ProjectSummaryContainer(
-                  //           margin: EdgeInsets.only(left: 30, right: 60.5),
-                  //           innercontainer: Theme.of(context).primaryColor
-                  //               .withOpacity(0.1),
-                  //           number: inprogressProvider
-                  //                       .allInprogressProjects?.length ==
-                  //                   null
-                  //               ? 0
-                  //               : inprogressProvider
-                  //                   .allInprogressProjects!.length,
-                  //           colour: Theme.of(context).primaryColor,
-                  //           label: 'InProgress',
-                  //           childCard: Icon(
-                  //             FontAwesomeIcons.spinner,
-                  //             size: 65,
-                  //             color: Colors.yellow,
-                  //           ),
-                  //         ),
-                  //       ),
-
-                  //       //Completed Project
-                  //       GestureDetector(
-                  //         onTap: () {
-                  //           Navigator.pushNamed(context, CompletedPage.id);
-                  //         },
-                  //         child: ProjectSummaryContainer(
-                  //           margin: EdgeInsets.only(right: 41.5),
-                  //           innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
-                  //           number: completedProvider
-                  //                       .allCompletedProjects?.length ==
-                  //                   null
-                  //               ? 0
-                  //               : completedProvider
-                  //                   .allCompletedProjects!.length,
-                  //           colour: Color(0xff50AF47),
-                  //           label: 'Completed',
-                  //           childCard: Icon(
-                  //             FontAwesomeIcons.checkCircle,
-                  //             size: 65,
-                  //             color: Color(0xff50AF47),
-                  //           ),
-                  //         ),
-                  //       ),
-
-                  //       // Pending project
-                  //       GestureDetector(
-                  //         onTap: () {
-                  //           Navigator.pushNamed(context, PendingPage.id);
-                  //         },
-                  //         child: ProjectSummaryContainer(
-                  //           margin: EdgeInsets.only(right: 30),
-                  //           innercontainer: Theme.of(context).primaryColor.withOpacity(0.1),
-                  //           number: pendingProvider
-                  //                       .allPendingProjects?.length ==
-                  //                   null
-                  //               ? 0
-                  //               : pendingProvider.allPendingProjects!.length,
-                  //           colour: Color(0xffEF7D00),
-                  //           label: 'Pending',
-                  //           childCard: Icon(
-                  //             FontAwesomeIcons.solidCommentDots,
-                  //             color: Color(0xffEF7D00),
-                  //             size: 65,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
+                 
                   //Inprogress Project
                   SizedBox(
                     height: 150,
@@ -235,7 +166,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   width: 180,
                                                   child: inprogress.files!.first
                                                                   .fileExt ==
-                                                              'image/jpeg' &&
+                                                              'image' &&
                                                           inprogress
                                                               .files!
                                                               .first
@@ -426,7 +357,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   width: 180,
                                                   child: completed.files!.first
                                                                   .fileExt ==
-                                                              'image/jpeg' &&
+                                                              'image' &&
                                                           completed
                                                               .files!
                                                               .first
@@ -610,7 +541,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                   width: 180,
                                                   child: pending.files!.first
                                                                   .fileExt ==
-                                                              'image/jpeg' &&
+                                                              'image' &&
                                                           pending
                                                               .files!
                                                               .first

@@ -64,7 +64,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                             imageUrl:
                                 'https://www.batnf.net/${completedFile.thumbnail}',
                             fit: BoxFit.cover);
-                      } else if (completedFile.fileExt == 'image/jpeg') {
+                      } else if (completedFile.fileExt == 'image') {
                         return CachedNetworkImage(
                             placeholder: (context, url) => Center(
                                   child: Text(

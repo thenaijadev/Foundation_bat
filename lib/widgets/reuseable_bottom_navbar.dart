@@ -72,7 +72,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
                 icon: Icon(
                       Icons.home,
                     ),
-                selectedIcon: Image.asset('assets/logo.png', height: 30, width:30,),
+                selectedIcon: Image.asset('assets/icons/home.png', height: 30, width:30,),
                 label: 'Home'),
                 //Event
             NavigationDestination(
