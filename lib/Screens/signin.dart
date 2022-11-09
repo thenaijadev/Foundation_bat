@@ -292,7 +292,7 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(45.0),
                         ),
                         height: 45.0,
-                        color: kButtonColor,
+                        color: Color.fromARGB(255, 8, 51, 121),
                         onPressed: () async {
                           final SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();

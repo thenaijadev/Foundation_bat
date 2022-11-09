@@ -156,7 +156,7 @@ class _EventDetailsState extends State<EventDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(
@@ -194,7 +194,7 @@ class _EventDetailsState extends State<EventDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 25,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(
@@ -251,21 +251,21 @@ class _EventDetailsState extends State<EventDetails> {
               ),
 
               //Map Header
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text('Location'),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 30),
+              //   child: Text('Location'),
+              // ),
 
-              // Location Map
-              Container(
-                height: 192,
-                margin:
-                    EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Image.asset('assets/map.png'),
-              ),
+              // // Location Map
+              // Container(
+              //   height: 192,
+              //   margin:
+              //       EdgeInsets.only(left: 30, top: 10, bottom: 75, right: 30),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(15),
+              //   ),
+              //   child: Image.asset('assets/map.png'),
+              // ),
 
               //Registration Button
               Padding(
@@ -277,10 +277,8 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   height: 45.0,
                   minWidth: MediaQuery.of(context).size.width,
-                  color: kButtonColor,
+                  color: Color.fromARGB(255, 8, 51, 121),
                   onPressed: () {
-                    // print(widget.singleEvent.eventId);
-                    // print(Provider.of<EventProvider>(context, listen: false)
                         // .userId);
                       setState(() {
                         loading = true;

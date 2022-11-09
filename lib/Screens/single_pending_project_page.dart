@@ -106,7 +106,7 @@ class _PendingDetailsState extends State<PendingDetails> {
                     child: Icon(
                       FontAwesomeIcons.calendarAlt,
                       size: 25,
-                      color: kButtonColor,
+                      color: kSignupbuttonColor,
                     ),
                   ),
                   Column(
@@ -144,7 +144,7 @@ class _PendingDetailsState extends State<PendingDetails> {
                     child: Icon(
                       FontAwesomeIcons.mapMarkerAlt,
                       size: 22,
-                      color: kButtonColor,
+                      color: kSignupbuttonColor,
                     ),
                   ),
       

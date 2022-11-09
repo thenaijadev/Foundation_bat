@@ -483,7 +483,7 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(45.0),
                         ),
                         height: 45.0,
-                        color: kButtonColor,
+                        color: Color.fromARGB(255, 8, 51, 121),
                         onPressed: () {
                           if (_formKey.currentState!.validate() && !loading) {
                             setState(() {

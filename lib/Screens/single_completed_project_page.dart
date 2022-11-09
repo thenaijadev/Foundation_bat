@@ -108,7 +108,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(
@@ -158,7 +158,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 22,
-                        color: kButtonColor,
+                        color: kSignupbuttonColor,
                       ),
                     ),
                     Column(
@@ -186,7 +186,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
                   'About Project',
-                  style: kBodyTextStyle,
+                  style: kAboutTextStyle,
                   textAlign: TextAlign.left,
                 ),
               ),
