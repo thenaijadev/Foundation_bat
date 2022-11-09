@@ -64,7 +64,7 @@ class _PendingDetailsState extends State<PendingDetails> {
                           imageUrl:
                               'https://www.batnf.net/${pendingFile.thumbnail}',
                           fit: BoxFit.cover);
-                    } else if (pendingFile.fileExt == 'image') {
+                    } else if (pendingFile.fileExt == 'image' && pendingFile.thumbnail.isNotEmpty) {
                           return CachedNetworkImage(
                               placeholder: (context, url) => Center(
                                     child: Text('Loading...', style: TextStyle(color: Colors.black),

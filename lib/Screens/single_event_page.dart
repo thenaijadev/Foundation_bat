@@ -113,7 +113,8 @@ class _EventDetailsState extends State<EventDetails> {
                               imageUrl:
                                   'https://www.batnf.net/${eventsFile.thumbnail}',
                               fit: BoxFit.cover);
-                        } else if (eventsFile.fileExt == 'image') {
+                        } else if (eventsFile.fileExt == 'image'  &&
+                            eventsFile.thumbnail.isNotEmpty) {
                           return CachedNetworkImage(
                               errorWidget: (context, url, error) =>
                                   Center(child: Text('No Image/Video Available')),

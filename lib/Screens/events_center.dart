@@ -26,12 +26,14 @@ class _EventCenterState extends State<EventCenter> {
     super.initState();
   }
 
-  List<EventModel> displayList = EventProvider().allEvents!;
+  // // List<EventModel> displayList = EventProvider().allEvents!;
+  // List displayList = EventModel().eventName;
+
 
   void updateList(String value) {
     setState(() {
-      displayList;
-      //  = EventProvider().allEvents!.where((element) => element.eventName.toLowerCase().contains(value.toLowerCase())).toList();
+      // displayList;
+      //  List<EventModel> displayList = EventProvider().allEvents!.where((element) => element.eventName.toLowerCase().contains(value.toLowerCase())).toList();
     });
   }
 

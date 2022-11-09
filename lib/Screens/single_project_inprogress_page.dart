@@ -59,7 +59,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                               imageUrl:
                                   'https://www.batnf.net/${inprogressFile.thumbnail}',
                               fit: BoxFit.cover);
-                        } else if (inprogressFile.fileExt == 'image') {
+                        } else if (inprogressFile.fileExt == 'image' && inprogressFile.thumbnail.isNotEmpty) {
                           return CachedNetworkImage(
                               errorWidget: (context, url, error) =>
                                   Center(child: Text('No Image Available')),
