@@ -50,7 +50,7 @@ class _ProjectPageState extends State<ProjectPage> {
         Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+        // backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -213,14 +213,14 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 .allInprogressProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.pushNamed(
-                                                context, InprogressPage.id);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             ProgressDetails(
-                                            //                 inprogress)));
+                                            // Navigator.pushNamed(
+                                            //     context, InprogressPage.id);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProgressDetails(
+                                                            inprogress)));
                                           },
                                           child: Container(
                                             color: Colors.transparent,
@@ -336,10 +336,10 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               // ignore: prefer_const_literals_to_create_immutables
                                                               children: [
                                                                 TextSpan(
-                                                                  text: inprogress
-                                                                      .projectDescription,
                                                                   style:
                                                                       kNewsDateSTyle,
+                                                                  text: inprogress
+                                                                      .projectDescription,
                                                                 )
                                                               ])),
                                                       Row(
@@ -404,14 +404,14 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 .allCompletedProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.pushNamed(
-                                                context, CompletedPage.id);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             CompletedProjectDetails(
-                                            //                 completed)));
+                                            // Navigator.pushNamed(
+                                            //     context, CompletedPage.id);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CompletedProjectDetails(
+                                                            completed)));
                                           },
                                           child: Container(
                                             color: Colors.transparent,
@@ -537,7 +537,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               ])),
 
                                                       //Project Status
-                                                      Text.rich(TextSpan(
+                                                      Text.rich(
+                                                        TextSpan(
                                                           text: 'Status: ',
                                                           style: kNewsSubHeader,
                                                           // ignore: prefer_const_literals_to_create_immutables
@@ -588,14 +589,14 @@ class _ProjectPageState extends State<ProjectPage> {
                                             .allPendingProjects![index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.pushNamed(
-                                                context, PendingPage.id);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             PendingDetails(
-                                            //                 pending)));
+                                            // Navigator.pushNamed(
+                                            //     context, PendingPage.id);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PendingDetails(
+                                                            pending)));
                                           },
                                           child: Container(
                                             color: Colors.transparent,
@@ -716,7 +717,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                       kNewsDateSTyle,
                                                                 ),
                                                               ])),
-                                                      Text.rich(TextSpan(
+                                                      Text.rich(
+                                                        TextSpan(
                                                           text: 'Status: ',
                                                           style: kNewsSubHeader,
                                                           children: [
@@ -726,7 +728,8 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               style:
                                                                   kNewsDateSTyle,
                                                             ),
-                                                          ])),
+                                                          ])
+                                                          ),
                                                     ],
                                                   ),
                                                 )

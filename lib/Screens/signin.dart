@@ -118,7 +118,7 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  // Forget Password Api Function
+  // Forgot Password Api Function
   Future<void> forgetpassword({required String email}) async {
     var response =
         await http.post(Uri.parse('https://www.batnf.net/api/forgot_password'),
@@ -336,7 +336,7 @@ class _SignInState extends State<SignIn> {
                                   valueColor:
                                       AlwaysStoppedAnimation(Colors.blue))
                               : Text(
-                                  'Forget Password?',
+                                  'Forgot Password?',
                                   textAlign: TextAlign.right,
                                   style: kForgetpasswordstyle,
                                 )),

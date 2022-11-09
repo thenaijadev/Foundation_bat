@@ -57,12 +57,9 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           NavigationBarTheme(
               data: NavigationBarThemeData(
             backgroundColor: Colors.transparent,
-            // Theme.of(context).primaryColor,
-            // height: 50,
             indicatorColor: Colors.blue),
-              // ignore: prefer_const_literals_to_create_immutables
               child: NavigationBar(
-          animationDuration: Duration(seconds: 3),
+          animationDuration: Duration(seconds: 2),
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
           selectedIndex: screenProvider.currentTab,
           onDestinationSelected: (int idx) {
@@ -70,23 +67,36 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
           },
           // ignore: prefer_const_literals_to_create_immutables
           destinations: [
+            //Home
             NavigationDestination(
-                icon: Image.asset('assets/icons/home.png'),
-                // icon: Icon(FontAwesomeIcons.home),
+                icon: Icon(
+                      Icons.home,
+                    ),
+                selectedIcon: Image.asset('assets/logo.png', height: 30, width:30,),
                 label: 'Home'),
+                //Event
             NavigationDestination(
-                icon: Image.asset('assets/icons/Calendar.png'),
-                // icon: Icon(FontAwesomeIcons.calendarAlt),
+                icon: Icon(FontAwesomeIcons.calendarAlt, size: 19,),
+                selectedIcon: Image.asset('assets/icons/Calendar.png'),
                 label: 'Events'),
+                //Games
             NavigationDestination(
-                icon: Image.asset('assets/icons/game.png'), label: 'Games'),
+              icon: Icon(
+                      FontAwesomeIcons.gamepad,
+                      size: 19,
+                    ),
+                selectedIcon: Image.asset('assets/icons/game.png'),
+                 label: 'Games'),
+                 //Project
             NavigationDestination(
-                icon: Image.asset('assets/icons/pro.png'),
-                // Icon(FontAwesomeIcons.tasks),
+                icon:  Icon(
+                      FontAwesomeIcons.heart, size: 19,),
+                selectedIcon:Image.asset('assets/icons/pro.png'),
                 label: 'projects'),
+                //News
             NavigationDestination(
-                icon: Image.asset('assets/icons/news.svg'),
-                // icon: Icon(FontAwesomeIcons.newspaper),
+                selectedIcon: Image.asset('assets/icons/news.svg'),
+                icon: Icon(FontAwesomeIcons.newspaper, size: 19,),
                 label: 'News'),
           ],
               ),

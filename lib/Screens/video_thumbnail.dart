@@ -48,7 +48,7 @@ class _VideosState extends State<Videos> {
         alignment: AlignmentDirectional.center,
         children: [
           CachedNetworkImage(
-            height: double.maxFinite,
+            // height: double.maxFinite,
             errorWidget: (context, url, error) => Container(),
             // ignore: prefer_const_constructors
             placeholder: (context, url) => Center(
@@ -88,8 +88,8 @@ class _VideosState extends State<Videos> {
       children: [
         AspectRatio(
             aspectRatio:
-                16 / 19,
-                // _playerController.value.aspectRatio,
+                // 16 / 19,
+                _playerController.value.aspectRatio,
             child: CachedVideoPlayer(_playerController)),
         Positioned.fill(
           child: GestureDetector(

@@ -455,7 +455,7 @@ class _SignUpState extends State<SignUp> {
                           controller: _date,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(top: 2),
-                            hintText: 'YYYY-MM-DD',
+                            hintText: 'Date of Birth',
                             hintStyle: kTextboxhintstyle,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
