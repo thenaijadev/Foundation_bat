@@ -38,17 +38,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
-    Provider.of<InprogressProvider>(context, listen: false).getInprogressProjects();
+    Provider.of<InprogressProvider>(context, listen: false)
+        .getInprogressProjects();
     getId();
     FlutterNativeSplash.remove();
-     }
-
+  }
 
   getId() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -77,7 +76,8 @@ class _HomePageState extends State<HomePage> {
         : 'Light Theme';
     NewsProvider newsProvider = Provider.of<NewsProvider>(context);
     EventProvider eventProvider = Provider.of<EventProvider>(context);
-    InprogressProvider inprogressProvider = Provider.of<InprogressProvider>(context);
+    InprogressProvider inprogressProvider =
+        Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.blue,
                   ));
             })),
-            // Drawer
+        // Drawer
         drawer: Drawer(
           width: 250,
           backgroundColor: Theme.of(context).primaryColor,
@@ -119,8 +119,8 @@ class _HomePageState extends State<HomePage> {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               // UserAccountsDrawerHeader(
-              //   accountName: Text('paul'),
-              //   accountEmail: Text('$email'),
+              //   accountName: Text(),
+              //   accountEmail: Text('email'),
               //   decoration: BoxDecoration(color: Colors.lightBlue),
               // ),
               SizedBox(
@@ -190,6 +190,7 @@ class _HomePageState extends State<HomePage> {
               //Change User Password
               InkWell(
                 onTap: () {
+                   Navigator.pop(context);
                   Navigator.pushNamed(context, ResetPassword.id);
                 },
                 child: ListTile(
@@ -341,7 +342,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // InProject
-             SizedBox(
+              SizedBox(
                 height: 150,
                 width: 365,
                 child: Column(
@@ -361,10 +362,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProjectPage()));
+                              Navigator.pushNamed(context, ProjectPage.id);
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => ProjectPage()));
                             },
                             child: Text(
                               'See All',
@@ -375,13 +377,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Expanded(
-                      child:
-                      inprogressProvider.allInprogressProjects == null
+                      child: inprogressProvider.allInprogressProjects == null
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
-                          :
-                           inprogressProvider.allInprogressProjects!.isEmpty
+                          : inprogressProvider.allInprogressProjects!.isEmpty
                               ? Center(
                                   child: Image.asset('assets/noitem.png.gif'),
                                 )
@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage> {
                                                           inprogress)));
                                         },
                                         child: Container(
-                                            color:Colors.transparent,
+                                          color: Colors.transparent,
                                           // width: 375,
                                           child: Row(
                                             children: [
@@ -416,17 +416,23 @@ class _HomePageState extends State<HomePage> {
                                                     right: 15.0),
                                                 height: 100,
                                                 width: 180,
-                                                child: inprogress.files!.first
-                                                                .fileExt ==
-                                                            'image/jpeg' &&
-                                                        inprogress.files!.first
-                                                            .fileUrl.isNotEmpty
-                                                    ? ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(18),
-                                                        child: CachedNetworkImage(
-                                                           errorWidget: (context,
+                                                child:
+                                                    inprogress.files!.first
+                                                                    .fileExt ==
+                                                                'image/jpeg' &&
+                                                            inprogress
+                                                                .files!
+                                                                .first
+                                                                .fileUrl
+                                                                .isNotEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
                                                                             url,
                                                                             error) =>
                                                                         Center(
@@ -445,17 +451,19 @@ class _HomePageState extends State<HomePage> {
                                                                                 style: TextStyle(color: Colors.black),
                                                                               ),
                                                                             ),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
-                                                            fit: BoxFit.cover),
-                                                      )
-                                                    : ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(18),
-                                                        child: CachedNetworkImage(
-                                                           errorWidget:
-                                                                    (context,
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          )
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
                                                                             url,
                                                                             error) =>
                                                                         Center(
@@ -466,21 +474,19 @@ class _HomePageState extends State<HomePage> {
                                                                                 TextStyle(color: Colors.black),
                                                                           ),
                                                                         ),
-                                                                placeholder:
-                                                                    (context,
-                                                                            url) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
-                                                            fit: BoxFit.cover),
-                                                      ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          ),
                                               ),
 
                                               //Details
@@ -503,7 +509,8 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       inprogress
                                                           .projectDescription,
-                                                      textAlign: TextAlign.justify,
+                                                      textAlign:
+                                                          TextAlign.justify,
                                                       style: kNewsDateSTyle,
                                                       overflow:
                                                           TextOverflow.ellipsis,
@@ -591,7 +598,7 @@ class _HomePageState extends State<HomePage> {
                                                       EventDetails(events)));
                                         },
                                         child: Container(
-                                            color:Colors.transparent,
+                                          color: Colors.transparent,
                                           child: Row(
                                             children: [
                                               //Images
@@ -602,16 +609,21 @@ class _HomePageState extends State<HomePage> {
                                                 width: 180,
                                                 child:
                                                     events.files!.first
-                                                                .fileExt ==
-                                                            'image/jpeg' &&
-                                                        events.files!.first
-                                                            .fileUrl.isNotEmpty
-                                                    ? ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(18),
-                                                        child: CachedNetworkImage(
-                                                           errorWidget: (context,
+                                                                    .fileExt ==
+                                                                'image/jpeg' &&
+                                                            events
+                                                                .files!
+                                                                .first
+                                                                .fileUrl
+                                                                .isNotEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
                                                                             url,
                                                                             error) =>
                                                                         Center(
@@ -630,17 +642,19 @@ class _HomePageState extends State<HomePage> {
                                                                                 style: TextStyle(color: Colors.black),
                                                                               ),
                                                                             ),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${events.files!.first.fileUrl}',
-                                                            fit: BoxFit.cover),
-                                                      )
-                                                    : ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(18),
-                                                        child: CachedNetworkImage(
-                                                           errorWidget:
-                                                                    (context,
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${events.files!.first.fileUrl}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          )
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
                                                                             url,
                                                                             error) =>
                                                                         Center(
@@ -651,21 +665,19 @@ class _HomePageState extends State<HomePage> {
                                                                                 Colors.black,
                                                                           ),
                                                                         ),
-                                                                placeholder:
-                                                                    (context,
-                                                                            url) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                            imageUrl:
-                                                                'https://www.batnf.net/${events.files!.first.thumbnail}',
-                                                            fit: BoxFit.cover),
-                                                      ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: Text(
+                                                                                'Loading',
+                                                                                style: TextStyle(color: Colors.black),
+                                                                              ),
+                                                                            ),
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${events.files!.first.thumbnail}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          ),
                                               ),
                                               //Details
                                               Container(
@@ -688,7 +700,8 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                     Text(
                                                       events.eventDesc,
-                                                      textAlign: TextAlign.justify,
+                                                      textAlign:
+                                                          TextAlign.justify,
                                                       style: kNewsDateSTyle,
                                                       overflow:
                                                           TextOverflow.ellipsis,
@@ -696,7 +709,8 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                     Text(
                                                       events.eventStartDate,
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: kNewsDateSTyle,
                                                     )
                                                   ],
@@ -753,13 +767,11 @@ class _HomePageState extends State<HomePage> {
                           ? Center(
                               child: Image.asset('assets/noitem.png.gif'),
                             )
-                          :
-                          newsProvider.allNews  == null
+                          : newsProvider.allNews == null
                               ? Center(
                                   child: CircularProgressIndicator(),
                                 )
-                              :
-                               ListView.builder(
+                              : ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: newsProvider.allNews!.length,
                                   itemBuilder: ((context, index) {
@@ -777,27 +789,35 @@ class _HomePageState extends State<HomePage> {
                                                       NewsDetails(news)));
                                         },
                                         child: Container(
-                                            color:Colors.transparent,
+                                          color: Colors.transparent,
                                           // width: 375,
                                           child: Row(
                                             children: [
                                               //Images
                                               Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 15.0),
-                                                  height: 100,
-                                                  width: 180,
-                                                  child: news.files!.first.fileExt ==
-                                                    'image/png' &&
-                                                news.files!.first.fileUrl
-                                                    .isNotEmpty
-                                            ? ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                                child: CachedNetworkImage(
-                                                    errorWidget: (context,
+                                                margin: EdgeInsets.only(
+                                                    right: 15.0),
+                                                height: 100,
+                                                width: 180,
+                                                child:
+                                                    news.files!.first.fileExt ==
+                                                                'image/png' &&
+                                                            news
+                                                                .files!
+                                                                .first
+                                                                .fileUrl
+                                                                .isNotEmpty
+                                                        ? ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
                                                                             url,
-                                                                            error) =>  Center(
+                                                                            error) =>
+                                                                        Center(
                                                                           child:
                                                                               Icon(
                                                                             Icons.error,
@@ -813,31 +833,43 @@ class _HomePageState extends State<HomePage> {
                                                                                 style: TextStyle(color: Colors.black),
                                                                               ),
                                                                             ),
-
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${news.files!.first.fileUrl}',
-                                                    fit: BoxFit.cover),
-                                              )
-                                            : ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                                child: CachedNetworkImage(
-                                                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error, color: Colors.black,),),
-                                                    placeholder:
-                                                                        (context,
-                                                                                url) =>
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          )
+                                                        : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                    placeholder:
+                                                                        (context, url) =>
                                                                             Center(
                                                                               child: Text(
                                                                                 'Loading',
                                                                                 style: TextStyle(color: Colors.black),
                                                                               ),
                                                                             ),
-
-                                                    imageUrl:
-                                                        'https://www.batnf.net/${news.files!.first.thumbnail}',
-                                                    fit: BoxFit.cover),
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${news.files!.first.thumbnail}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          ),
                                               ),
-                                                  ),
 
                                               //Details
                                               Container(
@@ -852,7 +884,8 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       news.title,
                                                       style: kNewsSubHeader,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       maxLines: 2,
                                                       textAlign:
                                                           TextAlign.center,
@@ -889,8 +922,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 30,
               ),
-
-              
             ],
           ),
         ),

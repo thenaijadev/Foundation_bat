@@ -9,6 +9,7 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Switch.adaptive(
       onChanged: (value) {
+        Navigator.pop(context);
         final provider = Provider.of<ThemeProvider>(context, listen: false);
         provider.toggleTheme(value);
       },

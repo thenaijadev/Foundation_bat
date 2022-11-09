@@ -20,6 +20,7 @@ import '../Models/pending_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/pending_provider.dart';
+import '../widgets/reuseable_bottom_navbar.dart';
 import '../widgets/reuseable_project_summary_containers.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -50,7 +51,17 @@ class _ProjectPageState extends State<ProjectPage> {
         Provider.of<InprogressProvider>(context);
     return SafeArea(
       child: Scaffold(
-        // backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            color: Colors.blue,
+            onPressed: () {
+              Navigator.pushNamed(context, ReuseableBottomBar.id);
+            },
+          ),
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -65,21 +76,22 @@ class _ProjectPageState extends State<ProjectPage> {
                     children: [
                       Container(
                         margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                            EdgeInsets.only(left: 24.0, top: 0, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset('assets/logo.png'),
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 130),
+                            top: 10, left: 10, bottom: 26, right: 130),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text('Projects', style: kPageHeader),
                       ),
                     ],
                   ),
-                  if (inprogressProvider.allInprogressProjects != null && inprogressProvider.allInprogressProjects!.isNotEmpty)
+                  if (inprogressProvider.allInprogressProjects != null &&
+                      inprogressProvider.allInprogressProjects!.isNotEmpty)
                     Container(
                       margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
                       color: Theme.of(context).primaryColor,
@@ -114,7 +126,6 @@ class _ProjectPageState extends State<ProjectPage> {
             Expanded(
               child: ListView(
                 children: [
-                 
                   //Inprogress Project
                   SizedBox(
                     height: 150,
@@ -468,8 +479,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               ])),
 
                                                       //Project Status
-                                                      Text.rich(
-                                                        TextSpan(
+                                                      Text.rich(TextSpan(
                                                           text: 'Status: ',
                                                           style: kNewsSubHeader,
                                                           // ignore: prefer_const_literals_to_create_immutables
@@ -648,8 +658,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                                       kNewsDateSTyle,
                                                                 ),
                                                               ])),
-                                                      Text.rich(
-                                                        TextSpan(
+                                                      Text.rich(TextSpan(
                                                           text: 'Status: ',
                                                           style: kNewsSubHeader,
                                                           children: [
@@ -659,8 +668,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               style:
                                                                   kNewsDateSTyle,
                                                             ),
-                                                          ])
-                                                          ),
+                                                          ])),
                                                     ],
                                                   ),
                                                 )

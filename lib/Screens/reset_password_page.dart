@@ -27,7 +27,7 @@ class _ResetPasswordState extends State<ResetPassword> {
   final _formKey = GlobalKey<FormState>();
 
     TextEditingController _confirmpasswordController = TextEditingController();
-
+    TextEditingController _oldpasswordController = TextEditingController();
     TextEditingController _newpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title:  Text(
-                      'Reset Password',
+                      'Change Password',
                       style: kSigningtextstyle,
                     ),
         toolbarHeight: 94,
@@ -60,6 +60,56 @@ class _ResetPasswordState extends State<ResetPassword> {
                     ),
                   ),
             
+                 
+                  //Request for old Password
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, bottom: 10),
+                    child: Text(
+                      'Old Password *',
+                      style: kPageHeader,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 30.0, right: 30.0, bottom: 30.0),
+                    child: SizedBox(
+                      height: 45,
+                      child: TextFormField(
+                        obscureText: hidepassword,
+                        controller: _oldpasswordController,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 2, left: 25),
+                          hintText: ' Old Password',
+                          hintStyle: kTextboxhintstyle,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
+                            ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: togglePasswordView,
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 14.15),
+                              child: Icon(
+                                !hidepassword
+                                    ? FontAwesomeIcons.eye
+                                    : FontAwesomeIcons.eyeSlash,
+                                color: Color(0xff979797),
+                                size: 19.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            
+                 
                   //Request for New Password
                   Padding(
                     padding: const EdgeInsets.only(left: 30, bottom: 10),
@@ -163,7 +213,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         borderRadius: BorderRadius.circular(45.0),
                       ),
                       height: 45.0,
-                      color: kButtonColor,
+                      color: Colors.blue,
                       onPressed: () {
                         Navigator.pushNamed(context, ResetCompleted.id);
                       },

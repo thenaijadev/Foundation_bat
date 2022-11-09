@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../widgets/reuseable_bottom_navbar.dart';
+
 class News extends StatefulWidget {
   static String id = 'new';
   News({Key? key}) : super(key: key);
@@ -31,6 +33,16 @@ class _NewsState extends State<News> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pushNamed(context, ReuseableBottomBar.id);
+            },
+            color: Colors.blue,
+          ),
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -43,8 +55,7 @@ class _NewsState extends State<News> {
                   Row(
                     children: [
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        margin: EdgeInsets.only(left: 24.0, top: 0, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset(
@@ -53,7 +64,7 @@ class _NewsState extends State<News> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 140),
+                            top: 10, left: 10, bottom: 26, right: 140),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text(

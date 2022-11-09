@@ -3,6 +3,7 @@
 // import 'package:batnf/Models/events_model.dart';
 
 import 'package:batnf/Models/events_model.dart';
+import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../widgets/reuseable_bottom_navbar.dart';
 
 class EventCenter extends StatefulWidget {
   static String id = 'event';
@@ -26,14 +29,17 @@ class _EventCenterState extends State<EventCenter> {
     super.initState();
   }
 
-  // // List<EventModel> displayList = EventProvider().allEvents!;
-  // List displayList = EventModel().eventName;
-
+  List<EventModel>? allEvent = EventProvider().allEvents;
 
   void updateList(String value) {
+    final suggestions = EventProvider().allEvents?.where((event) {
+      final eventTitle = event.eventName.toLowerCase();
+      final input = value.toLowerCase();
+
+      return eventTitle.contains(input);
+    }).toList();
     setState(() {
-      // displayList;
-      //  List<EventModel> displayList = EventProvider().allEvents!.where((element) => element.eventName.toLowerCase().contains(value.toLowerCase())).toList();
+      allEvent = suggestions;
     });
   }
 
@@ -43,6 +49,16 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            color: Colors.blue,
+            onPressed: () {
+              Navigator.pushNamed(context, ReuseableBottomBar.id);
+            },
+          ),
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -52,12 +68,12 @@ class _EventCenterState extends State<EventCenter> {
               color: Theme.of(context).primaryColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       Container(
-                        margin:
-                            EdgeInsets.only(left: 24.0, top: 45, bottom: 20),
+                        margin: EdgeInsets.only(left: 14.0, top: 0, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset(
@@ -66,7 +82,7 @@ class _EventCenterState extends State<EventCenter> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 50, left: 10, bottom: 26, right: 130),
+                            top: 10, left: 10, bottom: 26, right: 130),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text(
