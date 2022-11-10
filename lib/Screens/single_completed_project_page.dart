@@ -48,7 +48,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                     options: CarouselOptions(
                       padEnds: false,
                       autoPlayInterval: Duration(seconds: 10),
-                      height: 350,
+                      height: 265,
                       viewportFraction: 1.0,
                       enableInfiniteScroll: false,
                       // autoPlay: true
@@ -85,10 +85,10 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
           
               //Project Title
               Container(
-                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: Text(
                   widget.singleCompleted.projectTitle,
-                  style: kPageHeader,
+                  style: kSingletitle,
                 ),
               ),
           
@@ -108,7 +108,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -119,21 +119,21 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                         Text.rich(
                              TextSpan(
                                 text: 'Started: ',
-                                style: kLandpageskiptextstyle,
+                                style: kSinglestart,
                                 children: [
                               TextSpan(
                                 text: widget.singleCompleted.projectStartDate,
-                                style: kPageHeader,
+                                style: kStartdetail,
                               )
                             ])),
                             Text.rich(
                             TextSpan(
                                 text: 'Completed: ',
-                                style: kLandpageskiptextstyle,
+                                style: kSinglestart,
                                 children: [
                               TextSpan(
                                 text: widget.singleCompleted.projectEndDate,
-                                style: kPageHeader,
+                                style: kStartdetail,
                               )
                             ])),
                       ],
@@ -158,7 +158,7 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 22,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -168,12 +168,12 @@ class _CompletedProjectDetailsState extends State<CompletedProjectDetails> {
                       children: [
                         Text(
                           widget.singleCompleted.projectVenue,
-                          style: kBodyTextStyle,
+                          style: kVenue,
                         ),
                         SizedBox(height: 8),
                         Text(
                           widget.singleCompleted.projectLocation,
-                          style: kBodyTextStyle,
+                          style: kState,
                         )
                       ],
                     )

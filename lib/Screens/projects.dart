@@ -2,16 +2,11 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:batnf/Screens/completed_project.dart';
-import 'package:batnf/Screens/inprogress_project.dart';
-import 'package:batnf/Screens/pending_project.dart';
 import 'package:batnf/Screens/single_completed_project_page.dart';
 import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 
 import '../Models/completed_model.dart';
@@ -20,7 +15,6 @@ import '../Models/pending_model.dart';
 import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/pending_provider.dart';
-import '../widgets/reuseable_bottom_navbar.dart';
 
 class ProjectPage extends StatefulWidget {
   static String id = 'projects';
@@ -80,34 +74,34 @@ class _ProjectPageState extends State<ProjectPage> {
                       ),
                     ],
                   ),
-                  if (inprogressProvider.allInprogressProjects != null &&
-                      inprogressProvider.allInprogressProjects!.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
-                      color: Theme.of(context).primaryColor,
-                      height: 45.0,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(top: 2),
-                          hintText: 'e.g: Project Title',
-                          hintStyle: kTextboxhintstyle,
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.search,
-                            size: 13.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(45.0),
-                            ),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: kTextfieldborderColor,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  // if (inprogressProvider.allInprogressProjects != null &&
+                  //     inprogressProvider.allInprogressProjects!.isNotEmpty)
+                  //   Container(
+                  //     margin: EdgeInsets.only(left: 30, right: 20, bottom: 21),
+                  //     color: Theme.of(context).primaryColor,
+                  //     height: 45.0,
+                  //     child: TextField(
+                  //       decoration: InputDecoration(
+                  //         contentPadding: EdgeInsets.only(top: 2),
+                  //         hintText: 'e.g: Project Title',
+                  //         hintStyle: kTextboxhintstyle,
+                  //         prefixIcon: Icon(
+                  //           FontAwesomeIcons.search,
+                  //           size: 13.0,
+                  //         ),
+                  //         border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(
+                  //             Radius.circular(45.0),
+                  //           ),
+                  //           borderSide: BorderSide(
+                  //             style: BorderStyle.solid,
+                  //             color: kTextfieldborderColor,
+                  //             width: 2.0,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
                 ],
               ),
             ),

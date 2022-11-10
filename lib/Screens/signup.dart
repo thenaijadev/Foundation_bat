@@ -29,7 +29,7 @@ class _SignUpState extends State<SignUp> {
   State<SignUp> createState() => _SignUpState();
 
   List<String> states = [
-    'Abia State,', 
+    'Abia State,',
     'Abuja State',
     'Adamawa State',
     'Akwa Ibom State',
@@ -104,17 +104,18 @@ class _SignUpState extends State<SignUp> {
       required String location,
       required String date}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await http.post(Uri.parse('https://www.batnf.net/api/create'),
-        body: jsonEncode({
-          "first_name": firstname,
-          "last_name": lastname,
-          "email": email,
-          "password": password,
-          "password_confirm": passwordconfirm,
-          "location": location,
-          "dob": date,
-        }),
-        headers: {"Content-Type": "application/json"});
+    var response =
+        await http.post(Uri.parse('https://www.batnf.net/api/create'),
+            body: jsonEncode({
+              "first_name": firstname,
+              "last_name": lastname,
+              "email": email,
+              "password": password,
+              "password_confirm": passwordconfirm,
+              "location": location,
+              "dob": date,
+            }),
+            headers: {"Content-Type": "application/json"});
 
     // var data = jsonDecode(response.body);
     // print(data);
@@ -125,41 +126,36 @@ class _SignUpState extends State<SignUp> {
       });
     }
 
-    try {
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        if (data['status'] == 200) {
-          var username = data['last_name'];
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      if (data['status'] == 200) {
+        var username = data['last_name'];
 
-          Provider.of<EventProvider>(context, listen: false).userName =
-              username.toString();
+        Provider.of<EventProvider>(context, listen: false).userName =
+            username.toString();
 
-          preferences.setString('email', email);
-          preferences.setBool('autoLogin', true);
-          preferences.setString('username', username.toString());
-          // activate();
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg:
-                  "Registration Successful\n check yor mail to activate account",
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => SignIn()));
-        } else {
-          Fluttertoast.showToast(
-              fontSize: 18,
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.CENTER,
-              msg: data['message'],
-              textColor: kBackground,
-              backgroundColor: kButtonColor);
-        }
+        preferences.setString('email', email);
+        preferences.setBool('autoLogin', true);
+        preferences.setString('username', username.toString());
+        // activate();
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: "Registration Successful\n check yor mail to activate account",
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SignIn()));
+      } else {
+        Fluttertoast.showToast(
+            fontSize: 18,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            msg: data['message'],
+            textColor: kBackground,
+            backgroundColor: kButtonColor);
       }
-    } catch (e) {
-      print(e);
     }
 
     Future<void> activate() async {
@@ -234,10 +230,7 @@ class _SignUpState extends State<SignUp> {
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(
-                            bottom: 10.0,
-                            top: 50.0,
-                            left: 130.0,
-                            right: 130.0) ,
+                            bottom: 10.0, top: 50.0, left: 130.0, right: 130.0),
                         child: Image.asset(
                           'assets/logo.png',
                         ),
@@ -344,8 +337,8 @@ class _SignUpState extends State<SignUp> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon: Icon(Icons.lock,
-                                size: 15, color: Colors.blue),
+                            prefixIcon:
+                                Icon(Icons.lock, size: 15, color: Colors.blue),
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(
@@ -386,8 +379,8 @@ class _SignUpState extends State<SignUp> {
                                 width: 2.0,
                               ),
                             ),
-                            prefixIcon: Icon(Icons.lock,
-                                size: 15, color: Colors.blue),
+                            prefixIcon:
+                                Icon(Icons.lock, size: 15, color: Colors.blue),
                             suffixIcon: IconButton(
                               onPressed: _togglePasswordView,
                               icon: Icon(

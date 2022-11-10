@@ -16,8 +16,8 @@ final kBoxshadow = BoxShadow(
                 offset: Offset(4, 4),
                 blurRadius: 10.5);
 
-const kLoginbuttonColor = Color(0xffF9F9FA);
+// const kLoginbuttonColor = Color(0xffF9F9FA);
 const kSignupbuttonColor = Color(0xff119AE2);
 const kButtontextColor = Color(0xffF5F5F5);
-const kDark = Color(0xff000000);
+const kIcon = Color(0xff004f9f);
 

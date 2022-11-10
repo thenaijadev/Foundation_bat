@@ -41,7 +41,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                     child: CarouselSlider(
                         options: CarouselOptions(
                           autoPlayInterval: Duration(seconds: 10),
-                          height: 350,
+                          height: 265,
                           viewportFraction: 1.0,
                             enableInfiniteScroll: false,
                             padEnds: false,
@@ -75,17 +75,20 @@ class _NewsDetailsState extends State<NewsDetails> {
                 margin: EdgeInsets.only(
                   top: 15,
                   left: 30,
+                  right: 30,
+                  bottom: 10
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
                       widget.singleNews.title,
-                      style: kPageHeader,
+                      style: kSingletitle,
                     ),
-                    Text('Dec 21 2021')
+                    SizedBox(height: 5,),
+                    Text(widget.singleNews.entryDate,
+                    style: kSinglestart,)
                   ],
                 ),
               ),

@@ -18,8 +18,6 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
- 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,7 +46,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       options: CarouselOptions(
                         padEnds: false,
                         autoPlayInterval: Duration(seconds: 10),
-                        height: 350,
+                        height: 265,
                         viewportFraction: 0.98,
                         enableInfiniteScroll: false,
                         // autoPlay: true
@@ -59,7 +57,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                               imageUrl:
                                   'https://www.batnf.net/${inprogressFile.thumbnail}',
                               fit: BoxFit.cover);
-                        } else if (inprogressFile.fileExt == 'image' && inprogressFile.thumbnail.isNotEmpty) {
+                        } else if (inprogressFile.fileExt == 'image' &&
+                            inprogressFile.thumbnail.isNotEmpty) {
                           return CachedNetworkImage(
                               errorWidget: (context, url, error) =>
                                   Center(child: Text('No Image Available')),
@@ -79,11 +78,10 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
               //Project Title
               Container(
-                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: Text(
                   widget.singleProgress.projectTitle,
-                  style: kPageHeader,
-                  
+                  style: kSingletitle,
                 ),
               ),
 
@@ -103,7 +101,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -111,34 +109,29 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Container(
-                          child: Text.rich(
-                              selectionColor: Theme.of(context).primaryColor,
-                              TextSpan(
-                                  text: 'Started: ',
-                                  style: kBodyTextStyle,
-                                  children: [
-                                    TextSpan(
-                                      text: widget
-                                          .singleProgress.projectStartDate,
-                                      style: kPageHeader,
-                                    )
-                                  ])),
-                        ),
-                        Container(
-                          child: Text.rich(
-                              selectionColor: Theme.of(context).primaryColor,
-                              TextSpan(
-                                  text: 'To be Completed: ',
-                                  style: kBodyTextStyle,
-                                  children: [
-                                    TextSpan(
-                                      text:
-                                          widget.singleProgress.projectEndDate,
-                                      style: kPageHeader,
-                                    )
-                                  ])),
-                        ),
+                        Text.rich(
+                            selectionColor: Theme.of(context).primaryColor,
+                            TextSpan(
+                                text: 'Started: ',
+                                style: kSinglestart,
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        widget.singleProgress.projectStartDate,
+                                    style: kStartdetail,
+                                  )
+                                ])),
+                        Text.rich(
+                            selectionColor: Theme.of(context).primaryColor,
+                            TextSpan(
+                                text: 'To be Completed: ',
+                                style: kSinglestart,
+                                children: [
+                                  TextSpan(
+                                    text: widget.singleProgress.projectEndDate,
+                                    style: kStartdetail,
+                                  )
+                                ])),
                       ],
                     )
                   ],
@@ -161,7 +154,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 22,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -171,12 +164,12 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       children: [
                         Text(
                           widget.singleProgress.projectVenue,
-                          style: kPageHeader,
+                          style: kVenue,
                         ),
                         SizedBox(height: 8),
                         Text(
                           widget.singleProgress.projectLocation,
-                          style: kBodyTextStyle,
+                          style: kState,
                         )
                       ],
                     )

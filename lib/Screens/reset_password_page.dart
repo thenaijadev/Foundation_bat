@@ -49,9 +49,9 @@ class _ResetPasswordState extends State<ResetPassword> {
             headers: {
           "Content-Type": "application/json",
         });
-    var data = jsonDecode(response.body);
-    print(data);
-    print(response.body);
+    // var data = jsonDecode(response.body);
+    // print(data);
+    // print(response.body);
 
     if (mounted) {
       setState(() {
@@ -59,7 +59,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       });
     }
 
-    try {
+    
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
@@ -94,9 +94,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             textColor: kGeneralbodytextColor,
             backgroundColor: kButtonColor);
       }
-    } catch (e) {
-      print(e);
-    }
+    
   }
 
   @override

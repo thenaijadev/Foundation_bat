@@ -102,7 +102,7 @@ class _EventDetailsState extends State<EventDetails> {
                       options: CarouselOptions(
                         padEnds: false,
                         autoPlayInterval: Duration(seconds: 10),
-                        height: 350,
+                        height: 265,
                         viewportFraction: 0.98,
                         enableInfiniteScroll: false,
                         // autoPlay: true
@@ -133,10 +133,10 @@ class _EventDetailsState extends State<EventDetails> {
 
               //Event Name
               Container(
-                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: Text(
                   widget.singleEvent.eventName,
-                  style: kPageHeader,
+                  style: kSingletitle,
                 ),
               ),
 
@@ -157,7 +157,7 @@ class _EventDetailsState extends State<EventDetails> {
                       child: Icon(
                         FontAwesomeIcons.calendarAlt,
                         size: 25,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -166,12 +166,12 @@ class _EventDetailsState extends State<EventDetails> {
                       children: [
                         Text(
                           widget.singleEvent.eventStartDate,
-                          style: kBodyTextStyle,
+                          style: kStartdetail,
                         ),
                         SizedBox(height: 8),
                         Text(
                           widget.singleEvent.eventStartTime,
-                          style: kBodyTextStyle,
+                          style: kStartdetail,
                         )
                       ],
                     )
@@ -195,7 +195,7 @@ class _EventDetailsState extends State<EventDetails> {
                       child: Icon(
                         FontAwesomeIcons.mapMarkerAlt,
                         size: 25,
-                        color: kSignupbuttonColor,
+                        color: kIcon,
                       ),
                     ),
                     Column(
@@ -205,11 +205,11 @@ class _EventDetailsState extends State<EventDetails> {
                       children: [
                         Text(
                           widget.singleEvent.venue,
-                          style: kBodyTextStyle,
+                          style: kVenue,
                         ),
                         Text(
                           widget.singleEvent.eventLocation,
-                          style: kBodyTextStyle,
+                          style: kState,
                         ),
                       ],
                     )

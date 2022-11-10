@@ -47,7 +47,7 @@ class _PendingDetailsState extends State<PendingDetails> {
               child: CarouselSlider(
                   options: CarouselOptions(
                     autoPlayInterval: Duration(seconds: 10),
-                    height: 350,
+                    height: 265,
                     viewportFraction: 1.0,
                      enableInfiniteScroll: false,
                         padEnds: false,
@@ -83,10 +83,10 @@ class _PendingDetailsState extends State<PendingDetails> {
       
             //Project Title
             Container(
-              margin: EdgeInsets.only(top: 20, left: 30, bottom: 20),
+              margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
               child: Text(
                 widget.singlePending.projectTitle,
-                style: kPageHeader,
+                style: kSingletitle,
               ),
             ),
       
@@ -106,7 +106,7 @@ class _PendingDetailsState extends State<PendingDetails> {
                     child: Icon(
                       FontAwesomeIcons.calendarAlt,
                       size: 25,
-                      color: kSignupbuttonColor,
+                      color: kIcon,
                     ),
                   ),
                   Column(
@@ -116,11 +116,11 @@ class _PendingDetailsState extends State<PendingDetails> {
                     children: [
                       Text(
                               'To Begin: ',
-                              style: kLandpageskiptextstyle,
+                              style: kSinglestart,
                           ),
                             Text(
                                widget.singlePending.projectStartDate,
-                              style: kPageHeader,
+                              style: kStartdetail,
                             )
                     ],
                   )
@@ -144,7 +144,7 @@ class _PendingDetailsState extends State<PendingDetails> {
                     child: Icon(
                       FontAwesomeIcons.mapMarkerAlt,
                       size: 22,
-                      color: kSignupbuttonColor,
+                      color: kIcon,
                     ),
                   ),
       
@@ -155,12 +155,12 @@ class _PendingDetailsState extends State<PendingDetails> {
                     children: [
                       Text(
                         widget.singlePending.projectVenue,
-                        style: kBodyTextStyle,
+                        style: kVenue,
                       ),
                       SizedBox(height: 8),
                       Text(
                         widget.singlePending.projectLocation,
-                        style: kBodyTextStyle,
+                        style: kState,
                       ),
                     ],
                   )
