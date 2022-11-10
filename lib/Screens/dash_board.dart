@@ -27,6 +27,7 @@ import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import '../providers/screen_provider.dart';
 import '../widgets/change_theme_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> {
               //Change User Password
               InkWell(
                 onTap: () {
-                   Navigator.pop(context);
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, ResetPassword.id);
                 },
                 child: ListTile(
@@ -728,196 +729,366 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // News list header
-              SizedBox(
-                height: 150,
-                width: 365,
-                child: Column(
-                  children: [
-                    // News label
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                        right: 15.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'News',
-                            style: kPageHeader,
+              ///I commented your news section to write another.
+              ///Look at how it works and do thesame for other sections
+              ///
+
+              if (newsProvider.allNews != null &&
+                  newsProvider.allNews!.isNotEmpty)
+                Builder(builder: (context) {
+                  //I used the builder so i can do this
+                  NewsModel news = newsProvider.allNews![0];
+                  return SizedBox(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 15.0,
+                            right: 15.0,
                           ),
-                          TextButton(
-                            onPressed: () {
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'News',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  //Because you have a bottom nav bar for news, no need to move to a new page.
+                                  //I just changed the index of the bottom nav bar to the index of the news tab.
+                                  Provider.of<Screens>(context, listen: false)
+                                      .updateScreen(4);
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: GestureDetector(
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => News()));
+                                      builder: (context) => NewsDetails(news)));
                             },
-                            child: Text(
-                              'See All',
-                              style: kForgetpasswordstyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: newsProvider.allNews!.isEmpty
-                          ? Center(
-                              child: Image.asset('assets/noitem.png.gif'),
-                            )
-                          : newsProvider.allNews == null
-                              ? Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: newsProvider.allNews!.length,
-                                  itemBuilder: ((context, index) {
-                                    NewsModel news =
-                                        newsProvider.allNews![index];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, right: 15.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NewsDetails(news)));
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          // width: 375,
-                                          child: Row(
-                                            children: [
-                                              //Images
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    right: 15.0),
-                                                height: 100,
-                                                width: 180,
-                                                child:
-                                                    news.files!.first.fileExt ==
-                                                                'image/png' &&
-                                                            news
-                                                                .files!
-                                                                .first
-                                                                .fileUrl
-                                                                .isNotEmpty
-                                                        ? ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${news.files!.first.fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          )
-                                                        : ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${news.files!.first.thumbnail}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          ),
-                                              ),
+                            child: Row(
+                              children: [
+                                //Images
 
-                                              //Details
-                                              Container(
-                                                // height: 100,
-                                                width: 180,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Text(
-                                                      news.title,
-                                                      style: kNewsSubHeader,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2,
-                                                      textAlign:
-                                                          TextAlign.center,
+                                ///Notice i used expanded and gave them a flex property.
+                                ///The reason is to allow the image and the text occupy the entire screen
+                                ///unlike giving it a fixed with.
+                                ///The image would occupy a little less screen than the text because it has a flex
+                                ///of 4 but the text has a flex of 5.
+                                ///
+                                ///this means that the image would occupy 4/9 of the entire screen and the text
+                                ///would occupy 5/9
+                                ///
+                                ///the 9 is gotten by summing the entire flex values (4+5 = 9)
+                                Expanded(
+                                  flex: 4,
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 15.0),
+                                    height: 100,
+                                    child: news.files!.first.fileExt ==
+                                                'image/png' &&
+                                            news.files!.first.fileUrl.isNotEmpty
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      news.information,
-                                                      style: kNewsDateSTyle,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 4,
-                                                      textAlign:
-                                                          TextAlign.justify,
+                                                imageUrl:
+                                                    'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                fit: BoxFit.cover),
+                                          )
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      news.entryDate,
-                                                      textAlign: TextAlign.left,
-                                                      style: kNewsDateSTyle,
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
+                                                imageUrl:
+                                                    'https://www.batnf.net/${news.files!.first.thumbnail}',
+                                                fit: BoxFit.cover),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                                  ),
                                 ),
-                    )
-                  ],
-                ),
-              ),
+
+                                //Details
+                                Expanded(
+                                  flex: 5,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Text(
+                                        news.title,
+                                        style: kNewsSubHeader,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        news.information,
+                                        style: kNewsDateSTyle,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        news.entryDate,
+                                        textAlign: TextAlign.left,
+                                        style: kNewsDateSTyle,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+              ///this is where your former code begins.
+              ///the changes are not much but i didnt want to
+              ///delete your entire code. Just look at it and let me know.
+              ///
+
+              // // News list header
+              // SizedBox(
+              //   height: 150,
+              //   width: 365,
+              //   child: Column(
+              //     children: [
+              //       // News label
+              //       Padding(
+              //         padding: const EdgeInsets.only(
+              //           left: 15.0,
+              //           right: 15.0,
+              //         ),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'News',
+              //               style: kPageHeader,
+              //             ),
+              //             TextButton(
+              //               onPressed: () {
+              //                 Navigator.push(
+              //                     context,
+              //                     MaterialPageRoute(
+              //                         builder: (context) => News()));
+              //               },
+              //               child: Text(
+              //                 'See All',
+              //                 style: kForgetpasswordstyle,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: newsProvider.allNews!.isEmpty
+              //             ? Center(
+              //                 child: Image.asset('assets/noitem.png.gif'),
+              //               )
+              //             : newsProvider.allNews == null
+              //                 ? Center(
+              //                     child: CircularProgressIndicator(),
+              //                   )
+              //                 : ListView.builder(
+              //                     scrollDirection: Axis.horizontal,
+              //                     itemCount: newsProvider.allNews!.length,
+              //                     itemBuilder: ((context, index) {
+              //                       NewsModel news =
+              //                           newsProvider.allNews![index];
+              //                       return Padding(
+              //                         padding: const EdgeInsets.only(
+              //                             left: 15.0, right: 15.0),
+              //                         child: GestureDetector(
+              //                           onTap: () {
+              //                             Navigator.push(
+              //                                 context,
+              //                                 MaterialPageRoute(
+              //                                     builder: (context) =>
+              //                                         NewsDetails(news)));
+              //                           },
+              //                           child: Container(
+              //                             color: Colors.transparent,
+              //                             // width: 375,
+              //                             child: Row(
+              //                               children: [
+              //                                 //Images
+              //                                 Container(
+              //                                   margin: EdgeInsets.only(
+              //                                       right: 15.0),
+              //                                   height: 100,
+              //                                   width: 180,
+              //                                   child:
+              //                                       news.files!.first.fileExt ==
+              //                                                   'image/png' &&
+              //                                               news
+              //                                                   .files!
+              //                                                   .first
+              //                                                   .fileUrl
+              //                                                   .isNotEmpty
+              //                                           ? ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Icon(
+              //                                                               Icons.error,
+              //                                                               color:
+              //                                                                   Colors.black,
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${news.files!.first.fileUrl}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             )
+              //                                           : ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Icon(
+              //                                                               Icons.error,
+              //                                                               color:
+              //                                                                   Colors.black,
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${news.files!.first.thumbnail}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             ),
+              //                                 ),
+
+              //                                 //Details
+              //                                 Container(
+              //                                   // height: 100,
+              //                                   width: 180,
+              //                                   child: Column(
+              //                                     mainAxisAlignment:
+              //                                         MainAxisAlignment
+              //                                             .spaceEvenly,
+              //                                     // ignore: prefer_const_literals_to_create_immutables
+              //                                     children: [
+              //                                       Text(
+              //                                         news.title,
+              //                                         style: kNewsSubHeader,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 2,
+              //                                         textAlign:
+              //                                             TextAlign.center,
+              //                                       ),
+              //                                       Text(
+              //                                         news.information,
+              //                                         style: kNewsDateSTyle,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 4,
+              //                                         textAlign:
+              //                                             TextAlign.justify,
+              //                                       ),
+              //                                       Text(
+              //                                         news.entryDate,
+              //                                         textAlign: TextAlign.left,
+              //                                         style: kNewsDateSTyle,
+              //                                       )
+              //                                     ],
+              //                                   ),
+              //                                 )
+              //                               ],
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       );
+              //                     }),
+              //                   ),
+              //       )
+              //     ],
+              //   ),
+              // ),
 
               SizedBox(
                 height: 30,
