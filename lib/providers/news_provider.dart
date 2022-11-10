@@ -23,7 +23,7 @@ class NewsProvider extends ChangeNotifier {
     search(searchString);
   }
 
-  search(searchString) async {
+  search(String searchString) async {
     ///this updates the local [searchString] with the current search string.
     this.searchString = searchString;
 
