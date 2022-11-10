@@ -35,7 +35,7 @@ class ResetCompleted extends StatelessWidget {
               )),
           Center(
             child: Text(
-              'Your Password has been Reset',
+              'Your Password has been Changed',
               style: kTextboxhintstyle,
             ),
           ),

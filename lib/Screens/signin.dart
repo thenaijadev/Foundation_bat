@@ -10,7 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:batnf/Screens/forget_password_page.dart';
 import 'package:batnf/Screens/signup.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
@@ -150,8 +149,6 @@ class _SignInState extends State<SignIn> {
               msg: "Check Your Mail",
               textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => ForgetPassword()));
         } else {
           Fluttertoast.showToast(
               fontSize: 18,
@@ -160,8 +157,6 @@ class _SignInState extends State<SignIn> {
               msg: data['message'],
               textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => ForgetPassword()));
         }
       }
     } catch (e) {

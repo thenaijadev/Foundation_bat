@@ -102,7 +102,7 @@ class MyApp extends StatelessWidget {
             SignIn.id: (context) => SignIn(),
             HomePage.id: (context) => HomePage(),
             SignUp.id: (context) => SignUp(),
-            ForgetPassword.id: (context) => ForgetPassword(),
+            // ForgetPassword.id: (context) => ForgetPassword(),
             ResetPassword.id: (context) => ResetPassword(),
             ResetCompleted.id: (context) => ResetCompleted(),
             EventCenter.id: (context) => EventCenter(),

@@ -24,6 +24,7 @@ class EventProvider extends ChangeNotifier {
                     fileUrl: 'fileUrl',
                      fileExt: 'fileExt', thumbnail: 'thumbnail')])
   ];
+ 
 
   getAllEvents() async {
     allEvents = await AppEvents().getAllEvents();
