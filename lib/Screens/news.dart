@@ -3,7 +3,6 @@
 import 'package:batnf/Screens/single_news_page.dart';
 import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/providers/news_provider.dart';
-import 'package:batnf/providers/screen_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:batnf/Models/news_model.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../widgets/reuseable_bottom_navbar.dart';
 
 class News extends StatefulWidget {
   static String id = 'new';
@@ -33,7 +31,7 @@ class _NewsState extends State<News> {
 
     //I check if the provider is null or empty before getting the news.
     //You know you already make the request in homepage.
-    //So if it is not null, no need to get news everytime this page is opened.
+    //So if it is not null, no need to get news every time this page is opened.
 
     //If the user wants latest news, the person can use the refresh function you added.
     if (_provider.allNews == null || _provider.allNews!.isEmpty) {
@@ -46,7 +44,7 @@ class _NewsState extends State<News> {
   Widget build(BuildContext context) {
     NewsProvider provider = Provider.of<NewsProvider>(context);
 
-    //In the body, I used the searchResult in the newsprovider class instead of the allNews you created.
+    //In the body, I used the searchResult in the news provider class instead of the allNews you created.
     //Check the provider class for explanation.
 
     //On another note, i removed your back button because it;s
@@ -67,7 +65,7 @@ class _NewsState extends State<News> {
                   Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 24.0, top: 0, bottom: 20),
+                        margin: EdgeInsets.only(left: 24.0, top: 20, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset(
@@ -76,7 +74,7 @@ class _NewsState extends State<News> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 10, left: 10, bottom: 26, right: 140),
+                            top: 30, left: 10, bottom: 26, right: 140),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text(

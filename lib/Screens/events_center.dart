@@ -3,7 +3,6 @@
 // import 'package:batnf/Models/events_model.dart';
 
 import 'package:batnf/Models/events_model.dart';
-import 'package:batnf/Screens/dash_board.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
@@ -24,23 +23,14 @@ class EventCenter extends StatefulWidget {
 }
 
 class _EventCenterState extends State<EventCenter> {
+  late EventProvider _eventprovider;
   @override
   void initState() {
+    _eventprovider = Provider.of<EventProvider>(context, listen: false);
+    if (_eventprovider.allEvents == null || _eventprovider.allEvents!.isEmpty) {
+      _eventprovider.getAllEvents();
+    }
     super.initState();
-  }
-
-  List<EventModel>? allEvent = EventProvider().allEvents;
-
-  void updateList(String value) {
-    final suggestions = EventProvider().allEvents?.where((event) {
-      final eventTitle = event.eventName.toLowerCase();
-      final input = value.toLowerCase();
-
-      return eventTitle.contains(input);
-    }).toList();
-    setState(() {
-      allEvent = suggestions;
-    });
   }
 
   @override
@@ -49,16 +39,6 @@ class _EventCenterState extends State<EventCenter> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          leading: BackButton(
-            color: Colors.blue,
-            onPressed: () {
-              Navigator.pushNamed(context, ReuseableBottomBar.id);
-            },
-          ),
-        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +53,7 @@ class _EventCenterState extends State<EventCenter> {
                   Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 14.0, top: 0, bottom: 20),
+                        margin: EdgeInsets.only(left: 24.0, top: 20, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset(
@@ -82,7 +62,7 @@ class _EventCenterState extends State<EventCenter> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 10, left: 10, bottom: 26, right: 130),
+                            top: 30, left: 10, bottom: 26, right: 130),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text(
@@ -99,7 +79,9 @@ class _EventCenterState extends State<EventCenter> {
                       color: Theme.of(context).primaryColor,
                       height: 45.0,
                       child: TextField(
-                        onChanged: (value) => updateList(value),
+                        onChanged: (value) {
+                          _eventprovider.search(value);
+                        },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(top: 2),
                           hintText: 'e.g: Event Title',
@@ -126,11 +108,11 @@ class _EventCenterState extends State<EventCenter> {
             ),
 
             Expanded(
-              child: provider.allEvents == null
+              child: provider.searchResult == null
                   ? Center(
                       child: CircularProgressIndicator(),
                     )
-                  : provider.allEvents!.isEmpty
+                  : provider.searchResult!.isEmpty
                       ? Center(
                           child: Image.asset('assets/noitem.png.gif'),
                         )
@@ -144,9 +126,9 @@ class _EventCenterState extends State<EventCenter> {
                           },
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
-                              itemCount: provider.allEvents!.length,
+                              itemCount: provider.searchResult!.length,
                               itemBuilder: ((context, index) {
-                                EventModel event = provider.allEvents![index];
+                                EventModel event = provider.searchResult![index];
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.push(

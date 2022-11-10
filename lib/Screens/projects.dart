@@ -21,7 +21,6 @@ import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/pending_provider.dart';
 import '../widgets/reuseable_bottom_navbar.dart';
-import '../widgets/reuseable_project_summary_containers.dart';
 
 class ProjectPage extends StatefulWidget {
   static String id = 'projects';
@@ -52,16 +51,7 @@ class _ProjectPageState extends State<ProjectPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          leading: BackButton(
-            color: Colors.blue,
-            onPressed: () {
-              Navigator.pushNamed(context, ReuseableBottomBar.id);
-            },
-          ),
-        ),
+       
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -76,14 +66,14 @@ class _ProjectPageState extends State<ProjectPage> {
                     children: [
                       Container(
                         margin:
-                            EdgeInsets.only(left: 24.0, top: 0, bottom: 20),
+                            EdgeInsets.only(left: 24.0, top: 20, bottom: 20),
                         color: Theme.of(context).primaryColor,
                         height: 40.0,
                         child: Image.asset('assets/logo.png'),
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: 10, left: 10, bottom: 26, right: 130),
+                            top: 30, left: 10, bottom: 26, right: 130),
                         color: Theme.of(context).primaryColor,
                         height: 29,
                         child: Text('Projects', style: kPageHeader),

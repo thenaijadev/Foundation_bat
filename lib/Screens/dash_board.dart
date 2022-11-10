@@ -343,391 +343,689 @@ class _HomePageState extends State<HomePage> {
               ),
 
               // InProject
-              SizedBox(
-                height: 150,
-                width: 365,
-                child: Column(
-                  children: [
-                    // Projects label
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                        right: 15.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Projects',
-                            style: kPageHeader,
+              if (inprogressProvider.allInprogressProjects != null &&
+                  inprogressProvider.allInprogressProjects!.isNotEmpty)
+                Builder(builder: (context) {
+                  //I used the builder so i can do this
+                  InprogressModel inprogress = inprogressProvider.allInprogressProjects![0];
+                  return SizedBox(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 15.0,
+                            right: 15.0,
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, ProjectPage.id);
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => ProjectPage()));
-                            },
-                            child: Text(
-                              'See All',
-                              style: kForgetpasswordstyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: inprogressProvider.allInprogressProjects == null
-                          ? Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : inprogressProvider.allInprogressProjects!.isEmpty
-                              ? Center(
-                                  child: Image.asset('assets/noitem.png.gif'),
-                                )
-                              : ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: inprogressProvider
-                                      .allInprogressProjects!.length,
-                                  itemBuilder: ((context, index) {
-                                    InprogressModel inprogress =
-                                        inprogressProvider
-                                            .allInprogressProjects![index];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, right: 15.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProgressDetails(
-                                                          inprogress)));
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          // width: 375,
-                                          child: Row(
-                                            children: [
-                                              //Images and Videos for Inprogress Projects
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    right: 15.0),
-                                                height: 100,
-                                                width: 180,
-                                                child:
-                                                    inprogress.files!.first
-                                                                    .fileExt ==
-                                                                'image/jpeg' &&
-                                                            inprogress
-                                                                .files!
-                                                                .first
-                                                                .fileUrl
-                                                                .isNotEmpty
-                                                        ? ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          )
-                                                        : ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          ),
-                                              ),
-
-                                              //Details
-                                              Container(
-                                                // height: 100,
-                                                width: 180,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Text(
-                                                      inprogress.projectTitle,
-                                                      style: kNewsSubHeader,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 1,
-                                                    ),
-                                                    Text(
-                                                      inprogress
-                                                          .projectDescription,
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                      style: kNewsDateSTyle,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 4,
-                                                    ),
-                                                    Text(
-                                                      inprogress
-                                                          .projectStartDate,
-                                                      textAlign: TextAlign.left,
-                                                      style: kNewsDateSTyle,
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Projects',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Provider.of<Screens>(context, listen: false)
+                                      .updateScreen(3);
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
                                 ),
-                    )
-                  ],
-                ),
-              ),
-
-              // Events
-              SizedBox(
-                height: 150,
-                width: 365,
-                child: Column(
-                  children: [
-                    // Event label
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 15.0,
-                        right: 15.0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Upcoming Events',
-                            style: kPageHeader,
+                              )
+                            ],
                           ),
-                          TextButton(
-                            onPressed: () {
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: GestureDetector(
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EventCenter()));
+                                      builder: (context) =>
+                                          ProgressDetails(inprogress)));
                             },
-                            child: Text(
-                              'See All',
-                              style: kForgetpasswordstyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: eventProvider.allEvents == null
-                          ? Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : eventProvider.allEvents!.isEmpty
-                              ? Center(
-                                  child: Image.asset('assets/noitem.png.gif'),
-                                )
-                              : ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: eventProvider.allEvents!.length,
-                                  itemBuilder: ((context, index) {
-                                    EventModel events =
-                                        eventProvider.allEvents![index];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0, right: 15.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      EventDetails(events)));
-                                        },
-                                        child: Container(
-                                          color: Colors.transparent,
-                                          child: Row(
-                                            children: [
-                                              //Images
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                    right: 15.0),
-                                                height: 100,
-                                                width: 180,
-                                                child:
-                                                    events.files!.first
-                                                                    .fileExt ==
-                                                                'image/jpeg' &&
-                                                            events
-                                                                .files!
-                                                                .first
-                                                                .fileUrl
-                                                                .isNotEmpty
-                                                        ? ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${events.files!.first.fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          )
-                                                        : ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.error,
-                                                                            color:
-                                                                                Colors.black,
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
-                                                                            ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${events.files!.first.thumbnail}',
-                                                                    fit: BoxFit
-                                                                        .cover),
+                            child: Row(
+                              children: [
+                                //Images
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 15.0),
+                                    height: 100,
+                                    child: inprogress.files!.first.fileExt ==
+                                                'image/png' &&
+                                            inprogress
+                                                .files!.first.fileUrl.isNotEmpty
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
                                                           ),
-                                              ),
-                                              //Details
-                                              Container(
-                                                height: 100,
-                                                width: 180,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Text(
-                                                      events.eventName,
-                                                      style: kNewsSubHeader,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2,
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      events.eventDesc,
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                      style: kNewsDateSTyle,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 4,
+                                                imageUrl:
+                                                    'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
+                                                fit: BoxFit.cover),
+                                          )
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      events.eventStartDate,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: kNewsDateSTyle,
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
+                                                imageUrl:
+                                                    'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
+                                                fit: BoxFit.cover),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                                  ),
                                 ),
-                    )
-                  ],
-                ),
-              ),
+
+                                //Details
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Text(
+                                        inprogress.projectTitle,
+                                        style: kNewsSubHeader,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        inprogress.projectDescription,
+                                        style: kNewsDateSTyle,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        inprogress.projectStartDate,
+                                        textAlign: TextAlign.left,
+                                        style: kNewsDateSTyle,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+              // SizedBox(
+              //   height: 150,
+              //   width: 365,
+              //   child: Column(
+              //     children: [
+              //       // Projects label
+              //       Padding(
+              //         padding: const EdgeInsets.only(
+              //           left: 15.0,
+              //           right: 15.0,
+              //         ),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Projects',
+              //               style: kPageHeader,
+              //             ),
+              //             TextButton(
+              //               onPressed: () {
+              //                 Navigator.pushNamed(context, ProjectPage.id);
+              //                 // Navigator.push(
+              //                 //     context,
+              //                 //     MaterialPageRoute(
+              //                 //         builder: (context) => ProjectPage()));
+              //               },
+              //               child: Text(
+              //                 'See All',
+              //                 style: kForgetpasswordstyle,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: inprogressProvider.allInprogressProjects == null
+              //             ? Center(
+              //                 child: CircularProgressIndicator(),
+              //               )
+              //             : inprogressProvider.allInprogressProjects!.isEmpty
+              //                 ? Center(
+              //                     child: Image.asset('assets/noitem.png.gif'),
+              //                   )
+              //                 : ListView.builder(
+              //                     scrollDirection: Axis.horizontal,
+              //                     itemCount: inprogressProvider
+              //                         .allInprogressProjects!.length,
+              //                     itemBuilder: ((context, index) {
+              //                       InprogressModel inprogress =
+              //                           inprogressProvider
+              //                               .allInprogressProjects![index];
+              //                       return Padding(
+              //                         padding: const EdgeInsets.only(
+              //                             left: 15.0, right: 15.0),
+              //                         child: GestureDetector(
+              //                           onTap: () {
+              //                             Navigator.push(
+              //                                 context,
+              //                                 MaterialPageRoute(
+              //                                     builder: (context) =>
+              //                                         ProgressDetails(
+              //                                             inprogress)));
+              //                           },
+              //                           child: Container(
+              //                             color: Colors.transparent,
+              //                             // width: 375,
+              //                             child: Row(
+              //                               children: [
+              //                                 //Images and Videos for Inprogress Projects
+              //                                 Container(
+              //                                   margin: EdgeInsets.only(
+              //                                       right: 15.0),
+              //                                   height: 100,
+              //                                   width: 180,
+              //                                   child:
+              //                                       inprogress.files!.first
+              //                                                       .fileExt ==
+              //                                                   'image/jpeg' &&
+              //                                               inprogress
+              //                                                   .files!
+              //                                                   .first
+              //                                                   .fileUrl
+              //                                                   .isNotEmpty
+              //                                           ? ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Text(
+              //                                                               'Loading',
+              //                                                               style:
+              //                                                                   TextStyle(color: Colors.black),
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             )
+              //                                           : ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Text(
+              //                                                               'Loading',
+              //                                                               style:
+              //                                                                   TextStyle(color: Colors.black),
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             ),
+              //                                 ),
+
+              //                                 //Details
+              //                                 Container(
+              //                                   // height: 100,
+              //                                   width: 180,
+              //                                   child: Column(
+              //                                     mainAxisAlignment:
+              //                                         MainAxisAlignment
+              //                                             .spaceEvenly,
+              //                                     // ignore: prefer_const_literals_to_create_immutables
+              //                                     children: [
+              //                                       Text(
+              //                                         inprogress.projectTitle,
+              //                                         style: kNewsSubHeader,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 1,
+              //                                       ),
+              //                                       Text(
+              //                                         inprogress
+              //                                             .projectDescription,
+              //                                         textAlign:
+              //                                             TextAlign.justify,
+              //                                         style: kNewsDateSTyle,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 4,
+              //                                       ),
+              //                                       Text(
+              //                                         inprogress
+              //                                             .projectStartDate,
+              //                                         textAlign: TextAlign.left,
+              //                                         style: kNewsDateSTyle,
+              //                                       )
+              //                                     ],
+              //                                   ),
+              //                                 )
+              //                               ],
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       );
+              //                     }),
+              //                   ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+
+              // Events
+              if (eventProvider.allEvents != null &&
+                  eventProvider.allEvents!.isNotEmpty)
+                Builder(builder: (context) {
+                  //I used the builder so i can do this
+                  EventModel events = eventProvider.allEvents![0];
+                  return SizedBox(
+                    height: 150,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 15.0,
+                            right: 15.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Upcoming Events',
+                                style: kPageHeader,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Provider.of<Screens>(context, listen: false)
+                                      .updateScreen(1);
+                                },
+                                child: Text(
+                                  'See All',
+                                  style: kForgetpasswordstyle,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EventDetails(events)));
+                            },
+                            child: Row(
+                              children: [
+                                //Images
+                                Expanded(
+                                  flex: 5,
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 15.0),
+                                    height: 100,
+                                    child: events.files!.first.fileExt ==
+                                                'image/png' &&
+                                            events.files!.first.fileUrl.isNotEmpty
+                                        ? ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                imageUrl:
+                                                    'https://www.batnf.net/${events.files!.first.fileUrl}',
+                                                fit: BoxFit.cover),
+                                          )
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            child: CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Center(
+                                                          child: Icon(
+                                                            Icons.error,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                placeholder: (context, url) =>
+                                                    Center(
+                                                      child: Text(
+                                                        'Loading',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                imageUrl:
+                                                    'https://www.batnf.net/${events.files!.first.thumbnail}',
+                                                fit: BoxFit.cover),
+                                          ),
+                                  ),
+                                ),
+
+                                //Details
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Text(
+                                        events.eventName,
+                                        style: kNewsSubHeader,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        events.eventDesc,
+                                        style: kNewsDateSTyle,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        events.eventStartDate,
+                                        textAlign: TextAlign.left,
+                                        style: kNewsDateSTyle,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+
+              // SizedBox(
+              //   height: 150,
+              //   width: 365,
+              //   child: Column(
+              //     children: [
+              //       // Event label
+              //       Padding(
+              //         padding: const EdgeInsets.only(
+              //           left: 15.0,
+              //           right: 15.0,
+              //         ),
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //           children: [
+              //             Text(
+              //               'Upcoming Events',
+              //               style: kPageHeader,
+              //             ),
+              //             TextButton(
+              //               onPressed: () {
+              //                 Navigator.push(
+              //                     context,
+              //                     MaterialPageRoute(
+              //                         builder: (context) => EventCenter()));
+              //               },
+              //               child: Text(
+              //                 'See All',
+              //                 style: kForgetpasswordstyle,
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: eventProvider.allEvents == null
+              //             ? Center(
+              //                 child: CircularProgressIndicator(),
+              //               )
+              //             : eventProvider.allEvents!.isEmpty
+              //                 ? Center(
+              //                     child: Image.asset('assets/noitem.png.gif'),
+              //                   )
+              //                 : ListView.builder(
+              //                     scrollDirection: Axis.horizontal,
+              //                     itemCount: eventProvider.allEvents!.length,
+              //                     itemBuilder: ((context, index) {
+              //                       EventModel events =
+              //                           eventProvider.allEvents![index];
+              //                       return Padding(
+              //                         padding: const EdgeInsets.only(
+              //                             left: 15.0, right: 15.0),
+              //                         child: GestureDetector(
+              //                           onTap: () {
+              //                             Navigator.push(
+              //                                 context,
+              //                                 MaterialPageRoute(
+              //                                     builder: (context) =>
+              //                                         EventDetails(events)));
+              //                           },
+              //                           child: Container(
+              //                             color: Colors.transparent,
+              //                             child: Row(
+              //                               children: [
+              //                                 //Images
+              //                                 Container(
+              //                                   margin: EdgeInsets.only(
+              //                                       right: 15.0),
+              //                                   height: 100,
+              //                                   width: 180,
+              //                                   child:
+              //                                       events.files!.first
+              //                                                       .fileExt ==
+              //                                                   'image/jpeg' &&
+              //                                               events
+              //                                                   .files!
+              //                                                   .first
+              //                                                   .fileUrl
+              //                                                   .isNotEmpty
+              //                                           ? ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Icon(
+              //                                                               Icons.error,
+              //                                                               color:
+              //                                                                   Colors.black,
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${events.files!.first.fileUrl}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             )
+              //                                           : ClipRRect(
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           18),
+              //                                               child:
+              //                                                   CachedNetworkImage(
+              //                                                       errorWidget: (context,
+              //                                                               url,
+              //                                                               error) =>
+              //                                                           Center(
+              //                                                             child:
+              //                                                                 Icon(
+              //                                                               Icons.error,
+              //                                                               color:
+              //                                                                   Colors.black,
+              //                                                             ),
+              //                                                           ),
+              //                                                       placeholder:
+              //                                                           (context, url) =>
+              //                                                               Center(
+              //                                                                 child: Text(
+              //                                                                   'Loading',
+              //                                                                   style: TextStyle(color: Colors.black),
+              //                                                                 ),
+              //                                                               ),
+              //                                                       imageUrl:
+              //                                                           'https://www.batnf.net/${events.files!.first.thumbnail}',
+              //                                                       fit: BoxFit
+              //                                                           .cover),
+              //                                             ),
+              //                                 ),
+              //                                 //Details
+              //                                 Container(
+              //                                   height: 100,
+              //                                   width: 180,
+              //                                   child: Column(
+              //                                     mainAxisAlignment:
+              //                                         MainAxisAlignment
+              //                                             .spaceEvenly,
+              //                                     // ignore: prefer_const_literals_to_create_immutables
+              //                                     children: [
+              //                                       Text(
+              //                                         events.eventName,
+              //                                         style: kNewsSubHeader,
+              //                                         textAlign:
+              //                                             TextAlign.center,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 2,
+              //                                       ),
+              //                                       Text(
+              //                                         events.eventDesc,
+              //                                         textAlign:
+              //                                             TextAlign.justify,
+              //                                         style: kNewsDateSTyle,
+              //                                         overflow:
+              //                                             TextOverflow.ellipsis,
+              //                                         maxLines: 4,
+              //                                       ),
+              //                                       Text(
+              //                                         events.eventStartDate,
+              //                                         textAlign:
+              //                                             TextAlign.center,
+              //                                         style: kNewsDateSTyle,
+              //                                       )
+              //                                     ],
+              //                                   ),
+              //                                 )
+              //                               ],
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       );
+              //                     }),
+              //                   ),
+              //       )
+              //     ],
+              //   ),
+              // ),
 
               ///I commented your news section to write another.
               ///Look at how it works and do thesame for other sections
@@ -793,7 +1091,7 @@ class _HomePageState extends State<HomePage> {
                                 ///
                                 ///the 9 is gotten by summing the entire flex values (4+5 = 9)
                                 Expanded(
-                                  flex: 4,
+                                  flex: 5,
                                   child: Container(
                                     margin: EdgeInsets.only(right: 15.0),
                                     height: 100,
@@ -855,7 +1153,7 @@ class _HomePageState extends State<HomePage> {
 
                                 //Details
                                 Expanded(
-                                  flex: 5,
+                                  flex: 4,
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
