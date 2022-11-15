@@ -7,7 +7,7 @@ class AppNews {
   final String baseUrl = 'https://www.batnf.net/api/';
 
   Future<List<NewsModel>> getAllNews() async {
-    String url = 'getallnews';
+    String url = 'getAllprojects';
 
     try {
       final response = await http.get(Uri.parse(baseUrl + url));

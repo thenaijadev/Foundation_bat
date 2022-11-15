@@ -112,7 +112,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 children: [
                   //Inprogress Project
                   SizedBox(
-                    height: 150,
+                    height: 220,
                     width: 365,
                     child: Column(
                       children: [
@@ -150,15 +150,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                             color: Colors.transparent,
-                                            // width: 375,
-                                            child: Row(
+                                            width: 368,
+                                            margin: EdgeInsets.only(
+                                              right: 10,
+                                              bottom: 30.0,
+                                            ),
+                                            child: Column(
                                               children: [
                                                 // Inprogress Images
                                                 Container(
+                                                 height: 150,
+                                                  width: 310,
                                                   margin: EdgeInsets.only(
-                                                      left: 10, right: 15.0),
-                                                  height: 100,
-                                                  width: 180,
+                                                      bottom: 7.0,
+                                                      top: 7.0,
+                                                      left: 9.0),
                                                   child: inprogress.files!.first
                                                                   .fileExt ==
                                                               'image' &&
@@ -234,64 +240,50 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
 
                                                 // Inprogress Information
-                                                Container(
-                                                  width: 180,
-                                                  height: 100,
-                                                  margin: EdgeInsets.only(
-                                                      right: 10),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    // ignore: prefer_const_literals_to_create_immutables
-                                                    children: [
-                                                      Text(
-                                                        inprogress.projectTitle,
-                                                        style: kNewsSubHeader,
-                                                      ),
-                                                      Text.rich(
-                                                          textAlign:
-                                                              TextAlign.justify,
-                                                          overflow: TextOverflow
+                                                Text(
+                                                  inprogress.projectTitle,
+                                                  style: kNewsSubHeader,
+                                                ),
+                                                // Text.rich(
+                                                //     textAlign:
+                                                //         TextAlign.justify,
+                                                //     overflow: TextOverflow
+                                                //         .ellipsis,
+                                                //     maxLines: 4,
+                                                //     TextSpan(
+                                                //         text: 'Title: ',
+                                                //         style:
+                                                //             kNewsSubHeader,
+                                                //         // ignore: prefer_const_literals_to_create_immutables
+                                                //         children: [
+                                                //           TextSpan(
+                                                //             style:
+                                                //                 kNewsDateSTyle,
+                                                //             text: inprogress
+                                                //                 .projectDescription,
+                                                //           )
+                                                //         ])),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .center,
+                                                  children: [
+                                                    Text(
+                                                      'Status: ',
+                                                      style:
+                                                          kNewsSubHeader,
+                                                    ),
+                                                    Text(
+                                                      inprogress
+                                                          .projectStatus,
+                                                      style:
+                                                          kNewsSubHeader,
+                                                      overflow:
+                                                          TextOverflow
                                                               .ellipsis,
-                                                          maxLines: 4,
-                                                          TextSpan(
-                                                              text: 'Title: ',
-                                                              style:
-                                                                  kNewsSubHeader,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                                TextSpan(
-                                                                  style:
-                                                                      kNewsDateSTyle,
-                                                                  text: inprogress
-                                                                      .projectDescription,
-                                                                )
-                                                              ])),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            'Status: ',
-                                                            style:
-                                                                kNewsSubHeader,
-                                                          ),
-                                                          Text(
-                                                            inprogress
-                                                                .projectStatus,
-                                                            style:
-                                                                kNewsSubHeader,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            maxLines: 1,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
+                                                      maxLines: 1,
+                                                    )
+                                                  ],
                                                 )
                                               ],
                                             ),
@@ -306,7 +298,7 @@ class _ProjectPageState extends State<ProjectPage> {
 
                   //Completed Project
                   SizedBox(
-                    height: 150,
+                    height: 230,
                     width: 365,
                     child: Column(
                       children: [
@@ -341,15 +333,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                             color: Colors.transparent,
-                                            // width: 375,
-                                            child: Row(
+                                            width: 368,
+                                            margin: EdgeInsets.only(
+                                              right: 10,
+                                              bottom: 30.0,
+                                            ),
+                                            child: Column(
                                               children: [
                                                 // Completed Image
                                                 Container(
+                                                  height: 150,
+                                                  width: 310,
                                                   margin: EdgeInsets.only(
-                                                      left: 10, right: 15.0),
-                                                  height: 100,
-                                                  width: 180,
+                                                      bottom: 7.0,
+                                                      top: 7.0,
+                                                      left: 9.0),
                                                   child: completed.files!.first
                                                                   .fileExt ==
                                                               'image' &&
@@ -425,59 +423,44 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
 
                                                 // Completed Project Info
-                                                Container(
-                                                  width: 180,
-                                                  height: 100,
-                                                  margin: EdgeInsets.only(
-                                                      right: 10),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
+                                                Text(
+                                                  completed.projectTitle,
+                                                  style: kNewsSubHeader,
+                                                ),
+                                                // project Start Date
+                                                // Text.rich(
+                                                //     textAlign:
+                                                //         TextAlign.justify,
+                                                //     overflow: TextOverflow
+                                                //         .ellipsis,
+                                                //     maxLines: 4,
+                                                //     TextSpan(
+                                                //         text: 'Title: ',
+                                                //         style:
+                                                //             kNewsSubHeader,
+                                                //         // ignore: prefer_const_literals_to_create_immutables
+                                                //         children: [
+                                                //           TextSpan(
+                                                //             text: completed
+                                                //                 .projectDescription,
+                                                //             style:
+                                                //                 kNewsDateSTyle,
+                                                //           )
+                                                //         ])),
+
+                                                //Project Status
+                                                Text.rich(TextSpan(
+                                                    text: 'Status: ',
+                                                    style: kNewsSubHeader,
                                                     // ignore: prefer_const_literals_to_create_immutables
                                                     children: [
-                                                      // Project Title
-                                                      Text(
-                                                        completed.projectTitle,
-                                                        style: kNewsSubHeader,
-                                                      ),
-                                                      // project Start Date
-                                                      Text.rich(
-                                                          textAlign:
-                                                              TextAlign.justify,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          maxLines: 4,
-                                                          TextSpan(
-                                                              text: 'Title: ',
-                                                              style:
-                                                                  kNewsSubHeader,
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                                TextSpan(
-                                                                  text: completed
-                                                                      .projectDescription,
-                                                                  style:
-                                                                      kNewsDateSTyle,
-                                                                )
-                                                              ])),
-
-                                                      //Project Status
-                                                      Text.rich(TextSpan(
-                                                          text: 'Status: ',
-                                                          style: kNewsSubHeader,
-                                                          // ignore: prefer_const_literals_to_create_immutables
-                                                          children: [
-                                                            TextSpan(
-                                                              text: completed
-                                                                  .projectStatus,
-                                                              style:
-                                                                  kNewsDateSTyle,
-                                                            )
-                                                          ])),
-                                                    ],
-                                                  ),
-                                                )
+                                                      TextSpan(
+                                                        text: completed
+                                                            .projectStatus,
+                                                        style:
+                                                            kNewsDateSTyle,
+                                                      )
+                                                    ]))
                                               ],
                                             ),
                                           ),
@@ -489,9 +472,9 @@ class _ProjectPageState extends State<ProjectPage> {
                     ),
                   ),
 
-                  // Pending Progress label
+                  // // Pending Progress label
                   SizedBox(
-                    height: 150,
+                    height: 220,
                     width: 365,
                     child: Column(
                       children: [
@@ -525,14 +508,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                           },
                                           child: Container(
                                             color: Colors.transparent,
-                                            child: Row(
+                                            width: 368,
+                                            margin: EdgeInsets.only(
+                                              right: 10,
+                                              bottom: 30.0,
+                                            ),
+                                            child: Column(
                                               children: [
                                                 //pending Project Image
                                                 Container(
+                                                   height: 150,
+                                                  width: 310,
                                                   margin: EdgeInsets.only(
-                                                      left: 10, right: 15.0),
-                                                  height: 100,
-                                                  width: 180,
+                                                      bottom: 7.0,
+                                                      top: 7.0,
+                                                      left: 9.0),
                                                   child: pending.files!.first
                                                                   .fileExt ==
                                                               'image' &&
@@ -608,54 +598,40 @@ class _ProjectPageState extends State<ProjectPage> {
                                                 ),
 
                                                 //Pending Project Details
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 10),
-                                                  width: 180,
-                                                  height: 100,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      //Project Title
-                                                      Text(pending.projectTitle,
-                                                          style:
-                                                              kNewsSubHeader),
+                                                Text(pending.projectTitle,
+                                                    style:
+                                                        kNewsSubHeader),
 
-                                                      //Project Begin Date
-                                                      Text.rich(
-                                                          textAlign:
-                                                              TextAlign.justify,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          maxLines: 4,
-                                                          TextSpan(
-                                                              text: 'Title: ',
-                                                              style:
-                                                                  kNewsSubHeader,
-                                                              children: [
-                                                                TextSpan(
-                                                                  text: pending
-                                                                      .projectDescription,
-                                                                  style:
-                                                                      kNewsDateSTyle,
-                                                                ),
-                                                              ])),
-                                                      Text.rich(TextSpan(
-                                                          text: 'Status: ',
-                                                          style: kNewsSubHeader,
-                                                          children: [
-                                                            TextSpan(
-                                                              text: pending
-                                                                  .projectStatus,
-                                                              style:
-                                                                  kNewsDateSTyle,
-                                                            ),
-                                                          ])),
-                                                    ],
-                                                  ),
-                                                )
+                                                //Project Begin Date
+                                                // Text.rich(
+                                                //     textAlign:
+                                                //         TextAlign.justify,
+                                                //     overflow: TextOverflow
+                                                //         .ellipsis,
+                                                //     maxLines: 4,
+                                                //     TextSpan(
+                                                //         text: 'Title: ',
+                                                //         style:
+                                                //             kNewsSubHeader,
+                                                //         children: [
+                                                //           TextSpan(
+                                                //             text: pending
+                                                //                 .projectDescription,
+                                                //             style:
+                                                //                 kNewsDateSTyle,
+                                                //           ),
+                                                //         ])),
+                                                Text.rich(TextSpan(
+                                                    text: 'Status: ',
+                                                    style: kNewsSubHeader,
+                                                    children: [
+                                                      TextSpan(
+                                                        text: pending
+                                                            .projectStatus,
+                                                        style:
+                                                            kNewsDateSTyle,
+                                                      ),
+                                                    ]))
                                               ],
                                             ),
                                           ),

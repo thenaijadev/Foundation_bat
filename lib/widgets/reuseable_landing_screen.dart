@@ -31,7 +31,7 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
           fit: BoxFit.cover,
         ),
         Container(
-          margin: EdgeInsets.only(top: 350),
+          margin: EdgeInsets.only(top: 300),
           width: double.maxFinite,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(0.8),
@@ -45,7 +45,6 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
               // Header
               Container(
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 8, 51, 121),
                     borderRadius: BorderRadius.circular(50)),
                 margin: EdgeInsets.fromLTRB(30, 25, 30, 10),
                 padding: EdgeInsets.only(left: 35, right: 35),
@@ -64,7 +63,8 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   style: kLandpagebodytextstyle,
                 ),
               ),
-              // Button
+
+              // Skip Button
               Container(
                 margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                 child: MaterialButton(
@@ -80,6 +80,28 @@ class _ReuseableLandingScreenState extends State<ReuseableLandingScreen> {
                   },
                   child: Text(
                     'skip',
+                    textAlign: TextAlign.center,
+                    style: kButtontextstyle,
+                  ),
+                ),
+              ),
+
+              // Next Button
+              Container(
+                margin: EdgeInsets.only(left: 30, right: 30, top: 20),
+                child: MaterialButton(
+                  height: 45,
+                  minWidth: MediaQuery.of(context).size.width,
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45.0),
+                  ),
+                  color: Color.fromARGB(255, 8, 51, 121),
+                  onPressed: () {
+                    // Navigator.pushNamed(context, SignIn.id);
+                  },
+                  child: Text(
+                    'Next',
                     textAlign: TextAlign.center,
                     style: kButtontextstyle,
                   ),

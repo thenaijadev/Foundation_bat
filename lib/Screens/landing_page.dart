@@ -89,7 +89,6 @@ class _LandindPageState extends State<LandingPage> {
                         // Header
                         Container(
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 8, 51, 121),
                             borderRadius: BorderRadius.circular(50)
                           ),
                           margin: EdgeInsets.fromLTRB(30, 35, 30, 0),

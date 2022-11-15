@@ -17,7 +17,10 @@ const kAppnametextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kSingletitle =
-    TextStyle(fontFamily: 'Inter', fontSize: 24, fontWeight: FontWeight.w600);
+    TextStyle(
+      fontFamily: 'Inter',
+       fontSize: 24,
+        fontWeight: FontWeight.w600);
 
 const kSinglestart =
     TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w400);
@@ -38,7 +41,7 @@ const kNewsDateSTyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kLandpageHeadertextstyle = TextStyle(
-    color: Colors.white,
+    color: Color.fromARGB(255, 8, 51, 121),
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
     fontSize: 24.0,

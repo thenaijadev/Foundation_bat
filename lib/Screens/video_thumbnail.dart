@@ -74,8 +74,8 @@ class _VideosState extends State<Videos> {
                 color: Colors.transparent,
                 child: Icon(
                   Icons.play_arrow,
-                  color: Colors.blue.withOpacity(0.99),
-                  size: 30,
+                  color: Colors.white.withOpacity(0.99),
+                  size: 60,
                 ),
               ),
             ),
@@ -105,8 +105,8 @@ class _VideosState extends State<Videos> {
                   ? const SizedBox.expand()
                   : Icon(
                       Icons.play_arrow,
-                      color: Colors.blue.withOpacity(0.5),
-                      size: 30,
+                      color: Colors.white70,
+                      size: 60,
                     ),
             ),
           ),
