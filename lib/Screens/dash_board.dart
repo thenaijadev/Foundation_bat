@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage> {
                     Scaffold.of(context).openDrawer();
                   },
                   icon: Icon(
+                    size: 20,
                     FontAwesomeIcons.bars,
                     color: Colors.blue,
                   ));

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors, use_key_in_widget_constructors, must_be_immutable, non_constant_identifier_names
 
+import 'package:batnf/Screens/landing_page.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:flutter/material.dart';
