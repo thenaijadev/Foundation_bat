@@ -6,7 +6,7 @@ class AppInprogressProjects {
   final String baseUrl = 'https://www.batnf.net/api/';
 
   Future<List<InprogressModel>> getInprogressProjects() async {
-    String url = 'getinprogressprojects';
+    String url = 'getAllprojects';
 
     try {
       final response = await http.get(Uri.parse(baseUrl + url));
