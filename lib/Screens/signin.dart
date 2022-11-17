@@ -177,197 +177,203 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // ignore: prefer_const_literals_to_create_immutables
+      body: Stack(
         children: [
-          Expanded(
-            child: Form(
-                key: formKey,
-                child: ListView(
-                  children: [
-                    // Logo
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            bottom: 10.0, top: 60.0, left: 130.0, right: 130.0),
-                        child: Image.asset(
-                          'assets/logo.png',
-                        ),
+          Image.asset('assets/onboarding4.png',
+          fit: BoxFit.cover,
+          width: double.maxFinite,
+          height: double.maxFinite,
+          ),
+          Form(
+              key: formKey,
+              child: ListView(
+                children: [
+                  // Logo
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          bottom: 10.0, top: 50.0, left: 130.0, right: 130.0),
+                      child: Image.asset(
+                        'assets/logo.png',
                       ),
                     ),
+                  ),
 
-                    // SignIn Label
-                    Padding(
-                      padding: const EdgeInsets.only(top: 35.0, left: 30.0),
-                      child: Text(
-                        'Sign in',
-                        textAlign: TextAlign.left,
-                        style: kSigningtextstyle,
+                  // SignIn Label
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35.0, left: 30.0),
+                    child: Text(
+                      'Sign in',
+                      textAlign: TextAlign.left,
+                      style: kSigningtextstyle,
+                    ),
+                  ),
+
+                  //Request for User Email
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
+                    child: SizedBox(
+                      height: 65,
+                      child: ReuseableTextField(
+                        keyboard: TextInputType.emailAddress,
+                        validator: (val) {
+                          return val!.isEmpty
+                              ? "Email can not be empty"
+                              : null;
+                        },
+                        cardChild: Icon(FontAwesomeIcons.solidEnvelope,
+                            size: 15, color: Colors.black),
+                        textcontroller: emailController,
+                        label: "Email",
                       ),
                     ),
+                  ),
 
-                    //Request for User Email
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-                      child: SizedBox(
-                        height: 65,
-                        child: ReuseableTextField(
-                          keyboard: TextInputType.emailAddress,
-                          validator: (val) {
-                            return val!.isEmpty
-                                ? "Email can not be empty"
-                                : null;
-                          },
-                          cardChild: Icon(FontAwesomeIcons.solidEnvelope,
-                              size: 15, color: kTextboxhintColor),
-                          textcontroller: emailController,
-                          label: "Email",
-                        ),
-                      ),
-                    ),
-
-                    //Request for User Password
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 21.0),
-                      child: SizedBox(
-                        height: 65,
-                        child: TextFormField(
-                          style: TextStyle(color: Colors.blue),
-                          validator: (val) {
-                            return val!.isEmpty ? "Password is Required" : null;
-                          },
-                          obscureText: hidepassword,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 2),
-                            hintText: "password",
-                            hintStyle: kTextboxhintstyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(45.0),
-                              ),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                                color: kTextfieldborderColor,
-                                width: 2.0,
-                              ),
+                  //Request for User Password
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 30.0, right: 30.0, bottom: 21.0),
+                    child: SizedBox(
+                      height: 65,
+                      child: TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        validator: (val) {
+                          return val!.isEmpty ? "Password is Required" : null;
+                        },
+                        obscureText: hidepassword,
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 2),
+                          hintText: "password",
+                          hintStyle: kTextboxhintstyle,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(45.0),
                             ),
-                            prefixIcon: Icon(Icons.lock,
-                                size: 15, color: kTextboxhintColor),
-                            suffixIcon: IconButton(
-                              onPressed: _togglePasswordView,
-                              icon: Padding(
-                                padding: const EdgeInsets.only(right: 14.15),
-                                child: Icon(
-                                  !hidepassword
-                                      ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash,
-                                  size: 19.0,
-                                  color: Color(0xff979797),
-                                ),
+                            borderSide: BorderSide(
+                              style: BorderStyle.solid,
+                              color: kTextfieldborderColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          prefixIcon: Icon(Icons.lock,
+                              size: 15, color: Colors.black),
+                          suffixIcon: IconButton(
+                            onPressed: _togglePasswordView,
+                            icon: Padding(
+                              padding: const EdgeInsets.only(right: 14.15),
+                              child: Icon(
+                                !hidepassword
+                                    ? FontAwesomeIcons.eye
+                                    : FontAwesomeIcons.eyeSlash,
+                                size: 19.0,
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
+                  ),
 
-                    //Sing In Button
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 6.0, left: 30, right: 30, bottom: 35.0),
-                      child: MaterialButton(
-                        splashColor: kBackground,
-                        hoverColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45.0),
-                        ),
-                        height: 45.0,
-                        color: Color.fromARGB(255, 8, 51, 121),
-                        onPressed: () async {
-                          final SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          sharedPreferences.setString(
-                              'email', emailController.text);
-                          if (formKey.currentState!.validate() && !loading) {
+                  //Sing In Button
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 6.0, left: 30, right: 30, bottom: 35.0),
+                    child: MaterialButton(
+                      splashColor: kBackground,
+                      hoverColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45.0),
+                      ),
+                      height: 45.0,
+                      color: Color.fromARGB(255, 8, 51, 121),
+                      onPressed: () async {
+                        final SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.setString(
+                            'email', emailController.text);
+                        if (formKey.currentState!.validate() && !loading) {
+                          setState(() {
+                            loading = true;
+                          });
+                          login(
+                              email: emailController.text,
+                              password: passwordController.text);
+                          activate();
+                        }
+                      },
+                      child: loading
+                          ? CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation(Colors.white))
+                          : Text(
+                              'Sign In',
+                              textAlign: TextAlign.center,
+                              style: kButtontextstyle,
+                            ),
+                    ),
+                  ),
+
+                  //Forget Password Request
+                  Center(
+                    child: TextButton(
+                        onPressed: () {
+                          if (!loading1) {
                             setState(() {
-                              loading = true;
+                              loading1 = true;
                             });
-                            login(
-                                email: emailController.text,
-                                password: passwordController.text);
-                            activate();
+                            forgetpassword(email: emailController.text);
                           }
                         },
-                        child: loading
+                        child: loading1
                             ? CircularProgressIndicator(
                                 valueColor:
-                                    AlwaysStoppedAnimation(Colors.white))
+                                    AlwaysStoppedAnimation(Colors.blue))
                             : Text(
-                                'Sign In',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
-                              ),
-                      ),
-                    ),
+                                'Forgot Password?',
+                                textAlign: TextAlign.right,
+                                style: kForgetpasswordstyle,
+                              )),
+                  ),
 
-                    //Forget Password Request
-                    Center(
-                      child: TextButton(
-                          onPressed: () {
-                            if (!loading1) {
-                              setState(() {
-                                loading1 = true;
-                              });
-                              forgetpassword(email: emailController.text);
-                            }
-                          },
-                          child: loading1
-                              ? CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation(Colors.blue))
-                              : Text(
-                                  'Forgot Password?',
-                                  textAlign: TextAlign.right,
-                                  style: kForgetpasswordstyle,
-                                )),
+                  // Sign Up Redirection
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 75.0,
+                      top: 110,
                     ),
-
-                    // Sign Up Redirection
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 75.0,
-                        top: 110,
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, SignUp.id);
-                          },
-                          child: RichText(
-                              text: TextSpan(
-                                  text: "Don't have an account? ",
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, SignUp.id);
+                        },
+                        child: RichText(
+                            text: TextSpan(
+                                text: "Don't have an account? ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontStyle: FontStyle.normal,
+                                    fontFamily: 'Inter',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                              TextSpan(
+                                  text: 'Sign Up',
                                   style: TextStyle(
-                                      color: kButtonColor,
-                                      fontStyle: FontStyle.normal,
+                                      color: Color.fromARGB(255, 8, 51, 121),
                                       fontFamily: 'Inter',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400),
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                TextSpan(
-                                    text: 'Sign Up',
-                                    style: kForgetpasswordstyle)
-                              ])),
-                        ),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600))
+                            ])),
                       ),
                     ),
-                  ],
-                )),
-          ),
+                  ),
+                ],
+              )
+              ),
         ],
       ),
     );

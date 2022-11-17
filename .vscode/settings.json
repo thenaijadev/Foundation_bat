@@ -35,6 +35,7 @@
         "userdob",
         "userid",
         "userlastname",
-        "userlocation"
+        "userlocation",
+        "wakelock"
     ]
 }

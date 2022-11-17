@@ -227,6 +227,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -459,6 +460,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       Text(
@@ -466,7 +468,7 @@ class _HomePageState extends State<HomePage> {
                                         style: kNewsSubHeader,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.left,
                                       ),
                                       SizedBox(height: 6),
                                       Text(
@@ -803,6 +805,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       Text(
@@ -810,7 +813,7 @@ class _HomePageState extends State<HomePage> {
                                         style: kNewsSubHeader,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.left,
                                       ),
                                       SizedBox(height: 6),
                                       Text(
@@ -1158,6 +1161,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                     // ignore: prefer_const_literals_to_create_immutables
                                     children: [
                                       Text(
@@ -1165,7 +1169,7 @@ class _HomePageState extends State<HomePage> {
                                         style: kNewsSubHeader,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.left,
                                       ),
                                       SizedBox(height: 6),
                                       Text(

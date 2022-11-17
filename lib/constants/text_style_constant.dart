@@ -23,7 +23,10 @@ const kSingletitle =
         fontWeight: FontWeight.w600);
 
 const kSinglestart =
-    TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w400);
+    TextStyle(
+      fontFamily: 'Inter', 
+      fontSize: 14,
+       fontWeight: FontWeight.w400);
 
 const kStartdetail =
     TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w600);
@@ -54,7 +57,7 @@ const kLandpagebodytextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kSigningtextstyle = TextStyle(
-    color: Colors.blue,
+    color: Color.fromARGB(255, 8, 51, 121),
     // kGeneralbodytextColor,
     fontWeight: FontWeight.w600,
     fontFamily: 'Inter',
@@ -62,7 +65,7 @@ const kSigningtextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kTextboxhintstyle = TextStyle(
-    color: kTextboxhintColor,
+    color: Colors.white,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -75,8 +78,8 @@ const kButtontextstyle = TextStyle(
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
 
-var kForgetpasswordstyle = TextStyle(
-    color: Colors.blue[900],
+const kForgetpasswordstyle = TextStyle(
+    color: Colors.white,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -97,7 +100,15 @@ const kNewsSubHeader = TextStyle(
     fontWeight: FontWeight.bold);
 
 const kBodyTextStyle =
-    TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400);
+    TextStyle(
+      fontFamily: 'Inter',
+       fontSize: 16,
+        fontWeight: FontWeight.w400);
+
+const kLocationTextStyle =
+    TextStyle(
+    color: Colors.white,
+      fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400);
 
 const kAboutTextStyle =
     TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w600);
