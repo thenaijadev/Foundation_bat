@@ -372,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child: Text(
                                   'See All',
-                                  style: kForgetpasswordstyle,
+                                  style: kSeeallstyle,
                                 ),
                               )
                             ],
@@ -719,7 +719,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child: Text(
                                   'See All',
-                                  style: kForgetpasswordstyle,
+                                  style: kSeeallstyle,
                                 ),
                               )
                             ],
@@ -1064,7 +1064,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child: Text(
                                   'See All',
-                                  style: kForgetpasswordstyle,
+                                  style: kSeeallstyle,
                                 ),
                               )
                             ],

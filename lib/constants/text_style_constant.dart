@@ -77,7 +77,12 @@ const kButtontextstyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
-
+const kSeeallstyle = TextStyle(
+    color: Colors.blue,
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: FontWeight.w400);
 const kForgetpasswordstyle = TextStyle(
     color: Colors.white,
     fontStyle: FontStyle.normal,

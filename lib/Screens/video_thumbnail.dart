@@ -1,4 +1,5 @@
 import 'package:auto_orientation/auto_orientation.dart';
+import 'package:batnf/Screens/video_orientation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
@@ -158,11 +159,15 @@ class _VideosState extends State<Videos> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        if (isPortrait) {
-                          AutoOrientation.landscapeRightMode();
-                        } else {
-                          AutoOrientation.portraitUpMode();
-                        }
+                         Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullScreen(playerController: _playerController,)));
+                        // if (isPortrait) {
+                        //   AutoOrientation.landscapeRightMode();
+                        // } else {
+                        //   AutoOrientation.portraitUpMode();
+                        // }
                       },
                     )
                   ],

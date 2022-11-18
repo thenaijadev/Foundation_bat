@@ -11,6 +11,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:page_indicator/page_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:readmore/readmore.dart';
@@ -95,39 +96,47 @@ class _EventDetailsState extends State<EventDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Event Image
-              Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                child: ClipRRect(
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                        padEnds: false,
-                        autoPlayInterval: Duration(seconds: 10),
-                        height: 265,
-                        viewportFraction: 0.98,
-                        enableInfiniteScroll: false,
-                        // autoPlay: true
-                      ),
-                      items: widget.singleEvent.files!.map((eventsFile) {
-                        if (eventsFile.fileExt == '') {
-                          return CachedNetworkImage(
-                              imageUrl:
-                                  'https://www.batnf.net/${eventsFile.thumbnail}',
-                              fit: BoxFit.cover);
-                        } else if (eventsFile.fileExt == 'image'  &&
-                            eventsFile.thumbnail.isNotEmpty) {
-                          return CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  Center(child: Text('No Image/Video Available')),
-                              placeholder: (context, url) => Center(
-                                      child: Text(
-                                    'Loading',
-                                    style: TextStyle(color: Colors.black),
-                                  )),
-                              imageUrl:
-                                  'https://www.batnf.net/${eventsFile.fileUrl}',
-                              fit: BoxFit.cover);
-                        } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
-                      }).toList()),
+              PageIndicatorContainer(
+                align: IndicatorAlign.center,
+                indicatorColor: Color(0xffBDBDBD),
+                indicatorSelectorColor: Colors.black,
+                indicatorSpace: 10.0,
+                shape: IndicatorShape.circle(size: 108),
+                length: 4,
+                child: Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  child: ClipRRect(
+                    child: CarouselSlider(
+                        options: CarouselOptions(
+                          padEnds: false,
+                          autoPlayInterval: Duration(seconds: 10),
+                          height: 265,
+                          viewportFraction: 0.95,
+                          enableInfiniteScroll: false,
+                          // autoPlay: true
+                        ),
+                        items: widget.singleEvent.files!.map((eventsFile) {
+                          if (eventsFile.fileExt == '') {
+                            return CachedNetworkImage(
+                                imageUrl:
+                                    'https://www.batnf.net/${eventsFile.thumbnail}',
+                                fit: BoxFit.cover);
+                          } else if (eventsFile.fileExt == 'image'  &&
+                              eventsFile.thumbnail.isNotEmpty) {
+                            return CachedNetworkImage(
+                                errorWidget: (context, url, error) =>
+                                    Center(child: Text('No Image/Video Available')),
+                                placeholder: (context, url) => Center(
+                                        child: Text(
+                                      'Loading',
+                                      style: TextStyle(color: Colors.black),
+                                    )),
+                                imageUrl:
+                                    'https://www.batnf.net/${eventsFile.fileUrl}',
+                                fit: BoxFit.cover);
+                          } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
+                        }).toList()),
+                  ),
                 ),
               ),
 
