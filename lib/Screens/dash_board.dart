@@ -324,7 +324,6 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 25,
                                     fontWeight: FontWeight.w600))),
                         decoration: BoxDecoration(
-                          color: Colors.blue,
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
