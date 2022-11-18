@@ -7,6 +7,7 @@ import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:readmore/readmore.dart';
 
 class NewsDetails extends StatefulWidget {
@@ -18,6 +19,8 @@ class NewsDetails extends StatefulWidget {
 }
 
 class _NewsDetailsState extends State<NewsDetails> {
+  
+  final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,38 +39,64 @@ class _NewsDetailsState extends State<NewsDetails> {
               //News Image
               Container(
                 margin: EdgeInsets.only(left: 25, right: 25),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CarouselSlider(
-                        options: CarouselOptions(
-                          autoPlayInterval: Duration(seconds: 10),
-                          height: 265,
-                          viewportFraction: 1.0,
-                            enableInfiniteScroll: false,
-                            padEnds: false,
-                          // autoPlay: true
+                child: Column(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: CarouselSlider(
+                          
+                            carouselController: _controller,
+                            options: CarouselOptions(
+                              autoPlayInterval: Duration(seconds: 10),
+                              height: 265,
+                              viewportFraction: 1.0,
+                                enableInfiniteScroll: false,
+                                padEnds: false,
+                              // autoPlay: true
+                            ),
+                            items: widget.singleNews.files!.map((newsFile) {
+                              if (newsFile.fileExt == '') {
+                                return CachedNetworkImage(
+                                    imageUrl:
+                                        'https://www.batnf.net/${newsFile.thumbnail}',
+                                    fit: BoxFit.cover);
+                              } else if (newsFile.fileExt == 'image' && newsFile.thumbnail.isNotEmpty) {
+                                return CachedNetworkImage(
+                                    errorWidget: (context, url, error) => Center(
+                                        child: Text('No Image/Video Available')),
+                                    placeholder: (context, url) => Center(
+                                            child: Text(
+                                          'Loading',
+                                          style: TextStyle(color: Colors.black),
+                                        )),
+                                    imageUrl:
+                                        'https://www.batnf.net/${newsFile.fileUrl}',
+                                    fit: BoxFit.cover);
+                              }
+                              return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
+                            }).toList())),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('previous'),
+                        MaterialButton(
+                          onPressed: () => _controller.previousPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowLeft),
                         ),
-                        items: widget.singleNews.files!.map((newsFile) {
-                          if (newsFile.fileExt == '') {
-                            return CachedNetworkImage(
-                                imageUrl:
-                                    'https://www.batnf.net/${newsFile.thumbnail}',
-                                fit: BoxFit.cover);
-                          } else if (newsFile.fileExt == 'image' && newsFile.thumbnail.isNotEmpty) {
-                            return CachedNetworkImage(
-                                errorWidget: (context, url, error) => Center(
-                                    child: Text('No Image/Video Available')),
-                                placeholder: (context, url) => Center(
-                                        child: Text(
-                                      'Loading',
-                                      style: TextStyle(color: Colors.black),
-                                    )),
-                                imageUrl:
-                                    'https://www.batnf.net/${newsFile.fileUrl}',
-                                fit: BoxFit.cover);
-                          }
-                          return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
-                        }).toList())),
+                        MaterialButton(
+                          onPressed: () => _controller.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowRight),
+                        ),
+                        Text('Next')
+                      ],
+                    )
+                  ],
+                ),
               ),
 
               //News title

@@ -27,6 +27,7 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
+  final CarouselController _controller = CarouselController();
   bool loading = false;
   Future<void> register({required int userId, required String eventId}) async {
     var response =
@@ -96,50 +97,67 @@ class _EventDetailsState extends State<EventDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Event Image
-              PageIndicatorContainer(
-                align: IndicatorAlign.center,
-                indicatorColor: Color(0xffBDBDBD),
-                indicatorSelectorColor: Colors.black,
-                indicatorSpace: 10.0,
-                shape: IndicatorShape.circle(size: 108),
-                length: 4,
-                child: Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
-                  child: ClipRRect(
-                    child: CarouselSlider(
-                        options: CarouselOptions(
-                          padEnds: false,
-                          autoPlayInterval: Duration(seconds: 10),
-                          height: 265,
-                          viewportFraction: 0.95,
-                          enableInfiniteScroll: false,
-                          // autoPlay: true
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      child: CarouselSlider(
+            carouselController: _controller,
+                          options: CarouselOptions(
+                            padEnds: false,
+                            autoPlayInterval: Duration(seconds: 10),
+                            height: 265,
+                            viewportFraction: 1.0,
+                            enableInfiniteScroll: false,
+                            // autoPlay: true
+                          ),
+                          items: widget.singleEvent.files!.map((eventsFile) {
+                            if (eventsFile.fileExt == '') {
+                              return CachedNetworkImage(
+                                  imageUrl:
+                                      'https://www.batnf.net/${eventsFile.thumbnail}',
+                                  fit: BoxFit.cover);
+                            } else if (eventsFile.fileExt == 'image'  &&
+                                eventsFile.thumbnail.isNotEmpty) {
+                              return CachedNetworkImage(
+                                  errorWidget: (context, url, error) =>
+                                      Center(child: Text('No Image/Video Available')),
+                                  placeholder: (context, url) => Center(
+                                          child: Text(
+                                        'Loading',
+                                        style: TextStyle(color: Colors.black),
+                                      )),
+                                  imageUrl:
+                                      'https://www.batnf.net/${eventsFile.fileUrl}',
+                                  fit: BoxFit.cover);
+                            } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
+                          }).toList()),
+                    
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('previous'),
+                        MaterialButton(
+                          onPressed: () => _controller.previousPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowLeft),
                         ),
-                        items: widget.singleEvent.files!.map((eventsFile) {
-                          if (eventsFile.fileExt == '') {
-                            return CachedNetworkImage(
-                                imageUrl:
-                                    'https://www.batnf.net/${eventsFile.thumbnail}',
-                                fit: BoxFit.cover);
-                          } else if (eventsFile.fileExt == 'image'  &&
-                              eventsFile.thumbnail.isNotEmpty) {
-                            return CachedNetworkImage(
-                                errorWidget: (context, url, error) =>
-                                    Center(child: Text('No Image/Video Available')),
-                                placeholder: (context, url) => Center(
-                                        child: Text(
-                                      'Loading',
-                                      style: TextStyle(color: Colors.black),
-                                    )),
-                                imageUrl:
-                                    'https://www.batnf.net/${eventsFile.fileUrl}',
-                                fit: BoxFit.cover);
-                          } return Videos(thumbnailUrl: eventsFile.thumbnail, videoUrl: eventsFile.fileUrl,);
-                        }).toList()),
-                  ),
+                        MaterialButton(
+                          onPressed: () => _controller.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowRight),
+                        ),
+                        Text('Next'),
+                      ],
+                    )
+                  ],
                 ),
               ),
-
+              
               //Event Name
               Container(
                 margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),

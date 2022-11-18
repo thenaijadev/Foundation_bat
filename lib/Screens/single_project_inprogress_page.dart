@@ -18,6 +18,8 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
+  
+  final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,39 +42,64 @@ class _ProgressDetailsState extends State<ProgressDetails> {
               //Project Image
               Container(
                 margin: EdgeInsets.only(left: 25, right: 25),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                        padEnds: false,
-                        autoPlayInterval: Duration(seconds: 10),
-                        height: 265,
-                        viewportFraction: 0.98,
-                        enableInfiniteScroll: false,
-                        // autoPlay: true
-                      ),
-                      items: widget.singleProgress.files!.map((inprogressFile) {
-                        if (inprogressFile.fileExt == '') {
-                          return CachedNetworkImage(
-                              imageUrl:
-                                  'https://www.batnf.net/${inprogressFile.thumbnail}',
-                              fit: BoxFit.cover);
-                        } else if (inprogressFile.fileExt == 'image' &&
-                            inprogressFile.thumbnail.isNotEmpty) {
-                          return CachedNetworkImage(
-                              errorWidget: (context, url, error) =>
-                                  Center(child: Text('No Image Available')),
-                              placeholder: (context, url) =>
-                                  Center(child: CircularProgressIndicator()),
-                              imageUrl:
-                                  'https://www.batnf.net/${inprogressFile.fileUrl}',
-                              fit: BoxFit.cover);
-                        }
-                        return Videos(
-                          thumbnailUrl: inprogressFile.thumbnail,
-                          videoUrl: inprogressFile.fileUrl,
-                        );
-                      }).toList()),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CarouselSlider(
+                          carouselController: _controller,
+                          options: CarouselOptions(
+                            padEnds: false,
+                            autoPlayInterval: Duration(seconds: 10),
+                            height: 265,
+                            viewportFraction: 1.0,
+                            enableInfiniteScroll: false,
+                            // autoPlay: true
+                          ),
+                          items: widget.singleProgress.files!.map((inprogressFile) {
+                            if (inprogressFile.fileExt == '') {
+                              return CachedNetworkImage(
+                                  imageUrl:
+                                      'https://www.batnf.net/${inprogressFile.thumbnail}',
+                                  fit: BoxFit.cover);
+                            } else if (inprogressFile.fileExt == 'image' &&
+                                inprogressFile.thumbnail.isNotEmpty) {
+                              return CachedNetworkImage(
+                                  errorWidget: (context, url, error) =>
+                                      Center(child: Text('No Image Available')),
+                                  placeholder: (context, url) =>
+                                      Center(child: CircularProgressIndicator()),
+                                  imageUrl:
+                                      'https://www.batnf.net/${inprogressFile.fileUrl}',
+                                  fit: BoxFit.cover);
+                            }
+                            return Videos(
+                              thumbnailUrl: inprogressFile.thumbnail,
+                              videoUrl: inprogressFile.fileUrl,
+                            );
+                          }).toList()),
+                    ),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('previous'),
+                        MaterialButton(
+                          onPressed: () => _controller.previousPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowLeft),
+                        ),
+                        MaterialButton(
+                          onPressed: () => _controller.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.linear),
+                          child: Icon(FontAwesomeIcons.arrowRight),
+                        ),
+                        Text('Next')
+                      ],
+                    )
+                  ],
                 ),
               ),
 
