@@ -84,10 +84,8 @@ class _EventDetailsState extends State<EventDetails> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           elevation: 0,
           leading: BackButton(color: kBackground),
         ),
@@ -102,6 +100,7 @@ class _EventDetailsState extends State<EventDetails> {
                 child: Column(
                   children: [
                     ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
                       child: CarouselSlider(
             carouselController: _controller,
                           options: CarouselOptions(

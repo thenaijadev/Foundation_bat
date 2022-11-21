@@ -65,7 +65,14 @@ const kSigningtextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kTextboxhintstyle = TextStyle(
-    color: Colors.white,
+    color: Colors.white54,
+    fontStyle: FontStyle.normal,
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontWeight: FontWeight.w400);
+
+const kSearchboxhintstyle = TextStyle(
+    color: Colors.black,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -77,12 +84,14 @@ const kButtontextstyle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16.0,
     fontStyle: FontStyle.normal);
+
 const kSeeallstyle = TextStyle(
     color: Colors.blue,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: FontWeight.w400);
+
 const kForgetpasswordstyle = TextStyle(
     color: Colors.white,
     fontStyle: FontStyle.normal,
@@ -112,7 +121,7 @@ const kBodyTextStyle =
 
 const kLocationTextStyle =
     TextStyle(
-    color: Colors.white,
+    color: Colors.white54,
       fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400);
 
 const kAboutTextStyle =

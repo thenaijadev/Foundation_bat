@@ -184,6 +184,12 @@ class _SignInState extends State<SignIn> {
           width: double.maxFinite,
           height: double.maxFinite,
           ),
+          Container(
+            color: Colors.black.withOpacity(0.46),
+            height: double.maxFinite,
+            width: double.maxFinite,
+
+          ),
           Form(
               key: formKey,
               child: ListView(

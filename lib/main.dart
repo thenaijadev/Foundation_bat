@@ -62,59 +62,88 @@ class MyApp extends StatelessWidget {
   const MyApp(this.autoLogin, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => EventProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => NewsProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => InprogressProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CompletedProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => PendingProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ThemeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => Screens(),
-        ),
-      ],
-      child: Builder(builder: (context){
-        final themeProvider = Provider.of<ThemeProvider>(context);
-        return MaterialApp(
-          title: 'Batnf',
-          themeMode: themeProvider.themeMode,
-          theme: MyThemes.lightTheme,
-          darkTheme: MyThemes.darkTheme,
-          debugShowCheckedModeBanner: false,
-          initialRoute: !autoLogin ? LandingPage.id : ReuseableBottomBar.id,
-          routes: {
-            LandingPage.id: (context) => const LandingPage(),
-            // WelcomePage.id: (context) => WelcomePage(),
-            Promotion.id: (context) => Promotion(),
-            SignIn.id: (context) => SignIn(),
-            HomePage.id: (context) => HomePage(),
-            SignUp.id: (context) => SignUp(),
-            // ForgetPassword.id: (context) => ForgetPassword(),
-            ResetPassword.id: (context) => ResetPassword(),
-            ResetCompleted.id: (context) => ResetCompleted(),
-            EventCenter.id: (context) => EventCenter(),
-            ProjectPage.id: (context) => ProjectPage(),
-            // InprogressPage.id: (context) => InprogressPage(),
-            // CompletedPage.id: (context) => CompletedPage(),
-            // PendingPage.id: (context) => PendingPage(),
-            ReuseableBottomBar.id: (context) => ReuseableBottomBar(),
-            News.id: (context) => News(),
-          },
+    return WillPopScope(
+      onWillPop: ()  => onBackButtonPressed(context),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => EventProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => NewsProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => InprogressProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CompletedProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => PendingProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ThemeProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Screens(),
+          ),
+        ],
+        child: Builder(builder: (context) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            title: 'Batnf',
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            debugShowCheckedModeBanner: false,
+            initialRoute: !autoLogin ? LandingPage.id : ReuseableBottomBar.id,
+            routes: {
+              LandingPage.id: (context) => const LandingPage(),
+              // WelcomePage.id: (context) => WelcomePage(),
+              Promotion.id: (context) => Promotion(),
+              SignIn.id: (context) => SignIn(),
+              HomePage.id: (context) => HomePage(),
+              SignUp.id: (context) => SignUp(),
+              // ForgetPassword.id: (context) => ForgetPassword(),
+              ResetPassword.id: (context) => ResetPassword(),
+              ResetCompleted.id: (context) => ResetCompleted(),
+              EventCenter.id: (context) => EventCenter(),
+              ProjectPage.id: (context) => ProjectPage(),
+              // InprogressPage.id: (context) => InprogressPage(),
+              // CompletedPage.id: (context) => CompletedPage(),
+              // PendingPage.id: (context) => PendingPage(),
+              ReuseableBottomBar.id: (context) => ReuseableBottomBar(),
+              News.id: (context) => News(),
+            },
+          );
+        }),
+      ),
+    );
+  }
+
+  Future<bool> onBackButtonPressed(BuildContext context) async {
+    bool? exitApp = await showDialog(
+      context: context,
+      builder: ((BuildContext context) {
+        return AlertDialog(
+          title: Text('Exist App'),
+          content: Text('Do you want to Exit app ?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text('No')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text('Yes')),
+          ],
         );
       }),
     );
+    return exitApp ?? false;
   }
+
 }

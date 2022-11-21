@@ -225,6 +225,11 @@ class _SignUpState extends State<SignUp> {
             width: double.maxFinite,
             height: double.maxFinite,
           ),
+          Container(
+            color: Colors.black.withOpacity(0.46),
+            height: double.maxFinite,
+            width: double.maxFinite,
+          ),
           Form(
               key: _formKey,
               child: ListView(
@@ -259,7 +264,7 @@ class _SignUpState extends State<SignUp> {
                       child: ReuseableTextField(
                         keyboard: TextInputType.name,
                         cardChild: Icon(FontAwesomeIcons.user,
-                            size: 15, color: kBackground),
+                            size: 15, color: Colors.black),
                         textcontroller: _firstnameTextController,
                         label: "First Name",
                         validator: (val) {
@@ -280,7 +285,7 @@ class _SignUpState extends State<SignUp> {
                       child: ReuseableTextField(
                         keyboard: TextInputType.name,
                         cardChild: Icon(FontAwesomeIcons.user,
-                            size: 15, color: kBackground),
+                            size: 15, color: Colors.black),
                         textcontroller: _lastnameTextController,
                         label: "Last Name",
                         validator: (val) {
@@ -301,7 +306,7 @@ class _SignUpState extends State<SignUp> {
                       child: ReuseableTextField(
                         keyboard: TextInputType.emailAddress,
                         cardChild: Icon(FontAwesomeIcons.envelope,
-                            size: 15, color: kBackground),
+                            size: 15, color: Colors.black),
                         textcontroller: _emailTextController,
                         label: "Email",
                         validator: (val) {
@@ -341,7 +346,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           prefixIcon:
-                              Icon(Icons.lock, size: 15, color:kBackground),
+                              Icon(Icons.lock, size: 15, color: Colors.black),
                           suffixIcon: IconButton(
                             onPressed: _togglePasswordView,
                             icon: Icon(
@@ -384,7 +389,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           prefixIcon:
-                              Icon(Icons.lock, size: 15, color: kBackground),
+                              Icon(Icons.lock, size: 15, color: Colors.black),
                           suffixIcon: IconButton(
                             onPressed: _togglePasswordView,
                             icon: Icon(
@@ -467,7 +472,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           prefixIcon: Icon(FontAwesomeIcons.calendarAlt,
-                              size: 15, color: kBackground),
+                              size: 15, color: Colors.black),
                         ),
                       ),
                     ),

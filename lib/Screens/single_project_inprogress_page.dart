@@ -18,14 +18,12 @@ class ProgressDetails extends StatefulWidget {
 }
 
 class _ProgressDetailsState extends State<ProgressDetails> {
-  
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        extendBodyBehindAppBar: true,
         extendBody: true,
         appBar: AppBar(
           leading: BackButton(
@@ -45,7 +43,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                 child: Column(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(5),
                       child: CarouselSlider(
                           carouselController: _controller,
                           options: CarouselOptions(
@@ -56,7 +54,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                             enableInfiniteScroll: false,
                             // autoPlay: true
                           ),
-                          items: widget.singleProgress.files!.map((inprogressFile) {
+                          items: widget.singleProgress.files!
+                              .map((inprogressFile) {
                             if (inprogressFile.fileExt == '') {
                               return CachedNetworkImage(
                                   imageUrl:
@@ -67,8 +66,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                               return CachedNetworkImage(
                                   errorWidget: (context, url, error) =>
                                       Center(child: Text('No Image Available')),
-                                  placeholder: (context, url) =>
-                                      Center(child: CircularProgressIndicator()),
+                                  placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator()),
                                   imageUrl:
                                       'https://www.batnf.net/${inprogressFile.fileUrl}',
                                   fit: BoxFit.cover);
@@ -79,7 +78,6 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                             );
                           }).toList()),
                     ),
-                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -105,7 +103,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
               //Project Title
               Container(
-                margin: EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
+                margin:
+                    EdgeInsets.only(top: 20, left: 30, bottom: 20, right: 30),
                 child: Text(
                   widget.singleProgress.projectTitle,
                   style: kSingletitle,
@@ -131,35 +130,39 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                         color: kIcon,
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Text.rich(
-                            selectionColor: Theme.of(context).primaryColor,
-                            TextSpan(
-                                text: 'Started: ',
-                                style: kSinglestart,
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        widget.singleProgress.projectStartDate,
-                                    style: kStartdetail,
-                                  )
-                                ])),
-                        Text.rich(
-                            selectionColor: Theme.of(context).primaryColor,
-                            TextSpan(
-                                text: 'To be Completed: ',
-                                style: kSinglestart,
-                                children: [
-                                  TextSpan(
-                                    text: widget.singleProgress.projectEndDate,
-                                    style: kStartdetail,
-                                  )
-                                ])),
-                      ],
+                    Expanded(
+                      flex: 9,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text.rich(
+                              selectionColor: Theme.of(context).primaryColor,
+                              TextSpan(
+                                  text: 'Started: ',
+                                  style: kSinglestart,
+                                  children: [
+                                    TextSpan(
+                                      text: widget
+                                          .singleProgress.projectStartDate,
+                                      style: kStartdetail,
+                                    )
+                                  ])),
+                          Text.rich(
+                              selectionColor: Theme.of(context).primaryColor,
+                              TextSpan(
+                                  text: 'To be Completed: ',
+                                  style: kSinglestart,
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          widget.singleProgress.projectEndDate,
+                                      style: kStartdetail,
+                                    )
+                                  ])),
+                        ],
+                      ),
                     )
                   ],
                 ),

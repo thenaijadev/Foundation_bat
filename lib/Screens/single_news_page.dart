@@ -42,7 +42,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                 child: Column(
                   children: [
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                         child: CarouselSlider(
                           
                             carouselController: _controller,
