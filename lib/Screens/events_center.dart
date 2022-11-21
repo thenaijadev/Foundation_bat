@@ -70,9 +70,9 @@ class _EventCenterState extends State<EventCenter> {
         : 'Light Theme';
 
     EventProvider provider = Provider.of<EventProvider>(context);
-    return WillPopScope(
-      onWillPop: () async => onBackButtonPressed(context),
-      child: SafeArea(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async => onBackButtonPressed(context),
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
@@ -233,7 +233,7 @@ class _EventCenterState extends State<EventCenter> {
             children: [
               // Container for search box etc
 
-              if (provider.allEvents != null && provider.allEvents!.isNotEmpty)
+              if (provider.allEvents != null)
                 Container(
                   margin:
                       EdgeInsets.only(left: 30, right: 30, bottom: 21, top: 15),

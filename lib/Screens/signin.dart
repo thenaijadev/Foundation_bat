@@ -178,208 +178,221 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
         children: [
-          Image.asset('assets/onboarding4.png',
+          Image.asset('assets/Home Page Pix.png',
           fit: BoxFit.cover,
           width: double.maxFinite,
           height: double.maxFinite,
           ),
+          // Container(
+          //   color: Colors.black.withOpacity(0.46),
+          //   height: double.maxFinite,
+          //   width: double.maxFinite,
+
+          // ),
           Container(
-            color: Colors.black.withOpacity(0.46),
-            height: double.maxFinite,
-            width: double.maxFinite,
-
-          ),
-          Form(
-              key: formKey,
-              child: ListView(
-                children: [
-                  // Logo
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          bottom: 10.0, top: 50.0, left: 130.0, right: 130.0),
-                      child: Image.asset(
-                        'assets/logo.png',
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.38),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            height: 350,
+            child: Form(
+                key: formKey,
+                child: ListView(
+                  children: [
+                    // Logo
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            bottom: 10.0, top: 5.0, left: 130.0, right: 130.0),
+                        child: Image.asset(
+                          'assets/logo.png',
+                          height: 85,
+                        ),
                       ),
                     ),
-                  ),
-
-                  // SignIn Label
-                  Padding(
-                    padding: const EdgeInsets.only(top: 35.0, left: 30.0),
-                    child: Text(
-                      'Sign in',
-                      textAlign: TextAlign.left,
-                      style: kSigningtextstyle,
-                    ),
-                  ),
-
-                  //Request for User Email
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 30.0, top: 20.0, right: 30.0, bottom: 20.0),
-                    child: SizedBox(
-                      height: 65,
-                      child: ReuseableTextField(
-                        keyboard: TextInputType.emailAddress,
-                        validator: (val) {
-                          return val!.isEmpty
-                              ? "Email can not be empty"
-                              : null;
-                        },
-                        cardChild: Icon(FontAwesomeIcons.solidEnvelope,
-                            size: 15, color: Colors.black),
-                        textcontroller: emailController,
-                        label: "Email",
-                      ),
-                    ),
-                  ),
-
-                  //Request for User Password
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 30.0, right: 30.0, bottom: 21.0),
-                    child: SizedBox(
-                      height: 65,
-                      child: TextFormField(
-                        style: TextStyle(color: Colors.white),
-                        validator: (val) {
-                          return val!.isEmpty ? "Password is Required" : null;
-                        },
-                        obscureText: hidepassword,
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(top: 2),
-                          hintText: "password",
-                          hintStyle: kTextboxhintstyle,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(45.0),
-                            ),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: kTextfieldborderColor,
-                              width: 2.0,
-                            ),
-                          ),
-                          prefixIcon: Icon(Icons.lock,
+          
+                    // SignIn Label
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 35.0, left: 30.0),
+                    //   child: Text(
+                    //     'Sign in',
+                    //     textAlign: TextAlign.left,
+                    //     style: kSigningtextstyle,
+                    //   ),
+                    // ),
+          
+                    //Request for User Email
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 60.0, top: 20.0, right: 60.0, bottom: 10.0),
+                      child: SizedBox(
+                        height: 65,
+                        child: ReuseableTextField(
+                          keyboard: TextInputType.emailAddress,
+                          validator: (val) {
+                            return val!.isEmpty
+                                ? "Email can not be empty"
+                                : null;
+                          },
+                          cardChild: Icon(FontAwesomeIcons.solidEnvelope,
                               size: 15, color: Colors.black),
-                          suffixIcon: IconButton(
-                            onPressed: _togglePasswordView,
-                            icon: Padding(
-                              padding: const EdgeInsets.only(right: 14.15),
-                              child: Icon(
-                                !hidepassword
-                                    ? FontAwesomeIcons.eye
-                                    : FontAwesomeIcons.eyeSlash,
-                                size: 19.0,
-                                color: Colors.white,
+                          textcontroller: emailController,
+                          label: "Email",
+                        ),
+                      ),
+                    ),
+          
+                    //Request for User Password
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 60.0, right: 60.0, bottom: 21.0),
+                      child: SizedBox(
+                        height: 65,
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.black),
+                          validator: (val) {
+                            return val!.isEmpty ? "Password is Required" : null;
+                          },
+                          obscureText: hidepassword,
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(top: 2),
+                            hintText: "password",
+                            hintStyle: kTextboxhintstyle,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(45.0),
+                              ),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: kTextfieldborderColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            prefixIcon: Icon(Icons.lock,
+                                size: 15, color: Colors.black),
+                            suffixIcon: IconButton(
+                              onPressed: _togglePasswordView,
+                              icon: Padding(
+                                padding: const EdgeInsets.only(right: 14.15),
+                                child: Icon(
+                                  !hidepassword
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 19.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-
-                  //Sing In Button
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 6.0, left: 30, right: 30, bottom: 35.0),
-                    child: MaterialButton(
-                      splashColor: kBackground,
-                      hoverColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(45.0),
-                      ),
-                      height: 45.0,
-                      color: Color.fromARGB(255, 8, 51, 121),
-                      onPressed: () async {
-                        final SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                        sharedPreferences.setString(
-                            'email', emailController.text);
-                        if (formKey.currentState!.validate() && !loading) {
-                          setState(() {
-                            loading = true;
-                          });
-                          login(
-                              email: emailController.text,
-                              password: passwordController.text);
-                          activate();
-                        }
-                      },
-                      child: loading
-                          ? CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation(Colors.white))
-                          : Text(
-                              'Sign In',
-                              textAlign: TextAlign.center,
-                              style: kButtontextstyle,
-                            ),
-                    ),
-                  ),
-
-                  //Forget Password Request
-                  Center(
-                    child: TextButton(
-                        onPressed: () {
-                          if (!loading1) {
+          
+                    //Sing In Button
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 6.0, left: 60, right:60, bottom: 5.0),
+                      child: MaterialButton(
+                        splashColor: kBackground,
+                        hoverColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45.0),
+                        ),
+                        height: 45.0,
+                        color: Colors.black.withOpacity(0.26),
+                        // Color.fromARGB(255, 8, 51, 121),
+                        onPressed: () async {
+                          final SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.setString(
+                              'email', emailController.text);
+                          if (formKey.currentState!.validate() && !loading) {
                             setState(() {
-                              loading1 = true;
+                              loading = true;
                             });
-                            forgetpassword(email: emailController.text);
+                            login(
+                                email: emailController.text,
+                                password: passwordController.text);
+                            activate();
                           }
                         },
-                        child: loading1
+                        child: loading
                             ? CircularProgressIndicator(
                                 valueColor:
-                                    AlwaysStoppedAnimation(Colors.blue))
+                                    AlwaysStoppedAnimation(Colors.white))
                             : Text(
-                                'Forgot Password?',
-                                textAlign: TextAlign.right,
-                                style: kForgetpasswordstyle,
-                              )),
-                  ),
-
-                  // Sign Up Redirection
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 75.0,
-                      top: 110,
-                    ),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, SignUp.id);
-                        },
-                        child: RichText(
-                            text: TextSpan(
-                                text: "Don't have an account? ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontStyle: FontStyle.normal,
-                                    fontFamily: 'Inter',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                              TextSpan(
-                                  text: 'Sign Up',
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 8, 51, 121),
-                                      fontFamily: 'Inter',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600))
-                            ])),
+                                'Sign In',
+                                textAlign: TextAlign.center,
+                                style: kButtontextstyle,
+                              ),
                       ),
                     ),
-                  ),
-                ],
-              )
-              ),
+          
+                    //Forget Password Request
+                    Center(
+                      child: TextButton(
+                          onPressed: () {
+                            if (!loading1) {
+                              setState(() {
+                                loading1 = true;
+                              });
+                              forgetpassword(email: emailController.text);
+                            }
+                          },
+                          child: loading1
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.blue))
+                              : Text(
+                                  'Forgot Password?',
+                                  textAlign: TextAlign.right,
+                                  style: kForgetpasswordstyle,
+                                )),
+                    ),
+          
+                    // Sign Up Redirection
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 10.0,
+                        top: 10,
+                      ),
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, SignUp.id);
+                          },
+                          child: RichText(
+                              text: TextSpan(
+                                  text: "Don't have an account? ",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                TextSpan(
+                                    text: 'Sign Up',
+                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 8, 51, 121),
+                                        fontFamily: 'Inter',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600))
+                              ])),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+                ),
+          ),
         ],
       ),
     );

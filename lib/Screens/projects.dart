@@ -82,9 +82,9 @@ class _ProjectPageState extends State<ProjectPage> {
     // PendingProvider pendingProvider = Provider.of<PendingProvider>(context);
     InprogressProvider inprogressProvider =
         Provider.of<InprogressProvider>(context);
-    return WillPopScope(
-      onWillPop: () async => onBackButtonPressed(context),
-      child: SafeArea(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async => onBackButtonPressed(context),
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(

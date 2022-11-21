@@ -72,7 +72,7 @@ const kTextboxhintstyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kSearchboxhintstyle = TextStyle(
-    color: Colors.black,
+    // color: Colors.black,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -93,7 +93,7 @@ const kSeeallstyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kForgetpasswordstyle = TextStyle(
-    color: Colors.white,
+    color: Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,
@@ -121,7 +121,7 @@ const kBodyTextStyle =
 
 const kLocationTextStyle =
     TextStyle(
-    color: Colors.white54,
+    color: Colors.black,
       fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.w400);
 
 const kAboutTextStyle =

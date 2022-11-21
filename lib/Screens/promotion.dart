@@ -50,9 +50,9 @@ class _PromotionState extends State<Promotion> {
      final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? 'Dark Theme'
         : 'Light Theme';
-    return WillPopScope(
-      onWillPop: () async => onBackButtonPressed(context),
-      child: SafeArea(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () async => onBackButtonPressed(context),
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
