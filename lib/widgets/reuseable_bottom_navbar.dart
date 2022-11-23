@@ -52,7 +52,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         // Drawer
         drawer: Drawer(
           width: 250,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           child: ListView(
             // ignore: prefer_const_literals_to_create_immutables
             children: [
@@ -175,7 +175,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
                     offset: Offset(0, 7),
                     blurRadius: 15.0),
               ],
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(360)),
           child: 
           NavigationBarTheme(
@@ -261,69 +261,6 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         //       ]),
         // ),
      ) );
-
-//          Scaffold(
-//         // body: screen[index],
-//         // backgroundColor: Colors.amber.withOpacity(0.99),
-
-//         bottomNavigationBar: Container(
-//           margin: EdgeInsets.only(bottom: 15, right: 10, left: 10),
-//            height: 60,
-//         decoration: BoxDecoration(
-//           boxShadow: [
-//             BoxShadow(
-//                 color: kSignupbuttonColor.withOpacity(0.6),
-//                 offset: Offset(0, 7),
-//                 blurRadius: 15.0),
-//           ],
-//           color: Theme.of(context).primaryColor,
-//           borderRadius: BorderRadius.circular(360)
-//         ),
-//           child: 
-          // NavigationBarTheme(
-          //     data: NavigationBarThemeData(
-          //   backgroundColor: Colors.transparent,
-          //   // Theme.of(context).primaryColor,
-          //   // height: 50,
-          //   indicatorColor: Colors.blue),
-          //     // ignore: prefer_const_literals_to_create_immutables
-          //     child: NavigationBar(
-          // animationDuration: Duration(seconds: 3),
-          // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          // selectedIndex: index,
-          // onDestinationSelected: (index) {
-          //   setState(() {
-          //     this.index = index;
-          //     screen;
-          //   });
-          // },
-          // // ignore: prefer_const_literals_to_create_immutables
-          // destinations: [
-          //   NavigationDestination(
-          //       icon: Image.asset('assets/icons/home.png'),
-          //       // icon: Icon(FontAwesomeIcons.home),
-          //       label: 'Home'),
-          //   NavigationDestination(
-          //       icon: Image.asset('assets/icons/Calendar.png'),
-          //       // icon: Icon(FontAwesomeIcons.calendarAlt),
-          //       label: 'Events'),
-          //   NavigationDestination(
-          //       icon: Image.asset('assets/icons/game.png'), label: 'Games'),
-          //   NavigationDestination(
-          //       icon: Image.asset('assets/icons/pro.png'),
-          //       // Icon(FontAwesomeIcons.tasks),
-          //       label: 'projects'),
-          //   NavigationDestination(
-          //       icon: Image.asset('assets/icons/news.svg'),
-          //       // icon: Icon(FontAwesomeIcons.newspaper),
-          //       label: 'News'),
-          // ],
-          //     ),
-          //   ),
-
-// ),
-
-//     );
 
 
 }

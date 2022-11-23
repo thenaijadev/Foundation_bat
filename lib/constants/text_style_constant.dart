@@ -65,7 +65,7 @@ const kSigningtextstyle = TextStyle(
     fontStyle: FontStyle.normal);
 
 const kTextboxhintstyle = TextStyle(
-    color: Colors.white54,
+    color: Colors.black,
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 16,
@@ -100,7 +100,7 @@ const kForgetpasswordstyle = TextStyle(
     fontWeight: FontWeight.w400);
 
 const kPageHeader = TextStyle(
-    color: Color.fromARGB(255, 8, 51, 121),
+    color:Color.fromARGB(255, 8, 51, 121),
     fontStyle: FontStyle.normal,
     fontFamily: 'Inter',
     fontSize: 14,

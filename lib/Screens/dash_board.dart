@@ -69,9 +69,6 @@ class _HomePageState extends State<HomePage> {
     }
     if (mounted) setState(() {});
   }
-  
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,13 +80,13 @@ class _HomePageState extends State<HomePage> {
     InprogressProvider inprogressProvider =
         Provider.of<InprogressProvider>(context);
     return WillPopScope(
-      onWillPop: () =>  onBackButtonPressed(context),
+      onWillPop: () => onBackButtonPressed(context),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
               elevation: 0.0,
               toolbarHeight: 60,
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: Center(
                   child: Text('Home',
                       style: TextStyle(
@@ -117,12 +114,11 @@ class _HomePageState extends State<HomePage> {
                       FontAwesomeIcons.bars,
                       color: Colors.blue,
                     ));
-              })
-              ),
+              })),
           // Drawer
           drawer: Drawer(
             width: 250,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             child: ListView(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
@@ -134,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 50,
                 ),
-    
+
                 //Header
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 20),
@@ -159,11 +155,11 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-    
+
                 SizedBox(
                   height: 50,
                 ),
-    
+
                 // Change  Theme Option
                 Padding(
                   padding: const EdgeInsets.only(left: 30, top: 20),
@@ -176,12 +172,12 @@ class _HomePageState extends State<HomePage> {
                   child: ListTile(
                       title: Text(
                         text,
-                        style:
-                            TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                        style: TextStyle(
+                            fontSize: 12, fontStyle: FontStyle.italic),
                       ),
                       leading: ChangeThemeButtonWidget()),
                 ),
-    
+
                 // User Profile
                 // InkWell(
                 //   onTap: () {},
@@ -194,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                 //       leading: Icon(FontAwesomeIcons.userAlt,
                 //           color: Colors.lightBlue)),
                 // ),
-    
+
                 //Change User Password
                 InkWell(
                   onTap: () {
@@ -204,28 +200,28 @@ class _HomePageState extends State<HomePage> {
                   child: ListTile(
                       title: Text(
                         'Change Password',
-                        style:
-                            TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                        style: TextStyle(
+                            fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.userLock,
                           color: Colors.lightBlue)),
                 ),
-    
+
                 //Logout option
                 InkWell(
                   onTap: () async {
                     final SharedPreferences sharedPreferences =
                         await SharedPreferences.getInstance();
                     sharedPreferences.setBool('autoLogin', false);
-    
+
                     Navigator.pushNamedAndRemoveUntil(
                         context, SignIn.id, (Route<dynamic> route) => false);
                   },
                   child: ListTile(
                       title: Text(
                         'LogOut',
-                        style:
-                            TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                        style: TextStyle(
+                            fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.signOutAlt,
                           color: Colors.lightBlue)),
@@ -233,7 +229,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          
+
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,23 +334,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Image.asset(
-                          'assets/Ads3.png',
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.fitWidth,
-                        ),
                       ],
                     ),
                   ),
                 ),
-    
+
                 // InProject
                 if (inprogressProvider.allInprogressProjects != null &&
                     inprogressProvider.allInprogressProjects!.isNotEmpty)
                   Builder(builder: (context) {
                     //I used the builder so i can do this
-                    InprogressModel inprogress = inprogressProvider.allInprogressProjects![0];
+                    InprogressModel inprogress =
+                        inprogressProvider.allInprogressProjects![0];
                     return SizedBox(
                       height: 150,
                       child: Column(
@@ -369,7 +360,13 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'Projects',
-                                  style: kPageHeader,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      // Color.fromARGB(255, 8, 51, 121),
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -404,20 +401,20 @@ class _HomePageState extends State<HomePage> {
                                       height: 100,
                                       child: inprogress.files!.first.fileExt ==
                                                   'image/png' &&
-                                              inprogress
-                                                  .files!.first.fileUrl.isNotEmpty
+                                              inprogress.files!.first.fileUrl
+                                                  .isNotEmpty
                                           ? ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -435,14 +432,14 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -458,19 +455,27 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                     ),
                                   ),
-    
+
                                   //Details
                                   Expanded(
                                     flex: 4,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: [
                                         Text(
                                           inprogress.projectTitle,
-                                          style: kNewsSubHeader,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontStyle: FontStyle.normal,
+                                              fontFamily: 'Inter',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold),
+                                          // kNewsSubHeader,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                           textAlign: TextAlign.left,
@@ -500,202 +505,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   }),
-    
-                // SizedBox(
-                //   height: 150,
-                //   width: 365,
-                //   child: Column(
-                //     children: [
-                //       // Projects label
-                //       Padding(
-                //         padding: const EdgeInsets.only(
-                //           left: 15.0,
-                //           right: 15.0,
-                //         ),
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //           children: [
-                //             Text(
-                //               'Projects',
-                //               style: kPageHeader,
-                //             ),
-                //             TextButton(
-                //               onPressed: () {
-                //                 Navigator.pushNamed(context, ProjectPage.id);
-                //                 // Navigator.push(
-                //                 //     context,
-                //                 //     MaterialPageRoute(
-                //                 //         builder: (context) => ProjectPage()));
-                //               },
-                //               child: Text(
-                //                 'See All',
-                //                 style: kForgetpasswordstyle,
-                //               ),
-                //             )
-                //           ],
-                //         ),
-                //       ),
-                //       Expanded(
-                //         child: inprogressProvider.allInprogressProjects == null
-                //             ? Center(
-                //                 child: CircularProgressIndicator(),
-                //               )
-                //             : inprogressProvider.allInprogressProjects!.isEmpty
-                //                 ? Center(
-                //                     child: Image.asset('assets/noitem.png.gif'),
-                //                   )
-                //                 : ListView.builder(
-                //                     scrollDirection: Axis.horizontal,
-                //                     itemCount: inprogressProvider
-                //                         .allInprogressProjects!.length,
-                //                     itemBuilder: ((context, index) {
-                //                       InprogressModel inprogress =
-                //                           inprogressProvider
-                //                               .allInprogressProjects![index];
-                //                       return Padding(
-                //                         padding: const EdgeInsets.only(
-                //                             left: 15.0, right: 15.0),
-                //                         child: GestureDetector(
-                //                           onTap: () {
-                //                             Navigator.push(
-                //                                 context,
-                //                                 MaterialPageRoute(
-                //                                     builder: (context) =>
-                //                                         ProgressDetails(
-                //                                             inprogress)));
-                //                           },
-                //                           child: Container(
-                //                             color: Colors.transparent,
-                //                             // width: 375,
-                //                             child: Row(
-                //                               children: [
-                //                                 //Images and Videos for Inprogress Projects
-                //                                 Container(
-                //                                   margin: EdgeInsets.only(
-                //                                       right: 15.0),
-                //                                   height: 100,
-                //                                   width: 180,
-                //                                   child:
-                //                                       inprogress.files!.first
-                //                                                       .fileExt ==
-                //                                                   'image/jpeg' &&
-                //                                               inprogress
-                //                                                   .files!
-                //                                                   .first
-                //                                                   .fileUrl
-                //                                                   .isNotEmpty
-                //                                           ? ClipRRect(
-                //                                               borderRadius:
-                //                                                   BorderRadius
-                //                                                       .circular(
-                //                                                           18),
-                //                                               child:
-                //                                                   CachedNetworkImage(
-                //                                                       errorWidget: (context,
-                //                                                               url,
-                //                                                               error) =>
-                //                                                           Center(
-                //                                                             child:
-                //                                                                 Text(
-                //                                                               'Loading',
-                //                                                               style:
-                //                                                                   TextStyle(color: Colors.black),
-                //                                                             ),
-                //                                                           ),
-                //                                                       placeholder:
-                //                                                           (context, url) =>
-                //                                                               Center(
-                //                                                                 child: Text(
-                //                                                                   'Loading',
-                //                                                                   style: TextStyle(color: Colors.black),
-                //                                                                 ),
-                //                                                               ),
-                //                                                       imageUrl:
-                //                                                           'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
-                //                                                       fit: BoxFit
-                //                                                           .cover),
-                //                                             )
-                //                                           : ClipRRect(
-                //                                               borderRadius:
-                //                                                   BorderRadius
-                //                                                       .circular(
-                //                                                           18),
-                //                                               child:
-                //                                                   CachedNetworkImage(
-                //                                                       errorWidget: (context,
-                //                                                               url,
-                //                                                               error) =>
-                //                                                           Center(
-                //                                                             child:
-                //                                                                 Text(
-                //                                                               'Loading',
-                //                                                               style:
-                //                                                                   TextStyle(color: Colors.black),
-                //                                                             ),
-                //                                                           ),
-                //                                                       placeholder:
-                //                                                           (context, url) =>
-                //                                                               Center(
-                //                                                                 child: Text(
-                //                                                                   'Loading',
-                //                                                                   style: TextStyle(color: Colors.black),
-                //                                                                 ),
-                //                                                               ),
-                //                                                       imageUrl:
-                //                                                           'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
-                //                                                       fit: BoxFit
-                //                                                           .cover),
-                //                                             ),
-                //                                 ),
-    
-                //                                 //Details
-                //                                 Container(
-                //                                   // height: 100,
-                //                                   width: 180,
-                //                                   child: Column(
-                //                                     mainAxisAlignment:
-                //                                         MainAxisAlignment
-                //                                             .spaceEvenly,
-                //                                     // ignore: prefer_const_literals_to_create_immutables
-                //                                     children: [
-                //                                       Text(
-                //                                         inprogress.projectTitle,
-                //                                         style: kNewsSubHeader,
-                //                                         overflow:
-                //                                             TextOverflow.ellipsis,
-                //                                         maxLines: 1,
-                //                                       ),
-                //                                       Text(
-                //                                         inprogress
-                //                                             .projectDescription,
-                //                                         textAlign:
-                //                                             TextAlign.justify,
-                //                                         style: kNewsDateSTyle,
-                //                                         overflow:
-                //                                             TextOverflow.ellipsis,
-                //                                         maxLines: 4,
-                //                                       ),
-                //                                       Text(
-                //                                         inprogress
-                //                                             .projectStartDate,
-                //                                         textAlign: TextAlign.left,
-                //                                         style: kNewsDateSTyle,
-                //                                       )
-                //                                     ],
-                //                                   ),
-                //                                 )
-                //                               ],
-                //                             ),
-                //                           ),
-                //                         ),
-                //                       );
-                //                     }),
-                //                   ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-    
+
                 // Events
                 if (eventProvider.allEvents != null &&
                     eventProvider.allEvents!.isNotEmpty)
@@ -716,7 +526,12 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'Upcoming Events',
-                                  style: kPageHeader,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -738,7 +553,8 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => EventDetails(events)));
+                                        builder: (context) =>
+                                            EventDetails(events)));
                               },
                               child: Row(
                                 children: [
@@ -750,19 +566,20 @@ class _HomePageState extends State<HomePage> {
                                       height: 100,
                                       child: events.files!.first.fileExt ==
                                                   'image/png' &&
-                                              events.files!.first.fileUrl.isNotEmpty
+                                              events.files!.first.fileUrl
+                                                  .isNotEmpty
                                           ? ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -780,14 +597,14 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -803,19 +620,27 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                     ),
                                   ),
-    
+
                                   //Details
                                   Expanded(
                                     flex: 4,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: [
                                         Text(
                                           events.eventName,
-                                          style: kNewsSubHeader,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontStyle: FontStyle.normal,
+                                              fontFamily: 'Inter',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold),
+                                          // kNewsSubHeader,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                           textAlign: TextAlign.left,
@@ -845,7 +670,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   }),
-    
+
                 // SizedBox(
                 //   height: 150,
                 //   width: 365,
@@ -1035,11 +860,11 @@ class _HomePageState extends State<HomePage> {
                 //     ],
                 //   ),
                 // ),
-    
+
                 ///I commented your news section to write another.
                 ///Look at how it works and do thesame for other sections
                 ///
-    
+
                 if (newsProvider.allNews != null &&
                     newsProvider.allNews!.isNotEmpty)
                   Builder(builder: (context) {
@@ -1059,7 +884,13 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Text(
                                   'News',
-                                  style: kPageHeader,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700),
+                                  // kPageHeader,
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -1083,12 +914,13 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => NewsDetails(news)));
+                                        builder: (context) =>
+                                            NewsDetails(news)));
                               },
                               child: Row(
                                 children: [
                                   //Images
-    
+
                                   ///Notice i used expanded and gave them a flex property.
                                   ///The reason is to allow the image and the text occupy the entire screen
                                   ///unlike giving it a fixed with.
@@ -1106,19 +938,20 @@ class _HomePageState extends State<HomePage> {
                                       height: 100,
                                       child: news.files!.first.fileExt ==
                                                   'image/png' &&
-                                              news.files!.first.fileUrl.isNotEmpty
+                                              news.files!.first.fileUrl
+                                                  .isNotEmpty
                                           ? ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -1136,14 +969,14 @@ class _HomePageState extends State<HomePage> {
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                               child: CachedNetworkImage(
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Center(
-                                                            child: Icon(
-                                                              Icons.error,
-                                                              color: Colors.black,
-                                                            ),
-                                                          ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Center(
+                                                        child: Icon(
+                                                          Icons.error,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                         child: Text(
@@ -1159,19 +992,27 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                     ),
                                   ),
-    
+
                                   //Details
                                   Expanded(
                                     flex: 4,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       // ignore: prefer_const_literals_to_create_immutables
                                       children: [
                                         Text(
                                           news.title,
-                                          style: kNewsSubHeader,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontStyle: FontStyle.normal,
+                                              fontFamily: 'Inter',
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold), 
+                                          // kNewsSubHeader,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                           textAlign: TextAlign.left,
@@ -1201,12 +1042,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   }),
-    
+
                 ///this is where your former code begins.
                 ///the changes are not much but i didnt want to
                 ///delete your entire code. Just look at it and let me know.
                 ///
-    
+
                 // // News list header
                 // SizedBox(
                 //   height: 150,
@@ -1349,7 +1190,7 @@ class _HomePageState extends State<HomePage> {
                 //                                                           .cover),
                 //                                             ),
                 //                                 ),
-    
+
                 //                                 //Details
                 //                                 Container(
                 //                                   // height: 100,
@@ -1397,7 +1238,7 @@ class _HomePageState extends State<HomePage> {
                 //     ],
                 //   ),
                 // ),
-    
+
                 SizedBox(
                   height: 30,
                 ),
@@ -1408,7 +1249,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  
+
   Future<bool> onBackButtonPressed(BuildContext context) async {
     bool? exitApp = await showDialog(
       context: context,
@@ -1433,5 +1274,4 @@ class _HomePageState extends State<HomePage> {
     );
     return exitApp ?? false;
   }
-
 }

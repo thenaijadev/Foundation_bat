@@ -83,11 +83,12 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
-          leading: BackButton(color: kBackground),
+          leading: BackButton(color: Theme.of(context).hintColor,
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(

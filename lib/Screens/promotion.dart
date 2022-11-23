@@ -54,17 +54,17 @@ class _PromotionState extends State<Promotion> {
       child: WillPopScope(
         onWillPop: () async => onBackButtonPressed(context),
         child: Scaffold(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
               elevation: 0.0,
               toolbarHeight: 60,
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     
               // App Logo
               actions: [
                 Container(
                   margin: EdgeInsets.only(left: 24.0, top: 10, bottom: 10),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 40.0,
                   child: Image.asset(
                     'assets/logo.png',
@@ -73,7 +73,7 @@ class _PromotionState extends State<Promotion> {
                 Container(
                   margin:
                       EdgeInsets.only(top: 25, left: 10, bottom: 6, right: 130),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 29,
                   child: Text(
                     'Games',
@@ -96,7 +96,7 @@ class _PromotionState extends State<Promotion> {
           // Drawer
           drawer: Drawer(
             width: 250,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             child: ListView(
               // ignore: prefer_const_literals_to_create_immutables
               children: [

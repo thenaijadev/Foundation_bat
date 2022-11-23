@@ -36,7 +36,7 @@ class _LandindPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: PageIndicatorContainer(
           // ignore: sort_child_properties_last
 
@@ -57,7 +57,7 @@ class _LandindPageState extends State<LandingPage> {
                     margin: EdgeInsets.only(top: 300),
                     width: double.maxFinite,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
@@ -150,7 +150,8 @@ class _LandindPageState extends State<LandingPage> {
                     margin: EdgeInsets.only(top: 300),
                     width: double.maxFinite,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      color: Theme.of(context).scaffoldBackgroundColor
+                          .withOpacity(0.8),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
@@ -235,7 +236,8 @@ class _LandindPageState extends State<LandingPage> {
                     margin: EdgeInsets.only(top: 300),
                     width: double.maxFinite,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      color: Theme.of(context).scaffoldBackgroundColor
+                          .withOpacity(0.8),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
@@ -338,7 +340,8 @@ class _LandindPageState extends State<LandingPage> {
                     // height: double.maxFinite,
                     // height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.8),
+                      color: Theme.of(context).scaffoldBackgroundColor
+                          .withOpacity(0.8),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),

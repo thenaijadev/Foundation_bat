@@ -23,14 +23,13 @@ class _ProgressDetailsState extends State<ProgressDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        extendBody: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           leading: BackButton(
-            color: kBackground,
+            color: Theme.of(context).hintColor,
           ),
           elevation: 0.0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: SingleChildScrollView(
           child: Column(

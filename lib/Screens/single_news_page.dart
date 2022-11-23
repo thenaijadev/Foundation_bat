@@ -25,12 +25,11 @@ class _NewsDetailsState extends State<NewsDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        // extendBodyBehindAppBar: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
-          leading: BackButton(color: kButtonColor),
+          leading: BackButton(color: Theme.of(context).hintColor),
         ),
         body: SingleChildScrollView(
           child: Column(

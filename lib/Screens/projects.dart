@@ -86,17 +86,17 @@ class _ProjectPageState extends State<ProjectPage> {
       child: WillPopScope(
         onWillPop: () async => onBackButtonPressed(context),
         child: Scaffold(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
               elevation: 0.0,
               toolbarHeight: 60,
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     
               // App Logo
               actions: [
                 Container(
                   margin: EdgeInsets.only(left: 24.0, top: 10, bottom: 10),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 40.0,
                   child: Image.asset(
                     'assets/logo.png',
@@ -105,7 +105,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 Container(
                   margin:
                       EdgeInsets.only(top: 25, left: 10, bottom: 6, right: 130),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 29,
                   child: Text(
                     'Projects',
@@ -128,7 +128,7 @@ class _ProjectPageState extends State<ProjectPage> {
           // Drawer
           drawer: Drawer(
             width: 250,
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             child: ListView(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
@@ -248,7 +248,7 @@ class _ProjectPageState extends State<ProjectPage> {
               if (inprogressProvider.searchResult != null )
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 15),
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   height: 45.0,
                   child: TextField(
                     onChanged: (value) {
@@ -287,7 +287,7 @@ class _ProjectPageState extends State<ProjectPage> {
                             child: Image.asset('assets/noitem.png.gif'),
                           )
                         : RefreshIndicator(
-                            color: kBackground,
+                            color: kGeneralbodytextColor,
                             backgroundColor: Theme.of(context).primaryColor,
                             onRefresh: () async {
                               await _inprojectprovider.getInprogressProjects();
@@ -386,7 +386,14 @@ class _ProjectPageState extends State<ProjectPage> {
                                           // News Details
                                           Text(
                                             inprogress.projectTitle,
-                                            style: kNewsSubHeader,
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                fontStyle: FontStyle.normal,
+                                                fontFamily: 'Inter',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                            // kNewsSubHeader,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
                                             textAlign: TextAlign.center,
@@ -397,11 +404,27 @@ class _ProjectPageState extends State<ProjectPage> {
                                             children: [
                                               Text(
                                                 'Status: ',
-                                                style: kNewsSubHeader,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                // kNewsSubHeader,
                                               ),
                                               Text(
                                                 inprogress.projectStatus,
-                                                style: kNewsSubHeader,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                // kNewsSubHeader,
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 1,
                                               )

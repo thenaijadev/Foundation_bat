@@ -17,13 +17,15 @@ class MyThemes {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: kBackground,
     colorScheme: ColorScheme.dark(),
-    primaryColor: kBackground,
+    primaryColor: kTitleheaderColor1,
+    hintColor: kGeneralbodytextColor,
     iconTheme: IconThemeData(color: kBackground, opacity: 0.8),
   );
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: kGeneralbodytextColor,
     colorScheme: ColorScheme.light(),
-    primaryColor: kGeneralbodytextColor,
+    hintColor: kBackground,
+    primaryColor: kTitleheaderColor,
     iconTheme: IconThemeData(color: kGeneralbodytextColor, opacity: 0.8),
   );
 }

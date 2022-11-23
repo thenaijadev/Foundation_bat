@@ -21,30 +21,36 @@ class ReuseableTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      style: TextStyle(color: Colors.black),
-      // onChanged: (value) {},
-      validator: (val) {
-        return val!.isEmpty ? "This Field is Required" : null;
-      },
-      keyboardType: keyboard,
-      controller: textcontroller,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(top: 2),
-        hintText: label,
-        hintStyle: kTextboxhintstyle,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(45.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(180),
+      ),
+      child: TextFormField(
+        style: TextStyle(color: Colors.black),
+        // onChanged: (value) {},
+        validator: (val) {
+          return val!.isEmpty ? "This Field is Required" : null;
+        },
+        keyboardType: keyboard,
+        controller: textcontroller,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(top: 2),
+          hintText: label,
+          hintStyle: kTextboxhintstyle,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(45.0),
+            ),
+            borderSide: BorderSide(
+              style: BorderStyle.solid,
+              color: Colors.white,
+              // Theme.of(context).primaryColor,
+              width: 2.0,
+            ),
           ),
-          borderSide: BorderSide(
-            style: BorderStyle.solid,
-            color: Colors.white,
-            // Theme.of(context).primaryColor,
-            width: 2.0,
-          ),
+          prefixIcon: cardChild,
         ),
-        prefixIcon: cardChild,
       ),
     );
   }
