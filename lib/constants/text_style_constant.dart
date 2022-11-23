@@ -19,7 +19,7 @@ const kAppnametextstyle = TextStyle(
 const kSingletitle =
     TextStyle(
       fontFamily: 'Inter',
-       fontSize: 24,
+       fontSize: 20,
         fontWeight: FontWeight.w600);
 
 const kSinglestart =

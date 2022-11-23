@@ -208,53 +208,65 @@ class _PromotionState extends State<Promotion> {
             ),
           ),
          
-          body: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisAlignment: MainAxisAlignment.start,
+          body: Stack(
             children: [
-                  //Game Logo
-              
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0, bottom: 50.0, top: 25),
-                child: Text(
-                  'Play to win!',
-                  style: kBodyTextStyle,
+              ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                      //Game Logo
+                  
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 50.0, top: 25),
+                    child: Text(
+                      'Play to win!',
+                      style: kBodyTextStyle,
+                    ),
+                  ),
+    
+                  //Games display
+    
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ReuseableGameContainer(
+                        imageName: 'assets/game1.png',
+                        label: 'Game 1',
+                      ),
+                      ReuseableGameContainer(
+                        imageName: 'assets/game2.png',
+                        label: 'Game 2',
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ReuseableGameContainer(
+                        imageName: 'assets/game4.png',
+                        label: 'Game 3',
+                      ),
+                      ReuseableGameContainer(
+                        imageName: 'assets/game3.png',
+                        label: 'Game 4',
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 42,
+                  ),
+                ],
+              ),
+             Container(
+                color: Colors.black.withOpacity(0.52),
+                height: double.maxFinite,
+                width: double.maxFinite,
+                child: Center(
+                  child: Text('Coming Soon !'),
                 ),
-              ),
-    
-              //Games display
-    
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ReuseableGameContainer(
-                    imageName: 'assets/game1.png',
-                    label: 'Game 1',
-                  ),
-                  ReuseableGameContainer(
-                    imageName: 'assets/game2.png',
-                    label: 'Game 2',
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ReuseableGameContainer(
-                    imageName: 'assets/game4.png',
-                    label: 'Game 3',
-                  ),
-                  ReuseableGameContainer(
-                    imageName: 'assets/game3.png',
-                    label: 'Game 4',
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 42,
               ),
             ],
           ),

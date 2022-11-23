@@ -112,7 +112,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
 
               //Project Timeline
               Container(
-                margin: EdgeInsets.only(left: 30, bottom: 21),
+                margin: EdgeInsets.only(left: 30, bottom: 21, right: 30),
                 child: Row(
                   children: [
                     Container(
@@ -148,6 +148,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                       style: kStartdetail,
                                     )
                                   ])),
+                                  SizedBox(height: 10),
                           Text.rich(
                               selectionColor: Theme.of(context).primaryColor,
                               TextSpan(
