@@ -111,213 +111,216 @@ class _ResetPasswordState extends State<ResetPassword> {
           elevation: 0,
           leading: BackButton(color: Theme.of(context).hintColor),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Form(
-                key: formKey,
-                child: ListView(
-                  children: [
-                    Container(
-                      height: 19,
-                      margin: EdgeInsets.only(left: 30, bottom: 75),
-                      child: Text(
-                        'Create a new password',
-                        // style: kTextboxhintstyle,
-                      ),
-                    ),
-    
-                    //Request for email Password
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 10),
-                      child: Text(
-                        'Email Address *',
-                        style: kPageHeader,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 30.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(180),
+        body: ScrollConfiguration(
+          behavior: ScrollBehavior().copyWith(overscroll: false),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Form(
+                  key: formKey,
+                  child: ListView(
+                    children: [
+                      Container(
+                        height: 19,
+                        margin: EdgeInsets.only(left: 30, bottom: 75),
+                        child: Text(
+                          'Create a new password',
+                          // style: kTextboxhintstyle,
                         ),
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (val) {
-                            return val!.isEmpty ? "Email can not be empty" : null;
+                      ),
+            
+                      //Request for email Password
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, bottom: 10),
+                        child: Text(
+                          'Email Address *',
+                          style: kPageHeader,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 30.0, right: 30.0, bottom: 30.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(180),
+                          ),
+                          child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (val) {
+                              return val!.isEmpty ? "Email can not be empty" : null;
+                            },
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 2, left: 25),
+                              hintText: ' @email',
+                              hintStyle: kTextboxhintstyle,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(45.0),
+                                ),
+                                borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: kTextfieldborderColor,
+                                  width: 2.0,
+                                ),
+                              ),
+                              suffixIcon: Icon(
+                                Icons.mail_rounded,
+                                color: Colors.black,
+                                size: 19,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+            
+                      //Request for Old Password
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, bottom: 10),
+                        child: Text(
+                          'Old Password *',
+                          style: kPageHeader,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 30.0, right: 30.0, bottom: 30.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(180),
+                          ),
+                          child: TextFormField(
+                            obscureText: hidepassword,
+                            controller: oldpasswordController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 2, left: 25),
+                              hintText: ' Old Password',
+                              hintStyle: kTextboxhintstyle,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(45.0),
+                                ),
+                                borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: kTextfieldborderColor,
+                                  width: 2.0,
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: togglePasswordView,
+                                icon: Padding(
+                                  padding: const EdgeInsets.only(right: 14.15),
+                                  child: Icon(
+                                    !hidepassword
+                                        ? FontAwesomeIcons.eye
+                                        : FontAwesomeIcons.eyeSlash,
+                                    color: Colors.black,
+                                    // Color(0xff979797),
+                                    size: 19.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+            
+                      //Request for New  Password
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, bottom: 10),
+                        child: Text(
+                          'New Password *',
+                          style: kPageHeader,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 30.0, right: 30.0, bottom: 31.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(180),
+                          ),
+                          child: TextFormField(
+                            obscureText: hidepassword,
+                            controller: newpasswordController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(top: 2, left: 25),
+                              hintText: '  Enter new Password',
+                              hintStyle: kTextboxhintstyle,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(45.0),
+                                ),
+                                borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                  color: kTextfieldborderColor,
+                                  width: 2.0,
+                                ),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: togglePasswordView,
+                                icon: Padding(
+                                  padding: const EdgeInsets.only(right: 14.15),
+                                  child: Icon(
+                                    !hidepassword
+                                        ? FontAwesomeIcons.eye
+                                        : FontAwesomeIcons.eyeSlash,
+                                    color: Colors.black,
+                                    // Color(0xff979797),
+                                    size: 19.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+            
+                      //Confirmation Button
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 105.0, left: 30, right: 30, bottom: 75.0),
+                        child: MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(45.0),
+                          ),
+                          height: 45.0,
+                          color: Colors.black.withOpacity(0.26),
+                          onPressed: () async {
+                            final SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setBool('autoLogin', false);
+                            if (formKey.currentState!.validate() && !loading) {
+                              setState(() {
+                                loading = true;
+                              });
+                              changepassword(
+                                  email: emailController.text,
+                                  oldpassword: oldpasswordController.text,
+                                  newpassword: newpasswordController.text);
+                            }
+                            // Navigator.pushNamed(context, ResetCompleted.id);
                           },
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 2, left: 25),
-                            hintText: ' @email',
-                            hintStyle: kTextboxhintstyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(45.0),
-                              ),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                                color: kTextfieldborderColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            suffixIcon: Icon(
-                              Icons.mail_rounded,
-                              color: Colors.black,
-                              size: 19,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-    
-                    //Request for Old Password
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 10),
-                      child: Text(
-                        'Old Password *',
-                        style: kPageHeader,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 30.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(180),
-                        ),
-                        child: TextFormField(
-                          obscureText: hidepassword,
-                          controller: oldpasswordController,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 2, left: 25),
-                            hintText: ' Old Password',
-                            hintStyle: kTextboxhintstyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(45.0),
-                              ),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                                color: kTextfieldborderColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: togglePasswordView,
-                              icon: Padding(
-                                padding: const EdgeInsets.only(right: 14.15),
-                                child: Icon(
-                                  !hidepassword
-                                      ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash,
-                                  color: Colors.black,
-                                  // Color(0xff979797),
-                                  size: 19.0,
+                          child: loading
+                              ? CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation(Colors.white))
+                              : Text(
+                                  'Confirm',
+                                  textAlign: TextAlign.center,
+                                  style: kButtontextstyle,
                                 ),
-                              ),
-                            ),
-                          ),
                         ),
                       ),
-                    ),
-    
-                    //Request for New  Password
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 10),
-                      child: Text(
-                        'New Password *',
-                        style: kPageHeader,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30.0, right: 30.0, bottom: 31.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(180),
-                        ),
-                        child: TextFormField(
-                          obscureText: hidepassword,
-                          controller: newpasswordController,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 2, left: 25),
-                            hintText: '  Enter new Password',
-                            hintStyle: kTextboxhintstyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(45.0),
-                              ),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                                color: kTextfieldborderColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: togglePasswordView,
-                              icon: Padding(
-                                padding: const EdgeInsets.only(right: 14.15),
-                                child: Icon(
-                                  !hidepassword
-                                      ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash,
-                                  color: Colors.black,
-                                  // Color(0xff979797),
-                                  size: 19.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-    
-                    //Confirmation Button
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 105.0, left: 30, right: 30, bottom: 75.0),
-                      child: MaterialButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45.0),
-                        ),
-                        height: 45.0,
-                        color: Colors.black.withOpacity(0.26),
-                        onPressed: () async {
-                          final SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                          sharedPreferences.setBool('autoLogin', false);
-                          if (formKey.currentState!.validate() && !loading) {
-                            setState(() {
-                              loading = true;
-                            });
-                            changepassword(
-                                email: emailController.text,
-                                oldpassword: oldpasswordController.text,
-                                newpassword: newpasswordController.text);
-                          }
-                          // Navigator.pushNamed(context, ResetCompleted.id);
-                        },
-                        child: loading
-                            ? CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(Colors.white))
-                            : Text(
-                                'Confirm',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
-                              ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

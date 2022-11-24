@@ -265,151 +265,154 @@ class _EventCenterState extends State<EventCenter> {
                   ),
                 ),
 
-              Expanded(
-                child: provider.searchResult == null
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : provider.searchResult!.isEmpty
-                        ? Center(
-                            child: Image.asset('assets/noitem.png.gif'),
-                          )
-                        : RefreshIndicator(
-                            color: kGeneralbodytextColor,
-                            backgroundColor: Theme.of(context).primaryColor,
-                            onRefresh: () async {
-                              await Provider.of<EventProvider>(context,
-                                      listen: false)
-                                  .getAllEvents();
-                            },
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: provider.searchResult!.length,
-                                itemBuilder: ((context, index) {
-                                  EventModel event =
-                                      provider.searchResult![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventDetails(event)));
-                                    },
-                                    child: Container(
-                                      width: 368,
-                                      margin: EdgeInsets.only(
-                                        left: 30,
-                                        right: 30,
-                                        bottom: 30.0,
-                                      ),
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              //Images
-                                              Container(
-                                                height: 150,
-                                                width: 310,
-                                                margin: EdgeInsets.only(
-                                                    bottom: 7.0,
-                                                    top: 7.0,
-                                                    left: 9.0),
-                                                child:
-                                                    event.files!.first.fileUrl
-                                                                .isNotEmpty &&
-                                                            event.files!.first
-                                                                    .fileExt ==
-                                                                'image/jpeg'
-                                                        ? ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
-                                                                          ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
-                                                                              ),
+              ScrollConfiguration(
+                behavior: ScrollBehavior().copyWith(overscroll: false),
+                child: Expanded(
+                  child: provider.searchResult == null
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : provider.searchResult!.isEmpty
+                          ? Center(
+                              child: Image.asset('assets/noitem.png.gif'),
+                            )
+                          : RefreshIndicator(
+                              color: kGeneralbodytextColor,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              onRefresh: () async {
+                                await Provider.of<EventProvider>(context,
+                                        listen: false)
+                                    .getAllEvents();
+                              },
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: provider.searchResult!.length,
+                                  itemBuilder: ((context, index) {
+                                    EventModel event =
+                                        provider.searchResult![index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EventDetails(event)));
+                                      },
+                                      child: Container(
+                                        width: 368,
+                                        margin: EdgeInsets.only(
+                                          left: 30,
+                                          right: 30,
+                                          bottom: 30.0,
+                                        ),
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                //Images
+                                                Container(
+                                                  height: 150,
+                                                  width: 310,
+                                                  margin: EdgeInsets.only(
+                                                      bottom: 7.0,
+                                                      top: 7.0,
+                                                      left: 9.0),
+                                                  child:
+                                                      event.files!.first.fileUrl
+                                                                  .isNotEmpty &&
+                                                              event.files!.first
+                                                                      .fileExt ==
+                                                                  'image/jpeg'
+                                                          ? ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style:
+                                                                                  TextStyle(color: Colors.black),
                                                                             ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${event.files!.first.fileUrl}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          )
-                                                        : ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        18),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                                    errorWidget: (context,
-                                                                            url,
-                                                                            error) =>
-                                                                        Center(
-                                                                          child:
-                                                                              Text(
-                                                                            'Loading',
-                                                                            style:
-                                                                                TextStyle(color: Colors.black),
                                                                           ),
-                                                                        ),
-                                                                    placeholder:
-                                                                        (context, url) =>
-                                                                            Center(
-                                                                              child: Text(
-                                                                                'Loading',
-                                                                                style: TextStyle(color: Colors.black),
+                                                                      placeholder:
+                                                                          (context, url) =>
+                                                                              Center(
+                                                                                child: Text(
+                                                                                  'Loading',
+                                                                                  style: TextStyle(color: Colors.black),
+                                                                                ),
                                                                               ),
+                                                                      imageUrl:
+                                                                          'https://www.batnf.net/${event.files!.first.fileUrl}',
+                                                                      fit: BoxFit
+                                                                          .cover),
+                                                            )
+                                                          : ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                      errorWidget: (context,
+                                                                              url,
+                                                                              error) =>
+                                                                          Center(
+                                                                            child:
+                                                                                Text(
+                                                                              'Loading',
+                                                                              style:
+                                                                                  TextStyle(color: Colors.black),
                                                                             ),
-                                                                    imageUrl:
-                                                                        'https://www.batnf.net/${event.files!.first.thumbnail}',
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                          ),
-                                              ),
-
-                                              // Details
-                                              Text(
-                                                event.eventName,
-                                                style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontFamily: 'Inter',
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                //  kNewsSubHeader,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                                          ),
+                                                                      placeholder:
+                                                                          (context, url) =>
+                                                                              Center(
+                                                                                child: Text(
+                                                                                  'Loading',
+                                                                                  style: TextStyle(color: Colors.black),
+                                                                                ),
+                                                                              ),
+                                                                      imageUrl:
+                                                                          'https://www.batnf.net/${event.files!.first.thumbnail}',
+                                                                      fit: BoxFit
+                                                                          .cover),
+                                                            ),
+                                                ),
+              
+                                                // Details
+                                                Text(
+                                                  event.eventName,
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .primaryColor,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontFamily: 'Inter',
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  //  kNewsSubHeader,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                })),
-                          ),
+                                    );
+                                  })),
+                            ),
+                ),
               ),
             ],
           ),

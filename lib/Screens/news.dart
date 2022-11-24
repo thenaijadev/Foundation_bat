@@ -282,132 +282,135 @@ class _NewsState extends State<News> {
                   ),
                 ),
     
-              Expanded(
-                child: provider.searchResult == null
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : provider.searchResult!.isEmpty
-                        ? Center(
-                            child: Image.asset('assets/noitem.png.gif'),
-                          )
-                        : RefreshIndicator(
-                            color: kGeneralbodytextColor,
-                            backgroundColor: Theme.of(context).primaryColor,
-                            onRefresh: () async {
-                              await _provider.getAllNews();
-                            },
-                            child: ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: provider.searchResult!.length,
-                                itemBuilder: ((context, index) {
-                                  NewsModel news = provider.searchResult![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NewsDetails(news)));
-                                    },
-                                    child: Container(
-                                      width: 368,
-                                      margin: EdgeInsets.only(
-                                        left: 30,
-                                        right: 30,
-                                        bottom: 30.0,
-                                      ),
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          //Images
-                                          Container(
-                                            height: 150,
-                                            width: 310,
-                                            margin: EdgeInsets.only(
-                                                bottom: 7.0, top: 7.0, left: 9.0),
-                                            child: news.files!.first.fileExt ==
-                                                        'image/jpeg' &&
-                                                    news.files!.first.fileUrl
-                                                        .isNotEmpty
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(18),
-                                                    child: CachedNetworkImage(
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Center(
-                                                              child: Icon(
-                                                                Icons.error,
-                                                                color:
-                                                                    Colors.black,
-                                                              ),
-                                                            ),
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                Center(
-                                                                  child: Text(
-                                                                    'Loading',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black),
-                                                                  ),
+              ScrollConfiguration(
+                behavior: ScrollBehavior().copyWith(overscroll: false),
+                child: Expanded(
+                  child: provider.searchResult == null
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : provider.searchResult!.isEmpty
+                          ? Center(
+                              child: Image.asset('assets/noitem.png.gif'),
+                            )
+                          : RefreshIndicator(
+                              color: kGeneralbodytextColor,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              onRefresh: () async {
+                                await _provider.getAllNews();
+                              },
+                              child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: provider.searchResult!.length,
+                                  itemBuilder: ((context, index) {
+                                    NewsModel news = provider.searchResult![index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NewsDetails(news)));
+                                      },
+                                      child: Container(
+                                        width: 368,
+                                        margin: EdgeInsets.only(
+                                          left: 30,
+                                          right: 30,
+                                          bottom: 30.0,
+                                        ),
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            //Images
+                                            Container(
+                                              height: 150,
+                                              width: 310,
+                                              margin: EdgeInsets.only(
+                                                  bottom: 7.0, top: 7.0, left: 9.0),
+                                              child: news.files!.first.fileExt ==
+                                                          'image/jpeg' &&
+                                                      news.files!.first.fileUrl
+                                                          .isNotEmpty
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(18),
+                                                      child: CachedNetworkImage(
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Center(
+                                                                child: Icon(
+                                                                  Icons.error,
+                                                                  color:
+                                                                      Colors.black,
                                                                 ),
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${news.files!.first.fileUrl}',
-                                                        fit: BoxFit.cover),
-                                                  )
-                                                : ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(18),
-                                                    child: CachedNetworkImage(
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Center(
-                                                              child: Icon(
-                                                                Icons.error,
-                                                                color:
-                                                                    Colors.black,
                                                               ),
-                                                            ),
-                                                        placeholder:
-                                                            (context, url) =>
-                                                                Center(
-                                                                  child: Text(
-                                                                    'Loading',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black),
+                                                          placeholder:
+                                                              (context, url) =>
+                                                                  Center(
+                                                                    child: Text(
+                                                                      'Loading',
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                    ),
                                                                   ),
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                          fit: BoxFit.cover),
+                                                    )
+                                                  : ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(18),
+                                                      child: CachedNetworkImage(
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Center(
+                                                                child: Icon(
+                                                                  Icons.error,
+                                                                  color:
+                                                                      Colors.black,
                                                                 ),
-                                                        imageUrl:
-                                                            'https://www.batnf.net/${news.files!.first.thumbnail}',
-                                                        fit: BoxFit.cover),
-                                                  ),
-                                          ),
-    
-                                          // News Details
-                                          Text(
-                                            news.title,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                                fontStyle: FontStyle.normal,
-                                                fontFamily: 'Inter',
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold),
-                                            // kNewsSubHeader,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
+                                                              ),
+                                                          placeholder:
+                                                              (context, url) =>
+                                                                  Center(
+                                                                    child: Text(
+                                                                      'Loading',
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black),
+                                                                    ),
+                                                                  ),
+                                                          imageUrl:
+                                                              'https://www.batnf.net/${news.files!.first.thumbnail}',
+                                                          fit: BoxFit.cover),
+                                                    ),
+                                            ),
+                  
+                                            // News Details
+                                            Text(
+                                              news.title,
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  fontStyle: FontStyle.normal,
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold),
+                                              // kNewsSubHeader,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                })),
-                          ),
-              
+                                    );
+                                  })),
+                            ),
+                
+                ),
               ),
     
             ],

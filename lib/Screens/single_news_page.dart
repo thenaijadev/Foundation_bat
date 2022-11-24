@@ -31,119 +31,122 @@ class _NewsDetailsState extends State<NewsDetails> {
           elevation: 0,
           leading: BackButton(color: Theme.of(context).hintColor),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //News Image
-              Container(
-                margin: EdgeInsets.only(left: 25, right: 25),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CarouselSlider(
-                          
-                            carouselController: _controller,
-                            options: CarouselOptions(
-                              autoPlayInterval: Duration(seconds: 10),
-                              height: 265,
-                              viewportFraction: 1.0,
-                                enableInfiniteScroll: false,
-                                padEnds: false,
-                              // autoPlay: true
-                            ),
-                            items: widget.singleNews.files!.map((newsFile) {
-                              if (newsFile.fileExt == '') {
-                                return CachedNetworkImage(
-                                    imageUrl:
-                                        'https://www.batnf.net/${newsFile.thumbnail}',
-                                    fit: BoxFit.cover);
-                              } else if (newsFile.fileExt == 'image' && newsFile.thumbnail.isNotEmpty) {
-                                return CachedNetworkImage(
-                                    errorWidget: (context, url, error) => Center(
-                                        child: Text('No Image/Video Available')),
-                                    placeholder: (context, url) => Center(
-                                            child: Text(
-                                          'Loading',
-                                          style: TextStyle(color: Colors.black),
-                                        )),
-                                    imageUrl:
-                                        'https://www.batnf.net/${newsFile.fileUrl}',
-                                    fit: BoxFit.cover);
-                              }
-                              return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
-                            }).toList())),
-                    
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('previous'),
-                        MaterialButton(
-                          onPressed: () => _controller.previousPage(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.linear),
-                          child: Icon(FontAwesomeIcons.arrowLeft),
-                        ),
-                        MaterialButton(
-                          onPressed: () => _controller.nextPage(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.linear),
-                          child: Icon(FontAwesomeIcons.arrowRight),
-                        ),
-                        Text('Next')
-                      ],
-                    )
-                  ],
+        body: ScrollConfiguration(
+          behavior: ScrollBehavior().copyWith(overscroll: false),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //News Image
+                Container(
+                  margin: EdgeInsets.only(left: 25, right: 25),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CarouselSlider(
+                            
+                              carouselController: _controller,
+                              options: CarouselOptions(
+                                autoPlayInterval: Duration(seconds: 10),
+                                height: 265,
+                                viewportFraction: 1.0,
+                                  enableInfiniteScroll: false,
+                                  padEnds: false,
+                                // autoPlay: true
+                              ),
+                              items: widget.singleNews.files!.map((newsFile) {
+                                if (newsFile.fileExt == '') {
+                                  return CachedNetworkImage(
+                                      imageUrl:
+                                          'https://www.batnf.net/${newsFile.thumbnail}',
+                                      fit: BoxFit.cover);
+                                } else if (newsFile.fileExt == 'image' && newsFile.thumbnail.isNotEmpty) {
+                                  return CachedNetworkImage(
+                                      errorWidget: (context, url, error) => Center(
+                                          child: Text('No Image/Video Available')),
+                                      placeholder: (context, url) => Center(
+                                              child: Text(
+                                            'Loading',
+                                            style: TextStyle(color: Colors.black),
+                                          )),
+                                      imageUrl:
+                                          'https://www.batnf.net/${newsFile.fileUrl}',
+                                      fit: BoxFit.cover);
+                                }
+                                return Videos(thumbnailUrl: newsFile.thumbnail, videoUrl: newsFile.fileUrl,);
+                              }).toList())),
+                      
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('previous'),
+                          MaterialButton(
+                            onPressed: () => _controller.previousPage(
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.linear),
+                            child: Icon(FontAwesomeIcons.arrowLeft),
+                          ),
+                          MaterialButton(
+                            onPressed: () => _controller.nextPage(
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.linear),
+                            child: Icon(FontAwesomeIcons.arrowRight),
+                          ),
+                          Text('Next')
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-
-              //News title
-              Container(
-                margin: EdgeInsets.only(
-                  top: 15,
-                  left: 30,
-                  right: 30,
-                  bottom: 10
+        
+                //News title
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 15,
+                    left: 30,
+                    right: 30,
+                    bottom: 10
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        widget.singleNews.title,
+                        style: kSingletitle,
+                      ),
+                      SizedBox(height: 5,),
+                      Text(widget.singleNews.entryDate,
+                      style: kSinglestart,)
+                    ],
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Text(
-                      widget.singleNews.title,
-                      style: kSingletitle,
-                    ),
-                    SizedBox(height: 5,),
-                    Text(widget.singleNews.entryDate,
-                    style: kSinglestart,)
-                  ],
+                // New Details
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
+                  child: ReadMoreText(
+                    widget.singleNews.information,
+                    textAlign: TextAlign.justify,
+                    style: kBodyTextStyle,
+                    trimLength: 150,
+                    trimMode: TrimMode.Line,
+                    trimLines: 15,
+                    trimCollapsedText: 'Read More',
+                    trimExpandedText: 'Show Less',
+                    lessStyle: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.normal),
+                    moreStyle: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.normal),
+                  ),
                 ),
-              ),
-              // New Details
-              Container(
-                margin:
-                    EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 5),
-                child: ReadMoreText(
-                  widget.singleNews.information,
-                  textAlign: TextAlign.justify,
-                  style: kBodyTextStyle,
-                  trimLength: 150,
-                  trimMode: TrimMode.Line,
-                  trimLines: 15,
-                  trimCollapsedText: 'Read More',
-                  trimExpandedText: 'Show Less',
-                  lessStyle: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.normal),
-                  moreStyle: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.normal),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
