@@ -324,7 +324,10 @@ class _ProjectPageState extends State<ProjectPage> {
                                               width: 310,
                                               margin: EdgeInsets.only(
                                                   bottom: 7.0, top: 7.0, left: 9.0),
-                                              child: inprogress.files!.first
+                                              child: 
+                                              inprogress.files!.isEmpty
+                                                  ? Image.asset('assets/logo.png')
+                                                  : inprogress.files!.first
                                                               .fileExt ==
                                                           'image/jpeg' &&
                                                       inprogress.files!.first

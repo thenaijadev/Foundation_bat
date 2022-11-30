@@ -181,10 +181,8 @@ class _SignInState extends State<SignIn> {
         body: Stack(
           alignment: AlignmentDirectional.bottomEnd,
           children: [
-            Container(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: Image.asset('assets/Home Page Pix.png',
+            SizedBox(
+              child: Image.asset('assets/Bc.png',
               fit: BoxFit.cover,
               width: double.maxFinite,
               height: double.maxFinite,

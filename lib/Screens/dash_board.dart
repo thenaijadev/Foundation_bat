@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
+import 'package:batnf/Screens/home_video.dart';
 import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
@@ -242,38 +243,19 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(22),
+                      borderRadius: BorderRadius.circular(5),
                       child: CarouselSlider(
                         options: CarouselOptions(
                             height: 200,
                             scrollDirection: Axis.horizontal,
                             padEnds: true,
+                            enableInfiniteScroll: false,
                             autoPlayCurve: Curves.easeInQuint,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
                             viewportFraction: 1,
-                            autoPlay: true),
+                            autoPlay: false),
+                        // ignore: prefer_const_literals_to_create_immutables
                         items: [
-                          Container(
-                            // ignore: sort_child_properties_last
-                            child: Center(
-                                child: Text(
-                                    'Register and Attend Events Hosted by Batnf',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: kGeneralbodytextColor,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'Inter',
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600))),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  'assets/boarding1.png',
-                                ),
-                              ),
-                            ),
-                          ),
+                          HomeVideo(),
                         ],
                       ),
                     ),
@@ -357,12 +339,7 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                     placeholder: (context, url) =>
                                                         Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
+                                                          child: CircularProgressIndicator(),
                                                         ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
@@ -522,12 +499,7 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                     placeholder: (context, url) =>
                                                         Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
+                                                          child: CircularProgressIndicator(),
                                                         ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${events.files!.first.fileUrl}',
@@ -919,12 +891,7 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                     placeholder: (context, url) =>
                                                         Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
+                                                          child: CircularProgressIndicator(),
                                                         ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.thumbnail}',

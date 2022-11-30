@@ -319,7 +319,10 @@ class _EventCenterState extends State<EventCenter> {
                                                       top: 7.0,
                                                       left: 9.0),
                                                   child:
-                                                      event.files!.first.fileUrl
+                                                      event.files!.isEmpty
+                                                  ? Image.asset(
+                                                        'assets/logo.png')
+                                                  :event.files!.first.fileUrl
                                                                   .isNotEmpty &&
                                                               event.files!.first
                                                                       .fileExt ==

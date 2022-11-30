@@ -57,8 +57,22 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                             ),
                             items: widget.singleProgress.files!
                                 .map((inprogressFile) {
-                              if (inprogressFile.fileExt == '') {
+                              if (widget.singleProgress.files!.isEmpty && inprogressFile.fileExt.isEmpty) {
+                                return Container(
+                                  height: 150,
+                                  color: Colors.blue,
+                                );
+                                // CachedNetworkImage(
+                                //     placeholder: (context, url) => Center(
+                                //         child: CircularProgressIndicator()),
+                                //     imageUrl:
+                                //         'https://i1.wp.com/nnn.ng/wp-content/uploads/2021/03/news-today.jpg',
+                                //     fit: BoxFit.cover);
+                                // Image.asset('assets/logo.png', fit: BoxFit.cover);
+                              } else if (inprogressFile.fileExt == '') {
                                 return CachedNetworkImage(
+                                    placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator()),
                                     imageUrl:
                                         'https://www.batnf.net/${inprogressFile.thumbnail}',
                                     fit: BoxFit.cover);
@@ -66,7 +80,9 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   inprogressFile.thumbnail.isNotEmpty) {
                                 return CachedNetworkImage(
                                     errorWidget: (context, url, error) =>
-                                        Center(child: Text('No Image/Video Available')),
+                                        Center(
+                                            child: Text(
+                                                'No Image/Video Available')),
                                     placeholder: (context, url) => Center(
                                         child: CircularProgressIndicator()),
                                     imageUrl:
@@ -101,7 +117,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     ],
                   ),
                 ),
-        
+
                 //Project Title
                 Container(
                   margin:
@@ -111,7 +127,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     style: kSingletitle,
                   ),
                 ),
-        
+
                 //Project Timeline
                 Container(
                   margin: EdgeInsets.only(left: 30, bottom: 21, right: 30),
@@ -150,7 +166,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                         style: kStartdetail,
                                       )
                                     ])),
-                                    SizedBox(height: 10),
+                            SizedBox(height: 10),
                             Text.rich(
                                 selectionColor: Theme.of(context).primaryColor,
                                 TextSpan(
@@ -158,8 +174,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                     style: kSinglestart,
                                     children: [
                                       TextSpan(
-                                        text:
-                                            widget.singleProgress.projectEndDate,
+                                        text: widget
+                                            .singleProgress.projectEndDate,
                                         style: kStartdetail,
                                       )
                                     ])),
@@ -169,7 +185,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     ],
                   ),
                 ),
-        
+
                 //Project Location and venue
                 Container(
                   margin: EdgeInsets.only(bottom: 30),
@@ -208,7 +224,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     ],
                   ),
                 ),
-        
+
                 //Project Description Header
                 Padding(
                   padding: const EdgeInsets.only(left: 30),
@@ -218,7 +234,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     textAlign: TextAlign.left,
                   ),
                 ),
-        
+
                 //Project Description
                 Container(
                   margin:

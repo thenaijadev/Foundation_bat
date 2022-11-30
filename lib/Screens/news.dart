@@ -329,34 +329,9 @@ class _NewsState extends State<News> {
                                               margin: EdgeInsets.only(
                                                   bottom: 7.0, top: 7.0, left: 9.0),
                                               child:
-                                              news.files == null && news.files!.first.fileUrl.isEmpty
-                                                  ? ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(18),
-                                                      child: CachedNetworkImage(
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Center(
-                                                                child: Icon(
-                                                                  Icons.error,
-                                                                  color:
-                                                                      Colors.black,
-                                                                ),
-                                                              ),
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  Center(
-                                                                    child: Text(
-                                                                      'Loading',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                    ),
-                                                                  ),
-                                                          imageUrl:
-                                                              'https://i1.wp.com/nnn.ng/wp-content/uploads/2021/03/news-today.jpg',
-                                                          fit: BoxFit.cover),
-                                                    )
+                                              news.files!.isEmpty
+                                                  ? Image.asset(
+                                                        'assets/logo.png')
                                                   :   news.files!.first
                                                                     .fileExt ==
                                                                 'image/jpeg' &&
