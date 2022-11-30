@@ -314,6 +314,11 @@ class _EventCenterState extends State<EventCenter> {
                                                 Container(
                                                   height: 150,
                                                   width: 310,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.blue,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18)),
                                                   margin: EdgeInsets.only(
                                                       bottom: 7.0,
                                                       top: 7.0,

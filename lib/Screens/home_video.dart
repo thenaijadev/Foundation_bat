@@ -128,8 +128,8 @@ String getDuration() {
         ),
         //video progress timer
         Positioned(
-            bottom: 18,
-            left: 8,
+            bottom: 5,
+            left: 5,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -138,7 +138,7 @@ String getDuration() {
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
-                  '/',
+                  ' / ',
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(

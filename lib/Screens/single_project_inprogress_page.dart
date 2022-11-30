@@ -43,57 +43,76 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                   margin: EdgeInsets.only(left: 25, right: 25),
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CarouselSlider(
-                            carouselController: _controller,
-                            options: CarouselOptions(
-                              padEnds: false,
-                              autoPlayInterval: Duration(seconds: 10),
-                              height: 265,
-                              viewportFraction: 1.0,
-                              enableInfiniteScroll: false,
-                              // autoPlay: true
-                            ),
-                            items: widget.singleProgress.files!
-                                .map((inprogressFile) {
-                              if (widget.singleProgress.files!.isEmpty && inprogressFile.fileExt.isEmpty) {
-                                return Container(
-                                  height: 150,
-                                  color: Colors.blue,
+                      Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/Bc.png',
+                                ),
+                                fit: BoxFit.cover),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(18)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CarouselSlider(
+                              carouselController: _controller,
+                              options: CarouselOptions(
+                                padEnds: false,
+                                autoPlayInterval: Duration(seconds: 10),
+                                height: 265,
+                                viewportFraction: 1.0,
+                                enableInfiniteScroll: false,
+                                // autoPlay: true
+                              ),
+                              items: widget.singleProgress.files!
+                                  .map((inprogressFile) {
+                                if (widget.singleProgress.files!.isEmpty ||
+                                    inprogressFile.fileExt.isEmpty ||
+                                    inprogressFile.fileUrl.isEmpty ||
+                                    inprogressFile.thumbnail.isEmpty) {
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          borderRadius:
+                                              BorderRadius.circular(18)),
+                                      child: CircularProgressIndicator());
+                                  // CachedNetworkImage(
+                                  //     placeholder: (context, url) => Center(
+                                  //         child: CircularProgressIndicator()),
+                                  //     imageUrl:
+                                  //         'https://i1.wp.com/nnn.ng/wp-content/uploads/2021/03/news-today.jpg',
+                                  //     fit: BoxFit.cover);
+                                  // Image.asset('assets/logo.png', fit: BoxFit.cover);
+                                } else if (inprogressFile.fileExt == '') {
+                                  return CachedNetworkImage(
+                                      errorWidget: (context, url, error) =>
+                                          Center(
+                                              child: Text(
+                                                  'No Image/Video Available')),
+                                      placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator()),
+                                      imageUrl:
+                                          'https://www.batnf.net/${inprogressFile.thumbnail}',
+                                      fit: BoxFit.cover);
+                                } else if (inprogressFile.fileExt == 'image' &&
+                                    inprogressFile.thumbnail.isNotEmpty) {
+                                  return CachedNetworkImage(
+                                      errorWidget: (context, url, error) =>
+                                          Center(
+                                              child: Text(
+                                                  'No Image/Video Available')),
+                                      placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator()),
+                                      imageUrl:
+                                          'https://www.batnf.net/${inprogressFile.fileUrl}',
+                                      fit: BoxFit.cover);
+                                }
+                                return Videos(
+                                  thumbnailUrl: inprogressFile.thumbnail,
+                                  videoUrl: inprogressFile.fileUrl,
                                 );
-                                // CachedNetworkImage(
-                                //     placeholder: (context, url) => Center(
-                                //         child: CircularProgressIndicator()),
-                                //     imageUrl:
-                                //         'https://i1.wp.com/nnn.ng/wp-content/uploads/2021/03/news-today.jpg',
-                                //     fit: BoxFit.cover);
-                                // Image.asset('assets/logo.png', fit: BoxFit.cover);
-                              } else if (inprogressFile.fileExt == '') {
-                                return CachedNetworkImage(
-                                    placeholder: (context, url) => Center(
-                                        child: CircularProgressIndicator()),
-                                    imageUrl:
-                                        'https://www.batnf.net/${inprogressFile.thumbnail}',
-                                    fit: BoxFit.cover);
-                              } else if (inprogressFile.fileExt == 'image' &&
-                                  inprogressFile.thumbnail.isNotEmpty) {
-                                return CachedNetworkImage(
-                                    errorWidget: (context, url, error) =>
-                                        Center(
-                                            child: Text(
-                                                'No Image/Video Available')),
-                                    placeholder: (context, url) => Center(
-                                        child: CircularProgressIndicator()),
-                                    imageUrl:
-                                        'https://www.batnf.net/${inprogressFile.fileUrl}',
-                                    fit: BoxFit.cover);
-                              }
-                              return Videos(
-                                thumbnailUrl: inprogressFile.thumbnail,
-                                videoUrl: inprogressFile.fileUrl,
-                              );
-                            }).toList()),
+                              }).toList()),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

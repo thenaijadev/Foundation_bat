@@ -55,6 +55,13 @@ class _VideosState extends State<Videos> {
         .join(':');
   }
 
+String getDuration() {
+    final duration =
+        Duration(milliseconds: _playerController.value.duration.inMilliseconds.round());
+    return [duration.inMinutes, duration.inSeconds]
+        .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
+        .join(':');
+  }
   @override
   Widget build(BuildContext context) {
     if (!playVideo) {
@@ -88,8 +95,8 @@ class _VideosState extends State<Videos> {
               child: Container(
                 color: Colors.transparent,
                 child: Icon(
-                  Icons.play_arrow,
-                  color: Colors.white.withOpacity(0.99),
+                  FontAwesomeIcons.playCircle,
+                  color: Colors.blue,
                   size: 60,
                 ),
               ),
@@ -134,9 +141,21 @@ class _VideosState extends State<Videos> {
             Positioned(
                 bottom: 18,
                 left: 8,
-                child: Text(
-                  getPosition(),
-                  style: TextStyle(color: Colors.white),
+                child: Row(
+                  children: [
+                    Text(
+                      getPosition(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      ' / ',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      getDuration(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
                 )),
             // video progress bar and full screen mode button
             Positioned(

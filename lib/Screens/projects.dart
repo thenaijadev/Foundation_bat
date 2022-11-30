@@ -320,13 +320,21 @@ class _ProjectPageState extends State<ProjectPage> {
                                           children: [
                                             //Images
                                             Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.blue,
+                                                borderRadius: BorderRadius.circular(18)
+                                              ),
                                               height: 150,
                                               width: 310,
                                               margin: EdgeInsets.only(
                                                   bottom: 7.0, top: 7.0, left: 9.0),
                                               child: 
                                               inprogress.files!.isEmpty
-                                                  ? Image.asset('assets/logo.png')
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18),
+                                                      child: Image.asset('assets/Bc.png', fit: BoxFit.cover ,))
                                                   : inprogress.files!.first
                                                               .fileExt ==
                                                           'image/jpeg' &&
