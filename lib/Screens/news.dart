@@ -246,7 +246,7 @@ class _NewsState extends State<News> {
             children: [
               // Container for search box etc
               
-              if (provider.searchResult != null)
+              if (provider.searchResult != null && provider.searchResult!.isNotEmpty)
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 15),
                   color: Theme.of(context).scaffoldBackgroundColor,
@@ -328,10 +328,8 @@ class _NewsState extends State<News> {
                                               width: 310,
                                               margin: EdgeInsets.only(
                                                   bottom: 7.0, top: 7.0, left: 9.0),
-                                              child: news.files!.first.fileExt ==
-                                                          'image/jpeg' &&
-                                                      news.files!.first.fileUrl
-                                                          .isNotEmpty
+                                              child:
+                                              news.files == null && news.files!.first.fileUrl.isEmpty
                                                   ? ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(18),
@@ -356,36 +354,64 @@ class _NewsState extends State<News> {
                                                                     ),
                                                                   ),
                                                           imageUrl:
-                                                              'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                              'https://i1.wp.com/nnn.ng/wp-content/uploads/2021/03/news-today.jpg',
                                                           fit: BoxFit.cover),
                                                     )
-                                                  : ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(18),
-                                                      child: CachedNetworkImage(
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Center(
-                                                                child: Icon(
-                                                                  Icons.error,
-                                                                  color:
-                                                                      Colors.black,
-                                                                ),
-                                                              ),
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  Center(
-                                                                    child: Text(
-                                                                      'Loading',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                    ),
+                                                  :   news.files!.first
+                                                                    .fileExt ==
+                                                                'image/jpeg' &&
+                                                            news
+                                                                .files!
+                                                                .first
+                                                                .fileUrl
+                                                                .isNotEmpty
+                                                            ? CachedNetworkImage(
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                Center(
+                                                                  child: Icon(
+                                                                    Icons.error,
                                                                   ),
-                                                          imageUrl:
-                                                              'https://www.batnf.net/${news.files!.first.thumbnail}',
-                                                          fit: BoxFit.cover),
-                                                    ),
+                                                                ),
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    Center(
+                                                                      child:
+                                                                          CircularProgressIndicator(),
+                                                                    ),
+                                                            imageUrl:
+                                                                'https://www.batnf.net/${news.files!.first.fileUrl}',
+                                                            fit: BoxFit.cover)
+                                                             : ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                                    errorWidget: (context,
+                                                                            url,
+                                                                            error) =>
+                                                                        Center(
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.error,
+                                                                            color:
+                                                                                Colors.black,
+                                                                          ),
+                                                                        ),
+                                                                    placeholder:
+                                                                        (context, url) =>
+                                                                            Center(
+                                                                              child: CircularProgressIndicator(),
+                                                                            ),
+                                                                    imageUrl:
+                                                                        'https://www.batnf.net/${news.files!.first.thumbnail}',
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                          ) 
                                             ),
                   
                                             // News Details

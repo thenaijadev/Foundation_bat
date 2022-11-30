@@ -202,7 +202,6 @@ class _SignInState extends State<SignIn> {
                   child: Expanded(
                     flex: 6,
                     child: Container(
-                      // margin: EdgeInsets.only(top: 200),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.68),
                         borderRadius: BorderRadius.only(
@@ -217,13 +216,9 @@ class _SignInState extends State<SignIn> {
                             children: [
                               // Logo
                               Center(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      bottom: 5.0, top: 5.0, left: 130.0, right: 130.0),
-                                  child: Image.asset(
-                                    'assets/logo.png',
-                                    height: 120,
-                                  ),
+                                child: Image.asset(
+                                  'assets/logo.png',
+                                  height: 120,
                                 ),
                               ),
                     
@@ -367,33 +362,36 @@ class _SignInState extends State<SignIn> {
                               ),
                     
                               // Sign Up Redirection
-                              Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, SignUp.id);
-                                  },
-                                  child: RichText(
-                                      text: TextSpan(
-                                          text: "Don't have an account? ",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontStyle: FontStyle.normal,
-                                              fontFamily: 'Inter',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400),
-                                          // ignore: prefer_const_literals_to_create_immutables
-                                          children: [
-                                        TextSpan(
-                                            text: 'Sign Up',
+                              Container(
+                                margin: EdgeInsets.only(bottom: 10),
+                                child: Center(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, SignUp.id);
+                                    },
+                                    child: RichText(
+                                        text: TextSpan(
+                                            text: "Don't have an account? ",
                                             style: TextStyle(
-                                                color: Color.fromARGB(255, 8, 51, 121),
+                                                color: Colors.black,
+                                                fontStyle: FontStyle.normal,
                                                 fontFamily: 'Inter',
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600))
-                                      ])),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                          TextSpan(
+                                              text: 'Sign Up',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(255, 8, 51, 121),
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600))
+                                        ])),
+                                  ),
                                 ),
                               ),
-                            SizedBox(height: 5,)
+                            
                             ],
                           )
                           ),

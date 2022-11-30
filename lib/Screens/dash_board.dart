@@ -257,68 +257,6 @@ class _HomePageState extends State<HomePage> {
                             // ignore: sort_child_properties_last
                             child: Center(
                                 child: Text(
-                                    'Providing Support in the Agricultural Sector',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: kGeneralbodytextColor,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'Inter',
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600))),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  'assets/market.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            // ignore: sort_child_properties_last
-                            child: Center(
-                                child: Text('Get Latest News on Batnf',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: kGeneralbodytextColor,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'Inter',
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600))),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  'assets/onboarding3.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            // ignore: sort_child_properties_last
-                            child: Center(
-                                child: Text(
-                                    'Follow-up on Projects Carried out by Batnf',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: kGeneralbodytextColor,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'Inter',
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600))),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  'assets/onboarding4.png',
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            // ignore: sort_child_properties_last
-                            child: Center(
-                                child: Text(
                                     'Register and Attend Events Hosted by Batnf',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(

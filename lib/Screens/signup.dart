@@ -235,32 +235,18 @@ class _SignUpState extends State<SignUp> {
                     key: _formKey,
                     child: ListView(
                       children: [
+                        SizedBox(height: 10),
                         // logo
                         Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                bottom: 20.0, top: 10.0, left: 130.0, right: 130.0),
-                            child: Image.asset(
-                              'assets/logo.png',
-                              height: 110,
-                            ),
+                          child: Image.asset(
+                            'assets/logo.png',
+                            height: 110,
                           ),
                         ),
-              
-                        //Sign Up label
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 35.0, left: 30.0),
-                        //   child: Text(
-                        //     'Sign Up',
-                        //     textAlign: TextAlign.left,
-                        //     style: kSigningtextstyle,
-                        //   ),
-                        // ),
-              
                         //Request for First Name
                         Padding(
                           padding: const EdgeInsets.only(
-                            left: 60.0, right: 60.0, bottom: 10.0),
+                            left: 60.0, right: 60.0, bottom: 10.0, top: 10),
                           child: ReuseableTextField(
                             keyboard: TextInputType.name,
                             cardChild: Icon(FontAwesomeIcons.user,

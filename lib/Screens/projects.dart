@@ -338,19 +338,12 @@ class _ProjectPageState extends State<ProjectPage> {
                                                               Center(
                                                                 child: Icon(
                                                                   Icons.error,
-                                                                  color:
-                                                                      Colors.black,
                                                                 ),
                                                               ),
                                                           placeholder:
                                                               (context, url) =>
                                                                   Center(
-                                                                    child: Text(
-                                                                      'Loading',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                    ),
+                                                                    child: CircularProgressIndicator(),
                                                                   ),
                                                           imageUrl:
                                                               'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
@@ -372,12 +365,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                           placeholder:
                                                               (context, url) =>
                                                                   Center(
-                                                                    child: Text(
-                                                                      'Loading',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black),
-                                                                    ),
+                                                                    child: CircularProgressIndicator(),
                                                                   ),
                                                           imageUrl:
                                                               'https://www.batnf.net/${inprogress.files!.first.thumbnail}',

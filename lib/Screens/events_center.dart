@@ -336,19 +336,14 @@ class _EventCenterState extends State<EventCenter> {
                                                                               error) =>
                                                                           Center(
                                                                             child:
-                                                                                Text(
-                                                                              'Loading',
-                                                                              style:
-                                                                                  TextStyle(color: Colors.black),
+                                                                                Icon(
+                                                                              Icons.error,
                                                                             ),
                                                                           ),
                                                                       placeholder:
                                                                           (context, url) =>
                                                                               Center(
-                                                                                child: Text(
-                                                                                  'Loading',
-                                                                                  style: TextStyle(color: Colors.black),
-                                                                                ),
+                                                                                child: CircularProgressIndicator(),
                                                                               ),
                                                                       imageUrl:
                                                                           'https://www.batnf.net/${event.files!.first.fileUrl}',
@@ -367,19 +362,14 @@ class _EventCenterState extends State<EventCenter> {
                                                                               error) =>
                                                                           Center(
                                                                             child:
-                                                                                Text(
-                                                                              'Loading',
-                                                                              style:
-                                                                                  TextStyle(color: Colors.black),
+                                                                                Icon(
+                                                                              Icons.error,
                                                                             ),
                                                                           ),
                                                                       placeholder:
                                                                           (context, url) =>
                                                                               Center(
-                                                                                child: Text(
-                                                                                  'Loading',
-                                                                                  style: TextStyle(color: Colors.black),
-                                                                                ),
+                                                                                child: CircularProgressIndicator(),
                                                                               ),
                                                                       imageUrl:
                                                                           'https://www.batnf.net/${event.files!.first.thumbnail}',

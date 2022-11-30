@@ -66,7 +66,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                                   inprogressFile.thumbnail.isNotEmpty) {
                                 return CachedNetworkImage(
                                     errorWidget: (context, url, error) =>
-                                        Center(child: Text('No Image Available')),
+                                        Center(child: Text('No Image/Video Available')),
                                     placeholder: (context, url) => Center(
                                         child: CircularProgressIndicator()),
                                     imageUrl:

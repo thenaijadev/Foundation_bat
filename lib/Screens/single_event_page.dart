@@ -126,10 +126,8 @@ class _EventDetailsState extends State<EventDetails> {
                                     errorWidget: (context, url, error) =>
                                         Center(child: Text('No Image/Video Available')),
                                     placeholder: (context, url) => Center(
-                                            child: Text(
-                                          'Loading',
-                                          style: TextStyle(color: Colors.black),
-                                        )),
+                                            child: CircularProgressIndicator(),
+                                        ),
                                     imageUrl:
                                         'https://www.batnf.net/${eventsFile.fileUrl}',
                                     fit: BoxFit.cover);
