@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:batnf/Screens/dash_board.dart';
+import 'package:batnf/providers/home_provider.dart';
 import 'package:batnf/providers/screen_provider.dart';
 import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +76,14 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => InprogressProvider(),
           ),
-          ChangeNotifierProvider(
-            create: (context) => CompletedProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => PendingProvider(),
+          // ChangeNotifierProvider(
+          //   create: (context) => CompletedProvider(),
+          // ),
+          // ChangeNotifierProvider(
+          //   create: (context) => PendingProvider(),
+          // ),
+           ChangeNotifierProvider(
+            create: (context) => HomeProvider(),
           ),
           ChangeNotifierProvider(
             create: (context) => ThemeProvider(),

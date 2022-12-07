@@ -37,7 +37,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
    List<Widget> screen = [
     HomePage(),
     EventCenter(),
-    Promotion(),
+    // Promotion(),
     ProjectPage(),
     News()
   ];
@@ -52,7 +52,7 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
         // Drawer
         drawer: Drawer(
           width: 250,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).primaryColor,
           child: ListView(
             // ignore: prefer_const_literals_to_create_immutables
             children: [
@@ -195,32 +195,36 @@ class _ReuseableBottomBarState extends State<ReuseableBottomBar> {
             NavigationDestination(
                 icon: Icon(
                       Icons.home,
+                      color: Theme.of(context).primaryColor
                     ),
                 selectedIcon: Image.asset('assets/icons/home.png', height: 30, width:30,),
                 label: 'Home'),
-                //Event
+           //Event
             NavigationDestination(
-                icon: Icon(FontAwesomeIcons.calendarAlt, size: 19,),
+                icon: Icon(FontAwesomeIcons.calendarAlt, size: 19, color: Theme.of(context).primaryColor),
                 selectedIcon: Image.asset('assets/icons/Calendar.png'),
                 label: 'Events'),
-                //Games
-            NavigationDestination(
-              icon: Icon(
-                      FontAwesomeIcons.gamepad,
-                      size: 19,
-                    ),
-                selectedIcon: Image.asset('assets/icons/game.png'),
-                 label: 'Games'),
-                 //Project
+          // //Games
+          //   NavigationDestination(
+          //     icon: Icon(
+          //             FontAwesomeIcons.gamepad,
+          //             size: 19,
+          //             color: Theme.of(context).primaryColor
+          //           ),
+          //       selectedIcon: Image.asset('assets/icons/game.png'),
+          //        label: 'Games'),
+          
+          
+          //Project
             NavigationDestination(
                 icon:  Icon(
-                      FontAwesomeIcons.heart, size: 19,),
+                      FontAwesomeIcons.heart, size: 19, color: Theme.of(context).primaryColor),
                 selectedIcon:Image.asset('assets/icons/pro.png'),
                 label: 'projects'),
-                //News
+          //News
             NavigationDestination(
                 selectedIcon: Image.asset('assets/icons/news.svg'),
-                icon: Icon(FontAwesomeIcons.newspaper, size: 19,),
+                icon: Icon(FontAwesomeIcons.newspaper, size: 19, color: Theme.of(context).primaryColor),
                 label: 'News'),
           ],
               ),

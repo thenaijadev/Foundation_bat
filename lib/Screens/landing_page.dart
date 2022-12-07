@@ -139,91 +139,91 @@ class _LandindPageState extends State<LandingPage> {
                   ],
                 ),
       
-                // page 2 (Games)
-                Stack(
-                  children: [
-                    Image.asset(
-                      'assets/onboarding2.png',
-                      width: double.maxFinite,
-                      height: double.maxFinite,
-                      fit: BoxFit.cover,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 300),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor
-                            .withOpacity(0.8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Header
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50)),
-                            margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              "Play and Learn",
-                              textAlign: TextAlign.center,
-                              style: kLandpageHeadertextstyle,
-                            ),
-                          ),
-                          // Body
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 10,
-                              left: 56,
-                              right: 56,
-                            ),
-                            child: Text(
-                              'How well do you know the agricultural ecosystem in Nigeria? Give yourself a test to see how much knowledge you have about agriculture.',
-                              textAlign: TextAlign.justify,
-                              style: kLandpagebodytextstyle,
-                            ),
-                          ),
-                          // Button
-                          Container(
-                            margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                            height: 45,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(45.0),
-                              ),
-                              height: 45.0,
-                              minWidth: MediaQuery.of(context).size.width,
-                              color: Color.fromARGB(255, 8, 51, 121),
-                              onPressed: () {
-                                controller.nextPage(
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.linear);
-                              },
-                              child: Text(
-                                'Next',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
-                              ),
-                            ),
-                          ),
-                          // Skip
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, SignIn.id);
-                              },
-                              child: Text(
-                                'Skip',
-                                style: TextStyle(fontSize: 18),
-                              ))
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                // // page 2 (Games)
+                // Stack(
+                //   children: [
+                //     Image.asset(
+                //       'assets/onboarding2.png',
+                //       width: double.maxFinite,
+                //       height: double.maxFinite,
+                //       fit: BoxFit.cover,
+                //     ),
+                //     Container(
+                //       margin: EdgeInsets.only(top: 300),
+                //       width: double.maxFinite,
+                //       decoration: BoxDecoration(
+                //         color: Theme.of(context).scaffoldBackgroundColor
+                //             .withOpacity(0.8),
+                //         borderRadius: BorderRadius.only(
+                //           topLeft: Radius.circular(30),
+                //           topRight: Radius.circular(30),
+                //         ),
+                //       ),
+                //       child: Column(
+                //         // crossAxisAlignment: CrossAxisAlignment.stretch,
+                //         children: [
+                //           // Header
+                //           Container(
+                //             decoration: BoxDecoration(
+                //                 borderRadius: BorderRadius.circular(50)),
+                //             margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
+                //             padding: EdgeInsets.only(left: 10, right: 10),
+                //             child: Text(
+                //               "Play and Learn",
+                //               textAlign: TextAlign.center,
+                //               style: kLandpageHeadertextstyle,
+                //             ),
+                //           ),
+                //           // Body
+                //           Container(
+                //             margin: EdgeInsets.only(
+                //               top: 10,
+                //               left: 56,
+                //               right: 56,
+                //             ),
+                //             child: Text(
+                //               'How well do you know the agricultural ecosystem in Nigeria? Give yourself a test to see how much knowledge you have about agriculture.',
+                //               textAlign: TextAlign.justify,
+                //               style: kLandpagebodytextstyle,
+                //             ),
+                //           ),
+                //           // Button
+                //           Container(
+                //             margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                //             height: 45,
+                //             child: MaterialButton(
+                //               shape: RoundedRectangleBorder(
+                //                 borderRadius: BorderRadius.circular(45.0),
+                //               ),
+                //               height: 45.0,
+                //               minWidth: MediaQuery.of(context).size.width,
+                //               color: Color.fromARGB(255, 8, 51, 121),
+                //               onPressed: () {
+                //                 controller.nextPage(
+                //                     duration: Duration(milliseconds: 500),
+                //                     curve: Curves.linear);
+                //               },
+                //               child: Text(
+                //                 'Next',
+                //                 textAlign: TextAlign.center,
+                //                 style: kButtontextstyle,
+                //               ),
+                //             ),
+                //           ),
+                //           // Skip
+                //           TextButton(
+                //               onPressed: () {
+                //                 Navigator.pushNamed(context, SignIn.id);
+                //               },
+                //               child: Text(
+                //                 'Skip',
+                //                 style: TextStyle(fontSize: 18),
+                //               ))
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
       
                 //page 3 (News)
                 Stack(
@@ -238,8 +238,8 @@ class _LandindPageState extends State<LandingPage> {
                       margin: EdgeInsets.only(top: 300),
                       width: double.maxFinite,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor
-                            .withOpacity(0.8),
+                        color: Color.fromARGB(59, 202, 197, 197)
+                            .withOpacity(0.85),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -411,7 +411,7 @@ class _LandindPageState extends State<LandingPage> {
             indicatorSelectorColor: Color.fromARGB(255, 8, 51, 121),
             indicatorSpace: 10.0,
             shape: IndicatorShape.circle(size: 8),
-            length: 4),
+            length: 3),
       ),
     );
   }

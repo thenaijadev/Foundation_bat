@@ -8,7 +8,7 @@ const kGeneralbodytextColor = Color(0xffFFFFFF);
 const kTextboxhintColor = Color(0xff828282);
 const kButtonColor = Color.fromARGB(255, 93, 97, 100);
 const kTextfieldborderColor = Color(0xffFFFFFF);
-const kTitleheaderColor = Color.fromARGB(255, 3, 32, 80);
+const kTitleheaderColor = Color.fromARGB(255, 68, 103, 209);
 const kTitleheaderColor1 = Colors.orange;
 final kBoxshadow = BoxShadow(
     // spreadRadius: 0.5,

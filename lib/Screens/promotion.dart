@@ -90,7 +90,7 @@ class _PromotionState extends State<Promotion> {
                     icon: Icon(
                       size: 20,
                       FontAwesomeIcons.bars,
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                     ));
               })),
           // Drawer
@@ -182,7 +182,7 @@ class _PromotionState extends State<Promotion> {
                             TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.userLock,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
     
                 //Logout option
@@ -202,7 +202,7 @@ class _PromotionState extends State<Promotion> {
                             TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
               ],
             ),

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:batnf/Screens/home_video.dart';
-import 'package:batnf/Screens/projects.dart';
 import 'package:batnf/Screens/reset_password_page.dart';
 import 'package:batnf/Screens/signin.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
@@ -13,17 +12,16 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:batnf/Models/news_model.dart';
-import 'package:batnf/Screens/events_center.dart';
-import 'package:batnf/Screens/news.dart';
 import 'package:batnf/Screens/single_event_page.dart';
 import 'package:batnf/Screens/single_news_page.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:batnf/providers/event_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../Models/events_model.dart';
+import '../Models/home_model.dart';
 import '../Models/inprogress_model.dart';
+import '../providers/home_provider.dart';
 import '../providers/inprogress_provider.dart';
 import '../providers/news_provider.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -40,9 +38,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final CarouselController _controller = CarouselController();
   @override
   void initState() {
     super.initState();
+    Provider.of<HomeProvider>(context, listen: false).getHomeProjects();
     Provider.of<NewsProvider>(context, listen: false).getAllNews();
     Provider.of<EventProvider>(context, listen: false).getAllEvents();
     Provider.of<InprogressProvider>(context, listen: false)
@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
     final text = Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark
         ? 'Dark Theme'
         : 'Light Theme';
+    HomeProvider homeProvider = Provider.of<HomeProvider>(context);
     NewsProvider newsProvider = Provider.of<NewsProvider>(context);
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     InprogressProvider inprogressProvider =
@@ -113,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(
                       size: 20,
                       FontAwesomeIcons.bars,
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                     ));
               })),
           // Drawer
@@ -205,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.userLock,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
 
                 //Logout option
@@ -225,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
               ],
             ),
@@ -240,27 +241,88 @@ class _HomePageState extends State<HomePage> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   // Image Sliders
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: CarouselSlider(
-                        options: CarouselOptions(
-                            height: 200,
-                            scrollDirection: Axis.horizontal,
-                            padEnds: true,
-                            enableInfiniteScroll: false,
-                            autoPlayCurve: Curves.easeInQuint,
-                            viewportFraction: 1,
-                            autoPlay: false),
-                        // ignore: prefer_const_literals_to_create_immutables
-                        items: [
-                          HomeVideo(),
-                        ],
-                      ),
-                    ),
-                  ),
-          
+                  Builder(builder: (context) {
+                    HomeModel home = homeProvider.allHomeProjects!.first;
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: CarouselSlider(
+                            carouselController: _controller,
+                            options: CarouselOptions(
+                                height: 200,
+                                scrollDirection: Axis.horizontal,
+                                padEnds: true,
+                                enableInfiniteScroll: false,
+                                autoPlayCurve: Curves.easeInQuint,
+                                viewportFraction: 1,
+                                autoPlay: false),
+                            // ignore: prefer_const_literals_to_create_immutables
+                            items: 
+                            // home.files!.isEmpty
+                            //     ? Container(
+                            //         child: Center(
+                            //           child: Text('Error loading files'),
+                            //         ),
+                            //       )
+                            //     : home.files!.first.fileExt == 'image' &&
+                            //             home.files!.first.fileUrl.isEmpty
+                            //         ? ClipRRect(
+                            //             borderRadius: BorderRadius.circular(18),
+                            //             child: CachedNetworkImage(
+                            //                 errorWidget:
+                            //                     (context, url, error) => Center(
+                            //                           child: Icon(
+                            //                             Icons.error,
+                            //                           ),
+                            //                         ),
+                            //                 placeholder: (context, url) =>
+                            //                     Center(
+                            //                       child:
+                            //                           CircularProgressIndicator(),
+                            //                     ),
+                            //                 imageUrl:
+                            //                     'https://www.batnf.net/${home.files!.first.fileUrl}',
+                            //                 fit: BoxFit.cover),
+                            //           )
+                            //         :
+
+
+                                [
+                                  HomeVideo(thumbnailUrl: home.files!.first.thumbnail, videoUrl: home.files!.first.fileUrl,),
+                                ],
+
+
+
+                            //     home.files!.map((homeFile) {
+                            //   if (homeFile.fileExt == '') {
+                            //     return CachedNetworkImage(
+                            //         imageUrl:
+                            //             'https://www.batnf.net/${homeFile.thumbnail}',
+                            //         fit: BoxFit.cover);
+                            //   } else if (homeFile.fileExt == 'image' &&
+                            //       homeFile.thumbnail.isNotEmpty) {
+                            //     return CachedNetworkImage(
+                            //         errorWidget: (context, url, error) =>
+                            //             Center(
+                            //                 child: Text(
+                            //                     'No Image/Video Available')),
+                            //         placeholder: (context, url) => Center(
+                            //               child: CircularProgressIndicator(),
+                            //             ),
+                            //         imageUrl:
+                            //             'https://www.batnf.net/${homeFile.fileUrl}',
+                            //         fit: BoxFit.cover);
+                            //   }
+                            //   return HomeVideo(
+                            //     thumbnailUrl: home.files!.first.fileUrl,
+                            //     videoUrl: home.files!.first.fileUrl,
+                            //   );
+                            // }).toList),
+                      ),)
+                    );
+                  }),
+
                   // InProject
                   if (inprogressProvider.allInprogressProjects != null &&
                       inprogressProvider.allInprogressProjects!.isNotEmpty)
@@ -278,7 +340,8 @@ class _HomePageState extends State<HomePage> {
                                 right: 15.0,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Projects',
@@ -292,7 +355,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      Provider.of<Screens>(context, listen: false)
+                                      Provider.of<Screens>(context,
+                                              listen: false)
                                           .updateScreen(3);
                                     },
                                     child: Text(
@@ -321,7 +385,8 @@ class _HomePageState extends State<HomePage> {
                                       child: Container(
                                         margin: EdgeInsets.only(right: 15.0),
                                         height: 100,
-                                        child: inprogress.files!.first.fileExt ==
+                                        child: inprogress
+                                                        .files!.first.fileExt ==
                                                     'image/png' &&
                                                 inprogress.files!.first.fileUrl
                                                     .isNotEmpty
@@ -337,10 +402,12 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: CircularProgressIndicator(),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${inprogress.files!.first.fileUrl}',
                                                     fit: BoxFit.cover),
@@ -357,22 +424,23 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child: Text(
+                                                                'Loading',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                              ),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
                                                     fit: BoxFit.cover),
                                               ),
                                       ),
                                     ),
-          
+
                                     //Details
                                     Expanded(
                                       flex: 4,
@@ -422,7 +490,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }),
-          
+
                   // Events
                   if (eventProvider.allEvents != null &&
                       eventProvider.allEvents!.isNotEmpty)
@@ -439,7 +507,8 @@ class _HomePageState extends State<HomePage> {
                                 right: 15.0,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'Upcoming Events',
@@ -452,7 +521,8 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      Provider.of<Screens>(context, listen: false)
+                                      Provider.of<Screens>(context,
+                                              listen: false)
                                           .updateScreen(1);
                                     },
                                     child: Text(
@@ -497,10 +567,12 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: CircularProgressIndicator(),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${events.files!.first.fileUrl}',
                                                     fit: BoxFit.cover),
@@ -517,22 +589,23 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child: Text(
+                                                                'Loading',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                              ),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${events.files!.first.thumbnail}',
                                                     fit: BoxFit.cover),
                                               ),
                                       ),
                                     ),
-          
+
                                     //Details
                                     Expanded(
                                       flex: 4,
@@ -582,7 +655,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }),
-          
+
                   // SizedBox(
                   //   height: 150,
                   //   width: 365,
@@ -772,11 +845,11 @@ class _HomePageState extends State<HomePage> {
                   //     ],
                   //   ),
                   // ),
-          
+
                   ///I commented your news section to write another.
                   ///Look at how it works and do thesame for other sections
                   ///
-          
+
                   if (newsProvider.allNews != null &&
                       newsProvider.allNews!.isNotEmpty)
                     Builder(builder: (context) {
@@ -792,7 +865,8 @@ class _HomePageState extends State<HomePage> {
                                 right: 15.0,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'News',
@@ -808,7 +882,8 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       //Because you have a bottom nav bar for news, no need to move to a new page.
                                       //I just changed the index of the bottom nav bar to the index of the news tab.
-                                      Provider.of<Screens>(context, listen: false)
+                                      Provider.of<Screens>(context,
+                                              listen: false)
                                           .updateScreen(4);
                                     },
                                     child: Text(
@@ -832,7 +907,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Row(
                                   children: [
                                     //Images
-          
+
                                     ///Notice i used expanded and gave them a flex property.
                                     ///The reason is to allow the image and the text occupy the entire screen
                                     ///unlike giving it a fixed with.
@@ -864,15 +939,16 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: Text(
-                                                            'Loading',
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.black),
-                                                          ),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child: Text(
+                                                                'Loading',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                              ),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.fileUrl}',
                                                     fit: BoxFit.cover),
@@ -889,17 +965,19 @@ class _HomePageState extends State<HomePage> {
                                                             color: Colors.black,
                                                           ),
                                                         ),
-                                                    placeholder: (context, url) =>
-                                                        Center(
-                                                          child: CircularProgressIndicator(),
-                                                        ),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.thumbnail}',
                                                     fit: BoxFit.cover),
                                               ),
                                       ),
                                     ),
-          
+
                                     //Details
                                     Expanded(
                                       flex: 4,
@@ -918,7 +996,7 @@ class _HomePageState extends State<HomePage> {
                                                 fontStyle: FontStyle.normal,
                                                 fontFamily: 'Inter',
                                                 fontSize: 10,
-                                                fontWeight: FontWeight.bold), 
+                                                fontWeight: FontWeight.bold),
                                             // kNewsSubHeader,
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 2,
@@ -949,12 +1027,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }),
-          
+
                   ///this is where your former code begins.
                   ///the changes are not much but i didnt want to
                   ///delete your entire code. Just look at it and let me know.
                   ///
-          
+
                   // // News list header
                   // SizedBox(
                   //   height: 150,
@@ -1097,7 +1175,7 @@ class _HomePageState extends State<HomePage> {
                   //                                                           .cover),
                   //                                             ),
                   //                                 ),
-          
+
                   //                                 //Details
                   //                                 Container(
                   //                                   // height: 100,
@@ -1145,7 +1223,7 @@ class _HomePageState extends State<HomePage> {
                   //     ],
                   //   ),
                   // ),
-          
+
                   SizedBox(
                     height: 30,
                   ),

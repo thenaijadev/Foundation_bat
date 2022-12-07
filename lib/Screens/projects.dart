@@ -122,7 +122,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     icon: Icon(
                       size: 20,
                       FontAwesomeIcons.bars,
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                     ));
               })),
           // Drawer
@@ -214,7 +214,7 @@ class _ProjectPageState extends State<ProjectPage> {
                             TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.userLock,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
     
                 //Logout option
@@ -234,7 +234,7 @@ class _ProjectPageState extends State<ProjectPage> {
                             TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
               ],
             ),
@@ -337,7 +337,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                                       child: Image.asset('assets/Bc.png', fit: BoxFit.cover ,))
                                                   : inprogress.files!.first
                                                               .fileExt ==
-                                                          'image/jpeg' &&
+                                                          'image' &&
                                                       inprogress.files!.first
                                                           .fileUrl.isNotEmpty
                                                   ? ClipRRect(

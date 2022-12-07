@@ -1,4 +1,4 @@
-import 'package:auto_orientation/auto_orientation.dart';
+
 import 'package:batnf/Screens/video_orientation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_video_player/cached_video_player.dart';
@@ -62,6 +62,8 @@ String getDuration() {
         .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
         .join(':');
   }
+  
+  
   @override
   Widget build(BuildContext context) {
     if (!playVideo) {
@@ -71,14 +73,13 @@ String getDuration() {
         children: [
           CachedNetworkImage(
             // height: double.maxFinite,
-            errorWidget: (context, url, error) => Container(),
+            errorWidget: (context, url, error) => Center(
+              child: Text('Error Loading Images'),
+            ),
             // ignore: prefer_const_constructors
             placeholder: (context, url) => Center(
-              child: const Text(
-                'Loading...',
-                style: TextStyle(color: Colors.black),
+              child: CircularProgressIndicator(),
               ),
-            ),
             imageUrl: 'https://www.batnf.net/${widget.thumbnailUrl}',
             fit: BoxFit.cover,
           ),

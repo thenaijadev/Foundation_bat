@@ -17,7 +17,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/theme_provider.dart';
 import '../widgets/change_theme_button.dart';
-import '../widgets/reuseable_bottom_navbar.dart';
 
 class EventCenter extends StatefulWidget {
   static String id = 'event';
@@ -110,7 +109,7 @@ class _EventCenterState extends State<EventCenter> {
                     icon: Icon(
                       size: 20,
                       FontAwesomeIcons.bars,
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                     ));
               })),
           // Drawer
@@ -202,7 +201,7 @@ class _EventCenterState extends State<EventCenter> {
                             fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.userLock,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
 
                 //Logout option
@@ -222,7 +221,7 @@ class _EventCenterState extends State<EventCenter> {
                             fontSize: 16, fontStyle: FontStyle.italic),
                       ),
                       leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.lightBlue)),
+                          color: Theme.of(context).primaryColor)),
                 ),
               ],
             ),

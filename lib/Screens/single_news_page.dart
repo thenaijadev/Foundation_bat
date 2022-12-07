@@ -2,7 +2,6 @@
 
 import 'package:batnf/Models/news_model.dart';
 import 'package:batnf/Screens/video_thumbnail.dart';
-import 'package:batnf/constants/color_constant.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -45,7 +44,6 @@ class _NewsDetailsState extends State<NewsDetails> {
                       ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: CarouselSlider(
-                            
                               carouselController: _controller,
                               options: CarouselOptions(
                                 autoPlayInterval: Duration(seconds: 10),
