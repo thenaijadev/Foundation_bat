@@ -7,7 +7,7 @@ import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class HomeVideo extends StatefulWidget {
-  final String videoUrl;
+  final String videoUrl ;
   final String thumbnailUrl;
   const HomeVideo(
       {Key? key, required this.videoUrl, required this.thumbnailUrl})
@@ -28,7 +28,10 @@ class _HomeVideoState extends State<HomeVideo> {
   }
 
   void video(String url) async {
-    _player = VideoPlayerController.asset('https://www.batnf.net/$url');
+    _player = VideoPlayerController.network(
+      // 'https://youtu.be/yTCDVfMz15M'
+      'https://www.batnf.net/$url'
+    );
     _player.addListener(() => setState(() {}));
     _player.setLooping(false);
     _player.addListener(listener);
@@ -75,7 +78,9 @@ class _HomeVideoState extends State<HomeVideo> {
             placeholder: (context, url) => Center(
               child: CircularProgressIndicator(),
             ),
-            imageUrl: 'https://www.batnf.net/${widget.thumbnailUrl}',
+            imageUrl:
+            //  'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+            'https://www.batnf.net/${widget.thumbnailUrl}',
             fit: BoxFit.cover,
           ),
           // Container(

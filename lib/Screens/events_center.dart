@@ -384,7 +384,6 @@ class _EventCenterState extends State<EventCenter> {
                                                                           .cover),
                                                             ),
                                                 ),
-              
                                                 // Details
                                                 Text(
                                                   event.eventName,

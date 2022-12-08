@@ -427,12 +427,7 @@ class _HomePageState extends State<HomePage> {
                                                     placeholder:
                                                         (context, url) =>
                                                             Center(
-                                                              child: Text(
-                                                                'Loading',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
+                                                              child: CircularProgressIndicator(),
                                                             ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${inprogress.files!.first.thumbnail}',
@@ -592,12 +587,7 @@ class _HomePageState extends State<HomePage> {
                                                     placeholder:
                                                         (context, url) =>
                                                             Center(
-                                                              child: Text(
-                                                                'Loading',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
+                                                              child: CircularProgressIndicator(),
                                                             ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${events.files!.first.thumbnail}',
@@ -884,7 +874,7 @@ class _HomePageState extends State<HomePage> {
                                       //I just changed the index of the bottom nav bar to the index of the news tab.
                                       Provider.of<Screens>(context,
                                               listen: false)
-                                          .updateScreen(4);
+                                          .updateScreen(3);
                                     },
                                     child: Text(
                                       'See All',
@@ -942,12 +932,7 @@ class _HomePageState extends State<HomePage> {
                                                     placeholder:
                                                         (context, url) =>
                                                             Center(
-                                                              child: Text(
-                                                                'Loading',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black),
-                                                              ),
+                                                              child: CircularProgressIndicator(),
                                                             ),
                                                     imageUrl:
                                                         'https://www.batnf.net/${news.files!.first.fileUrl}',

@@ -59,7 +59,7 @@ class _PromotionState extends State<Promotion> {
               elevation: 0.0,
               toolbarHeight: 60,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-    
+
               // App Logo
               actions: [
                 Container(
