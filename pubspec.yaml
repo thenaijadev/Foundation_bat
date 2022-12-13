@@ -57,7 +57,9 @@ dependencies:
   video_player:
   readmore:
   wakelock:
+  url_launcher:
   auto_orientation:
+  flutter_linkify:
 
 dev_dependencies:
   flutter_test:

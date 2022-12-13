@@ -245,7 +245,8 @@ class _ProjectPageState extends State<ProjectPage> {
             children: [
               // Container for search box etc
               
-              if (inprogressProvider.searchResult != null )
+              if (inprogressProvider.searchResult != null &&
+                  inprogressProvider.searchResult!.isNotEmpty)
                 Container(
                   margin: EdgeInsets.only(left: 30, right: 20, bottom: 21, top: 15),
                   color: Theme.of(context).scaffoldBackgroundColor,
@@ -321,9 +322,16 @@ class _ProjectPageState extends State<ProjectPage> {
                                             //Images
                                             Container(
                                               decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius: BorderRadius.circular(18)
-                                              ),
+                                                  image: DecorationImage(
+                                                    opacity: 0.2,
+                                                      image: AssetImage(
+                                                        'assets/Bc.png',
+                                                      ),
+                                                      fit: BoxFit.cover),
+                                                  color: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18)),
                                               height: 150,
                                               width: 310,
                                               margin: EdgeInsets.only(

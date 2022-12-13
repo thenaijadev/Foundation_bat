@@ -56,10 +56,10 @@ class _LandindPageState extends State<LandingPage> {
                       fit: BoxFit.cover,
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 300),
+                      margin: EdgeInsets.only(top: 350),
                       width: double.maxFinite,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.8),
+                        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -235,11 +235,11 @@ class _LandindPageState extends State<LandingPage> {
                       fit: BoxFit.cover,
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 300),
+                      margin: EdgeInsets.only(top: 350),
                       width: double.maxFinite,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(59, 202, 197, 197)
-                            .withOpacity(0.85),
+                            .withOpacity(0.7),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -338,13 +338,11 @@ class _LandindPageState extends State<LandingPage> {
                       fit: BoxFit.cover,
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 300),
+                      margin: EdgeInsets.only(top: 350),
                       width: double.maxFinite,
-                      // height: double.maxFinite,
-                      // height: MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
                         color: Theme.of(context).scaffoldBackgroundColor
-                            .withOpacity(0.8),
+                            .withOpacity(0.7),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),

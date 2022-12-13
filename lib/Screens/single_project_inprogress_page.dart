@@ -46,6 +46,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                       Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
+                              opacity: 0.2,
                                 image: AssetImage(
                                   'assets/Bc.png',
                                 ),
@@ -163,7 +164,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                         child: Icon(
                           FontAwesomeIcons.calendarAlt,
                           size: 25,
-                          color: kIcon,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                       Expanded(
@@ -221,7 +222,7 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                         child: Icon(
                           FontAwesomeIcons.mapMarkerAlt,
                           size: 22,
-                          color: kIcon,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                       Column(
@@ -265,8 +266,8 @@ class _ProgressDetailsState extends State<ProgressDetails> {
                     trimLength: 150,
                     trimMode: TrimMode.Line,
                     trimLines: 15,
-                    trimCollapsedText: 'Read More',
-                    trimExpandedText: 'Show Less',
+                    trimCollapsedText: '  Read More',
+                    trimExpandedText:  '  Show Less',
                     lessStyle: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,

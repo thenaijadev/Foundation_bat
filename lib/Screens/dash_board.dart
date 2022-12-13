@@ -241,6 +241,8 @@ class _HomePageState extends State<HomePage> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   // Image Sliders
+                   if (homeProvider.allHomeProjects != null &&
+                      homeProvider.allHomeProjects!.isNotEmpty)
                   Builder(builder: (context) {
                     HomeModel home = homeProvider.allHomeProjects!.first;
                     return Padding(
@@ -248,7 +250,6 @@ class _HomePageState extends State<HomePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: CarouselSlider(
-                            carouselController: _controller,
                             options: CarouselOptions(
                                 height: 200,
                                 scrollDirection: Axis.horizontal,
@@ -259,35 +260,6 @@ class _HomePageState extends State<HomePage> {
                                 autoPlay: false),
                             // ignore: prefer_const_literals_to_create_immutables
                             items: 
-                            // home.files!.isEmpty
-                            //     ? Container(
-                            //         child: Center(
-                            //           child: Text('Error loading files'),
-                            //         ),
-                            //       )
-                            //     : home.files!.first.fileExt == 'image' &&
-                            //             home.files!.first.fileUrl.isEmpty
-                            //         ? ClipRRect(
-                            //             borderRadius: BorderRadius.circular(18),
-                            //             child: CachedNetworkImage(
-                            //                 errorWidget:
-                            //                     (context, url, error) => Center(
-                            //                           child: Icon(
-                            //                             Icons.error,
-                            //                           ),
-                            //                         ),
-                            //                 placeholder: (context, url) =>
-                            //                     Center(
-                            //                       child:
-                            //                           CircularProgressIndicator(),
-                            //                     ),
-                            //                 imageUrl:
-                            //                     'https://www.batnf.net/${home.files!.first.fileUrl}',
-                            //                 fit: BoxFit.cover),
-                            //           )
-                            //         :
-
-
                                 [
                                   HomeVideo(thumbnailUrl: home.files!.first.thumbnail, videoUrl: home.files!.first.fileUrl,),
                                 ],

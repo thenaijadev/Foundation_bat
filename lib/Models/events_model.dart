@@ -2,8 +2,11 @@
 
 import 'package:batnf/Models/files.dart';
 
+import 'links_model.dart';
+
 class EventModel {
   List<Files>? files;
+  List<Links>? links;
   String eventId = '';
   String eventName = '';
   String eventDesc = '';
@@ -17,6 +20,7 @@ class EventModel {
 
   EventModel(
       {required this.files,
+      required this.links,
       required this.eventId,
       required this.eventName,
       required this.eventDesc,
@@ -48,6 +52,15 @@ class EventModel {
       files = <Files>[];
       for (var item in (data['files'])) {
         files!.add(Files.fromJson(item));
+      }
+    } else {
+      return;
+    }
+
+    if (data['links'] != null) {
+      links = <Links>[];
+      for (var item in (data['links'])) {
+        links!.add(Links.fromJson(item));
       }
     } else {
       return;

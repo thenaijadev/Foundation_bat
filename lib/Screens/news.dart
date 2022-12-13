@@ -327,7 +327,13 @@ class _NewsState extends State<News> {
                                               height: 150,
                                               width: 310,
                                               decoration: BoxDecoration(
-                                                    color: Colors.blue,
+                                                    image: DecorationImage(
+                                                      opacity: 0.2,
+                                                        image: AssetImage(
+                                                          'assets/Bc.png',
+                                                        ),
+                                                        fit: BoxFit.cover),
+                                                    color: Colors.transparent,
                                                     borderRadius: BorderRadius
                                                         .circular(18)),
                                               margin: EdgeInsets.only(

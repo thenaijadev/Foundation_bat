@@ -232,7 +232,8 @@ class _EventCenterState extends State<EventCenter> {
             children: [
               // Container for search box etc
 
-              if (provider.allEvents != null)
+              if (provider.allEvents != null &&
+                  provider.allEvents!.isNotEmpty)
                 Container(
                   margin:
                       EdgeInsets.only(left: 30, right: 30, bottom: 21, top: 15),
@@ -314,7 +315,13 @@ class _EventCenterState extends State<EventCenter> {
                                                   height: 150,
                                                   width: 310,
                                                   decoration: BoxDecoration(
-                                                      color: Colors.blue,
+                                                      image: DecorationImage(
+                                                        opacity: 0.2,
+                                                          image: AssetImage(
+                                                            'assets/Bc.png',
+                                                          ),
+                                                          fit: BoxFit.cover),
+                                                      color: Colors.transparent,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               18)),
