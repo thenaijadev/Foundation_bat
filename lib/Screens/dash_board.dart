@@ -295,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   }),
 
-                  // InProject
+                                  // InProject
                   if (inprogressProvider.allInprogressProjects != null &&
                       inprogressProvider.allInprogressProjects!.isNotEmpty)
                     Builder(builder: (context) {
@@ -306,6 +306,7 @@ class _HomePageState extends State<HomePage> {
                         height: 150,
                         child: Column(
                           children: [
+                            // Project Label
                             Padding(
                               padding: const EdgeInsets.only(
                                 left: 15.0,
@@ -329,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                                     onPressed: () {
                                       Provider.of<Screens>(context,
                                               listen: false)
-                                          .updateScreen(3);
+                                          .updateScreen(2);
                                     },
                                     child: Text(
                                       'See All',
@@ -339,6 +340,8 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
+
+                            //Project Contents
                             Padding(
                               padding: EdgeInsets.only(left: 15.0, right: 15.0),
                               child: GestureDetector(

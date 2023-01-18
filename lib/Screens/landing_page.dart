@@ -55,87 +55,88 @@ class _LandindPageState extends State<LandingPage> {
                       height: double.maxFinite,
                       fit: BoxFit.cover,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 350),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          // Header
-                          Container(
+                    Column(
+                      children: [
+                        Expanded(
+                            flex: 7,
+                            child: Container(color: Colors.transparent)),
+                        Expanded(
+                          flex: 5,
+                          child: Container(
+                            // margin: EdgeInsets.only(top: 20),
+                            width: double.maxFinite,
+                            height: MediaQuery.of(context).size.height,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50)),
-                            margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              "Attend our Events",
-                              textAlign: TextAlign.center,
-                              style: kLandpageHeadertextstyle,
-                            ),
-                          ),
-                          // Body
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 10,
-                              left: 56,
-                              right: 56,
-                            ),
-                            child: Text(
-                              "Keep up to date with our events as the happen, and don't forget to register, so you can be part of our stories as we continue to make a difference here.",
-                              textAlign: TextAlign.justify,
-                              style: kLandpagebodytextstyle,
-                            ),
-                          ),
-                          // Next Button
-                          Container(
-                            margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                            height: 45,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(45.0),
-                              ),
-                              height: 45.0,
-                              minWidth: MediaQuery.of(context).size.width,
-                              color: Color.fromARGB(255, 8, 51, 121),
-                              onPressed: () {
-                                controller.nextPage(
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.linear);
-                              },
-                              child: Text(
-                                'Next',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
+                              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.7),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
                               ),
                             ),
+                            child: Column(
+                              children: [
+                                // Header
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  margin: EdgeInsets.fromLTRB(30, 5, 30, 0),
+                                  child: Text(
+                                    "Attend our Events",
+                                    textAlign: TextAlign.center,
+                                    style: kLandpageHeadertextstyle,
+                                  ),
+                                ),
+                                // Body
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                    left: 56,
+                                    right: 56,
+                                  ),
+                                  child: Text(
+                                    "Keep up to date with our events as they happen. Don't forget to register so you can be part of our stories as we continue to make a difference here.",
+                                    textAlign: TextAlign.justify,
+                                    style: kLandpagebodytextstyle,
+                                  ),
+                                ),
+                                // Next Button
+                                Container(
+                                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                                  height: 45,
+                                  child: MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45.0),
+                                    ),
+                                    height: 45.0,
+                                    minWidth: MediaQuery.of(context).size.width,
+                                    color: Color.fromARGB(255, 8, 51, 121),
+                                    onPressed: () {
+                                      controller.nextPage(
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.linear);
+                                    },
+                                    child: Text(
+                                      'Next',
+                                      textAlign: TextAlign.center,
+                                      style: kButtontextstyle,
+                                    ),
+                                  ),
+                                ),
+                                // Skip
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, SignIn.id);
+                                    },
+                                    child: Text(
+                                      'Skip',
+                                      style: TextStyle(fontSize: 18),
+                                    ))
+                              ],
+                            ),
                           ),
-                          // Skip
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, SignIn.id);
-                              },
-                              child: Text(
-                                'Skip',
-                                style: TextStyle(fontSize: 18),
-                              ))
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    // Skip
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, SignIn.id);
-                        },
-                        child: Text(
-                          'Skip',
-                          style: TextStyle(fontSize: 18),
-                        ))
                   ],
                 ),
       
@@ -234,76 +235,86 @@ class _LandindPageState extends State<LandingPage> {
                       height: double.maxFinite,
                       fit: BoxFit.cover,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 350),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(59, 202, 197, 197)
-                            .withOpacity(0.7),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Header
-                          Container(
+                    Column(
+                      children: [
+                        Expanded(
+                            flex: 6,
+                            child: Container(color: Colors.transparent)),
+                        Expanded(
+                          flex:4,
+                          child: Container(
+                            width: double.maxFinite,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50)),
-                            margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              "News Update",
-                              textAlign: TextAlign.center,
-                              style: kLandpageHeadertextstyle,
-                            ),
-                          ),
-                          // Body
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 10,
-                              left: 56,
-                              right: 56,
-                            ),
-                            child: Text(
-                              'Get Live updates on the foundation\'s activities, press statements, news articles, video, photos.',
-                              textAlign: TextAlign.justify,
-                              style: kLandpagebodytextstyle,
-                            ),
-                          ),
-                          // Button
-                          Container(
-                            margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                            height: 45,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(45.0),
-                              ),
-                              height: 45.0,
-                              minWidth: MediaQuery.of(context).size.width,
-                              color: Color.fromARGB(255, 8, 51, 121),
-                              onPressed: () {
-                                controller.nextPage(
-                                    duration: Duration(milliseconds: 500),
-                                    curve: Curves.linear);
-                              },
-                              child: Text(
-                                'Next',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
+                              color: Color.fromARGB(59, 202, 197, 197)
+                                  .withOpacity(0.7),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
                               ),
                             ),
+                            child: Column(
+                              // crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                // Header
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  margin: EdgeInsets.fromLTRB(30, 5, 30, 0),
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Text(
+                                    "News Update",
+                                    textAlign: TextAlign.center,
+                                    style: kLandpageHeadertextstyle,
+                                  ),
+                                ),
+                                // Body
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                    left: 56,
+                                    right: 56,
+                                  ),
+                                  child: Text(
+                                    "Get live updates on the foundation's activities, press statement, news articles, videos and photos.",
+                                    softWrap: true,
+                                    // textAlign: TextAlign.justify,
+                                    style: kLandpagebodytextstyle,
+                                  ),
+                                ),
+                                // Button
+                                Container(
+                                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                                  height: 45,
+                                  child: MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45.0),
+                                    ),
+                                    height: 45.0,
+                                    minWidth: MediaQuery.of(context).size.width,
+                                    color: Color.fromARGB(255, 8, 51, 121),
+                                    onPressed: () {
+                                      controller.nextPage(
+                                          duration: Duration(milliseconds: 500),
+                                          curve: Curves.linear);
+                                    },
+                                    child: Text(
+                                      'Next',
+                                      textAlign: TextAlign.center,
+                                      style: kButtontextstyle,
+                                    ),
+                                  ),
+                                ),
+                                // Skip
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, SignIn.id);
+                                    },
+                                    child: Text('Skip', style: TextStyle(fontSize: 18),))
+                              ],
+                            ),
                           ),
-                          // Skip
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, SignIn.id);
-                              },
-                              child: Text('Skip', style: TextStyle(fontSize: 18),))
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -337,68 +348,77 @@ class _LandindPageState extends State<LandingPage> {
                       height: double.maxFinite,
                       fit: BoxFit.cover,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 350),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor
-                            .withOpacity(0.7),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
-                      ),
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Header
-                          Container(
+                    Column(
+                      children: [
+                        Expanded(
+                            flex: 6,
+                            child: Container(color: Colors.transparent)),
+                        Expanded(
+                          flex:4,
+                          child: Container(
+                            width: double.maxFinite,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50)),
-                            margin: EdgeInsets.fromLTRB(30, 35, 30, 0),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              "Explore Our Projects",
-                              textAlign: TextAlign.center,
-                              style: kLandpageHeadertextstyle,
-                            ),
-                          ),
-                          // Body
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 10,
-                              left: 56,
-                              right: 56,
-                            ),
-                            child: Text(
-                              'Our agricultural initiatives are aimed at empowering smallholders farmers, to improve their productivity and help build their capacity to establish viable agricultural enterprises.',
-                              textAlign: TextAlign.justify,
-                              style: kLandpagebodytextstyle,
-                            ),
-                          ),
-                          // Button
-                          Container(
-                            margin: EdgeInsets.only(top: 20, left: 30, right: 30),
-                            height: 45,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(45.0),
-                              ),
-                              height: 45.0,
-                              minWidth: MediaQuery.of(context).size.width,
-                              color: Color.fromARGB(255, 8, 51, 121),
-                              onPressed: () {
-                                Navigator.pushNamed(context, SignIn.id);
-                              },
-                              child: Text(
-                                'Get Started',
-                                textAlign: TextAlign.center,
-                                style: kButtontextstyle,
+                              color: Theme.of(context).scaffoldBackgroundColor
+                                  .withOpacity(0.7),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
                               ),
                             ),
+                            child: Column(
+                              // crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                // Header
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  margin: EdgeInsets.fromLTRB(30, 5, 30, 0),
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Text(
+                                    "Explore Our Projects",
+                                    textAlign: TextAlign.center,
+                                    style: kLandpageHeadertextstyle,
+                                  ),
+                                ),
+                                // Body
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                    left: 56,
+                                    right: 56,
+                                  ),
+                                  child: Text(
+                                    "Our agricultural initiatives are aimed at empowering smallholders farmers, to improve their productivity and help build their capacity to establish viable agricultural enterprises.",
+                                    // textAlign: TextAlign.justify,
+                                    style: kLandpagebodytextstyle,
+                                  ),
+                                ),
+                                // Button
+                                Container(
+                                  margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+                                  height: 45,
+                                  child: MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(45.0),
+                                    ),
+                                    height: 45.0,
+                                    minWidth: MediaQuery.of(context).size.width,
+                                    color: Color.fromARGB(255, 8, 51, 121),
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, SignIn.id);
+                                    },
+                                    child: Text(
+                                      'Get Started',
+                                      textAlign: TextAlign.center,
+                                      style: kButtontextstyle,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

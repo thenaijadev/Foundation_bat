@@ -195,6 +195,7 @@ class _SignInState extends State<SignIn> {
                   child: Container(
                     color: Colors.transparent
                   )),
+
                 ScrollConfiguration(
                   behavior: ScrollBehavior().copyWith(overscroll: false),
                   child: Expanded(
