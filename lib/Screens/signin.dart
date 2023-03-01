@@ -50,7 +50,8 @@ class _SignInState extends State<SignIn> {
   Future<void> login({required String email, required String password}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    var response = await http.post(Uri.parse('https://www.batnf.net/api/login'),
+    var response = await http.post(
+      Uri.parse('https://www.batnf.net/api/login'),
         body: jsonEncode({
           "identity": email,
           "password": password,

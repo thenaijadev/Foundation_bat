@@ -7,19 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:batnf/Screens/single_completed_project_page.dart';
-import 'package:batnf/Screens/single_pending_project_page.dart';
 import 'package:batnf/Screens/single_project_inprogress_page.dart';
 import 'package:batnf/constants/text_style_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import '../Models/completed_model.dart';
 import '../Models/inprogress_model.dart';
-// import '../Models/pending_model.dart';
 import '../constants/color_constant.dart';
-import '../providers/completed_provider.dart';
 import '../providers/inprogress_provider.dart';
-import '../providers/pending_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/change_theme_button.dart';
 
