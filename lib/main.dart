@@ -1,38 +1,16 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
-
-import 'package:batnf/Screens/dash_board.dart';
-import 'package:batnf/providers/home_provider.dart';
-import 'package:batnf/providers/screen_provider.dart';
-import 'package:batnf/widgets/reuseable_bottom_navbar.dart';
+import 'package:batnf/router/app_router.dart';
+import 'package:batnf/utilities/injector.dart';
+import 'package:batnf/utilities/local_session_manager/local_session_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'features/authentication/bloc/auth_bloc.dart';
+import 'features/authentication/data/repository/auth_repository.dart';
+import 'features/home/presentation/screens/home.dart';
+import 'features/onboarding/screens/onboarding_screen.dart';
 
-import 'package:batnf/Screens/completed_project.dart';
-import 'package:batnf/Screens/events_center.dart';
-import 'package:batnf/Screens/forget_password_page.dart';
-import 'package:batnf/Screens/inprogress_project.dart';
-import 'package:batnf/Screens/landing_page.dart';
-import 'package:batnf/Screens/news.dart';
-import 'package:batnf/Screens/projects.dart';
-import 'package:batnf/Screens/reset_Completed_page.dart';
-import 'package:batnf/Screens/reset_password_page.dart';
-import 'package:batnf/Screens/signin.dart';
-import 'package:batnf/Screens/signup.dart';
-import 'package:batnf/Screens/welcone_page.dart';
-import 'package:batnf/providers/completed_provider.dart';
-import 'package:batnf/providers/event_provider.dart';
-import 'package:batnf/providers/inprogress_provider.dart';
-import 'package:batnf/providers/news_provider.dart';
-import 'package:batnf/providers/pending_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'Screens/pending_project.dart';
-import 'Screens/promotion.dart';
-import 'providers/theme_provider.dart';
 
 class MyHttpoverrides extends HttpOverrides {
   @override
@@ -44,110 +22,55 @@ class MyHttpoverrides extends HttpOverrides {
 }
 
 void main() async {
-  await Hive.initFlutter();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  bool exist = sharedPreferences.containsKey('autoLogin') &&
-      sharedPreferences.containsKey('userId') &&
-      sharedPreferences.containsKey('username');
-  bool autoLogin = exist ? sharedPreferences.getBool('autoLogin')! : false;
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.dark,
+  ));
+  await LocalSessionManager().init();
+  await init();
+  LocalSessionManager localSessionManager = LocalSessionManager();
+  final authStatus = localSessionManager.authStatus;
   HttpOverrides.global = MyHttpoverrides();
-  runApp(MyApp(autoLogin));
+  runApp(MyApp(loggedIn: authStatus,));
 }
 
 class MyApp extends StatelessWidget {
-  static String mode = 'Mode';
-  final bool autoLogin;
-  const MyApp(this.autoLogin, {Key? key}) : super(key: key);
+  final bool? loggedIn;
+  const MyApp({super.key, this.loggedIn});
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: ()  => onBackButtonPressed(context),
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => EventProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => NewsProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => InprogressProvider(),
-          ),
-          // ChangeNotifierProvider(
-          //   create: (context) => CompletedProvider(),
-          // ),
-          // ChangeNotifierProvider(
-          //   create: (context) => PendingProvider(),
-          // ),
-           ChangeNotifierProvider(
-            create: (context) => HomeProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => ThemeProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => Screens(),
-          ),
-        ],
-        child: Builder(builder: (context) {
-          final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(
-            title: 'Batnf',
-            themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-            debugShowCheckedModeBanner: false,
-            initialRoute: !autoLogin ? LandingPage.id : ReuseableBottomBar.id,
-            routes: {
-              LandingPage.id: (context) => const LandingPage(),
-              // WelcomePage.id: (context) => WelcomePage(),
-              Promotion.id: (context) => Promotion(),
-              SignIn.id: (context) => SignIn(),
-              HomePage.id: (context) => HomePage(),
-              SignUp.id: (context) => SignUp(),
-              // ForgetPassword.id: (context) => ForgetPassword(),
-              ResetPassword.id: (context) => ResetPassword(),
-              ResetCompleted.id: (context) => ResetCompleted(),
-              EventCenter.id: (context) => EventCenter(),
-              ProjectPage.id: (context) => ProjectPage(),
-              // InprogressPage.id: (context) => InprogressPage(),
-              // CompletedPage.id: (context) => CompletedPage(),
-              // PendingPage.id: (context) => PendingPage(),
-              ReuseableBottomBar.id: (context) => ReuseableBottomBar(),
-              News.id: (context) => News(),
-            },
-          );
-        }),
+    final appRouter = AppRouter();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) {
+            return AuthBloc(AuthRepository());
+          },
+        ),
+      ],
+      child: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus!.unfocus();
+          }
+        },
+        child: GetMaterialApp(
+          theme: ThemeData(textTheme: const TextTheme()),
+          debugShowCheckedModeBanner: false,
+          home: loggedIn == true ? const HomeScreen() : const OnboardingScreen(),
+          // initialRoute: "/",
+          onGenerateRoute: appRouter.onGenerateRoute,
+        ),
       ),
     );
   }
-
-  Future<bool> onBackButtonPressed(BuildContext context) async {
-    bool? exitApp = await showDialog(
-      context: context,
-      builder: ((BuildContext context) {
-        return AlertDialog(
-          title: Text('Exist App'),
-          content: Text('Do you want to Exit app ?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: Text('No')),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: Text('Yes')),
-          ],
-        );
-      }),
-    );
-    return exitApp ?? false;
-  }
-
 }
