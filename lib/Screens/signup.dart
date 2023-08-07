@@ -117,8 +117,9 @@ class _SignUpState extends State<SignUp> {
             }),
             headers: {"Content-Type": "application/json"});
 
-    // var data = jsonDecode(response.body);
-    // print(data);
+    var data = jsonDecode(response.body);
+    print(data);
+    print(response.statusCode);
 
     if (mounted) {
       setState(() {
@@ -228,7 +229,7 @@ class _SignUpState extends State<SignUp> {
               height: double.maxFinite,
             ),
             ScrollConfiguration(
-                  behavior: ScrollBehavior().copyWith(overscroll: false),
+              behavior: ScrollBehavior().copyWith(overscroll: false),
               child: Container(
                 color: Colors.white.withOpacity(0.58),
                 child: Form(
@@ -246,7 +247,7 @@ class _SignUpState extends State<SignUp> {
                         //Request for First Name
                         Padding(
                           padding: const EdgeInsets.only(
-                            left: 60.0, right: 60.0, bottom: 10.0, top: 10),
+                              left: 60.0, right: 60.0, bottom: 10.0, top: 10),
                           child: ReuseableTextField(
                             keyboard: TextInputType.name,
                             cardChild: Icon(FontAwesomeIcons.user,
@@ -260,7 +261,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-              
+
                         // Request for LastName
                         Padding(
                           padding: const EdgeInsets.only(
@@ -278,7 +279,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-              
+
                         //Request for Email Address
                         Padding(
                           padding: const EdgeInsets.only(
@@ -296,7 +297,7 @@ class _SignUpState extends State<SignUp> {
                             },
                           ),
                         ),
-              
+
                         //Request for Password
                         Padding(
                           padding: const EdgeInsets.only(
@@ -309,7 +310,9 @@ class _SignUpState extends State<SignUp> {
                             child: TextFormField(
                               style: TextStyle(color: Colors.black),
                               validator: (val) {
-                                return val!.isEmpty ? "Password is Required" : null;
+                                return val!.isEmpty
+                                    ? "Password is Required"
+                                    : null;
                               },
                               obscureText: hidepassword,
                               controller: _passwordTextController,
@@ -327,22 +330,23 @@ class _SignUpState extends State<SignUp> {
                                     width: 2.0,
                                   ),
                                 ),
-                                prefixIcon:
-                                    Icon(Icons.lock, size: 15, color: Colors.black),
+                                prefixIcon: Icon(Icons.lock,
+                                    size: 15, color: Colors.black),
                                 suffixIcon: IconButton(
                                   onPressed: _togglePasswordView,
                                   icon: Icon(
-                                      !hidepassword
-                                          ? FontAwesomeIcons.eye
-                                          : FontAwesomeIcons.eyeSlash,
-                                      size: 15.0,
-                                      color: Colors.black,),
+                                    !hidepassword
+                                        ? FontAwesomeIcons.eye
+                                        : FontAwesomeIcons.eyeSlash,
+                                    size: 15.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-              
+
                         //Confirm Password
                         Padding(
                           padding: const EdgeInsets.only(
@@ -355,7 +359,9 @@ class _SignUpState extends State<SignUp> {
                             child: TextFormField(
                               style: TextStyle(color: Colors.black),
                               validator: (val) {
-                                return val!.isEmpty ? "Password is Required" : null;
+                                return val!.isEmpty
+                                    ? "Password is Required"
+                                    : null;
                               },
                               obscureText: hidepassword,
                               controller: _passwordconfirmTextController,
@@ -373,8 +379,8 @@ class _SignUpState extends State<SignUp> {
                                     width: 2.0,
                                   ),
                                 ),
-                                prefixIcon:
-                                    Icon(Icons.lock, size: 15, color: Colors.black),
+                                prefixIcon: Icon(Icons.lock,
+                                    size: 15, color: Colors.black),
                                 suffixIcon: IconButton(
                                   onPressed: _togglePasswordView,
                                   icon: Icon(
@@ -389,7 +395,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-              
+
                         //Request for Location
                         Padding(
                           padding: const EdgeInsets.only(
@@ -407,7 +413,8 @@ class _SignUpState extends State<SignUp> {
                                 },
                                 icon: Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: Icon(FontAwesomeIcons.mapMarkerAlt, size: 19, color: Colors.black),
+                                  child: Icon(FontAwesomeIcons.mapMarkerAlt,
+                                      size: 19, color: Colors.black),
                                 ),
                                 itemsVisibleInDropdown: 3,
                                 controller: _locationTextController,
@@ -419,7 +426,7 @@ class _SignUpState extends State<SignUp> {
                                 items: states),
                           ),
                         ),
-              
+
                         //Request for Date of Birth
                         Padding(
                           padding: const EdgeInsets.only(
@@ -442,7 +449,7 @@ class _SignUpState extends State<SignUp> {
                                   firstDate: DateTime(1789),
                                   lastDate: DateTime.now(),
                                 );
-              
+
                                 if (_myDateTime != null) {
                                   setState(() {
                                     _date.text = df.format(_myDateTime!);
@@ -475,10 +482,11 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-              
+
                         //Sign Up Button
                         Padding(
-                          padding: const EdgeInsets.only(left: 60, right: 60, bottom: 15.0),
+                          padding: const EdgeInsets.only(
+                              left: 60, right: 60, bottom: 15.0),
                           child: MaterialButton(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(45.0),
@@ -487,7 +495,8 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.black.withOpacity(0.26),
                             // Color.fromARGB(255, 8, 51, 121),
                             onPressed: () {
-                              if (_formKey.currentState!.validate() && !loading) {
+                              if (_formKey.currentState!.validate() &&
+                                  !loading) {
                                 setState(() {
                                   loading = true;
                                 });
@@ -514,7 +523,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                           ),
                         ),
-              
+
                         // Sign In Redirection
                         Padding(
                           padding: const EdgeInsets.only(
@@ -538,7 +547,8 @@ class _SignUpState extends State<SignUp> {
                                     TextSpan(
                                       text: 'Sign In',
                                       style: TextStyle(
-                                          color: Color.fromARGB(255, 8, 51, 121),
+                                          color:
+                                              Color.fromARGB(255, 8, 51, 121),
                                           fontFamily: 'Inter',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),

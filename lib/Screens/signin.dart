@@ -50,8 +50,7 @@ class _SignInState extends State<SignIn> {
   Future<void> login({required String email, required String password}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    var response = await http.post(
-      Uri.parse('https://www.batnf.net/api/login'),
+    var response = await http.post(Uri.parse('https://www.batnf.net/api/login'),
         body: jsonEncode({
           "identity": email,
           "password": password,
@@ -59,8 +58,9 @@ class _SignInState extends State<SignIn> {
         headers: {
           "Content-Type": "application/json",
         });
-    // print(response.body);
-
+    print({email, password});
+    print(response.body);
+    print(response.statusCode);
     if (mounted) {
       setState(() {
         loading = false;
@@ -92,8 +92,8 @@ class _SignInState extends State<SignIn> {
               msg: "Login Successful",
               textColor: kGeneralbodytextColor,
               backgroundColor: kButtonColor);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ReuseableBottomBar()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => ReuseableBottomBar()));
         } else {
           Fluttertoast.showToast(
               fontSize: 18,
@@ -183,20 +183,16 @@ class _SignInState extends State<SignIn> {
           alignment: AlignmentDirectional.bottomEnd,
           children: [
             SizedBox(
-              child: Image.asset('assets/Bc.png',
-              fit: BoxFit.cover,
-              width: double.maxFinite,
-              height: double.maxFinite,
+              child: Image.asset(
+                'assets/Bc.png',
+                fit: BoxFit.cover,
+                width: double.maxFinite,
+                height: double.maxFinite,
               ),
             ),
             Column(
               children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    color: Colors.transparent
-                  )),
-
+                Expanded(flex: 3, child: Container(color: Colors.transparent)),
                 ScrollConfiguration(
                   behavior: ScrollBehavior().copyWith(overscroll: false),
                   child: Expanded(
@@ -221,7 +217,7 @@ class _SignInState extends State<SignIn> {
                                   height: 120,
                                 ),
                               ),
-                    
+
                               // SignIn Label
                               // Padding(
                               //   padding: const EdgeInsets.only(top: 35.0, left: 30.0),
@@ -231,11 +227,14 @@ class _SignInState extends State<SignIn> {
                               //     style: kSigningtextstyle,
                               //   ),
                               // ),
-                    
+
                               //Request for User Email
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 60.0, top: 20.0, right: 60.0, bottom: 10.0),
+                                    left: 60.0,
+                                    top: 20.0,
+                                    right: 60.0,
+                                    bottom: 10.0),
                                 child: ReuseableTextField(
                                   keyboard: TextInputType.emailAddress,
                                   validator: (val) {
@@ -243,13 +242,15 @@ class _SignInState extends State<SignIn> {
                                         ? "Email can not be empty"
                                         : null;
                                   },
-                                  cardChild: Icon(FontAwesomeIcons.solidEnvelope,
-                                      size: 15, color: Colors.black),
+                                  cardChild: Icon(
+                                      FontAwesomeIcons.solidEnvelope,
+                                      size: 15,
+                                      color: Colors.black),
                                   textcontroller: emailController,
                                   label: "Email",
                                 ),
                               ),
-                    
+
                               //Request for User Password
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -262,7 +263,9 @@ class _SignInState extends State<SignIn> {
                                   child: TextFormField(
                                     style: TextStyle(color: Colors.black),
                                     validator: (val) {
-                                      return val!.isEmpty ? "Password is Required" : null;
+                                      return val!.isEmpty
+                                          ? "Password is Required"
+                                          : null;
                                     },
                                     obscureText: hidepassword,
                                     controller: passwordController,
@@ -285,7 +288,8 @@ class _SignInState extends State<SignIn> {
                                       suffixIcon: IconButton(
                                         onPressed: _togglePasswordView,
                                         icon: Padding(
-                                          padding: const EdgeInsets.only(right: 14.15),
+                                          padding: const EdgeInsets.only(
+                                              right: 14.15),
                                           child: Icon(
                                             !hidepassword
                                                 ? FontAwesomeIcons.eye
@@ -299,10 +303,11 @@ class _SignInState extends State<SignIn> {
                                   ),
                                 ),
                               ),
-                    
+
                               //Sing In Button
                               Padding(
-                                padding: const EdgeInsets.only(left: 60, right:60, bottom: 5.0),
+                                padding: const EdgeInsets.only(
+                                    left: 60, right: 60, bottom: 5.0),
                                 child: MaterialButton(
                                   splashColor: kBackground,
                                   hoverColor: Colors.black,
@@ -317,7 +322,8 @@ class _SignInState extends State<SignIn> {
                                         await SharedPreferences.getInstance();
                                     sharedPreferences.setString(
                                         'email', emailController.text);
-                                    if (formKey.currentState!.validate() && !loading) {
+                                    if (formKey.currentState!.validate() &&
+                                        !loading) {
                                       setState(() {
                                         loading = true;
                                       });
@@ -329,8 +335,8 @@ class _SignInState extends State<SignIn> {
                                   },
                                   child: loading
                                       ? CircularProgressIndicator(
-                                          valueColor:
-                                              AlwaysStoppedAnimation(Colors.white))
+                                          valueColor: AlwaysStoppedAnimation(
+                                              Colors.white))
                                       : Text(
                                           'Sign In',
                                           textAlign: TextAlign.center,
@@ -338,7 +344,7 @@ class _SignInState extends State<SignIn> {
                                         ),
                                 ),
                               ),
-                    
+
                               //Forget Password Request
                               Center(
                                 child: TextButton(
@@ -347,20 +353,21 @@ class _SignInState extends State<SignIn> {
                                         setState(() {
                                           loading1 = true;
                                         });
-                                        forgetpassword(email: emailController.text);
+                                        forgetpassword(
+                                            email: emailController.text);
                                       }
                                     },
                                     child: loading1
                                         ? CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation(Colors.blue))
+                                            valueColor: AlwaysStoppedAnimation(
+                                                Colors.blue))
                                         : Text(
                                             'Forgot Password?',
                                             textAlign: TextAlign.right,
                                             style: kForgetpasswordstyle,
                                           )),
                               ),
-                    
+
                               // Sign Up Redirection
                               Container(
                                 margin: EdgeInsets.only(bottom: 10),
@@ -383,7 +390,8 @@ class _SignInState extends State<SignIn> {
                                           TextSpan(
                                               text: 'Sign Up',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(255, 8, 51, 121),
+                                                  color: Color.fromARGB(
+                                                      255, 8, 51, 121),
                                                   fontFamily: 'Inter',
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w600))
@@ -391,10 +399,8 @@ class _SignInState extends State<SignIn> {
                                   ),
                                 ),
                               ),
-                            
                             ],
-                          )
-                          ),
+                          )),
                     ),
                   ),
                 ),
